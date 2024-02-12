@@ -220,7 +220,7 @@ subroutine prodout
         un(3) = trim(ystr)
         col(4)='Yield'
         un(4) = trim(rstr)
-        col(5)='Isotopic frac.'
+        col(5)='Isotopic_frac.'
         col(6)='Time'
         un(1) = 'h'
         Ncol=6
