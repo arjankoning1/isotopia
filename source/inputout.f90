@@ -45,6 +45,8 @@ subroutine inputout
   write(*, '(/"    ISOTOPIA-2.0    (Version: December 29, 2023)"/)')
   write(*, '(10x, " Prediction of medical isotope production with ", "accelerators")')
   write(*, '(/" Copyright (C) 2023  A.J. Koning")')
+  write(*, '(/" User: ",a)') trim(user)
+  write(*, '(" Date: ",a)') trim(date)
 !
 ! ************************** User input file ***************************
 !
