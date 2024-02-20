@@ -112,7 +112,9 @@ subroutine range_integer_error(varname, variable, vmin, vmax, default, unit, ind
 !
 ! ***************************** Error message **************************
 !
-  if (present(default) .and. variable == default) return
+  if (present(default)) then 
+    if (variable == default) return
+  endif
   if (present(unit)) then
     unitstring=unit
   else
@@ -167,7 +169,9 @@ subroutine range_real_error(varname, variable, vmin, vmax, default, unit, index1
 !
 ! ***************************** Error message **************************
 !
-  if (present(default) .and. variable == default) return
+  if (present(default)) then 
+    if (variable == default) return
+  endif
   if (present(unit)) then
     unitstring=unit
   else
