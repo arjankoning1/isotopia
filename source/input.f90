@@ -90,7 +90,7 @@ subroutine input
   flagcross = .false.
   xsfile = ' '
   source ='ISOTOPIA'
-  oformat ='YANDF-0.1'
+  oformat ='YANDF-0.2'
 !
 ! 2. Read input
 !
