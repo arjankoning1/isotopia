@@ -219,10 +219,10 @@ subroutine prodout
         col(3)='Isotopes'
         un(3) = trim(ystr)
         col(4)='Yield'
-        un(4) = trim(rstr)
+        un(4) = trim(rstr//'mAh')
         col(5)='Isotopic_frac.'
         col(6)='Time'
-        un(1) = 'h'
+        un(6) = 'h'
         Ncol=6
         call write_datablock(quantity,Ncol,numtime,col,un)
         do it = 1, numtime
