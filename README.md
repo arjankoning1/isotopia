@@ -55,7 +55,7 @@ make
 #### 2. Using the install_isotopia.bash script:
 ```
 cd isotopia
-install_isotopia.bash isotopia
+install_isotopia.bash
 ```
 
 The above will produce a *isotopia* executable in the *isotopia/bin* directory.
