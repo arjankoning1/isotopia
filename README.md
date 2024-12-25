@@ -1,6 +1,6 @@
 
 # ISOTOPIA
-ISOTOPIA is a software package for the prediction of radio-isotope production. It uses cross sections from the TENDL nuclear data library and calculates the radioactive yield as a function of irradiation time and other irradiation characteristics.
+ISOTOPIA is a software package for the prediction of radio-isotope production. It uses cross sections from the IAEA medical isotope data library and the TENDL nuclear data library and calculates the radioactive yield as a function of irradiation time and other irradiation characteristics.
 
 ## Documentation and reference
 A description of the code and its options can be found in the [ISOTOPIA User Manual (pdf)](https://github.com/arjankoning1/isotopia/blob/main/doc/isotopia.pdf).
@@ -19,13 +19,13 @@ The following are the prerequisites for compiling ISOTOPIA:
 ### Downloads:
 
 To download ISOTOPIA, you can use one of the following options:
-#### 1. Download the entire tar file:
+#### 1. Download the entire tar file (frozen version):
 ```
 https://nds.iaea.org/talys/isotopia.tar
 tar zxf isotopia.tar
 ```
 
-#### 2. Using git:
+#### 2. Using git (latest beta version):
 ```
 git clone https://github.com/arjankoning1/isotopia.git
 ```
@@ -39,7 +39,7 @@ The resulting *samples/* directory should be moved to the *isotopia/* directory.
 ISOTOPIA requires the cross section database *isotopia.libs/*
 This can be obtained as follows
 ```
-Download isotopia.libs  https://nds.iaea.org/talys/isotopia.libs.tar
+https://nds.iaea.org/talys/isotopia.libs.tar
 tar zxf isotopia.libs.tar
 ```
 and place the resulting directory *isotopia.libs/* in your home directory.
@@ -52,14 +52,14 @@ To install ISOTOPIA, you can use one of the following options:
 cd isotopia/source
 make
 ```
-#### 2. Using the code_build script:
+#### 2. Using the install_isotopia.bash script:
 ```
 cd isotopia
-code_build isotopia
+install_isotopia.bash isotopia
 ```
 
 The above will produce a *isotopia* executable in the *isotopia/bin* directory.
-The compiler and its flags can be set in either the *source/Makefile* or in *code_build*.
+The compiler and its flags can be set in either the *source/Makefile* or in *code_build.bash*.
 
 ## The ISOTOPIA package
 
@@ -67,10 +67,10 @@ The *isotopia/* directory contains the following directories and files:
 
 + `README.md` is this README file
 + `LICENSE` is the License file
-+ `code_build` and `path_change` installation scripts
++ `install_isotopia.bash`, `code_build.bash` and `path_change.bash` installation scripts
 + `source/` contains the Fortran source code of ISOTOPIA and the Makefile
 + `bin/` contains the executable after successful installation
-+ `files/` contains abundace and decay data files needed for the calculations
++ `files/` contains abundance and decay data files needed for the calculations
 + `doc/` contains the tutorial in pdf format
 + `samples/` contains the input and output files of the sample cases, and the *verify* script for the user to run the sample cases
 
