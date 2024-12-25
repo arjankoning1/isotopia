@@ -5,7 +5,7 @@
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2023-12-19   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -35,11 +35,10 @@
   logical            :: flagpositive   ! flag for existence of non-zero cross sections
   logical            :: lexist         ! logical to determine existence
   character(len=7)   :: ZAstring       !
-  character(len=132) :: csfile         ! file with inverse reaction cross sections
+  character(len=132) :: nucfile         ! file with cross sections
+  character(len=132) :: csfile         ! file with cross sections
   character(len=132) :: pfile          ! parameter file
   character(len=132) :: string         ! line with parameter value
-  character(len=3)  :: massstring !
-  character(len=6)  :: finalnuclide !
   character(len=16) :: reaction   ! reaction
   character(len=132) :: topline    ! topline
   character(len=16) :: col(2)     ! header
@@ -83,7 +82,7 @@
       read(string, * ) E, xs
       iE = iE + 1
       if (iE > numen) then
-        write(*, '(" ISOTOPIA-error: too many incident energies:", " increase numen in isotopia.cmb")')
+        write(*, '(" ISOTOPIA-error: too many incident energies: increase numen in A0_isotopia_mod.f90")')
         stop
       endif
       Ein(iE) = E
@@ -129,9 +128,11 @@
 !
   reaction='('//ptype0//',x)'
   if (xsfile(iz, ia, is) /= ' ') then
+    nucfile = 'file.loc'
     csfile = xsfile(iz, ia, is)
   else
-    csfile = trim(xspath)//'residual/'//parsym(k0)//'-'// trim(nuclide)//'-rp'//trim(ZAstring)//'.'//trim(libname)
+    nucfile = parsym(k0)//'-'// trim(nuclide)//'-rp'//trim(ZAstring)//'.'//trim(libname)
+    csfile = trim(xspath)//'residual/'//trim(nucfile)
   endif
   inquire (file = csfile, exist = lexist)
   if (lexist) then
@@ -140,9 +141,11 @@
     flagpositive = .false.
     iE = 0
     open (unit = 1, status = 'unknown', file = csfile)
+    if (flagcross) open (unit = 2, status = 'unknown', file = nucfile)
     do
       read(1, '(a80)', iostat = istat) string
       if (istat == -1) exit
+      if (flagcross) write(2, '(a)') trim(string)
       if (string(1:1) == '#') cycle
       read(string, * , iostat = istat) E, xs
       if (istat > 0) then
@@ -153,48 +156,26 @@
       if (E >= Eback .and. E <= Ebeam .and. xs > 0.) flagpositive = .true.
       iE = iE + 1
       if (iE > numen) then
-        write(*, '(" ISOTOPIA-error: too many incident energies:" , " increase numen in A0_isotopia_mod")')
+        write(*, '(" ISOTOPIA-error: too many incident energies: increase numen in A0_isotopia_mod")')
         stop
       endif
       if (iE > 1) then
         if (E < Ein(iE - 1)) then
-          write(*, '(" ISOTOPIA-error: incident energies" " in cross section file not in increasing order at E = ", es12.5)') E
+          write(*, '(" ISOTOPIA-error: incident energies in cross section file not in increasing order at E = ", es12.5)') E
           stop
         endif
       endif
       Ein(iE) = E
       xsrp(iE) = xs
     enddo
+    close (unit = 1)
+    if (flagcross) close (unit = 1)
 !
 ! Subtract inelastic cross section from non-elastic cross section
 !
-    close (unit = 1)
     Nenrp = iE
-    if (flagcross) then
-      massstring='   '
-      write(massstring,'(i3)') ia
-      finalnuclide=trim(nuc(iz))//adjustl(massstring)
-      csfile = parsym(k0)//'-'//trim(nuclide)//'-rp'// trim(ZAstring)//'.xs'
-      open (unit = 1, status = 'unknown', file = csfile)
-      topline=trim(targetnuclide)//trim(reaction)//trim(finalnuclide)//' '//trim(quantity)
-      call write_header(topline,source,user,date,oformat)
-      call write_target
-      call write_reaction(reaction,0.d0,0.d0,6,5)
-      call write_nuc(2,iz,ia,finalnuclide)
-      call write_datablock(quantity,Ncol,Nenrp,col,un)
-!     write(2, '("# ", a1, " + ", a5, ": Production of ", a7)') parsym(k0), nuclide, ZAstring
-!     write(2, '("#")')
-!     write(2, '("#")')
-!     write(2, '("# # energies =", i6)') Nenrp
-!     write(2, '("#   E(MeV)       xs(mb)")')
-      do i = 1, Nenrp
-        write(1, '(2es15.6)') Ein(i), xsrp(i)
-      enddo
-      close(1)
-    endif
     if ( .not. flagpositive) rpexist(iz, ia, is) = .false.
     if (iz == Ztarget .and. ia == Atarget .and. is <= 0) then
-!         xsrp(0,0,-1,iE)=xsrp(0,0,-1,iE)-xsrp(iz,ia,is,iE)
       do i = 1, Nennon
         E = Enon(i)
         if (E < Ein(1)) cycle
@@ -220,5 +201,5 @@
     endif
   endif
   return
-end    subroutine prodres
+end subroutine prodres
 ! Copyright A.J. Koning 2023
