@@ -5,7 +5,7 @@ program isotopia
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-12-29   A.J. Koning    A     Original code
+!    1     2024-12-29   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !   |-------------------------------------------------------|
@@ -16,7 +16,7 @@ program isotopia
 !
 ! MIT License
 !
-! Copyright (c) 2023 Arjan Koning
+! Copyright (c) 2024 Arjan Koning
 !
 ! Permission is hereby granted, free of charge, to any person obtaining a copy
 ! of this software and associated documentation files (the "Software"), to deal
@@ -61,4 +61,4 @@ program isotopia
   if (flagnatural) call natural
   call timer
 end program isotopia
-! Copyright A.J. Koning 2023
+! Copyright A.J. Koning 2024
