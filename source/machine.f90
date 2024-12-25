@@ -5,7 +5,7 @@ subroutine machine
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2024-12-19   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -40,7 +40,7 @@ subroutine machine
 ! ************************ Set nuclear data directory ******************
 !
   crosspath = trim(basedir)//'isotopia.libs/'
-  libname = 'iaea.2022'
+  libname = 'iaea.2024'
 !
 ! ************************ Set counter for isotope *********************
 !
@@ -50,7 +50,7 @@ subroutine machine
   enddo
   isonum = 1
 !
-! Set date
+! ************************ Set date and user ***************************
 !
   call date_and_time(VALUES=values)
   year=values(1)
@@ -63,4 +63,4 @@ subroutine machine
   user = 'Arjan Koning'
   return
 end subroutine machine
-! Copyright A.J. Koning 2023
+! Copyright A.J. Koning 2024
