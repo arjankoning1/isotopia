@@ -110,15 +110,15 @@ subroutine prodout
   write(*, '(" Produced heat in target [kW]:", es15.6)') heat
   write(*, '(/" (Maximum) production and decay rates per isotope"/)')
   write(*, '(" Total production rate [s^-1]:", es15.6/)') prate(0, 0, -1)
-  write(*, '("#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic", &
- &  "                   Half-life               Time of maximum production")')
-  write(*, '("#             [s^-1]         [s^-1]         [", a3, "]          [", a3, "]        [", a3, "/mAh]      fraction")') &
- & rstr, ystr, rstr
+  write(*, '("#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.", &
+ &  "             Half-life               Time of maximum production")')
+  write(*, '("#             [s^-1]         [s^-1]         [", a3, "]          [", a3, "]        [", a3, "/mAh]")') rstr, ystr, rstr
   do iz = Zcomp, Zcomp - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, Nisomer(iz, ia)
         if ( .not. Yexist(iz, ia, is)) cycle
         it = int(Tmaxactivity(iz, ia, is))
+        if (it == 0) it = Ntime
         halflife = '                                      '
         if (Thalf(iz, ia, is) > 1.e17) then
           write(halflife, '(a15)') '       stable  '
@@ -142,7 +142,7 @@ subroutine prodout
     enddo
   enddo
 !
-! Output to files per residual product
+! Output of files per residual product
 !
   reaction='('//ptype0//',x)'
   quantity='Isotope production'
@@ -172,7 +172,7 @@ subroutine prodout
         endif
         massstring='   '
         write(massstring,'(i3)') ia
-        finalnuclide=trim(nuc(iz))//adjustl(massstring)//isochar(is)
+        finalnuclide=trim(nuc(iz))//trim(adjustl(massstring))//isochar(is)
         write(*,'("file: ",a)') trim(Yfile)
         open (unit = 1, file = Yfile, status = 'replace')
         topline=trim(targetnuclide)//trim(reaction)//trim(finalnuclide)//' '//trim(quantity)
@@ -210,7 +210,7 @@ subroutine prodout
           write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")')  &
  & (Tp(iz, ia, is, k), k = 1, 5)
         endif
-        call write_char(2,'Maximum production at',string)
+        call write_char(2,'Maximum production',string)
         un = ''
         col(1)='Time'
         un(1) = 'sec'
@@ -219,7 +219,7 @@ subroutine prodout
         col(3)='Isotopes'
         un(3) = trim(ystr)
         col(4)='Yield'
-        un(4) = trim(rstr//'mAh')
+        un(4) = trim(rstr//'/mAh')
         col(5)='Isotopic_frac.'
         col(6)='Time'
         un(6) = 'h'
@@ -234,7 +234,7 @@ subroutine prodout
       enddo
     enddo
   enddo
-  write(*, '(/"  End of ISOTOPIA calculation for ", a1, " + ", a)') ptype0, trim(targetnuclide)
+  write(*, '(/,"  End of ISOTOPIA calculation for ", a1, " + ", a)') ptype0, trim(targetnuclide)
   return
 end subroutine prodout
 ! Copyright A.J. Koning 2023
