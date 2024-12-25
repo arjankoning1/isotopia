@@ -93,7 +93,8 @@ subroutine abundance
     abun(i) = 0.01 * ab
     i = i + 1
     if (i > numiso) then
-      write(*, '(" ISOTOPIA-error: Too many isotopes in abundance file", a, " Increase numiso in isotopia.cmb")') trim(abfile)
+      write(*, '(" ISOTOPIA-error: Too many isotopes in abundance file", a, " Increase numiso in A0_isotopia_mod.f90")') &
+ &      trim(abfile)
       stop
     endif
   enddo
