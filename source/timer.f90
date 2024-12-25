@@ -33,10 +33,6 @@ subroutine timer
   minute = int((time - hour * 3600) / 60.)
   second = int(time - hour * 3600 - minute * 60)
   hundred = int(100 * (time - int(time)))
-!      write(*,'(/" Execution time:",i3," hours ",i2," minutes ",i2,".",
-!     +  i2.2," seconds ")') hour,minute,second,hundred
-!      write(*,*)
-!      write(*,*) " End of ISOTOPIA isotopic run"
   return
 end subroutine timer
 ! Copyright A.J. Koning 2023
