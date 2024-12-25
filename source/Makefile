@@ -1,6 +1,6 @@
 # This file is part of ISOTOPIA
 # 
-#    Author: Arjan Koning Copyright: (C) 2023
+#    Author: Arjan Koning Copyright: (C) 2024
 #
 # ISOTOPIA is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
@@ -34,7 +34,7 @@ src = $(fsub)
 all: change isotopia install clean
 
 change : 
-	../path_change
+	../path_change.bash
 
 isotopia : $(obj)
 	$(FC) $(FFLAGS) -o  isotopia  $(obj)
