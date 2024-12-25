@@ -9,6 +9,7 @@ subroutine readinput
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
+!
   use A0_isotopia_mod
 !
 !              inline, &   ! input line
@@ -50,7 +51,7 @@ subroutine readinput
       i = i + 1
       if (i > numlines) then
         write(*, '(" ISOTOPIA-error: Number of input lines exceeds", i5)') numlines
-        write(*, '(" numlines in isotopia.cmb should be increased")')
+        write(*, '(" numlines in A0_isotopia_mod.f90 should be increased")')
         stop
       endif
     enddo
