@@ -65,10 +65,12 @@ subroutine natural
   character(len=16) :: col(6)    ! header
   character(len=16) :: un(6)    ! header
   character(len=80) :: quantity   ! quantity
+  character(len=80) :: key
   character(len=132) :: string    !
   character(len=132) :: topline    ! topline
   character(len=132) :: line        !
   integer           :: Ncol       ! counter
+  integer           :: keyix
   integer           :: ia                                ! mass number from abundance table
   integer           :: is                                ! isotope counter: -1=total, 0=ground state 1=isomer
   integer           :: it                                ! counter for tritons
@@ -135,10 +137,12 @@ subroutine natural
             do 
               read(2,'(a)',iostat = istat) line
               if (istat == -1) exit
-              if (line(1:9) == '# Entries') then
-                read(line(42:47),'(i6)', iostat = istat) Ntime
+              key='entries'
+              keyix=index(line,trim(key))
+              if (keyix > 0) then
+                read(line(keyix+len_trim(key)+2:80),*, iostat = istat) Ntime
                 if (istat /= 0) call read_error(Yf, istat)
-                read(2,'()')
+                read(2,'(/)')
                 do it = 1, Ntime
                   read(2, * , iostat = istat) Tdum, Y, Nis, Ym
                   if (istat < 0) call read_error(Yf, istat)
@@ -169,6 +173,7 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
     enddo
   enddo
   write(*,'()')
+  targetnuclide=trim(Starget)//'0'
   do iz = Zcomp, Zcomp - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, 1
@@ -204,16 +209,16 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
             string='stable'
           else
             write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') &
- &   (Td(iz, ia, is, k), k = 1, 5)
+ &            (Td(iz, ia, is, k), k = 1, 5)
           endif
           call write_char(2,'Half-life',string)
           if (Tmax(iz, ia, is) > 1.e17) then
             string='infinity'
           else
             write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")')  &
- &   (Tp(iz, ia, is, k), k = 1, 5)
+ &            (Tp(iz, ia, is, k), k = 1, 5)
           endif
-          call write_char(2,'Maximum production at',string)
+          call write_char(2,'Maximum production',string)
           un = ''
           col(1)='Time'
           un(1)='sec'
@@ -222,7 +227,7 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           col(3)='Isotopes'
           un(3)= trim(ystr)
           col(4)='Yield'
-          un(4)= trim(rstr)
+          un(4)= trim(rstr)//'/mAh'
           col(5)='Isotopic_frac.'
           col(6)='Time'
           un(6)='h'
@@ -247,6 +252,7 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
   do it = 1, Ntime
     write(2, fmt = form2) Tgrid(it), (Nelrel(iz, it), iz = Zcomp, Zcomp - Zdepth, -1)
   enddo
+  write( * , '()' ) 
   write( * , * ) " End of ISOTOPIA for natural target"
   return
 end subroutine natural
