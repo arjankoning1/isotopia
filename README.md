@@ -39,7 +39,7 @@ The resulting *samples/* directory should be moved to the *isotopia/* directory.
 ISOTOPIA requires the cross section database *isotopia.libs/*
 This can be obtained as follows
 ```
-https://nds.iaea.org/talys/isotopia.libs.tar
+https://nds.iaea.org/talys/codes/isotopia.libs.tar
 tar zxf isotopia.libs.tar
 ```
 and place the resulting directory *isotopia.libs/* in your home directory.
