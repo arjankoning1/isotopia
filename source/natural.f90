@@ -77,6 +77,9 @@ subroutine natural
   integer           :: iz                                ! charge number of residual nucleus
   integer           :: k                                 ! designator for particle
   integer           :: istat                             ! istat
+  integer           :: indent
+  integer           :: id2
+  integer           :: id4
   real(sgl)         :: Nis                               ! number of produced isotopes
   real(sgl)         :: Tdum                              !
   real(sgl)         :: Y                                 ! product yield (in ENDF-6 format)
@@ -103,6 +106,9 @@ subroutine natural
 !
 ! ******** Merge output files in results for natural elements **********
 !
+  indent = 0
+  id2 = indent + 2
+  id4 = indent + 4
   quantity='Isotope production'
   reaction='('//ptype0//',x)'
   do iz = Zcomp, Zcomp - Zdepth, -1
@@ -184,41 +190,41 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           write(*,'("file: ",a)') trim(Yfile(iz, ia, is))
           open (1, status = 'unknown', file = Yfile(iz, ia, is))
           topline=trim(targetnuclide)//trim(reaction)//trim(finalnuclide)//' '//trim(quantity)
-          call write_header(topline,source,user,date,oformat)
-          call write_target
-          call write_reaction(reaction,0.d0,0.d0,6,5)
-          call write_residual(iz,ia,finalnuclide)
-          call write_real(2,'Beam current [mA]',Ibeam)
-          call write_real(2,'E-Beam [MeV]',Ebeam)
-          call write_real(2,'E-Back [MeV]',Eback)
+          call write_header(indent,topline,source,user,date,oformat)
+          call write_target(indent)
+          call write_reaction(indent,reaction,0.d0,0.d0,6,5)
+          call write_residual(id2,iz,ia,finalnuclide)
+          call write_real(id4,'Beam current [mA]',Ibeam)
+          call write_real(id4,'E-Beam [MeV]',Ebeam)
+          call write_real(id4,'E-Back [MeV]',Eback)
           string='Initial production rate [s^-1]'
-          call write_real(2,string,prate(iz, ia, is))
+          call write_real(id4,string,prate(iz, ia, is))
           string='Decay rate [s^-1]'
-          call write_real(2,string,lambda(iz, ia, is))
+          call write_real(id4,string,lambda(iz, ia, is))
           string='Initial production yield ['//rstr//'/mAh]'
-          call write_real(2,string,yield(iz, ia, is, 1))
+          call write_real(id4,string,yield(iz, ia, is, 1))
           string='Total activity at EOI ['//rstr//']'
-          call write_real(2,string,activity(iz, ia, is, Ntime))
+          call write_real(id4,string,activity(iz, ia, is, Ntime))
           string='      years     days    hours  minutes seconds'
           string=''
           write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tirrad(k), k = 1, 5)
-          call write_char(2,'Irradiation time',string)
+          call write_char(id4,'Irradiation time',string)
           write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tcool(k), k = 1, 5)
-          call write_char(2,'Cooling time',string)
+          call write_char(id4,'Cooling time',string)
           if (Thalf(iz, ia, is) > 1.e17) then
             string='stable'
           else
             write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') &
  &            (Td(iz, ia, is, k), k = 1, 5)
           endif
-          call write_char(2,'Half-life',string)
+          call write_char(id4,'Half-life',string)
           if (Tmax(iz, ia, is) > 1.e17) then
             string='infinity'
           else
             write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")')  &
  &            (Tp(iz, ia, is, k), k = 1, 5)
           endif
-          call write_char(2,'Maximum production',string)
+          call write_char(id4,'Maximum production',string)
           un = ''
           col(1)='Time'
           un(1)='sec'
@@ -232,7 +238,8 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           col(6)='Time'
           un(6)='h'
           Ncol=6
-          call write_datablock(quantity,Ncol,numtime,col,un)
+          call write_quantity(id2,quantity)
+          call write_datablock(id2,Ncol,numtime,col,un)
           do it = 1, numtime
             Th = Tgrid(it)/hoursec
             write(1, '(6es15.6)') Tgrid(it),  activitynat(iz, ia, is, it), Nisonat(iz, ia, is, it), &
