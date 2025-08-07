@@ -47,6 +47,7 @@
   integer            :: i              ! counter
   integer            :: Ncol           ! 
   integer            :: istat          ! 
+  integer            :: indent
   integer            :: ia             ! mass number from abundance table
   integer            :: iE             ! energy counter
   integer            :: is             ! isotope counter: -1=total, 0=ground state 1=isomer
@@ -60,6 +61,7 @@
 ! For convenience in later loops, we store the non-elastic cross section in the 0th element of xsrp. In the next loop, we subtract
 ! the inelastic cross section from this, i.e. xsrp will contain all non-elastic cross sections other than inelastic.
 !
+  indent = 0
   col(1)='E'
   un(1)='MeV'
   col(2)='xs'
@@ -99,10 +101,11 @@
       csfile = parsym(k0)//'-'//trim(nuclide)//'.non'
       open (unit = 1, status = 'unknown', file = csfile)
       topline=trim(targetnuclide)//trim(reaction)//' '//trim(quantity)
-      call write_header(topline,source,user,date,oformat)
-      call write_target
-      call write_reaction(reaction,0.d0,0.d0,3,3)
-      call write_datablock(quantity,Ncol,Nennon,col,un)
+      call write_header(indent,topline,source,user,date,oformat)
+      call write_target(indent)
+      call write_reaction(indent,reaction,0.d0,0.d0,3,3)
+      call write_quantity(indent,quantity)
+      call write_datablock(indent,Ncol,Nennon,col,un)
       do i = 1, Nennon
         write(1, '(2es15.6)') Enon(i), xsnon(i)
       enddo
@@ -189,10 +192,11 @@
         open (unit = 1, status = 'unknown', file = csfile)
         reaction='('//ptype0//',non)'
         topline=trim(targetnuclide)//trim(reaction)//' '//trim(quantity)
-        call write_header(topline,source,user,date,oformat)
-        call write_target
-        call write_reaction(reaction,0.d0,0.d0,3,3)
-        call write_datablock(quantity,Ncol,Nennon,col,un)
+        call write_header(indent,topline,source,user,date,oformat)
+        call write_target(indent)
+        call write_reaction(indent,reaction,0.d0,0.d0,3,3)
+        call write_quantity(indent,quantity)
+        call write_datablock(indent,Ncol,Nennon,col,un)
         do i = 1, Nennon
           write(1, '(2es15.6)') Enon(i), xsnon(i)
         enddo
