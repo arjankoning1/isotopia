@@ -19,7 +19,7 @@ The following are the prerequisites for compiling ISOTOPIA:
 ### Downloads:
 
 To download ISOTOPIA, you can use one of the following options:
-#### 1. Download the entire tar file (frozen version):
+#### 1. Download the entire tar file (frozen version ISOTOPIA-2.2):
 ```
 https://nds.iaea.org/talys/isotopia.tar
 tar zxf isotopia.tar
@@ -29,13 +29,6 @@ tar zxf isotopia.tar
 ```
 git clone https://github.com/arjankoning1/isotopia.git
 ```
-The ISOTOPIA sample cases do not fall under the git repository. For that you need to download:
-```
-https://nds.iaea.org/talys/samples/isotopia_samples.tar
-tar zxf isotopia_samples.tar
-```
-The resulting *samples/* directory should be moved to the *isotopia/* directory.
-
 ISOTOPIA requires the cross section database *isotopia.libs/*
 This can be obtained as follows
 ```
