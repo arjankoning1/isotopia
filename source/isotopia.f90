@@ -1,17 +1,18 @@
 program isotopia
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
-! Purpose: Main program - Prediction of radio-isotope production
+! Purpose   : Prediction of radio-isotope production
 !
-! Revision    Date      Author      Quality  Description
-! ======================================================
-!    1     2025-12-01   A.J. Koning    A     Original code
+! Author    : Arjan Koning
+!
+! 2025-12-09: Current revision
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !   |-------------------------------------------------------|
+!   |                 ISOTOPIA-2.2                          |
 !   |                 Arjan Koning                          |
 !   |                                                       |
-!   | Email: A.Koning@@iaea.org                             |
+!   | Email: A.Koning@iaea.org                              |
 !   |-------------------------------------------------------|
 !
 ! MIT License
