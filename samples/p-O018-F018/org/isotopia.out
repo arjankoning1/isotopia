@@ -1,0 +1,104 @@
+
+    ISOTOPIA-2.2    (Version: December 9, 2025)
+
+           Prediction of medical isotope production with accelerators
+
+ Copyright (C) 2025  A.J. Koning
+
+ User: Arjan Koning
+ Date: 2025-12-15
+
+ ########## USER INPUT ##########
+
+ USER INPUT FILE
+
+ projectile p
+ element o
+ mass 18
+ ebeam 16.
+ eback 3.
+
+ USER INPUT FILE + DEFAULTS
+
+ Keyword           Value   Variable     Explanation
+
+ user      Arjan Koning    user         user for this calculation
+ source    ISOTOPIA        source       source for this calculation
+ format    YANDF-0.4       oformat      format for output
+ #
+ # Nuclear reaction
+ #
+ projectile          p     ptype0       type of incident particle
+ element            O      Starget      symbol of target nucleus
+ mass               18     Atarget      mass number of target nucleus
+ #
+ # Accelerator 
+ #
+ Ebeam              16.000 Ebeam        incident energy in MeV
+ Eback               3.000 Eback        lower end of energy range in MeV
+ Ibeam               1.000 Ibeam        beam current in mA
+ Tirrad              1     Tirrad       d of irradiation time
+ radiounit             gbq radiounit    unit for radioactivity
+ yieldunit             num yieldunit    unit for isotope yield
+ #
+ # Target
+ #
+ Area                1.000 Area         target area in cm^2
+ Tcool               1     Tcool        d of cooling time
+ rho                -1.000 rhotarget    target density [g/cm^3] 
+ #
+ # Cross section and decay data
+ #
+ Zdepth              8     Zdepth       depth to which Z numbers are scanned for cross sections
+ Adepth             18     Adepth       depth to which A numbers are scanned for cross sections
+
+
+ Summary of isotope production for p + O18
+
+ Maximal irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ E-beam [MeV]:   1.600000E+01
+ E-back [MeV]:   3.000000E+00
+ Beam current [mA]:        1.000 mA
+ Target material density [g/cm^3]:   1.430000E-03
+ Target area [cm^2]:   1.000000E+00
+ Effective target thickness [cm]:   2.547108E+02
+ Effective target volume [cm^3]:   2.547108E+02
+ Effective target mass [g]:   3.642364E-01
+ Number of target atoms:    1.218602E+22
+ Number of incident particles [s^-1]:   6.241509E+15
+ Produced heat in target [kW]:   1.300000E+01
+
+ (Maximum) production and decay rates per isotope
+
+ Total production rate [s^-1]:   4.041555E-09
+
+#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.             Half-life               Time of maximum production
+#             [s^-1]         [s^-1]         [GBq]          [   ]        [GBq/mAh]
+ F   19     2.031908E-12   0.000000E+00   0.000000E+00   2.138966E+15   0.000000E+00   0.01972       stable                                infinite                       
+ F   18     9.190974E-10   1.052826E-04   1.119540E+04   1.063366E+17   1.078132E+00   0.98012          0 y   0 d   1 h  49 m  43 s           0 y   1 d   2 h  49 m  39 s 
+ F   17     1.605262E-11   1.074813E-02   1.956162E+02   1.820001E+13   1.132038E-01   0.00102          0 y   0 d   0 h   1 m   4 s           0 y   0 d   0 h  22 m  56 s 
+ O   18     5.819829E-10   0.000000E+00   0.000000E+00   1.218176E+22   0.000000E+00   0.99992       stable                                infinite                       
+ O   17     7.181187E-10   0.000000E+00   0.000000E+00   7.728351E+17   0.000000E+00   0.00006       stable                                infinite                       
+ O   16     1.345999E-10   0.000000E+00   0.000000E+00   1.416917E+17   0.000000E+00   0.00001       stable                                infinite                       
+ N   16     6.629758E-17   9.721559E-02   8.078978E-04   8.310372E+06   4.675335E-07   0.00000          0 y   0 d   0 h   0 m   7 s           0 y   0 d   0 h   2 m  54 s 
+ N   15     9.800999E-10   0.000000E+00   0.000000E+00   1.031739E+18   0.000000E+00   0.62996       stable                                infinite                       
+ N   14     5.757139E-10   0.000000E+00   0.000000E+00   6.060472E+17   0.000000E+00   0.37004       stable                                infinite                       
+ C   14     9.435132E-11   3.853515E-12   3.827407E-04   9.932248E+16   4.430628E-09   0.99982       5699 y 315 d   8 h  29 m  52 s          54 y 214 d   3 h  48 m  16 s 
+ C   13     1.745258E-14   0.000000E+00   0.000000E+00   1.837212E+13   0.000000E+00   0.00018       stable                                infinite                       
+ B   11     2.608497E-11   0.000000E+00   0.000000E+00   2.745933E+16   0.000000E+00   1.00000       stable                                infinite                       
+
+file: F019.act
+file: F018.act
+file: F017.act
+file: O018.act
+file: O017.act
+file: O016.act
+file: N016.act
+file: N015.act
+file: N014.act
+file: C014.act
+file: C013.act
+file: B011.act
+
+  End of ISOTOPIA calculation for p + O18

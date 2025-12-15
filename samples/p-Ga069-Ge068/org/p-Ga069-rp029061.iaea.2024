@@ -1,0 +1,46 @@
+# header:
+#   title: Ga69(p,x)Cu61 cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2024-10-07
+#   format: YANDF-0.2
+# endf:
+#   library: tendl.2023
+#   author: A.J. Koning
+#   year: 2023
+# target:
+#   Z: 31
+#   A: 69
+#   nuclide: Ga69
+# reaction:
+#   type: (p,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+# residual:
+#   Z: 29
+#   A: 61
+#   nuclide: Cu61
+# datablock:
+#   quantity: cross section
+#   columns: 2
+#   entries: 18
+##       E             xs
+##     [MeV]          [mb]
+   4.500000E+01   2.812500E-06
+   5.000000E+01   2.537783E-03
+   5.500000E+01   5.353769E-02
+   6.000000E+01   3.190087E-01
+   6.500000E+01   2.445467E+00
+   7.000000E+01   9.053542E+00
+   7.500000E+01   1.709866E+01
+   8.000000E+01   2.051155E+01
+   9.000000E+01   1.730790E+01
+   1.000000E+02   1.643829E+01
+   1.100000E+02   2.385265E+01
+   1.200000E+02   3.301345E+01
+   1.300000E+02   3.675409E+01
+   1.400000E+02   3.720662E+01
+   1.500000E+02   3.477952E+01
+   1.600000E+02   3.684258E+01
+   1.800000E+02   3.219981E+01
+   2.000000E+02   3.042882E+01

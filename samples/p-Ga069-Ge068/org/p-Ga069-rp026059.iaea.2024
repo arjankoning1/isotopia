@@ -1,0 +1,46 @@
+# header:
+#   title: Ga69(p,x)Fe59 cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2024-10-07
+#   format: YANDF-0.2
+# endf:
+#   library: tendl.2023
+#   author: A.J. Koning
+#   year: 2023
+# target:
+#   Z: 31
+#   A: 69
+#   nuclide: Ga69
+# reaction:
+#   type: (p,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+# residual:
+#   Z: 26
+#   A: 59
+#   nuclide: Fe59
+# datablock:
+#   quantity: cross section
+#   columns: 2
+#   entries: 18
+##       E             xs
+##     [MeV]          [mb]
+   4.500000E+01   1.526464E-08
+   5.000000E+01   5.205759E-06
+   5.500000E+01   1.228061E-04
+   6.000000E+01   1.760529E-03
+   6.500000E+01   1.220279E-02
+   7.000000E+01   3.441232E-02
+   7.500000E+01   5.189179E-02
+   8.000000E+01   4.915688E-02
+   9.000000E+01   3.478060E-02
+   1.000000E+02   5.790179E-02
+   1.100000E+02   1.259170E-01
+   1.200000E+02   1.685857E-01
+   1.300000E+02   1.690416E-01
+   1.400000E+02   1.724865E-01
+   1.500000E+02   1.983320E-01
+   1.600000E+02   1.975891E-01
+   1.800000E+02   1.782711E-01
+   2.000000E+02   1.515652E-01

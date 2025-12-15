@@ -1,0 +1,75 @@
+#!/bin/bash
+#
+# verify: Run ISOTOPIA sample cases (Version July 21 2022) (C) Copyright 2022 Arjan Koning All Rights Reserved
+#
+# Extended by Viktor Zerkin for the option to run only a few, and not all, sample cases and to give more descriptive output
+#
+# This script runs ISOTOPIA for each sample case present in the new/ directories and determines
+# the numerical differences with the results of the org/ directories
+#
+# Examples: verify     (run all sample cases)"
+#           verify 2   (run only the first 2 sample case)"
+#
+# For Windows, change diff --> FC  and /dev/null --> NUL
+# ISOTOPIA executable
+#
+cwd=`pwd`
+isotopia=${cwd}/../bin/isotopia
+#
+# Main output and number of sample cases
+#
+start=`date +%F,%T`
+echo "________Script [$0] starting on: `uname -n` at: $start"
+files=`find . -name isotopia.inp | grep new | sort`
+nfiles=`find . -name isotopia.inp | grep new | sort | wc -l`
+iimax=1000
+if [ "$1" != "" ] ; then 
+  iimax=$1 
+else 
+  iimax=${nfiles}
+fi
+if [ $iimax -ge $nfiles ] ; then 
+  iimax=$nfiles
+fi
+iimax=`printf "%2d"  $(echo $iimax)`
+nfiles=`printf "%2d"  $(echo $nfiles)`
+echo "________in total there are ${nfiles} sample cases"
+echo "________going to run ISOTOPIA on ${iimax} sample cases"
+#
+# Loop over sample cases
+#
+homedir=`pwd`
+echo "________ISOTOPIA executable: $isotopia"
+ls -la ${isotopia}
+echo ""
+ii=0
+for f in ${files} ; do
+  dir=`dirname ${f}`
+  cd ${dir}
+  ii=$((ii+1))
+  echo "${ii}/${nfiles} *** Sample case " $dir
+  $isotopia < isotopia.inp > isotopia.out
+  errCode=$?
+  if [ $errCode -ne 0 ] ; then 
+    echo "___________error=$errCode on $dir"
+  fi
+  echo
+  if [ -e outputdiff ]; then
+    rm outputdiff
+  fi
+  for of in `ls -1` ; do
+    diff ${of} ../org/${of} | grep -v date >> /dev/null
+    if [ $? -eq 1 ] ; then
+      echo $of >> outputdiff
+      diff ${of} ../org/${of} | grep -v date >> outputdiff
+    fi
+  done
+  cd $homedir
+  if [ $ii -ge $iimax ] ; then 
+    break
+  fi
+done
+end=`date +%F,%T`
+echo "*** All sample cases done " 
+echo "Start: " $start
+echo "End  : " $end

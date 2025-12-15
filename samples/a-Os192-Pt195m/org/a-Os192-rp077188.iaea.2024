@@ -1,0 +1,43 @@
+# header:
+#   title: Os192(a,x)Ir188 cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2024-10-07
+#   format: YANDF-0.2
+# endf:
+#   library: tendl.2023
+#   author: A.J. Koning
+#   year: 2023
+# target:
+#   Z: 76
+#   A: 192
+#   nuclide: Os192
+# reaction:
+#   type: (a,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+# residual:
+#   Z: 77
+#   A: 188
+#   nuclide: Ir188
+# datablock:
+#   quantity: cross section
+#   columns: 2
+#   entries: 15
+##       E             xs
+##     [MeV]          [mb]
+   6.000000E+01   4.545198E-07
+   6.500000E+01   7.646790E-03
+   7.000000E+01   5.600042E-01
+   7.500000E+01   4.182332E+00
+   8.000000E+01   1.419418E+01
+   9.000000E+01   9.000433E+01
+   1.000000E+02   1.643491E+02
+   1.100000E+02   1.492081E+02
+   1.200000E+02   1.305393E+02
+   1.300000E+02   1.165333E+02
+   1.400000E+02   9.510279E+01
+   1.500000E+02   8.633611E+01
+   1.600000E+02   6.858575E+01
+   1.800000E+02   4.942794E+01
+   2.000000E+02   4.116316E+01

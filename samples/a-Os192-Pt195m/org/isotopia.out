@@ -1,0 +1,118 @@
+
+    ISOTOPIA-2.2    (Version: December 9, 2025)
+
+           Prediction of medical isotope production with accelerators
+
+ Copyright (C) 2025  A.J. Koning
+
+ User: Arjan Koning
+ Date: 2025-12-15
+
+ ########## USER INPUT ##########
+
+ USER INPUT FILE
+
+ projectile a
+ element os
+ mass 192
+ ebeam 24.
+ eback 18.
+ ibeam 0.150
+ outcross y
+
+ USER INPUT FILE + DEFAULTS
+
+ Keyword           Value   Variable     Explanation
+
+ user      Arjan Koning    user         user for this calculation
+ source    ISOTOPIA        source       source for this calculation
+ format    YANDF-0.4       oformat      format for output
+ #
+ # Nuclear reaction
+ #
+ projectile          a     ptype0       type of incident particle
+ element            Os     Starget      symbol of target nucleus
+ mass              192     Atarget      mass number of target nucleus
+ #
+ # Accelerator 
+ #
+ Ebeam              24.000 Ebeam        incident energy in MeV
+ Eback              18.000 Eback        lower end of energy range in MeV
+ Ibeam               0.150 Ibeam        beam current in mA
+ Tirrad              1     Tirrad       d of irradiation time
+ radiounit             gbq radiounit    unit for radioactivity
+ yieldunit             num yieldunit    unit for isotope yield
+ #
+ # Target
+ #
+ Area                1.000 Area         target area in cm^2
+ Tcool               1     Tcool        d of cooling time
+ rho                -1.000 rhotarget    target density [g/cm^3] 
+ #
+ # Cross section and decay data
+ #
+ Zdepth             10     Zdepth       depth to which Z numbers are scanned for cross sections
+ Adepth             20     Adepth       depth to which A numbers are scanned for cross sections
+
+
+ Summary of isotope production for a + Os192
+
+ Maximal irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ E-beam [MeV]:   2.400000E+01
+ E-back [MeV]:   1.800000E+01
+ Beam current [mA]:        0.150 mA
+ Target material density [g/cm^3]:   2.260000E+01
+ Target area [cm^2]:   1.000000E+00
+ Effective target thickness [cm]:   2.259161E-03
+ Effective target volume [cm^3]:   2.259161E-03
+ Effective target mass [g]:   5.105705E-02
+ Number of target atoms:    1.601420E+20
+ Number of incident particles [s^-1]:   4.681132E+14
+ Produced heat in target [kW]:   9.000000E-01
+
+ (Maximum) production and decay rates per isotope
+
+ Total production rate [s^-1]:   1.340850E-10
+
+#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.             Half-life               Time of maximum production
+#             [s^-1]         [s^-1]         [GBq]          [   ]        [GBq/mAh]
+ Pt 195     7.418770E-12   0.000000E+00   0.000000E+00   1.033378E+14   0.000000E+00   0.05747                                                                            
+ Pt 195 g   3.222222E-12   0.000000E+00   0.000000E+00   4.491741E+13   0.000000E+00   0.02498       stable                                infinite                       
+ Pt 195 m   4.196550E-12   1.956716E-06   1.051228E-01   5.372409E+13   8.754546E-06   0.02988          0 y   4 d   2 h  24 m   0 s           0 y  56 d  17 h  15 m  37 s 
+ Pt 194     1.153459E-10   0.000000E+00   0.000000E+00   1.595954E+15   0.000000E+00   0.88764       stable                                infinite                       
+ Pt 193     1.603907E-15   4.392902E-10   3.644019E-06   2.015604E+10   7.522196E-13   0.00001                                                                            
+ Pt 193 g   1.314623E-15   4.392902E-10   7.990264E-09   1.818903E+10   6.165476E-13   0.00001         50 y   0 d   0 h   0 m   0 s         123 y  76 d   2 h  20 m  48 s 
+ Pt 193 m   1.538183E-16   1.848511E-06   3.636028E-06   1.967004E+09   3.030754E-10   0.00000          0 y   4 d   8 h   9 m  36 s           0 y  59 d  16 h  24 m   2 s 
+ Ir 195     5.870039E-14   7.701635E-05   9.333562E-03   1.535263E+11   4.519179E-06   0.39588                                                                            
+ Ir 195 g   2.841292E-14   7.701635E-05   4.544195E-03   5.900299E+10   2.187431E-06   0.19162          0 y   0 d   2 h  30 m   0 s           0 y   1 d  23 h  49 m  45 s 
+ Ir 195 m   3.028747E-14   5.066865E-05   4.789367E-03   9.452327E+10   1.568710E-06   0.30698          0 y   0 d   3 h  48 m   0 s           0 y   2 d  22 h  24 m  18 s 
+ Ir 194     1.382609E-15   9.976212E-06   1.279010E-04   1.282060E+10   1.459960E-08   0.04164          0 y   0 d  19 h  18 m   0 s           0 y  13 d   0 h  20 m  13 s 
+ Ir 193     7.118410E-16   0.000000E+00   0.000000E+00   9.849590E+09   0.000000E+00   0.03199                                                                            
+ Ir 193 g   2.956569E-16   0.000000E+00   0.000000E+00   4.091110E+09   0.000000E+00   0.01329       stable                                infinite                       
+ Ir 193 m   4.161842E-16   7.611515E-07   4.362064E-06   5.730875E+09   3.381748E-10   0.01861          0 y  10 d  12 h  57 m  36 s           0 y 131 d  11 h  10 m  28 s 
+ Os 191     4.816130E-16   5.243488E-07   2.583003E-05   5.334462E+09   2.694858E-10   0.54981                                                                            
+ Os 191 g   2.742116E-16   5.243488E-07   1.945012E-06   3.709385E+09   1.534347E-10   0.31304          0 y  15 d   7 h  12 m   0 s           0 y 182 d  14 h  58 m  43 s 
+ Os 191 m   2.074014E-16   1.469778E-05   2.388502E-05   1.625077E+09   3.213467E-09   0.13714          0 y   0 d  13 h   6 m   0 s           0 y   9 d   3 h  19 m  24 s 
+ Os 190     2.968661E-21   0.000000E+00   0.000000E+00   4.107496E+04   0.000000E+00   0.00000       stable                                infinite                       
+
+file: Pt195.act
+file: Pt195g.act
+file: Pt195m.act
+file: Pt194.act
+file: Pt193.act
+file: Pt193g.act
+file: Pt193m.act
+file: Ir195.act
+file: Ir195g.act
+file: Ir195m.act
+file: Ir194.act
+file: Ir193.act
+file: Ir193g.act
+file: Ir193m.act
+file: Os191.act
+file: Os191g.act
+file: Os191m.act
+file: Os190.act
+
+  End of ISOTOPIA calculation for a + Os192

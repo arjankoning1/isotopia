@@ -1,0 +1,45 @@
+# header:
+#   title: Ga69(p,x)Ge65 cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2024-10-07
+#   format: YANDF-0.2
+# endf:
+#   library: tendl.2023
+#   author: A.J. Koning
+#   year: 2023
+# target:
+#   Z: 31
+#   A: 69
+#   nuclide: Ga69
+# reaction:
+#   type: (p,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+# residual:
+#   Z: 32
+#   A: 65
+#   nuclide: Ge65
+# datablock:
+#   quantity: cross section
+#   columns: 2
+#   entries: 17
+##       E             xs
+##     [MeV]          [mb]
+   5.000000E+01   4.935831E-05
+   5.500000E+01   8.173344E-03
+   6.000000E+01   4.907615E-02
+   6.500000E+01   9.275520E-02
+   7.000000E+01   9.738764E-02
+   7.500000E+01   8.109654E-02
+   8.000000E+01   6.468712E-02
+   9.000000E+01   4.508315E-02
+   1.000000E+02   3.406738E-02
+   1.100000E+02   2.696852E-02
+   1.200000E+02   2.238825E-02
+   1.300000E+02   1.937692E-02
+   1.400000E+02   1.723320E-02
+   1.500000E+02   1.562703E-02
+   1.600000E+02   1.460356E-02
+   1.800000E+02   1.238101E-02
+   2.000000E+02   1.204451E-02

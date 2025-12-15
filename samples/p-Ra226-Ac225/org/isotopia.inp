@@ -1,0 +1,6 @@
+projectile p
+element Ra
+mass 226
+Ebeam 16.8
+Eback 4.
+Ibeam 0.100

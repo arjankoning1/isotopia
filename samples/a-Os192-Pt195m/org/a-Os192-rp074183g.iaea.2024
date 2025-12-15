@@ -1,0 +1,45 @@
+# header:
+#   title: Os192(a,x)W183g cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2024-10-07
+#   format: YANDF-0.2
+# endf:
+#   library: tendl.2023
+#   author: A.J. Koning
+#   year: 2023
+# target:
+#   Z: 76
+#   A: 192
+#   nuclide: Os192
+# reaction:
+#   type: (a,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+# residual:
+#   Z: 74
+#   A: 183
+#   nuclide: W183g
+#   level:
+#     isomer: 0
+# datablock:
+#   quantity: cross section
+#   columns: 2
+#   entries: 15
+##       E             xs
+##     [MeV]          [mb]
+   6.000000E+01   7.104355E-12
+   6.500000E+01   5.274695E-08
+   7.000000E+01   3.300777E-05
+   7.500000E+01   1.972856E-03
+   8.000000E+01   2.575643E-02
+   9.000000E+01   2.286893E-01
+   1.000000E+02   2.326071E-01
+   1.100000E+02   1.055899E-01
+   1.200000E+02   1.518448E-01
+   1.300000E+02   1.743596E-01
+   1.400000E+02   1.600973E-01
+   1.500000E+02   1.621406E-01
+   1.600000E+02   1.064551E-01
+   1.800000E+02   1.302299E-01
+   2.000000E+02   3.188267E-01

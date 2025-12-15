@@ -1,0 +1,245 @@
+
+    ISOTOPIA-2.2    (Version: December 9, 2025)
+
+           Prediction of medical isotope production with accelerators
+
+ Copyright (C) 2025  A.J. Koning
+
+ User: Arjan Koning
+ Date: 2025-12-15
+
+ ########## USER INPUT ##########
+
+ USER INPUT FILE
+
+ projectile p
+ element th
+ mass 232
+ ebeam 192
+ eback 170.
+ ibeam 0.10
+
+ USER INPUT FILE + DEFAULTS
+
+ Keyword           Value   Variable     Explanation
+
+ user      Arjan Koning    user         user for this calculation
+ source    ISOTOPIA        source       source for this calculation
+ format    YANDF-0.4       oformat      format for output
+ #
+ # Nuclear reaction
+ #
+ projectile          p     ptype0       type of incident particle
+ element            Th     Starget      symbol of target nucleus
+ mass              232     Atarget      mass number of target nucleus
+ #
+ # Accelerator 
+ #
+ Ebeam             192.000 Ebeam        incident energy in MeV
+ Eback             170.000 Eback        lower end of energy range in MeV
+ Ibeam               0.100 Ibeam        beam current in mA
+ Tirrad              1     Tirrad       d of irradiation time
+ radiounit             gbq radiounit    unit for radioactivity
+ yieldunit             num yieldunit    unit for isotope yield
+ #
+ # Target
+ #
+ Area                1.000 Area         target area in cm^2
+ Tcool               1     Tcool        d of cooling time
+ rho                -1.000 rhotarget    target density [g/cm^3] 
+ #
+ # Cross section and decay data
+ #
+ Zdepth             10     Zdepth       depth to which Z numbers are scanned for cross sections
+ Adepth             20     Adepth       depth to which A numbers are scanned for cross sections
+
+
+ Summary of isotope production for p + Th232
+
+ Maximal irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ E-beam [MeV]:   1.920000E+02
+ E-back [MeV]:   1.700000E+02
+ Beam current [mA]:        0.100 mA
+ Target material density [g/cm^3]:   1.172000E+01
+ Target area [cm^2]:   1.000000E+00
+ Effective target thickness [cm]:   7.972751E-01
+ Effective target volume [cm^3]:   7.972751E-01
+ Effective target mass [g]:   9.344065E+00
+ Number of target atoms:    2.425486E+22
+ Number of incident particles [s^-1]:   6.241510E+14
+ Produced heat in target [kW]:   2.200000E+00
+
+ (Maximum) production and decay rates per isotope
+
+ Total production rate [s^-1]:   1.111251E-09
+
+#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.             Half-life               Time of maximum production
+#             [s^-1]         [s^-1]         [GBq]          [   ]        [GBq/mAh]
+ Pa 232     5.806650E-13   6.124074E-06   5.786466E+00   9.448720E+14   8.579629E-04   0.02778          0 y   1 d   7 h  26 m  24 s           0 y  16 d   6 h  48 m  36 s 
+ Pa 231     1.562295E-12   6.704653E-13   1.733483E-05   2.585493E+16   2.969316E-10   0.76027      32760 y  34 d  21 h  24 m  16 s         211 y 188 d   3 h  24 m  48 s 
+ Pa 230     1.787709E-13   4.610653E-07   1.693282E-01   3.672542E+14   1.998410E-05   0.01080          0 y  17 d   9 h  36 m   0 s           0 y 151 d  16 h  29 m  32 s 
+ Pa 229     1.980766E-12   5.348358E-06   1.777697E+01   3.323818E+15   2.557683E-03   0.09774          0 y   1 d  12 h   0 m   0 s           0 y  18 d   8 h  28 m   6 s 
+ Pa 228     2.314221E-12   8.751858E-06   2.977789E+01   3.402464E+15   4.875551E-03   0.10005          0 y   0 d  22 h   0 m   0 s           0 y  11 d  20 h  47 m  10 s 
+ Pa 227     1.364760E-12   3.016306E-04   3.310055E+01   1.097387E+14   7.781334E-02   0.00923          0 y   0 d   0 h  38 m  18 s           0 y   0 d  11 h  31 m  19 s 
+ Pa 226     1.133980E-12   6.418029E-03   2.750443E+01   4.285494E+12   1.591670E-01   0.00641          0 y   0 d   0 h   1 m  48 s           0 y   0 d   0 h  40 m  25 s 
+ Pa 225     3.715049E-13   4.077336E-01   9.010781E+00   2.209968E+10   5.214573E-02   0.00007          0 y   0 d   0 h   0 m   1 s           0 y   0 d   0 h   0 m  48 s 
+ Pa 224     3.714334E-13   8.212644E-01   9.009049E+00   1.096973E+10   5.213570E-02   0.00003          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m  24 s 
+ Th 232     6.236385E-12   0.000000E+00   0.000000E+00   2.425253E+22   0.000000E+00   0.99998       stable                                infinite                       
+ Th 231     4.061774E-11   7.544706E-06   5.652980E+02   7.492645E+16   8.343078E-02   0.00000          0 y   1 d   1 h  31 m  12 s           0 y  13 d  12 h  53 m  36 s 
+ Th 230     4.711987E-11   2.913069E-13   3.263350E-05   1.120245E+17   3.731751E-09   0.00000      75399 y 330 d  17 h   8 m  16 s         235 y  80 d   5 h  49 m  52 s 
+ Th 229     4.491146E-11   2.992437E-12   3.582819E-04   1.197291E+17   3.395635E-08   0.00000       7340 y   2 d  11 h   9 m  52 s         169 y  68 d   9 h  48 m  48 s 
+ Th 228     5.024629E-11   1.148374E-08   1.354218E+00   1.179248E+17   1.406369E-04   0.00000          1 y 333 d   8 h  23 m  20 s           7 y  49 d   5 h  47 m  44 s 
+ Th 227     1.751011E-11   4.285988E-07   1.543921E+01   3.602251E+16   1.819607E-03   0.00000          0 y  18 d  17 h  14 m   0 s           0 y 161 d   5 h  31 m  51 s 
+ Th 226     4.374127E-11   3.779017E-04   1.273298E+03   3.369389E+15   2.952859E+00   0.00000          0 y   0 d   0 h  30 m  34 s           0 y   0 d   9 h  21 m  44 s 
+ Th 225     2.464891E-11   1.324823E-03   5.978489E+02   4.512672E+14   3.109200E+00   0.00000          0 y   0 d   0 h   8 m  43 s           0 y   0 d   2 h  56 m   0 s 
+ Th 224     1.837707E-11   6.601402E-01   4.457325E+02   6.752088E+11   2.579470E+00   0.00000          0 y   0 d   0 h   0 m   1 s           0 y   0 d   0 h   0 m  30 s 
+ Th 223     1.075862E-11   1.155245E+00   2.609483E+02   2.258812E+11   1.510117E+00   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m  17 s 
+ Th 222     5.963439E-12   2.475526E+02   1.446421E+02   5.842884E+08   8.370493E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Th 221     3.140108E-12   4.125876E+02   7.616273E+01   1.845977E+08   4.407565E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Th 220     3.180844E-12   7.145847E+04   7.715079E+01   1.079659E+06   4.464745E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Th 219     2.523699E-12   6.601401E+05   6.121185E+01   9.272553E+04   3.542352E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Th 218     2.382088E-12   6.359148E+06   5.777710E+01   9.085666E+03   3.343582E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Th 217     2.277228E-12   2.750584E+03   5.523374E+01   2.008073E+07   3.196397E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Th 216     1.431547E-12   2.586370E+01   3.472192E+01   1.342496E+09   2.009370E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Th 215     5.505122E-13   5.776227E-01   1.335257E+01   2.311643E+10   7.727183E-02   0.00000          0 y   0 d   0 h   0 m   1 s           0 y   0 d   0 h   0 m  34 s 
+ Th 214     9.844403E-14   6.931472E+00   2.387742E+00   3.444783E+08   1.381795E-02   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   3 s 
+ Ac 231     8.092495E-12   1.540327E-03   1.962803E+02   1.274277E+14   1.056572E+00   0.00920          0 y   0 d   0 h   7 m  30 s           0 y   0 d   2 h  33 m   1 s 
+ Ac 230     6.341728E-12   5.681534E-03   1.538172E+02   2.707318E+13   8.900990E-01   0.00439          0 y   0 d   0 h   2 m   2 s           0 y   0 d   0 h  45 m  18 s 
+ Ac 229     1.304367E-11   1.842497E-04   3.163494E+02   1.716960E+15   4.992308E-01   0.02366          0 y   0 d   1 h   2 m  42 s           0 y   0 d  18 h   7 m  10 s 
+ Ac 228     9.244837E-12   3.130746E-05   2.092246E+02   6.682898E+15   6.833622E-02   0.07446          0 y   0 d   6 h   9 m   0 s           0 y   3 d  18 h  54 m  45 s 
+ Ac 227     9.111046E-12   1.008795E-09   2.034227E-02   2.016492E+16   2.255903E-06   0.22468         21 y 282 d   8 h  12 m  48 s          29 y 334 d  23 h   4 m  32 s 
+ Ac 226     2.073716E-11   6.555699E-06   2.174969E+02   3.317677E+16   3.278755E-02   0.36966          0 y   1 d   5 h  22 m  12 s           0 y  15 d   7 h  57 m  40 s 
+ Ac 225     1.162351E-11   8.022537E-07   1.891204E+01   2.357363E+16   2.260277E-03   0.26266          0 y  10 d   0 h   0 m   0 s           0 y  95 d   2 h   8 m  10 s 
+ Ac 224     1.193323E-11   6.925931E-05   2.886866E+02   4.168200E+15   1.889320E-01   0.04644          0 y   0 d   2 h  46 m  48 s           0 y   1 d  20 h  16 m  45 s 
+ Ac 223     2.320130E-11   5.501168E-03   5.627422E+02   1.022950E+14   3.256374E+00   0.01658          0 y   0 d   0 h   2 m   6 s           0 y   0 d   0 h  46 m  42 s 
+ Ac 222     1.236649E-11   1.386294E-01   2.999470E+02   5.699428E+12   1.735804E+00   0.00065                                                                            
+ Ac 222 g   1.062435E-11   1.386294E-01   2.576917E+02   1.858852E+12   1.491271E+00   0.00056          0 y   0 d   0 h   0 m   5 s           0 y   0 d   0 h   2 m  14 s 
+ Ac 222 m   1.742141E-12   1.100234E-02   4.225530E+01   3.840575E+12   2.445330E-01   0.00116          0 y   0 d   0 h   1 m   3 s           0 y   0 d   0 h  24 m  24 s 
+ Ac 221     9.230313E-12   1.332975E+01   2.238795E+02   1.679547E+10   1.295599E+00   0.00001          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   1 s 
+ Ac 220     7.384963E-12   2.625558E+01   1.791209E+02   6.822205E+09   1.036579E+00   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Ac 219     6.193172E-12   5.874129E+04   1.502142E+02   2.557217E+06   8.692954E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Ac 218     7.299190E-12   6.418030E+05   1.770405E+02   2.758487E+05   1.024540E+00   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Ac 217     5.660929E-12   1.004561E+07   1.373048E+02   1.366814E+04   7.945879E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Ac 216     6.313484E-12   2.100446E+03   1.531324E+02   7.290470E+07   8.861828E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Ac 215     4.994237E-12   4.077336E+00   1.211343E+02   2.970917E+10   7.010086E-01   0.00001          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   5 s 
+ Ac 214     2.712993E-12   8.453014E-02   6.580314E+01   7.784576E+11   3.808052E-01   0.00024          0 y   0 d   0 h   0 m   8 s           0 y   0 d   0 h   3 m  34 s 
+ Ac 213     5.595893E-13   8.664340E-01   1.357273E+01   1.566505E+10   7.854591E-02   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m  23 s 
+ Ra 228     2.742526E-13   3.819919E-09   2.194951E-03   5.746068E+14   2.540983E-07   0.03999          5 y 273 d  22 h  26 m  40 s          14 y 162 d  12 h  38 m  56 s 
+ Ra 227     5.348573E-13   2.737548E-04   1.297224E+01   4.738633E+13   2.829559E-02   0.00618          0 y   0 d   0 h  42 m  12 s           0 y   0 d  12 h  35 m  49 s 
+ Ra 226     8.508082E-13   1.372811E-11   2.447562E-05   1.782884E+15   2.832961E-09   0.12408       1599 y 352 d  23 h  53 m  36 s         126 y 313 d  20 h  43 m  44 s 
+ Ra 225     8.758125E-13   5.420633E-07   9.719019E-01   1.792968E+15   1.150949E-04   0.12478          0 y  14 d  19 h  12 m   0 s           0 y 132 d  10 h  29 m  57 s 
+ Ra 224     2.239667E-12   2.203994E-06   9.418693E+00   4.273466E+15   1.194993E-03   0.29741          0 y   3 d  15 h  21 m  36 s           0 y  39 d  21 h  23 m  58 s 
+ Ra 223     2.877544E-12   7.018842E-07   4.106550E+00   5.850750E+15   4.895787E-04   0.40719          0 y  11 d  10 h  19 m  12 s           0 y 106 d  12 h   1 m  10 s 
+ Ra 222     4.247316E-12   1.824071E-02   1.099629E+02   6.028430E+12   6.260525E-01   0.00245          0 y   0 d   0 h   0 m  38 s           0 y   0 d   0 h  15 m  10 s 
+ Ra 221     1.053277E-11   2.475526E-02   2.554704E+02   1.031984E+13   1.478417E+00   0.02847          0 y   0 d   0 h   0 m  28 s           0 y   0 d   0 h  11 m  23 s 
+ Ra 220     9.477562E-12   3.850818E+01   2.298765E+02   5.969550E+09   1.330304E+00   0.00002          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Ra 219     7.224080E-12   6.931472E+01   1.752187E+02   2.527872E+09   1.013997E+00   0.00001          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Ra 218     6.837275E-12   2.707606E+04   1.658369E+02   6.124851E+06   9.597040E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Ra 217     7.876431E-12   4.332170E+05   1.910414E+02   4.409831E+05   1.105564E+00   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Ra 216     6.669485E-12   3.808501E+06   1.617671E+02   4.247527E+04   9.361524E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Ra 215     7.885436E-12   4.359416E+02   1.912598E+02   4.387280E+08   1.106828E+00   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Ra 214     7.771922E-12   2.817671E-01   1.885065E+02   6.690153E+11   1.090894E+00   0.00185          0 y   0 d   0 h   0 m   2 s           0 y   0 d   0 h   1 m   8 s 
+ Ra 213     5.161123E-12   4.216224E-03   1.251818E+02   2.969050E+13   7.239370E-01   0.04423          0 y   0 d   0 h   2 m  44 s           0 y   0 d   0 h  59 m  53 s 
+ Fr 222     2.863998E-13   8.135531E-04   6.946459E+00   8.538422E+12   3.034442E-02   0.34721          0 y   0 d   0 h  14 m  12 s           0 y   0 d   4 h  36 m  38 s 
+ Fr 221     6.956378E-13   2.357644E-03   1.687247E+01   7.156499E+12   9.598140E-02   0.29138          0 y   0 d   0 h   4 m  54 s           0 y   0 d   1 h  42 m  58 s 
+ Fr 220     1.144728E-12   2.529734E-02   2.776517E+01   1.097553E+12   1.606781E-01   0.04905          0 y   0 d   0 h   0 m  27 s           0 y   0 d   0 h  11 m   9 s 
+ Fr 219     2.922566E-12   3.465736E+01   7.088629E+01   2.045346E+09   4.102216E-01   0.00009          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Fr 218     2.920889E-12   6.931472E+02   7.084563E+01   1.022086E+08   4.099863E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Fr 217     2.647370E-12   3.150669E+04   6.421147E+01   2.038026E+06   3.715942E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Fr 216     4.261265E-12   9.902102E+05   1.033562E+02   1.043780E+05   5.981261E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Fr 215     4.510648E-12   8.059851E+06   1.094049E+02   1.357406E+04   6.331304E-01   0.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Fr 214     5.729953E-12   1.386294E+02   1.389790E+02   1.002521E+09   8.042764E-01   0.00004          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Fr 213     6.439167E-12   2.003316E-02   1.561808E+02   7.796116E+12   9.038242E-01   0.34840          0 y   0 d   0 h   0 m  34 s           0 y   0 d   0 h  13 m  53 s 
+ Rn 218     1.818416E-13   1.980420E+01   4.410534E+00   2.227069E+08   2.552392E-02   0.10932          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   1 s 
+ Rn 217     5.085200E-13   1.283606E+03   1.233406E+01   9.608914E+06   7.137766E-02   0.00472          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Rn 216     7.091462E-13   1.540327E+04   1.720021E+01   1.116660E+06   9.953825E-02   0.00055          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Rn 215     9.963123E-13   3.013683E+05   2.416537E+01   8.018549E+04   1.398459E-01   0.00004          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Rn 214     1.700162E-12   2.567212E+06   4.123712E+01   1.606300E+04   2.386407E-01   0.00001          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ Rn 213     2.061815E-12   2.772589E+01   5.000895E+01   1.803691E+09   2.894036E-01   0.88537          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+ At 213     2.099151E-13   5.545178E+06   5.091451E+00   9.181763E+02   2.946441E-02   1.00000          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
+
+file: Pa232.act
+file: Pa231.act
+file: Pa230.act
+file: Pa229.act
+file: Pa228.act
+file: Pa227.act
+file: Pa226.act
+file: Pa225.act
+file: Pa224.act
+file: Th232.act
+file: Th231.act
+file: Th230.act
+file: Th229.act
+file: Th228.act
+file: Th227.act
+file: Th226.act
+file: Th225.act
+file: Th224.act
+file: Th223.act
+file: Th222.act
+file: Th221.act
+file: Th220.act
+file: Th219.act
+file: Th218.act
+file: Th217.act
+file: Th216.act
+file: Th215.act
+file: Th214.act
+file: Ac231.act
+file: Ac230.act
+file: Ac229.act
+file: Ac228.act
+file: Ac227.act
+file: Ac226.act
+file: Ac225.act
+file: Ac224.act
+file: Ac223.act
+file: Ac222.act
+file: Ac222g.act
+file: Ac222m.act
+file: Ac221.act
+file: Ac220.act
+file: Ac219.act
+file: Ac218.act
+file: Ac217.act
+file: Ac216.act
+file: Ac215.act
+file: Ac214.act
+file: Ac213.act
+file: Ra228.act
+file: Ra227.act
+file: Ra226.act
+file: Ra225.act
+file: Ra224.act
+file: Ra223.act
+file: Ra222.act
+file: Ra221.act
+file: Ra220.act
+file: Ra219.act
+file: Ra218.act
+file: Ra217.act
+file: Ra216.act
+file: Ra215.act
+file: Ra214.act
+file: Ra213.act
+file: Fr222.act
+file: Fr221.act
+file: Fr220.act
+file: Fr219.act
+file: Fr218.act
+file: Fr217.act
+file: Fr216.act
+file: Fr215.act
+file: Fr214.act
+file: Fr213.act
+file: Rn218.act
+file: Rn217.act
+file: Rn216.act
+file: Rn215.act
+file: Rn214.act
+file: Rn213.act
+file: At213.act
+
+  End of ISOTOPIA calculation for p + Th232

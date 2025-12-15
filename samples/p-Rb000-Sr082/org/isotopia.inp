@@ -1,0 +1,5 @@
+projectile p
+element rb
+mass 0
+Ebeam 70.
+Eback 30.

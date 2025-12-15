@@ -1,0 +1,38 @@
+# header:
+#   title: Os192(a,x)W180 cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2024-10-07
+#   format: YANDF-0.2
+# endf:
+#   library: tendl.2023
+#   author: A.J. Koning
+#   year: 2023
+# target:
+#   Z: 76
+#   A: 192
+#   nuclide: Os192
+# reaction:
+#   type: (a,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+# residual:
+#   Z: 74
+#   A: 180
+#   nuclide: W180
+# datablock:
+#   quantity: cross section
+#   columns: 2
+#   entries: 10
+##       E             xs
+##     [MeV]          [mb]
+   9.000000E+01   1.771675E-07
+   1.000000E+02   2.631883E-03
+   1.100000E+02   2.661404E-01
+   1.200000E+02   1.709843E+00
+   1.300000E+02   2.285647E+00
+   1.400000E+02   1.382971E+00
+   1.500000E+02   1.660640E+00
+   1.600000E+02   1.752540E+00
+   1.800000E+02   1.944562E+00
+   2.000000E+02   2.571681E+00

@@ -1,0 +1,48 @@
+# header:
+#   title: Os192(a,x)W185m cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2024-10-07
+#   format: YANDF-0.2
+# endf:
+#   library: tendl.2023
+#   author: A.J. Koning
+#   year: 2023
+# target:
+#   Z: 76
+#   A: 192
+#   nuclide: Os192
+# reaction:
+#   type: (a,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+# residual:
+#   Z: 74
+#   A: 185
+#   nuclide: W185m
+#   level:
+#     isomer: 1
+# datablock:
+#   quantity: cross section
+#   columns: 2
+#   entries: 18
+##       E             xs
+##     [MeV]          [mb]
+   4.500000E+01   1.962193E-12
+   5.000000E+01   1.157559E-08
+   5.500000E+01   6.039712E-06
+   6.000000E+01   2.835210E-04
+   6.500000E+01   2.431794E-03
+   7.000000E+01   6.468710E-03
+   7.500000E+01   8.775469E-03
+   8.000000E+01   6.989186E-03
+   9.000000E+01   5.318576E-03
+   1.000000E+02   7.249154E-03
+   1.100000E+02   8.138972E-03
+   1.200000E+02   9.374172E-03
+   1.300000E+02   9.499749E-03
+   1.400000E+02   7.161590E-03
+   1.500000E+02   1.141846E-02
+   1.600000E+02   1.905351E-02
+   1.800000E+02   7.439796E-02
+   2.000000E+02   9.049540E-02

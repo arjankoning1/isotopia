@@ -1,0 +1,46 @@
+# header:
+#   title: Ga69(p,x)Mn57 cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2024-10-07
+#   format: YANDF-0.2
+# endf:
+#   library: tendl.2023
+#   author: A.J. Koning
+#   year: 2023
+# target:
+#   Z: 31
+#   A: 69
+#   nuclide: Ga69
+# reaction:
+#   type: (p,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+# residual:
+#   Z: 25
+#   A: 57
+#   nuclide: Mn57
+# datablock:
+#   quantity: cross section
+#   columns: 2
+#   entries: 18
+##       E             xs
+##     [MeV]          [mb]
+   4.500000E+01   6.523382E-10
+   5.000000E+01   4.959032E-07
+   5.500000E+01   1.666980E-05
+   6.000000E+01   1.048434E-04
+   6.500000E+01   2.572335E-04
+   7.000000E+01   3.064114E-04
+   7.500000E+01   2.234625E-04
+   8.000000E+01   2.530180E-04
+   9.000000E+01   2.742568E-03
+   1.000000E+02   1.508452E-02
+   1.100000E+02   3.046624E-02
+   1.200000E+02   2.642393E-02
+   1.300000E+02   3.353183E-02
+   1.400000E+02   5.501788E-02
+   1.500000E+02   5.276868E-02
+   1.600000E+02   5.756747E-02
+   1.800000E+02   7.487642E-02
+   2.000000E+02   8.693027E-02

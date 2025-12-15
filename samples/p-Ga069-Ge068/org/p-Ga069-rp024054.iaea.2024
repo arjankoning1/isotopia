@@ -1,0 +1,46 @@
+# header:
+#   title: Ga69(p,x)Cr54 cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2024-10-07
+#   format: YANDF-0.2
+# endf:
+#   library: tendl.2023
+#   author: A.J. Koning
+#   year: 2023
+# target:
+#   Z: 31
+#   A: 69
+#   nuclide: Ga69
+# reaction:
+#   type: (p,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+# residual:
+#   Z: 24
+#   A: 54
+#   nuclide: Cr54
+# datablock:
+#   quantity: cross section
+#   columns: 2
+#   entries: 18
+##       E             xs
+##     [MeV]          [mb]
+   4.500000E+01   2.536356E-12
+   5.000000E+01   2.585104E-09
+   5.500000E+01   1.186113E-07
+   6.000000E+01   8.251008E-07
+   6.500000E+01   1.948833E-06
+   7.000000E+01   2.448834E-06
+   7.500000E+01   2.315428E-06
+   8.000000E+01   8.365466E-06
+   9.000000E+01   3.427467E-04
+   1.000000E+02   3.152642E-03
+   1.100000E+02   7.570463E-03
+   1.200000E+02   9.378217E-03
+   1.300000E+02   1.248446E-02
+   1.400000E+02   2.459269E-02
+   1.500000E+02   3.668892E-02
+   1.600000E+02   4.596881E-02
+   1.800000E+02   7.377377E-02
+   2.000000E+02   8.702700E-02
