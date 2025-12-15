@@ -42,7 +42,7 @@ subroutine inputout
 !
 ! *************************** Code and version *************************
 !
-  write(*, '(/"    ISOTOPIA-2.2    (Version: December 1, 2025)"/)')
+  write(*, '(/"    ISOTOPIA-2.2    (Version: December 9, 2025)"/)')
   write(*, '(10x, " Prediction of medical isotope production with accelerators")')
   write(*, '(/" Copyright (C) 2025  A.J. Koning")')
   write(*, '(/" User: ",a)') trim(user)
