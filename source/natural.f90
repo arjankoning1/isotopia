@@ -28,7 +28,7 @@ subroutine natural
 !              Niso, &      ! number of isotopes produced after irradiation
 !              Nisorel, &   ! fraction of number of produced isotopes per ele
 !              Nisotot, &   ! number of elemental isotopes produced after irr
-!              Ntar0, &     ! number of original target atoms
+!              N_0, &       ! number of original target atoms
 !              Ntime, &     ! number of time points
 !              nuc, &       ! symbol of nucleus
 !              numA, &      ! number of masses
@@ -175,7 +175,7 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
       enddo
     enddo Loop1
     do it = 1, Ntime
-      Nelrel(iz, it) = Nisototnat(iz, it) / Ntar0
+      Nelrel(iz, it) = Nisototnat(iz, it) / N_0
     enddo
   enddo
   write(*,'()')
