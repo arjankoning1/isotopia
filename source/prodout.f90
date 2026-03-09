@@ -27,7 +27,7 @@ subroutine prodout
 !              natstring, &    ! string extension for file names
 !              Niso, &         ! number of isotopes produced after irradiation
 !              Nisorel, &      ! fraction of number of produced isotopes per ele
-!              Ntar0, &        ! number of original target atoms
+!              N_0, &          ! number of original target atoms
 !              Ntime, &        ! number of time points
 !              nuc, &          ! symbol of nucleus
 !              numtime, &      ! number of time points
@@ -111,7 +111,7 @@ subroutine prodout
   write(*, '(" Effective target thickness [cm]:", es15.6)') targetdx
   write(*, '(" Effective target volume [cm^3]:", es15.6)') Vtar
   write(*, '(" Effective target mass [g]:", es15.6)') Mtar
-  write(*, '(" Number of target atoms: ", es15.6)') Ntar0
+  write(*, '(" Number of target atoms: ", es15.6)') N_0
   write(*, '(" Number of incident particles [s^-1]:", es15.6)') projnum
   write(*, '(" Produced heat in target [kW]:", es15.6)') heat
   write(*, '(/" (Maximum) production and decay rates per isotope"/)')
