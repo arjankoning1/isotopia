@@ -5,7 +5,7 @@ module A0_isotopia_mod
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2025-12-18  A.J. Koning    A     Original code
+!    1     2026-02-26  A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -160,7 +160,7 @@ module A0_isotopia_mod
   integer                                                  :: Ntime        ! number of time points
   integer, dimension(0:numZ,0:numA,-1:numisom)             :: Tmaxactivity ! time of maximum activity of produced isoto
   integer, dimension(0:numZ,0:numA,-1:numisom,5)           :: Tp           ! irradiation time with maximal yield per time unit
-  real(sgl)                                                :: Ntar0        ! number of original target atoms
+  real(sgl)                                                :: N_0          ! number of original target atoms
   real(sgl), dimension(0:numtime)                          :: Tgrid        ! time
   real(sgl)                                                :: Tir          ! irradiation time per unit
   real(sgl)                                                :: Tco          ! cooling time per unit
