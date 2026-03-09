@@ -5,11 +5,11 @@ program isotopia
 !
 ! Author    : Arjan Koning
 !
-! 2025-12-18: Current revision
+! 2026-02-26: Current revision
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !   |-------------------------------------------------------|
-!   |                 ISOTOPIA-2.2                          |
+!   |                 ISOTOPIA-2.21                         |
 !   |                 Arjan Koning                          |
 !   |                                                       |
 !   | Email: A.Koning@iaea.org                              |
@@ -17,7 +17,7 @@ program isotopia
 !
 ! MIT License
 !
-! Copyright (c) 2025 Arjan Koning
+! Copyright (c) 2026 Arjan Koning
 !
 ! Permission is hereby granted, free of charge, to any person obtaining a copy
 ! of this software and associated documentation files (the "Software"), to deal
@@ -62,4 +62,4 @@ program isotopia
   if (flagnatural) call natural
   call timer
 end program isotopia
-! Copyright A.J. Koning 2025
+! Copyright A.J. Koning 2026
