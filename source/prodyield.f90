@@ -5,7 +5,7 @@ subroutine prodyield
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2026-02-26   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -27,7 +27,7 @@ subroutine prodyield
 !              Niso, &                            ! number of isotopes produced after irradiation
 !              Nisorel, &                         ! fraction of number of produced isotopes per ele
 !              Nisotot, &                         ! number of elemental isotopes produced after irr
-!              Ntar0, &                           ! number of original target atoms
+!              N_0, &                             ! number of original target atoms
 !              Ntime, &                           ! number of time points
 !              nuc, &                             ! symbol of nucleus
 !              numtime, &                         ! number of time points
@@ -52,6 +52,7 @@ subroutine prodyield
   implicit none
   integer   :: ia      ! mass number from abundance table
   integer   :: is      ! isotope counter: -1=total, 0=ground state 1=isomer
+  integer   :: is_p    ! isotope counter: -1=total, 0=ground state 1=isomer
   integer   :: isob    ! counter
   integer   :: it      ! counter for tritons
   integer   :: itm     ! maxmum time
@@ -60,32 +61,38 @@ subroutine prodyield
   integer   :: Zparent ! Z of parent isotope
   real(sgl) :: dT      ! time step
   real(sgl) :: acmax   ! maximum activity
-  real(sgl) :: N0      ! number of isotopes
+  real(sgl) :: N_p     ! number of isotopes for parent
   real(sgl) :: rfac    ! conversion factor for radioactivity
   real(sgl) :: yfac    ! conversion factor for isotope yield
-  real(dbl) :: C1      ! constant
-  real(dbl) :: CP1     ! constant
-  real(dbl) :: denom   ! help variable
-  real(dbl) :: denomD  ! help variable
-  real(dbl) :: exp1    ! exponent
-  real(dbl) :: exp2    ! exponent
-  real(dbl) :: expo1   ! exponent
-  real(dbl) :: expo2   ! exponent
-  real(dbl) :: lamD    ! decay rate per isotope
-  real(dbl) :: lamPD   ! decay rate for parent isotope
-  real(dbl) :: prate0  ! production rate for all isotopes
-  real(dbl) :: pratei  ! production rate per isotope
-  real(dbl) :: prateP  ! production rate
-  real(dbl) :: t1      ! help variable
-  real(dbl) :: t2      ! help variable
+  real(dbl) :: enum_i  ! constant
+  real(dbl) :: enum_p  ! constant
+  real(dbl) :: denom_i ! help variable
+  real(dbl) :: denom_p ! help variable
+  real(dbl) :: denom_ip! help variable
+  real(dbl) :: exp_cp  ! exponent
+  real(dbl) :: exp_ci  ! exponent
+  real(dbl) :: exp_i   ! exponent
+  real(dbl) :: exp_c   ! exponent
+  real(dbl) :: exp_p   ! exponent
+  real(dbl) :: exp_T   ! exponent
+  real(dbl) :: lambda_i! decay rate per isotope
+  real(dbl) :: lambda_p! decay rate for parent isotope
+  real(dbl) :: R_T     ! production rate for target
+  real(dbl) :: R_Ti    ! production rate per isotope
+  real(dbl) :: R_Tp    ! production rate for parent
   real(dbl) :: term    ! help variable
+  real(dbl) :: term_pi ! help variable
+  real(dbl) :: term_Ti ! help variable
   real(dbl) :: TT      ! help variable
 !
 ! ************ Initial condition for irradiation ***********************
 !
-  Ntar0 = avogadro / Atarget * rhotarget * Vtar
+  N_0 = avogadro / Atarget * rhotarget * Vtar
 !
 ! ******************** Set time grid ***********************************
+!
+! Ntime is number of time points until end of irration, i.e. before cooling
+! time points bewteen Ntime and numtime are for cooling only
 !
   Ntime = numtime / 2
   dT = Tir / Ntime
@@ -100,15 +107,16 @@ subroutine prodyield
     enddo
   endif
 !
-! ******************** Activity yield in MBq ***************************
+! ******************** Activity ****************************************
 !
-  prate0 = dble(prate(0, 0, -1))
+  R_T = dble(prate(0, 0, -1))
   do iz = Zcomp, Zcomp - Zdepth, -1
     do it=0,numtime
       Nisotot(iz,it)=0.
       Nisototnat(iz,it)=0.
     enddo
     do ia = Acomp, Acomp - Adepth, -1
+print*,iz,ia
       do is = -1, 1
         Yexist(iz,ia,is)=.false.
         if ( .not. rpexist(iz, ia, is)) cycle
@@ -128,13 +136,13 @@ subroutine prodyield
           Nisorelnat(iz,ia,is,it)=0.
         enddo
         if (iz == Ztarget .and. ia == Atarget .and. is ==  -1) then
-          Niso(iz, ia, is, 0) = dble(Ntar0)
+          Niso(iz, ia, is, 0) = dble(N_0)
           Nisotot(iz, 0) = Nisotot(iz, 0) + Niso(iz, ia, is, 0)
         endif
-        pratei = dble(prate(iz, ia, is))
-        lamD = dble(lambda(iz, ia, is))
-        C1 = dble(Ntar0) * pratei
-        denomD = lamD - prate0
+        R_Ti = dble(prate(iz, ia, is))
+        lambda_i = dble(lambda(iz, ia, is))
+        enum_i = dble(N_0) * R_Ti
+        denom_i = lambda_i - R_T
         do it = 1, numtime
           TT = dble(Tgrid(it))
 !
@@ -142,7 +150,7 @@ subroutine prodyield
 !
           if (iz == Ztarget .and. ia == Atarget .and. is ==  -1) then
             if (it <= Ntime) then
-              Niso(iz, ia, is, it) = dble(Ntar0) * exp( -prate0 * TT)
+              Niso(iz, ia, is, it) = dble(N_0) * exp( -R_T * TT)
             else
               Niso(iz, ia, is, it) = Niso(iz, ia, is, Ntime)
             endif
@@ -153,19 +161,20 @@ subroutine prodyield
 ! 1. Production directly from target
 !
             if (it <= Ntime) then
-              t1 = prate0 * TT
-              expo1 = exp( - t1)
-              t2 = lamD * TT
-              expo2 = exp( - t2)
-              if (denomD /= 0) then
-                exp1 = expo1 / denomD - expo2 / denomD
-                Niso(iz, ia, is, it) = C1 * exp1
+              exp_T = exp( -R_T * TT)
+              exp_i = exp( -lambda_i * TT)
+              if (denom_i /= 0) then
+                term_Ti = exp_T / denom_i - exp_i / denom_i
+                Niso(iz, ia, is, it) = enum_i * term_Ti
+if (iz == 53 .and. ia == 122 .and. is == -1) print*," A ", TT, Niso(iz, ia, is, it)
               endif
             else
-              t2 = lamD * (TT - Tir)
-              expo2 = exp( - t2)
-              term = Niso(iz, ia, is, Ntime) * expo2
-              Niso(iz, ia, is, it) = term
+!
+! Cooling
+!
+              exp_c = exp( -lambda_i * (TT - Tir))
+              Niso(iz, ia, is, it) = Niso(iz, ia, is, Ntime) * exp_c
+if (iz == 53 .and. ia == 122 .and. is == -1) print*," B ", TT, Niso(iz, ia, is, it)
             endif
 !
 ! 2. Production from decay of other isotope
@@ -174,38 +183,42 @@ subroutine prodyield
               do isob = -1, 1
                 Zparent = iz + isob
                 if (Zparent < 0) cycle
-                if ((isob ==  -1 .and. rtyp(Zparent, ia, -1) == 1) .or. (isob == 1 .and. rtyp(Zparent, ia, -1) == 2)) then
-                  lamPD = dble(lambda(Zparent, ia, is))
-                  if (it <= Ntime) then
-                    prateP = dble(prate(Zparent, ia, is))
-                    if (prateP > 0..and.lamPD > 0.) then
-                      CP1 = dble(Ntar0) * prateP
-                      t1 = lamPD * TT
-                      expo1 = exp( -t1)
-                      denom = lamD - lamPD
-                      exp2 = expo1 / denom - expo2 / denom
-                      term = lamPD * CP1 / (lamPD - prate0) * (exp1 - exp2)
-                      Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
-                    endif
-                  else
+!
+! Account for isomeric decay of parent
+!
+                do is_p = -1, -1
+                  if ((isob ==  -1 .and. rtyp(Zparent, ia, is_p) == 1) .or. (isob == 1 .and. rtyp(Zparent, ia, is_p) == 2)) then
+                    lambda_p = dble(lambda(Zparent, ia, is_p))
+                    denom_ip = lambda_i - lambda_p
+                    if (it <= Ntime) then
+                      R_Tp = dble(prate(Zparent, ia, is_p))
+                      if (R_Tp > 0. .and. lambda_p > 0.) then
+                        enum_p = dble(N_0) * R_Tp
+                        denom_p = lambda_p - R_T
+                        exp_p = exp( -lambda_p * TT)
+                        term_pi = exp_p / denom_ip - exp_i / denom_ip
+                        term = lambda_p * enum_p / denom_p * (term_Ti - term_pi)
+                        Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
+if (iz == 53 .and. ia == 122 .and. is == -1) print*," C ", TT, Niso(iz, ia, is, it),term
+                      endif
+                    else
 !
 ! Cooling only
 !
-                    N0 = Niso(Zparent, ia, is, Ntime)
-                    t1 = lamPD * (TT - Tir)
-                    exp1 = exp( -t1)
-                    t2 = lamD * (TT - Tir)
-                    exp2 = exp( -t2)
-                    denom = lamD - lamPD
-                    if (denom /= 0.) then
-                      term = N0 * lamPD / denom * (exp1 - exp2)
-                      Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
+                      N_p = Niso(Zparent, ia, is_p, Ntime)
+                      exp_cp = exp( -lambda_p * (TT - Tir))
+                      exp_ci = exp( -lambda_i * (TT - Tir))
+                      if (denom_ip /= 0.) then
+                        term = N_p * lambda_p / denom_ip * (exp_cp - exp_ci)
+                        Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
+if (iz == 53 .and. ia == 122 .and. is == -1) print*," D ", TT, Niso(iz, ia, is, it),term,Tir
+                      endif
                     endif
                   endif
-                endif
+                enddo
               enddo
             endif
-            activity(iz, ia, is, it) = lamD * Niso(iz, ia, is, it) * 1.e-6
+            activity(iz, ia, is, it) = lambda_i * Niso(iz, ia, is, it) * 1.e-6
             if (it <= Ntime) yield(iz, ia, is, it) = max( (activity(iz, ia, is, it) - activity(iz, ia, is, it - 1)) / &
  &            (Ibeam * dble(Tgrid(it) - Tgrid(it - 1))), 0.)
           endif
@@ -213,8 +226,8 @@ subroutine prodyield
           Nisotot(iz, it) = Nisotot(iz, it) + Niso(iz, ia, is, it)
         enddo
         if ( .not. Yexist(iz, ia, is)) cycle
-        if (lamD > 0..and.prate0 > 0.) then
-          Tmax(iz, ia, is) = log(lamD / prate0) / (lamD - prate0)
+        if (lambda_i > 0..and. R_T > 0.) then
+          Tmax(iz, ia, is) = log(lambda_i / R_T) / (lambda_i - R_T)
         else
           Tmax(iz, ia, is) = 1.e30
         endif
