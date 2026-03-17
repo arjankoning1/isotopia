@@ -128,7 +128,7 @@ subroutine prodout
   endif
   write(*, '("#             [s^-1]         [s^-1]         [", a3, "]          [", a3, "]        [", a3, "/",a)') &
  &  rstr, ystr, rstr, trim(yieldstring)
-  do iz = Zcomp, Zcomp - Zdepth, -1
+  do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, Nisomer(iz, ia)
         if ( .not. Yexist(iz, ia, is)) cycle
@@ -162,7 +162,7 @@ subroutine prodout
   reaction='('//ptype0//',x)'
   quantity='Isotope production'
   write(*,'()')
-  do iz = Zcomp, Zcomp - Zdepth, -1
+  do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, Nisomer(iz, ia)
         if ( .not. Yexist(iz, ia, is)) cycle
