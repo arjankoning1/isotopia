@@ -5,7 +5,7 @@ subroutine inputout
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-02-26   A.J. Koning    A     Original code
+!    1     2026-03-17   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -39,11 +39,12 @@ subroutine inputout
 !
   implicit none
   integer :: i              ! level
+  character(len=1) :: yesno ! y or n function
 !
 ! *************************** Code and version *************************
 !
-  write(*, '(/"    ISOTOPIA-2.21   (Version: February 26, 2026)"/)')
-  write(*, '(10x, " Prediction of medical isotope production with accelerators")')
+  write(*, '(/"    ISOTOPIA-2.21   (Version: March 17, 2026)"/)')
+  write(*, '(10x, " Simulation of medical isotope production")')
   write(*, '(/" Copyright (C) 2026  A.J. Koning")')
   write(*, '(/" User: ",a)') trim(user)
   write(*, '(" Date: ",a)') trim(date)
@@ -63,41 +64,50 @@ subroutine inputout
   write(*, '(" user      ", a, t28, "user         user for this calculation")') trim(user)
   write(*, '(" source    ", a, t28, "source       source for this calculation")') trim(source)
   write(*, '(" format    ", a, t28, "oformat      format for output")') trim(oformat)
+  write(*, '(" crosspath ", a, "   crosspath    directory containing cross sections ")') trim(crosspath)
 !
-! 1. Nuclear reaction
+! Nuclear reaction
 !
   write(*, '(" #"/" # Nuclear reaction"/" #")')
   write(*, '(" projectile          ", a1, "     ptype0       type of incident particle")') ptype0
   write(*, '(" element            ", a2, "     Starget      symbol of target nucleus")') Starget
   write(*, '(" mass              ", i3, "     Atarget      mass number of target nucleus")') Atarget
 !
-! 2. Accelerator
+! Accelerator
 !
   write(*, '(" #"/" # Accelerator "/" #")')
   write(*, '(" Ebeam             ", f7.3, " Ebeam        incident energy in MeV")') Ebeam
   write(*, '(" Eback             ", f7.3, " Eback        lower end of energy range in MeV")') Eback
   write(*, '(" Ibeam             ", f7.3, " Ibeam        beam current in mA")') Ibeam
+!
+! Output
+!
+  write(*, '(" #"/" # Output "/" #")')
+  write(*, '(" radiounit             ", a3, " radiounit    unit for radioactivity")') radiounit
+  write(*, '(" yieldunit             ", a3, " yieldunit    unit for isotope yield")') yieldunit
+  write(*, '(" ZAoutput              ", a1, "   flagZAoutput output files per Z, A instead of El, A")') yesno(flagZAoutput)
+!
+! Target
+!
+  write(*, '(" #"/" # Target"/" #")')
   do i = 1, 5
     if (Tirrad(i) > 0) write(*, '(" Tirrad      ", i9, "     Tirrad       ", a1, " of irradiation time")') Tirrad(i), unitTirrad(i)
   enddo
-  write(*, '(" radiounit             ", a3, " radiounit    unit for radioactivity")') radiounit
-  write(*, '(" yieldunit             ", a3, " yieldunit    unit for isotope yield")') yieldunit
-!
-! 3. Target
-!
-  write(*, '(" #"/" # Target"/" #")')
   write(*, '(" Area              ", f7.3, " Area         target area in cm^2")') Area
   do i = 1, 5
     if (Tcool(i) > 0) write(*, '(" Tcool       ", i9, "     Tcool        ", a1, " of cooling time")') Tcool(i), unitTcool(i)
   enddo
   write(*, '(" rho               ", f7.3, " rhotarget    target density [g/cm^3] ")') rhotarget
+  write(*, '(" fluxtotal ", es15.6, " fluxtotal    total flux")') fluxtotal
 !
-! 4. Cross section and decay data
+! Cross section and decay data
 !
   write(*, '(" #"/" # Cross section and decay data"/" #")')
   write(*, '(" Zdepth            ", i3, "     Zdepth       depth to which Z numbers are scanned for cross sections")') Zdepth
   write(*, '(" Adepth            ", i3, "     Adepth       depth to which A numbers are scanned for cross sections")') Adepth
-  write( * , * )
+  write(*, '(" decay               ", a1, "     flagdecay    flag to include decay of nuclides (n only for diagnosis) ")') &
+ &  yesno(flagdecay)
+  write(* , *)
   return
 end subroutine inputout
-! Copyright A.J. Koning 2025
+! Copyright A.J. Koning 2026
