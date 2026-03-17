@@ -74,7 +74,16 @@
     Enon = 0.
     xsnon = 0.
     Nennon = 0
-    pfile = trim(xspath)//'xs/'//parsym(k0)//'-'//trim(nuclide)// '-MT005.'//trim(libname)
+    if (k0 == 1) then
+      pfile = trim(xspath)//'xs/'//parsym(k0)//'-'//trim(nuclide)// '-MT003.'//trim(libname)
+    else
+      pfile = trim(xspath)//'xs/'//parsym(k0)//'-'//trim(nuclide)// '-MT005.'//trim(libname)
+    endif
+    inquire (file = trim(pfile), exist = lexist)
+      if (.not. lexist) then
+      write(*, '(" ISOTOPIA-error: Non-elastic cross section file does not exist: " , a)') trim(pfile)
+      stop
+    endif
     open (unit = 1, status = 'unknown', file = trim(pfile))
     iE = 0
     do
@@ -156,10 +165,10 @@
  &        trim(csfile), E, xs
         stop
       endif
-      if (E >= Eback .and. E <= Ebeam .and. xs > 0.) flagpositive = .true.
+      if (k0 <= 1 .or. (E >= Eback .and. E <= Ebeam .and. xs > 0.)) flagpositive = .true.
       iE = iE + 1
       if (iE > numen) then
-        write(*, '(" ISOTOPIA-error: too many incident energies: increase numen in A0_isotopia_mod")')
+        write(*, '(" ISOTOPIA-error: too many incident energies: increase numen in A0_isotopia_mod.f90")')
         stop
       endif
       if (iE > 1) then
