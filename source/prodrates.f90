@@ -68,6 +68,7 @@ subroutine prodrates
 !
 ! **** Photons: read Bremsstrahlung spectrum for incident electron energy
 !
+  Mtar = targetmass
   dEint = 0.
   Eint = 0.
   phi = 0.
@@ -136,8 +137,6 @@ subroutine prodrates
     Mtar = rhotarget * Vtar
     heat = Ibeam * (Ebeam - Eback)
     projnum = Ibeam / (1000. * parZ(k0) * qelem)
-  else
-    Mtar = targetmass
   endif
 !
 ! ********************* Calculate reaction rates ***********************
