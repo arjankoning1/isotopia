@@ -87,7 +87,7 @@ subroutine prodyield
 !
 ! ************ Initial condition for irradiation ***********************
 !
-  N_0 = avogadro / Atarget * rhotarget * Vtar
+  N_0 = avogadro / Atarget * Mtar
 !
 ! ******************** Set time grid ***********************************
 !
@@ -116,7 +116,7 @@ subroutine prodyield
       Nisototnat(iz,it)=0.
     enddo
     do ia = Acomp, Acomp - Adepth, -1
-print*,iz,ia
+!print*,iz,ia
       do is = -1, 1
         Yexist(iz,ia,is)=.false.
         if ( .not. rpexist(iz, ia, is)) cycle
@@ -166,7 +166,7 @@ print*,iz,ia
               if (denom_i /= 0) then
                 term_Ti = exp_T / denom_i - exp_i / denom_i
                 Niso(iz, ia, is, it) = enum_i * term_Ti
-if (iz == 53 .and. ia == 122 .and. is == -1) print*," A ", TT, Niso(iz, ia, is, it)
+!if (iz == 53 .and. ia == 122 .and. is == -1) print*," A ", TT, Niso(iz, ia, is, it)
               endif
             else
 !
@@ -174,7 +174,7 @@ if (iz == 53 .and. ia == 122 .and. is == -1) print*," A ", TT, Niso(iz, ia, is, 
 !
               exp_c = exp( -lambda_i * (TT - Tir))
               Niso(iz, ia, is, it) = Niso(iz, ia, is, Ntime) * exp_c
-if (iz == 53 .and. ia == 122 .and. is == -1) print*," B ", TT, Niso(iz, ia, is, it)
+!if (iz == 53 .and. ia == 122 .and. is == -1) print*," B ", TT, Niso(iz, ia, is, it)
             endif
 !
 ! 2. Production from decay of other isotope
@@ -199,7 +199,7 @@ if (iz == 53 .and. ia == 122 .and. is == -1) print*," B ", TT, Niso(iz, ia, is, 
                         term_pi = exp_p / denom_ip - exp_i / denom_ip
                         term = lambda_p * enum_p / denom_p * (term_Ti - term_pi)
                         Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
-if (iz == 53 .and. ia == 122 .and. is == -1) print*," C ", TT, Niso(iz, ia, is, it),term
+!if (iz == 53 .and. ia == 122 .and. is == -1) print*," C ", TT, Niso(iz, ia, is, it),term
                       endif
                     else
 !
@@ -211,7 +211,7 @@ if (iz == 53 .and. ia == 122 .and. is == -1) print*," C ", TT, Niso(iz, ia, is, 
                       if (denom_ip /= 0.) then
                         term = N_p * lambda_p / denom_ip * (exp_cp - exp_ci)
                         Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
-if (iz == 53 .and. ia == 122 .and. is == -1) print*," D ", TT, Niso(iz, ia, is, it),term,Tir
+!if (iz == 53 .and. ia == 122 .and. is == -1) print*," D ", TT, Niso(iz, ia, is, it),term,Tir
                       endif
                     endif
                   endif
