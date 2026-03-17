@@ -5,7 +5,7 @@ module A1_error_handling_mod
 !
 ! Author    : Arjan Koning
 !
-! 2023-02-25: Original code
+! 2026-03-09: Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 contains
@@ -34,7 +34,7 @@ subroutine read_error(errfile, istat, eor, eof, error, ival, xval, cval)
 !
 ! ***************************** Error message **************************
 !
-  write(*, '(" TEFAL-error: Error in ",a)') trim(errfile)
+  write(*, '(" ISOTOPIA-error: Error in ",a)') trim(errfile)
   write(*, '("              IOSTAT = ",i6)') istat
   if (istat == 0) write(*, '("              Wrong value")')
   if (istat == -1) then
@@ -121,7 +121,7 @@ subroutine range_integer_error(varname, variable, vmin, vmax, default, unit, ind
     unitstring=' '
   endif
   if (variable < vmin .or. variable > vmax) then
-    write(*, '(" TEFAL-error: Variable out of range")')
+    write(*, '(" ISOTOPIA-error: Variable out of range")')
     write(*, '("             ",a," = ",i9)') trim(varname),variable
     write(*, '("       Range: ",i9," <= ",a," <= ",i9," ",a)') vmin,trim(varname),vmax,trim(unitstring)
     if (present(index1) .and. present(name1)) write(*, '("             ",a," = ",i9)') trim(name1),index1
@@ -178,7 +178,7 @@ subroutine range_real_error(varname, variable, vmin, vmax, default, unit, index1
     unitstring=' '
   endif
   if (variable < vmin .or. variable > vmax) then
-    write(*, '(" TEFAL-error: Variable out of range")')
+    write(*, '(" ISOTOPIA-error: Variable out of range")')
     write(*, '("             ",a," = ",es12.5)') trim(varname),variable
     write(*, '("       Range: ",es12.5," <= ",a," <= ",es12.5," ",a)') vmin,trim(varname),vmax,trim(unitstring)
     if (present(index1) .and. present(name1)) write(*, '("             ",a," = ",i9)') trim(name1),index1
