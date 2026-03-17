@@ -5,7 +5,7 @@ module A0_isotopia_mod
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-02-26  A.J. Koning    A     Original code
+!    1     2026-03-17  A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ module A0_isotopia_mod
   integer, parameter :: numiso=20        ! maximum number of isotopes per element
   integer, parameter :: numlines=100     ! number of input lines
   integer, parameter :: numA=339         ! number of masses
-  integer, parameter :: numen=10000      ! number of energies
+  integer, parameter :: numen=1000000    ! number of energies
   integer, parameter :: numtime=100      ! number of time points
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -127,6 +127,8 @@ module A0_isotopia_mod
   real(sgl)                      :: Ebeam      ! incident energy in MeV for isotope production
   real(sgl)                      :: Ibeam      ! beam current in mA for isotope production
   real(sgl)                      :: rhotarget  ! target material density
+  real(sgl)                      :: targetmass ! target mass (in yieldunit) 
+  real(sgl)                      :: fluxtotal  ! total flux
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! Variables for decay data
@@ -177,3 +179,4 @@ module A0_isotopia_mod
   real(sgl), dimension(0:numZ, 0:numtime)                  :: Nisototnat   ! number of elemental isotopes produced after irr
   real(sgl), dimension(0:numZ,0:numA,-1:numisom)           :: Tmax         ! irradiation time with maximal yield
 end module A0_isotopia_mod
+! Copyright A.J. Koning 2026
