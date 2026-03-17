@@ -5,7 +5,7 @@
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2025-05-20   A.J. Koning    A     Original code
+!    1     2026-03-09   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -65,4 +65,4 @@
   avogadro = 6.02214076e23
   qelem = 1.602176634e-19
 end subroutine constants
-! Copyright A.J. Koning 2025
+! Copyright A.J. Koning 2026
