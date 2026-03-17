@@ -59,6 +59,7 @@ subroutine prodout
   character(len=3)  :: Astr        !
   character(len=3)  :: massstring !
   character(len=6)  :: finalnuclide !
+  character(len=6)  :: yieldstring     
   character(len=13) :: state       ! state of final nuclide
   character(len=15) :: Yfile       ! file with production yields
   character(len=38) :: halflife    ! half life
@@ -103,9 +104,11 @@ subroutine prodout
   write(*, '(" Maximal irradiation time: ", a)') trim(string)
   write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tcool(k), k = 1, 5) 
   write(*, '(" Cooling time: ", a)') trim(string)
-  write(*, '(" E-beam [MeV]:", es15.6)') Ebeam
-  write(*, '(" E-back [MeV]:", es15.6)') Eback
-  write(*, '(" Beam current [mA]: ", f12.3, " mA")') Ibeam
+  if (k0 /= 1) then
+    write(*, '(" E-beam [MeV]:", es15.6)') Ebeam
+    write(*, '(" E-back [MeV]:", es15.6)') Eback
+    write(*, '(" Beam current [mA]: ", f12.3, " mA")') Ibeam
+  endif
   write(*, '(" Target material density [g/cm^3]:", es15.6)') rhotarget
   write(*, '(" Target area [cm^2]:", es15.6)') Area
   write(*, '(" Effective target thickness [cm]:", es15.6)') targetdx
@@ -118,7 +121,13 @@ subroutine prodout
   write(*, '(" Total production rate [s^-1]:", es15.6/)') prate(0, 0, -1)
   write(*, '("#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.", &
  &  "             Half-life               Time of maximum production")')
-  write(*, '("#             [s^-1]         [s^-1]         [", a3, "]          [", a3, "]        [", a3, "/mAh]")') rstr, ystr, rstr
+  if (k0 > 1) then
+    yieldstring='mAh'
+  else
+    yieldstring=trim(yieldunit)
+  endif
+  write(*, '("#             [s^-1]         [s^-1]         [", a3, "]          [", a3, "]        [", a3, "/",a)') &
+ &  rstr, ystr, rstr, trim(yieldstring)
   do iz = Zcomp, Zcomp - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, Nisomer(iz, ia)
@@ -184,12 +193,14 @@ subroutine prodout
         topline=trim(targetnuclide)//trim(reaction)//trim(finalnuclide)//' '//trim(quantity)
         call write_header(indent,topline,source,user,date,oformat)
         call write_target(indent)
-        call write_reaction(indent,reaction,0.d0,0.d0,6,5)
+        call write_reaction(indent,reaction,0.d0,0.d0,0,0)
         call write_residual(id2,iz,ia,finalnuclide)
         call write_char(id2,'parameters','')
-        call write_real(id4,'Beam current [mA]',Ibeam)
-        call write_real(id4,'E-Beam [MeV]',Ebeam)
-        call write_real(id4,'E-Back [MeV]',Eback)
+        if (k0 /= 1) then
+          call write_real(id4,'Beam current [mA]',Ibeam)
+          call write_real(id4,'E-Beam [MeV]',Ebeam)
+          call write_real(id4,'E-Back [MeV]',Eback)
+        endif
         string='Initial production rate [s^-1]'
         call write_real(id4,string,prate(iz, ia, is))
         string='Decay rate [s^-1]'
@@ -225,7 +236,11 @@ subroutine prodout
         col(3)='Isotopes'
         un(3) = trim(ystr)
         col(4)='Yield'
-        un(4) = trim(rstr//'/mAh')
+        if (k0 > 1) then
+          un(4) = trim(rstr//'/mAh')
+        else
+          un(4) = trim(rstr)//'/'//trim(yieldunit)
+        endif
         col(5)='Isotopic_frac.'
         col(6)='Time'
         un(6) = 'h'
