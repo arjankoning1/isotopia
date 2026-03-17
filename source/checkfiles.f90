@@ -39,7 +39,11 @@ subroutine checkfiles
   targetnuclide = trim(Starget) // adjustl(Astr)
   nucpath = parsym(k0)//'/'//trim(nuclide)//'/'
   xspath = trim(crosspath)//trim(nucpath)//trim(libname)//'/tables/'
-  pfile = trim(xspath)//'xs/'//parsym(k0)//'-'//trim(nuclide)// '-MT005.'//trim(libname)
+  if (k0 == 1) then
+    pfile = trim(xspath)//'xs/'//parsym(k0)//'-'//trim(nuclide)// '-MT003.'//trim(libname)
+  else
+    pfile = trim(xspath)//'xs/'//parsym(k0)//'-'//trim(nuclide)// '-MT005.'//trim(libname)
+  endif
   inquire (file = trim(pfile), exist = lexist)
   if ( .not. lexist) then
     write(*, '(" ISOTOPIA-error: Cross section file does not exist: " , a)') trim(pfile)
