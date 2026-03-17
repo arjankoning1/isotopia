@@ -85,6 +85,8 @@ subroutine input
   Tcool(1) = 1
   unitTcool(1) = 'd'
   rhotarget = -1.
+  targetmass = 1.
+  fluxtotal = 1.e14
   flagdecay = .true.
   flagZAoutput = .false.
   flagcross = .false.
@@ -194,6 +196,16 @@ Loop1:  do i = 1, nlines
     endif
     if (key == 'rho') then
       read(val, * , iostat = istat) rhotarget
+      if (istat /= 0) call read_error(line, istat)
+      cycle
+    endif
+    if (key == 'targetmass') then
+      read(val, * , iostat = istat) targetmass
+      if (istat /= 0) call read_error(line, istat)
+      cycle
+    endif
+    if (key == 'fluxtotal') then
+      read(val, * , iostat = istat) fluxtotal
       if (istat /= 0) call read_error(line, istat)
       cycle
     endif
