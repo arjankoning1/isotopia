@@ -110,7 +110,7 @@ subroutine prodyield
 ! ******************** Activity ****************************************
 !
   R_T = dble(prate(0, 0, -1))
-  do iz = Zcomp, Zcomp - Zdepth, -1
+  do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do it=0,numtime
       Nisotot(iz,it)=0.
       Nisototnat(iz,it)=0.
@@ -119,7 +119,7 @@ subroutine prodyield
 !print*,iz,ia
       do is = -1, 1
         Yexist(iz,ia,is)=.false.
-        if ( .not. rpexist(iz, ia, is)) cycle
+        if (iz /= Zcomp + 1 .and.  .not. rpexist(iz, ia, is)) cycle
         Tmax(iz,ia,is)=0.
         Tmaxactivity(iz,ia,is)=0.
         do it=1,5
