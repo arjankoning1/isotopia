@@ -98,6 +98,7 @@ subroutine inputout
     if (Tcool(i) > 0) write(*, '(" Tcool       ", i9, "     Tcool        ", a1, " of cooling time")') Tcool(i), unitTcool(i)
   enddo
   write(*, '(" rho               ", f7.3, " rhotarget    target density [g/cm^3] ")') rhotarget
+  write(*, '(" targetmass        ", f7.3, " targetmass   target mass ")') targetmass
   write(*, '(" fluxtotal ", es15.6, " fluxtotal    total flux")') fluxtotal
 !
 ! Cross section and decay data
