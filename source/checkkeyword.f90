@@ -5,7 +5,7 @@ subroutine checkkeyword
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2026-03-17   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -24,7 +24,7 @@ subroutine checkkeyword
 !
   implicit none
 
-  integer, parameter :: numkey=25         ! number of keywords
+  integer, parameter :: numkey=26         ! number of keywords
   integer            :: i
   integer            :: j
   character(len=132) :: key               ! keyword
@@ -41,7 +41,7 @@ subroutine checkkeyword
 !
   data (keyword(i), i = 1, numkey) / ' ', 'abundance', 'adepth', 'area', 'crosspath', 'decay', &
  &  'eback', 'ebeam', 'element', 'fluxtotal', 'format', 'ibeam', 'mass', 'outcross', 'projectile', 'radiounit', 'rho', & 
- &  'source', 'tirrad', 'tcool', 'user', 'xsfile', 'yieldunit', 'zaoutput', 'zdepth'/
+ &  'source', 'targetmass', 'tirrad', 'tcool', 'user', 'xsfile', 'yieldunit', 'zaoutput', 'zdepth'/
 !
 ! A keyword can be de-activated by putting a # in front of it.
 ! All first words of the input lines are checked against the list of keywords.
