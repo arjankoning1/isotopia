@@ -5,7 +5,7 @@ subroutine checkvalue
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2026-03-14   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -94,25 +94,27 @@ subroutine checkvalue
     write(*, '(" ISOTOPIA-error: 5 < Target mass < = ", i3)') numA
     stop
   endif
-  if (Ebeam ==  -1.) then
-    write(*, '(" ISOTOPIA-error: incident energy must be given")')
-    stop
-  endif
-  if (Ebeam <= 0..or.Ebeam > 250.) then
-    write(*, '(" ISOTOPIA-error: 0 < Ebeam < 250 MeV")')
-    stop
-  endif
-  if (Eback ==  -1.) then
-    Eback = max(Ebeam - 5., 0.1)
-  else
-    if (Eback <= 0..or.Eback > 250.) then
-      write(*, '(" ISOTOPIA-error: 0 < Eback < 250 MeV")')
+  if (k0 > 1) then
+    if (Ebeam ==  -1.) then
+      write(*, '(" ISOTOPIA-error: incident energy must be given")')
       stop
     endif
-  endif
-  if (Eback >= Ebeam) then
-    write(*, '(" ISOTOPIA-error: Ebeam must be larger than Eback")')
-    stop
+    if (Ebeam <= 0..or.Ebeam > 250.) then
+      write(*, '(" ISOTOPIA-error: 0 < Ebeam < 250 MeV")')
+      stop
+    endif
+    if (Eback ==  -1.) then
+      Eback = max(Ebeam - 5., 0.1)
+    else
+      if (Eback <= 0..or.Eback > 250.) then
+        write(*, '(" ISOTOPIA-error: 0 < Eback < 250 MeV")')
+        stop
+      endif
+    endif
+    if (Eback >= Ebeam) then
+      write(*, '(" ISOTOPIA-error: Ebeam must be larger than Eback")')
+      stop
+    endif
   endif
   Zdepth = min(Zdepth, Ztarget)
   Adepth = min(Adepth, Atarget)
@@ -134,30 +136,38 @@ subroutine checkvalue
   endif
   do k = 1, 5
     if (Tirrad(k) < 0 .or. Tirrad(k) >= 1000000) then
-      write(*, '(" TALYS-error: 0 < = Tirrad < 1.e6")')
+      write(*, '(" ISOTOPIA-error: 0 < = Tirrad < 1.e6")')
       stop
     endif
     if (Tcool(k) < 0 .or. Tcool(k) >= 1000000) then
-      write(*, '(" TALYS-error: 0 < = Tcool < 1.e6")')
+      write(*, '(" ISOTOPIA-error: 0 < = Tcool < 1.e6")')
       stop
     endif
   enddo
   do k = 1, 5
     if (unitTirrad(k) /= ' ' .and. unitTirrad(k) /= 'y' .and. unitTirrad(k) /= 'd' .and. unitTirrad(k) /= 'h' .and. &
       unitTirrad(k) /= 'm' .and. unitTirrad(k) /= 's') then
-      write(*, '(" TALYS-error: wrong unit for Tirrad = ", i9)') Tirrad(k)
+      write(*, '(" ISOTOPIA-error: wrong unit for Tirrad = ", i9)') Tirrad(k)
       stop
     endif
     if (unitTcool(k) /= ' ' .and. unitTcool(k) /= 'y' .and. unitTcool(k) /= 'd' .and. unitTcool(k) /= 'h' .and. &
       unitTcool(k) /= 'm' .and. unitTcool(k) /= 's') then
-      write(*, '(" TALYS-error: wrong unit for Tcool = ", i9)') Tcool(k)
+      write(*, '(" ISOTOPIA-error: wrong unit for Tcool = ", i9)') Tcool(k)
       stop
     endif
   enddo
   if (rhotarget /=  - 1..and.(rhotarget <= 0..or.rhotarget > 100.)) then
-    write(*, '(" TALYS-error: 0 < rhotarget < = 100.")')
+    write(*, '(" ISOTOPIA-error: 0 < rhotarget < = 100.")')
+    stop
+  endif
+  if (targetmass <=  0. .or. targetmass >= 1.e9) then
+    write(*, '(" ISOTOPIA-error: 0 <= targetmass < = 1.e9")')
+    stop
+  endif
+  if (fluxtotal <=  0. .or. fluxtotal >= 1.e38) then
+    write(*, '(" ISOTOPIA-error: 0 <= fluxtotal < = 1.e38")')
     stop
   endif
   return
 end subroutine checkvalue
-! Copyright A.J. Koning 2023
+! Copyright A.J. Koning 2026
