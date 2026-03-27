@@ -40,7 +40,7 @@ subroutine machine
 ! ************************ Set nuclear data directory ******************
 !
   crosspath = trim(basedir)//'isotopia.libs/'
-  libname = 'iaea.2024'
+  libname = 'iaea.2026'
 !
 ! ************************ Set counter for isotope *********************
 !
