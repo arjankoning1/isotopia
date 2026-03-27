@@ -5,7 +5,7 @@ subroutine prodout
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2026-03-17   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -126,7 +126,7 @@ subroutine prodout
   else
     yieldstring=trim(yieldunit)
   endif
-  write(*, '("#             [s^-1]         [s^-1]         [", a3, "]          [", a3, "]        [", a3, "/",a)') &
+  write(*, '("#             [s^-1]         [s^-1]         [", a3, "]          [", a3, "]        [", a3, "/", a, "]")') &
  &  rstr, ystr, rstr, trim(yieldstring)
   do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
