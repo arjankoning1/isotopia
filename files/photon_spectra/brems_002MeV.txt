@@ -1,0 +1,11 @@
+# header:
+#   title: bremsstrahlung for E-incident 2 MeV
+# datablock:
+#   columns: 2
+#   entries: 4
+## photon energy  phi_norm_per_MeV
+##    [MeV]            []
+    0.35              2.227867474166e+00
+    0.85              6.393701663828e-01
+    1.35              2.275375310315e-01
+    1.85              3.831713100531e-02
