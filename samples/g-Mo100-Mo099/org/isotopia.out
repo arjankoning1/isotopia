@@ -1,0 +1,130 @@
+
+    ISOTOPIA-2.22   (Version: March 17, 2026)
+
+           Simulation of medical isotope production
+
+ Copyright (C) 2026  A.J. Koning
+
+ User: Arjan Koning
+ Date: 2026-03-28
+
+ ########## USER INPUT ##########
+
+ USER INPUT FILE
+
+ projectile g
+ element mo
+ mass 100
+ ebeam 20.
+ ibeam 0.150
+
+ USER INPUT FILE + DEFAULTS
+
+ Keyword           Value   Variable     Explanation
+
+ user      Arjan Koning    user         user for this calculation
+ source    ISOTOPIA        source       source for this calculation
+ format    YANDF-0.4       oformat      format for output
+ crosspath /Users/koning/isotopia.libs/   crosspath    directory containing cross sections 
+ #
+ # Nuclear reaction
+ #
+ projectile          g     ptype0       type of incident particle
+ element            Mo     Starget      symbol of target nucleus
+ mass              100     Atarget      mass number of target nucleus
+ #
+ # Accelerator 
+ #
+ Ebeam              20.000 Ebeam        incident energy in MeV
+ Eback              -1.000 Eback        lower end of energy range in MeV
+ Ibeam               0.150 Ibeam        beam current in mA
+ #
+ # Output 
+ #
+ radiounit             gbq radiounit    unit for radioactivity
+ yieldunit             num yieldunit    unit for isotope yield
+ ZAoutput              n   flagZAoutput output files per Z, A instead of El, A
+ #
+ # Target
+ #
+ Tirrad              1     Tirrad       d of irradiation time
+ Area                1.000 Area         target area in cm^2
+ Tcool               1     Tcool        d of cooling time
+ rho                -1.000 rhotarget    target density [g/cm^3] 
+ targetmass          1.000 targetmass   target mass 
+ fluxtotal    1.000000E+14 fluxtotal    total flux
+ #
+ # Cross section and decay data
+ #
+ Zdepth             10     Zdepth       depth to which Z numbers are scanned for cross sections
+ Adepth             20     Adepth       depth to which A numbers are scanned for cross sections
+ decay               y     flagdecay    flag to include decay of nuclides (n only for diagnosis) 
+
+
+ Summary of isotope production for g + Mo100
+
+ Maximal irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ E-beam [MeV]:   2.000000E+01
+ E-back [MeV]:  -1.000000E+00
+ Beam current [mA]:        0.150 mA
+ Target material density [g/cm^3]:   1.022000E+01
+ Target area [cm^2]:   1.000000E+00
+ Effective target thickness [cm]:   0.000000E+00
+ Effective target volume [cm^3]:   0.000000E+00
+ Effective target mass [g]:   1.000000E+00
+ Number of target atoms:    6.022141E+21
+ Number of incident particles [s^-1]:   0.000000E+00
+ Produced heat in target [kW]:   0.000000E+00
+
+ (Maximum) production and decay rates per isotope
+
+ Total production rate [s^-1]:   7.216855E-13
+
+#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.             Half-life               Time of maximum production
+#             [s^-1]         [s^-1]         [GBq]          [   ]        [GBq/num]
+ Tc  99     0.000000E+00   1.026401E-13   3.457244E-06   3.368316E+13   5.783457E-12   0.40475                                                                            
+ Tc  99 g   0.000000E+00   1.026401E-13   3.457244E-06   3.368316E+13   5.783457E-12   0.40475     213995 y 133 d  11 h  58 m  56 s       99836 y 109 d   5 h  26 m  24 s 
+ Tc  99 m   0.000000E+00   3.203675E-05   5.079058E+02   1.585385E+13   1.772304E-03   0.19050          0 y   0 d   6 h   0 m  36 s           0 y   6 d   8 h  40 m  36 s 
+ Mo 100     7.909657E-14   0.000000E+00   0.000000E+00   6.022140E+21   0.000000E+00   1.00000       stable                                infinite                       
+ Mo  99     5.572538E-13   2.919941E-06   7.482936E-01   2.562701E+14   6.516331E-05   0.00000          0 y   2 d  17 h  56 m  24 s           0 y  60 d   7 h  15 m  20 s 
+ Mo  98     1.306753E-13   0.000000E+00   0.000000E+00   6.799203E+13   0.000000E+00   0.00000       stable                                infinite                       
+ Mo  97     0.000000E+00   0.000000E+00   0.000000E+00   1.283202E+03   0.000000E+00   0.00000       stable                                infinite                       
+ Nb  99     1.508531E-17   4.620981E-02   9.084585E-05   1.429004E+07   3.504855E-07   0.12092                                                                            
+ Nb  99 g   5.025012E-18   4.620981E-02   3.026133E-05   6.548681E+05   1.167490E-07   0.04030          0 y   0 d   0 h   0 m  15 s           0 y   0 d   0 h   8 m  58 s 
+ Nb  99 m   1.006029E-17   4.443251E-03   6.058452E-05   1.363518E+07   2.336283E-07   0.83868          0 y   0 d   0 h   2 m  36 s           0 y   0 d   1 h  24 m  33 s 
+ Nb  98     2.243214E-22   2.423592E-01   1.350895E-09   1.254831E+03   5.211786E-12   0.00000                                                                            
+ Nb  98 g   1.775628E-22   2.423592E-01   1.069308E-09   4.412082E+00   4.125418E-12   0.00000          0 y   0 d   0 h   0 m   2 s           0 y   0 d   0 h   1 m  49 s 
+ Nb  98 m   4.675861E-23   2.251940E-04   2.815869E-10   1.250419E+03   3.501992E-13   0.00008          0 y   0 d   0 h  51 m  18 s           0 y   1 d   0 h   7 m  32 s 
+ Nb  97     2.658229E-24   1.602282E-04   1.600828E-11   6.687640E+01   1.493670E-14   0.00001                                                                            
+ Nb  97 g   1.768511E-24   1.602282E-04   1.065021E-11   6.646903E+01   9.937342E-15   0.00000          0 y   0 d   1 h  12 m   6 s           0 y   1 d   9 h  19 m   3 s 
+ Nb  97 m   8.897272E-25   1.315270E-02   5.358063E-12   4.073736E-01   2.067154E-14   0.00000          0 y   0 d   0 h   0 m  52 s           0 y   0 d   0 h  29 m  56 s 
+ Nb  95     0.000000E+00   2.292745E-07   1.825133E-10   1.523281E+05   2.798746E-17   0.00475                                                                            
+ Nb  95 g   0.000000E+00   2.292745E-07   1.795544E-11   7.831415E+04   2.798746E-17   0.00475          0 y  34 d  23 h  47 m   0 s           1 y 274 d   6 h  59 m  56 s 
+ Nb  95 m   0.000000E+00   2.223336E-06   1.645579E-10   7.401395E+04   2.710904E-16   0.00449          0 y   3 d  14 h  36 m   0 s           0 y  77 d  18 h  39 m   3 s 
+ Zr  95     2.809364E-20   1.252896E-07   1.821542E-09   1.453865E+07   1.412979E-13   1.00000          0 y  64 d   0 h  46 m   0 s           3 y  18 d  18 h  17 m  36 s 
+ Zr  94     8.729623E-26   0.000000E+00   0.000000E+00   4.542136E+01   0.000000E+00   0.00000       stable                                infinite                       
+
+file: Tc099.act
+file: Tc099g.act
+file: Tc099m.act
+file: Mo100.act
+file: Mo099.act
+file: Mo098.act
+file: Mo097.act
+file: Nb099.act
+file: Nb099g.act
+file: Nb099m.act
+file: Nb098.act
+file: Nb098g.act
+file: Nb098m.act
+file: Nb097.act
+file: Nb097g.act
+file: Nb097m.act
+file: Nb095.act
+file: Nb095g.act
+file: Nb095m.act
+file: Zr095.act
+file: Zr094.act
+
+  End of ISOTOPIA calculation for g + Mo100

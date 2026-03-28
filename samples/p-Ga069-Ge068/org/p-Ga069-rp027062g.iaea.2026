@@ -1,0 +1,50 @@
+# header:
+#   title: Ga69(p,x)Co62g cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2026-01-15
+#   format: YANDF-0.4
+# endf:
+#   library: tendl.2025
+#   author: A.J. Koning
+#   year: 2025
+# target:
+#   Z: 31
+#   A: 69
+#   nuclide: Ga69
+# reaction:
+#   type: (p,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+#   residual:
+#     Z: 27
+#     A: 62
+#     nuclide: Co62g
+#     level:
+#       isomer: 0
+#   quantity:
+#     type: cross section
+#   datablock:
+#     columns: 2
+#     entries: 19
+##       E             xs
+##     [MeV]          [mb]
+   4.000000E+01   8.153406E-13
+   4.500000E+01   2.530383E-08
+   5.000000E+01   4.356357E-06
+   5.500000E+01   6.105405E-05
+   6.000000E+01   3.930244E-04
+   6.500000E+01   1.687058E-03
+   7.000000E+01   4.105704E-03
+   7.500000E+01   6.644191E-03
+   8.000000E+01   9.672743E-03
+   9.000000E+01   1.281837E-02
+   1.000000E+02   1.397806E-02
+   1.100000E+02   1.896641E-02
+   1.200000E+02   2.120109E-02
+   1.300000E+02   2.590010E-02
+   1.400000E+02   3.004397E-02
+   1.500000E+02   3.559209E-02
+   1.600000E+02   3.427647E-02
+   1.800000E+02   2.402946E-02
+   2.000000E+02   2.372547E-02

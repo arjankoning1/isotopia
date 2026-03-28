@@ -1,0 +1,131 @@
+
+    ISOTOPIA-2.22   (Version: March 17, 2026)
+
+           Simulation of medical isotope production
+
+ Copyright (C) 2026  A.J. Koning
+
+ User: Arjan Koning
+ Date: 2026-03-28
+
+ ########## USER INPUT ##########
+
+ USER INPUT FILE
+
+ projectile n
+ element yb
+ mass 176
+
+ USER INPUT FILE + DEFAULTS
+
+ Keyword           Value   Variable     Explanation
+
+ user      Arjan Koning    user         user for this calculation
+ source    ISOTOPIA        source       source for this calculation
+ format    YANDF-0.4       oformat      format for output
+ crosspath /Users/koning/isotopia.libs/   crosspath    directory containing cross sections 
+ #
+ # Nuclear reaction
+ #
+ projectile          n     ptype0       type of incident particle
+ element            Yb     Starget      symbol of target nucleus
+ mass              176     Atarget      mass number of target nucleus
+ #
+ # Accelerator 
+ #
+ Ebeam              -1.000 Ebeam        incident energy in MeV
+ Eback              -1.000 Eback        lower end of energy range in MeV
+ Ibeam               1.000 Ibeam        beam current in mA
+ #
+ # Output 
+ #
+ radiounit             gbq radiounit    unit for radioactivity
+ yieldunit             num yieldunit    unit for isotope yield
+ ZAoutput              n   flagZAoutput output files per Z, A instead of El, A
+ #
+ # Target
+ #
+ Tirrad              1     Tirrad       d of irradiation time
+ Area                1.000 Area         target area in cm^2
+ Tcool               1     Tcool        d of cooling time
+ rho                -1.000 rhotarget    target density [g/cm^3] 
+ targetmass          1.000 targetmass   target mass 
+ fluxtotal    1.000000E+14 fluxtotal    total flux
+ #
+ # Cross section and decay data
+ #
+ Zdepth             10     Zdepth       depth to which Z numbers are scanned for cross sections
+ Adepth             20     Adepth       depth to which A numbers are scanned for cross sections
+ decay               y     flagdecay    flag to include decay of nuclides (n only for diagnosis) 
+
+
+ Summary of isotope production for n + Yb176
+
+ Maximal irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ Target material density [g/cm^3]:   6.900000E+00
+ Target area [cm^2]:   1.000000E+00
+ Effective target thickness [cm]:   0.000000E+00
+ Effective target volume [cm^3]:   0.000000E+00
+ Effective target mass [g]:   1.000000E+00
+ Number of target atoms:    3.421671E+21
+ Number of incident particles [s^-1]:   0.000000E+00
+ Produced heat in target [kW]:   0.000000E+00
+
+ (Maximum) production and decay rates per isotope
+
+ Total production rate [s^-1]:   9.373684E-11
+
+#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.             Half-life               Time of maximum production
+#             [s^-1]         [s^-1]         [GBq]          [   ]        [GBq/num]
+ Lu 177     0.000000E+00   1.206941E-06   1.703680E+04   1.411569E+16   1.917359E-02   0.32811                                                                            
+ Lu 177 g   0.000000E+00   1.206941E-06   1.703680E+04   1.411569E+16   1.917359E-02   0.32811          0 y   6 d  15 h  31 m  41 s           0 y  90 d  18 h   6 m  23 s 
+ Lu 177 m   0.000000E+00   5.004709E-08   7.386679E+02   1.475946E+16   7.955909E-04   0.34307          0 y 160 d   7 h  11 m  40 s           3 y 359 d   8 h  44 m  24 s 
+ Lu 175     0.000000E+00   0.000000E+00   0.000000E+00   1.027293E+13   0.000000E+00   0.00024                                                                            
+ Lu 175 g   0.000000E+00   0.000000E+00   0.000000E+00   1.027293E+13   0.000000E+00   0.00024       stable                                infinite                       
+ Lu 175 m   0.000000E+00   0.000000E+00   0.000000E+00   1.027293E+13   0.000000E+00   0.00024       stable                                infinite                       
+ Yb 177     5.651330E-11   1.007540E-04   2.651910E+02   1.548164E+15   1.788107E-02   0.00000                                                                            
+ Yb 177 g   4.556510E-11   1.007540E-04   1.558819E+02   1.547153E+15   1.441701E-02   0.00000          0 y   0 d   1 h  54 m  39 s           0 y   1 d  14 h  17 m  17 s 
+ Yb 177 m   3.194639E-11   1.081353E-01   1.093100E+02   1.010864E+12   6.325812E-02   0.00000          0 y   0 d   0 h   0 m   6 s           0 y   0 d   0 h   3 m  12 s 
+ Yb 176     9.148849E-11   0.000000E+00   0.000000E+00   3.421643E+21   0.000000E+00   0.99999                                                                            
+ Yb 176 g   9.276503E-11   0.000000E+00   0.000000E+00   2.742424E+16   0.000000E+00   0.00001       stable                                infinite                       
+ Yb 176 m   1.619289E-13   6.080239E-02   5.540963E-01   9.113069E+09   3.206576E-04   0.00000          0 y   0 d   0 h   0 m  11 s           0 y   0 d   0 h   5 m  33 s 
+ Yb 175     4.430901E-13   1.916974E-06   2.314140E-01   1.207184E+14   2.901533E-06   0.00000          0 y   4 d   4 h  26 m  24 s           0 y  59 d  22 h  21 m  24 s 
+ Yb 174     1.164067E-15   0.000000E+00   0.000000E+00   3.441491E+11   0.000000E+00   0.00000       stable                                infinite                       
+ Yb 173     0.000000E+00   0.000000E+00   0.000000E+00   1.909762E-02   0.000000E+00   0.00000       stable                                infinite                       
+ Tm 176     8.420748E-18   6.244569E-03   2.881302E-05   4.614092E+06   1.667386E-08   0.85437          0 y   0 d   0 h   1 m  51 s           0 y   0 d   0 h  48 m   4 s 
+ Tm 175     1.662919E-19   7.600298E-04   5.689951E-07   7.486483E+05   2.407293E-10   0.12701          0 y   0 d   0 h  15 m  12 s           0 y   0 d   5 h  48 m  51 s 
+ Tm 174     4.936385E-20   2.139343E-03   1.689067E-07   7.895260E+04   9.532258E-11   0.01430          0 y   0 d   0 h   5 m  24 s           0 y   0 d   2 h  11 m  59 s 
+ Tm 173     1.132417E-28   2.336661E-05   3.360153E-16   1.438015E-02   8.873641E-21   0.00000          0 y   0 d   8 h  14 m  24 s           0 y   6 d   3 h  43 m  20 s 
+ Tm 172     0.000000E+00   3.027372E-06   2.049241E-08   6.769043E+06   5.753667E-15   0.55435          0 y   2 d  15 h  36 m   0 s           0 y  39 d  16 h  41 m  58 s 
+ Tm 171     0.000000E+00   1.146077E-08   2.726714E-16   2.379172E+01   1.152256E-22   0.00000          1 y 334 d  18 h   0 m   0 s          13 y 145 d  11 h  39 m  44 s 
+ Er 172     1.652664E-19   3.905494E-06   1.619557E-07   4.146868E+07   2.201072E-12   1.00000          0 y   2 d   1 h  18 m   0 s           0 y  31 d  12 h  36 m   7 s 
+ Er 171     1.347209E-25   2.561747E-05   4.105686E-13   1.602690E+01   1.155134E-17   0.00000          0 y   0 d   7 h  30 m  57 s           0 y   5 d  15 h  44 m  24 s 
+ Er 170     2.702493E-32   0.000000E+00   0.000000E+00   7.989411E-06   0.000000E+00   0.00000       stable                                infinite                       
+
+file: Lu177.act
+file: Lu177g.act
+file: Lu177m.act
+file: Lu175.act
+file: Lu175g.act
+file: Lu175m.act
+file: Yb177.act
+file: Yb177g.act
+file: Yb177m.act
+file: Yb176.act
+file: Yb176g.act
+file: Yb176m.act
+file: Yb175.act
+file: Yb174.act
+file: Yb173.act
+file: Tm176.act
+file: Tm175.act
+file: Tm174.act
+file: Tm173.act
+file: Tm172.act
+file: Tm171.act
+file: Er172.act
+file: Er171.act
+file: Er170.act
+
+  End of ISOTOPIA calculation for n + Yb176

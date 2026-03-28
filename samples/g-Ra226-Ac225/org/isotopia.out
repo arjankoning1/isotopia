@@ -1,0 +1,118 @@
+
+    ISOTOPIA-2.22   (Version: March 17, 2026)
+
+           Simulation of medical isotope production
+
+ Copyright (C) 2026  A.J. Koning
+
+ User: Arjan Koning
+ Date: 2026-03-28
+
+ ########## USER INPUT ##########
+
+ USER INPUT FILE
+
+ projectile g
+ element ra
+ mass 226
+ ebeam 20.
+ ibeam 0.150
+
+ USER INPUT FILE + DEFAULTS
+
+ Keyword           Value   Variable     Explanation
+
+ user      Arjan Koning    user         user for this calculation
+ source    ISOTOPIA        source       source for this calculation
+ format    YANDF-0.4       oformat      format for output
+ crosspath /Users/koning/isotopia.libs/   crosspath    directory containing cross sections 
+ #
+ # Nuclear reaction
+ #
+ projectile          g     ptype0       type of incident particle
+ element            Ra     Starget      symbol of target nucleus
+ mass              226     Atarget      mass number of target nucleus
+ #
+ # Accelerator 
+ #
+ Ebeam              20.000 Ebeam        incident energy in MeV
+ Eback              -1.000 Eback        lower end of energy range in MeV
+ Ibeam               0.150 Ibeam        beam current in mA
+ #
+ # Output 
+ #
+ radiounit             gbq radiounit    unit for radioactivity
+ yieldunit             num yieldunit    unit for isotope yield
+ ZAoutput              n   flagZAoutput output files per Z, A instead of El, A
+ #
+ # Target
+ #
+ Tirrad              1     Tirrad       d of irradiation time
+ Area                1.000 Area         target area in cm^2
+ Tcool               1     Tcool        d of cooling time
+ rho                -1.000 rhotarget    target density [g/cm^3] 
+ targetmass          1.000 targetmass   target mass 
+ fluxtotal    1.000000E+14 fluxtotal    total flux
+ #
+ # Cross section and decay data
+ #
+ Zdepth             10     Zdepth       depth to which Z numbers are scanned for cross sections
+ Adepth             20     Adepth       depth to which A numbers are scanned for cross sections
+ decay               y     flagdecay    flag to include decay of nuclides (n only for diagnosis) 
+
+
+ Summary of isotope production for g + Ra226
+
+ Maximal irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ E-beam [MeV]:   2.000000E+01
+ E-back [MeV]:  -1.000000E+00
+ Beam current [mA]:        0.150 mA
+ Target material density [g/cm^3]:   5.500000E+00
+ Target area [cm^2]:   1.000000E+00
+ Effective target thickness [cm]:   0.000000E+00
+ Effective target volume [cm^3]:   0.000000E+00
+ Effective target mass [g]:   1.000000E+00
+ Number of target atoms:    2.664664E+21
+ Number of incident particles [s^-1]:   0.000000E+00
+ Produced heat in target [kW]:   0.000000E+00
+
+ (Maximum) production and decay rates per isotope
+
+ Total production rate [s^-1]:   2.579886E-12
+
+#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.             Half-life               Time of maximum production
+#             [s^-1]         [s^-1]         [GBq]          [   ]        [GBq/num]
+ Ac 225     0.000000E+00   8.022537E-07   6.351121E+00   7.916599E+12   1.017907E-05   0.33333                                                                            
+ Ac 225 g   0.000000E+00   8.022537E-07   6.351121E+00   7.916599E+12   1.017907E-05   0.33333          0 y  10 d   0 h   0 m   0 s           0 y 182 d  11 h   8 m  53 s 
+ Ac 225 m   0.000000E+00   8.022537E-07   6.351121E+00   7.916599E+12   1.017907E-05   0.33333          0 y  10 d   0 h   0 m   0 s           0 y 182 d  11 h   8 m  53 s 
+ Ra 226     1.053841E-13   1.372811E-11   0.000000E+00   2.664663E+21   0.000000E+00   1.00000       1599 y 352 d  23 h  53 m  36 s        4751 y 255 d   1 h  14 m  40 s 
+ Ra 225     1.526222E-12   5.420633E-07   1.860783E-01   3.432777E+14   1.468984E-05   0.00000          0 y  14 d  19 h  12 m   0 s           0 y 261 d  16 h  14 m  54 s 
+ Ra 224     9.234129E-13   2.203994E-06   4.266465E-01   1.935788E+14   3.608533E-05   0.00000          0 y   3 d  15 h  21 m  36 s           0 y  71 d  17 h  22 m  36 s 
+ Ra 223     5.472012E-16   7.018842E-07   8.579600E-05   1.222367E+11   6.818682E-09   0.00000          0 y  11 d  10 h  19 m  12 s           0 y 206 d   8 h  28 m  22 s 
+ Fr 225     7.199578E-18   2.888113E-03   1.918446E-05   6.642556E+06   7.351072E-08   0.99840          0 y   0 d   0 h   4 m   0 s           0 y   0 d   2 h   0 m  14 s 
+ Fr 224     5.871879E-21   3.469205E-03   1.564658E-08   4.510135E+03   6.021449E-11   0.00068                                                                            
+ Fr 224 g   3.572389E-21   3.469205E-03   9.519215E-09   2.743918E+03   3.663386E-11   0.00041          0 y   0 d   0 h   3 m  19 s           0 y   0 d   1 h  40 m  58 s 
+ Fr 224 m   2.299491E-21   3.469205E-03   6.127370E-09   1.766217E+03   2.358064E-11   0.00027          0 y   0 d   0 h   3 m  19 s           0 y   0 d   1 h  40 m  58 s 
+ Fr 223     3.257497E-22   5.299291E-04   8.680135E-10   1.637981E+03   2.008522E-12   0.00025          0 y   0 d   0 h  21 m  48 s           0 y   0 d  10 h   1 m  59 s 
+ Rn 221     4.089266E-20   4.620981E-04   1.089652E-07   2.358053E+05   2.312143E-10   0.99753          0 y   0 d   0 h  25 m   0 s           0 y   0 d  11 h  25 m  24 s 
+ Rn 220     2.724773E-21   1.242199E-02   7.260604E-09   5.844959E+02   2.801159E-11   0.00449          0 y   0 d   0 h   0 m  55 s           0 y   0 d   0 h  29 m  54 s 
+ Rn 219     5.760887E-29   1.750372E-01   1.535083E-16   8.770039E-07   5.922387E-19   0.00000          0 y   0 d   0 h   0 m   3 s           0 y   0 d   0 h   2 m  22 s 
+
+file: Ac225.act
+file: Ac225g.act
+file: Ac225m.act
+file: Ra226.act
+file: Ra225.act
+file: Ra224.act
+file: Ra223.act
+file: Fr225.act
+file: Fr224.act
+file: Fr224g.act
+file: Fr224m.act
+file: Fr223.act
+file: Rn221.act
+file: Rn220.act
+file: Rn219.act
+
+  End of ISOTOPIA calculation for g + Ra226
