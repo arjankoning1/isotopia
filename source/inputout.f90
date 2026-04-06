@@ -5,7 +5,7 @@ subroutine inputout
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-03-17   A.J. Koning    A     Original code
+!    1     2026-04-06   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -24,7 +24,7 @@ subroutine inputout
 !              nuc, &        ! symbol of nucleus
 !              ptype0, &     ! type of incident particle
 !              radiounit, &  ! unit for radioactivity: Bq, kBq, MBq, Gbq, mCi,
-!              rhotarget, &  ! target material density
+!              rho_target, &  ! target material density
 !              Starget, &    ! symbol of target nucleus
 !              Tco, &        ! cooling time per unit
 !              Tcool, &      ! cooling time per unit cooling time unit (y, d, h, m, s)
@@ -43,7 +43,7 @@ subroutine inputout
 !
 ! *************************** Code and version *************************
 !
-  write(*, '(/"    ISOTOPIA-2.22   (Version: March 17, 2026)"/)')
+  write(*, '(/"    ISOTOPIA-2.22   (Version: April 3, 2026)"/)')
   write(*, '(10x, " Simulation of medical isotope production")')
   write(*, '(/" Copyright (C) 2026  A.J. Koning")')
   write(*, '(/" User: ",a)') trim(user)
@@ -75,10 +75,12 @@ subroutine inputout
 !
 ! Accelerator
 !
-  write(*, '(" #"/" # Accelerator "/" #")')
-  write(*, '(" Ebeam             ", f7.3, " Ebeam        incident energy in MeV")') Ebeam
-  write(*, '(" Eback             ", f7.3, " Eback        lower end of energy range in MeV")') Eback
-  write(*, '(" Ibeam             ", f7.3, " Ibeam        beam current in mA")') Ibeam
+  if (k0 /= 1) then
+    write(*, '(" #"/" # Accelerator "/" #")')
+    write(*, '(" Ebeam             ", f7.3, " Ebeam        incident energy in MeV")') Ebeam
+    write(*, '(" Eback             ", f7.3, " Eback        lower end of energy range in MeV")') Eback
+    write(*, '(" Ibeam             ", f7.3, " Ibeam        beam current in mA")') Ibeam
+  endif
 !
 ! Output
 !
@@ -97,9 +99,10 @@ subroutine inputout
   do i = 1, 5
     if (Tcool(i) > 0) write(*, '(" Tcool       ", i9, "     Tcool        ", a1, " of cooling time")') Tcool(i), unitTcool(i)
   enddo
-  write(*, '(" rho               ", f7.3, " rhotarget    target density [g/cm^3] ")') rhotarget
+  write(*, '(" rho               ", f7.3, " rho_target   target density [g/cm^3] ")') rho_target
   write(*, '(" targetmass        ", f7.3, " targetmass   target mass ")') targetmass
-  write(*, '(" fluxtotal ", es15.6, " fluxtotal    total flux")') fluxtotal
+  if (k0 == 1) write(*, '(" fluxtotal ", es15.6, " fluxtotal    total flux")') fluxtotal
+  write(*, '(" selfshield            ", a1, " flagselfshield  flag for self-shielding ")') yesno(flagselfshield)
 !
 ! Cross section and decay data
 !
