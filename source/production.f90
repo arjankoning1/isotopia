@@ -5,18 +5,20 @@ subroutine production
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2026-01-04   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Declaration of local data
 !
-! prodrates: subroutine to calculate reaction rates
-! prodyield: subroutine to calculate production yields
+! reactionrates: subroutine to calculate reaction rates
+! equation: subroutine for production and depletion equations
+! activities: subroutine to calculate activities
 ! prodout  : subroutine for output
 !
-  call prodrates
-  call prodyield
+  call reactionrates
+  call equations
+  call activities
   call prodout
   return
 end subroutine production
-! Copyright A.J. Koning 2023
+! Copyright A.J. Koning 2026
