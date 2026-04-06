@@ -5,7 +5,7 @@ module A0_isotopia_mod
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-03-17  A.J. Koning    A     Original code
+!    1     2026-04-06  A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -69,6 +69,7 @@ module A0_isotopia_mod
   logical            :: flagdecay                      ! flag to include decay from parent nuclide
   logical            :: flagcross                      ! flag for output of cross sections
   logical            :: flagZAoutput                   ! flag for output per Z,A
+  logical            :: flagselfshield                 ! flag for self-shielding  
   character(len=1)   :: ptype0                         ! type of incident particle
   character(len=2)   :: Starget                        ! symbol of target nucleus
   character(len=132) :: xsfile(numZ, numA, -1:numisom) ! cross section file
@@ -104,11 +105,14 @@ module A0_isotopia_mod
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
   integer                                        :: Nennon     ! number of energies for nonelastic n c.s.
+  integer                                        :: Nentot     ! number of energies for total c.s.
   integer, dimension(0:numZ, 0:numA)             :: Nisomer    ! number of energies for residual produci n c.s.
   logical, dimension(0:numZ, 0:numA, -1:numisom) :: rpexist    ! logical for residual production c.s.
   real(sgl), dimension(0:numen)                  :: Ein        ! incident energy
   real(sgl), dimension(0:numen)                  :: Enon       ! incident energy
   real(sgl), dimension(0:numen)                  :: xsnon      ! nonelastic cross section
+  real(sgl), dimension(0:numen)                  :: Etot       ! incident energy
+  real(sgl), dimension(0:numen)                  :: xstot      ! nonelastic cross section
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! Variables for medical isotope production
@@ -123,10 +127,11 @@ module A0_isotopia_mod
   integer, dimension(5)          :: Tcool      ! cooling time per unit cooling time unit (y,d,h,m,s)
   integer, dimension(5)          :: Tirrad     ! irradiation time per unit irradiation time unit
   real(sgl)                      :: Area       ! target area in cm^2
+  real(sgl)                      :: thickness  ! target thickness in cm
   real(sgl)                      :: Eback      ! lower end of energy range in MeV for isotope
   real(sgl)                      :: Ebeam      ! incident energy in MeV for isotope production
   real(sgl)                      :: Ibeam      ! beam current in mA for isotope production
-  real(sgl)                      :: rhotarget  ! target material density
+  real(sgl)                      :: rho_target  ! target material density
   real(sgl)                      :: targetmass ! target mass (in yieldunit) 
   real(sgl)                      :: fluxtotal  ! total flux
 !
@@ -151,12 +156,12 @@ module A0_isotopia_mod
 !
   logical, dimension(0:numZ, 0:numA, -1:numisom)           :: Yexist       ! logical for yield
   integer                                                  :: Nenrp        ! number of incident energies for residual prod
-  real(sgl)                                                :: targetdx     ! effective thickness of target
-  real(sgl)                                                :: Vtar         ! active target volume
-  real(sgl)                                                :: Mtar         ! active target mass
+  real(sgl)                                                :: Leff         ! effective thickness of target
+  real(sgl)                                                :: V_target         ! active target volume
+  real(sgl)                                                :: M_target         ! active target mass
   real(sgl)                                                :: projnum      ! number of incident particles [s^-1]
   real(sgl)                                                :: heat         ! produced heat
-  real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: prate        ! production rate per isotope
+  real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: reaction_rate ! reaction rate per isotope
   real(sgl), dimension(0:numen)                            :: Erp          ! incident energy
   real(sgl), dimension(0:numen)                            :: xsrp         ! residual production cross section in mb
   integer                                                  :: Ntime        ! number of time points
@@ -178,5 +183,7 @@ module A0_isotopia_mod
   real(sgl), dimension(0:numZ,0:numA,-1:numisom,0:numtime) :: Nisorelnat   ! fraction of number of produced isotopes per ele
   real(sgl), dimension(0:numZ, 0:numtime)                  :: Nisototnat   ! number of elemental isotopes produced after irr
   real(sgl), dimension(0:numZ,0:numA,-1:numisom)           :: Tmax         ! irradiation time with maximal yield
+  real(sgl), dimension(0:numZ,0:numA,-1:numisom)           :: totactivity  ! total activity of produced isotope at EOI
+  real(sgl), dimension(0:numZ,0:numA,-1:numisom)           :: specactivity ! specific activity of produced isotope at EOI
 end module A0_isotopia_mod
 ! Copyright A.J. Koning 2026
