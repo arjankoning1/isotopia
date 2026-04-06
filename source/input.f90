@@ -14,6 +14,7 @@ subroutine input
 !
 !              activity, &    ! activity of produced isotope in MBq
 !              Area, &        ! target area in cm^2
+!              thickness, &   ! target thickness in cm
 !              Atarget, &     ! mass number of target nucleus
 !              crosspath, &   ! directory containing cross sections
 !              Eback, &       ! lower end of energy range in MeV for isotope
@@ -29,7 +30,7 @@ subroutine input
 !              path, &        ! directory containing files to be read
 !              ptype0, &      ! type of incident particle
 !              radiounit, &   ! unit for radioactivity: Bq, kBq, MBq, Gbq, mCi,
-!              rhotarget, &   ! target material density
+!              rho_target, &   ! target material density
 !              Starget, &     ! symbol of target nucleus
 !              Tco, &         ! cooling time per unit
 !              Tcool, &       ! cooling time per unit cooling time unit (y, d, h, m, s)
@@ -76,6 +77,7 @@ subroutine input
   radiounit = 'gbq'
   yieldunit = 'num'
   Area = 1.
+  thickness = 0.05
   Tirrad = 0
   unitTirrad = ' '
   Tcool = 0
@@ -84,12 +86,13 @@ subroutine input
   unitTirrad(1) = 'd'
   Tcool(1) = 1
   unitTcool(1) = 'd'
-  rhotarget = -1.
+  rho_target = -1.
   targetmass = 1.
   fluxtotal = 1.e14
   flagdecay = .true.
   flagZAoutput = .false.
   flagcross = .false.
+  flagselfshield = .false.
   xsfile = ' '
   source ='ISOTOPIA'
   oformat ='YANDF-0.4'
@@ -156,7 +159,12 @@ Loop1:  do i = 1, nlines
       cycle
     endif
     if (key == 'area') then
-      read(val, * , iostat = istat) area
+      read(val, * , iostat = istat) Area
+      if (istat /= 0) call read_error(line, istat)
+      cycle
+    endif
+    if (key == 'thickness') then
+      read(val, * , iostat = istat) thickness
       if (istat /= 0) call read_error(line, istat)
       cycle
     endif
@@ -173,6 +181,12 @@ Loop1:  do i = 1, nlines
     if (key == 'zaoutput') then
       if (ch == 'n') flagZAoutput = .false.
       if (ch == 'y') flagZAoutput = .true.
+      if (ch /= 'y' .and. ch /= 'n') cycle
+      cycle
+    endif
+    if (key == 'selfshield') then
+      if (ch == 'n') flagselfshield = .false.
+      if (ch == 'y') flagselfshield = .true.
       if (ch /= 'y' .and. ch /= 'n') cycle
       cycle
     endif
@@ -195,7 +209,7 @@ Loop1:  do i = 1, nlines
       cycle
     endif
     if (key == 'rho') then
-      read(val, * , iostat = istat) rhotarget
+      read(val, * , iostat = istat) rho_target
       if (istat /= 0) call read_error(line, istat)
       cycle
     endif
