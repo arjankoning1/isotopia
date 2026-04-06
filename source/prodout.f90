@@ -5,7 +5,7 @@ subroutine prodout
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-03-17   A.J. Koning    A     Original code
+!    1     2026-04-06   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -23,7 +23,7 @@ subroutine prodout
 !              isotope, &      ! isotope of natural element
 !              k0, &           ! index of incident particle
 !              lambda, &       ! decay rate per isotope
-!              Mtar, &         ! active target mass
+!              M_target, &         ! active target mass
 !              natstring, &    ! string extension for file names
 !              Niso, &         ! number of isotopes produced after irradiation
 !              Nisorel, &      ! fraction of number of produced isotopes per ele
@@ -32,12 +32,12 @@ subroutine prodout
 !              nuc, &          ! symbol of nucleus
 !              numtime, &      ! number of time points
 !              parsym, &       ! symbol of particle
-!              prate, &        ! production rate per isotope
+!              reaction_rate, &  ! reaction rate per isotope
 !              projnum, &      ! number of incident particles [s^ -1]
 !              ptype0, &       ! type of incident particle
 !              radiounit, &    ! unit for radioactivity: Bq, kBq, MBq, Gbq, mCi,
-!              rhotarget, &    ! target material density
-!              targetdx, &     ! effective thickness of target
+!              rho_target, &    ! target material density
+!              Leff, &     ! effective thickness of target
 !              Tco, &          ! cooling time per unit
 !              Tcool, &        ! cooling time per unit cooling time unit (y, d, h, m, s)
 !              Td, &           ! half life per time unit
@@ -48,7 +48,7 @@ subroutine prodout
 !              Tmax, &         ! irradiation time with maximal yield
 !              Tmaxactivity, & ! time of maximum activity of produced isoto
 !              Tp, &           ! irradiation time with maximal yield per time unit
-!              Vtar, &         ! active target volume
+!              V_target, &         ! active target volume
 !              yield, &        ! yield of produced isotope in MBq / (mA.h)
 !              yieldunit, &    ! unit for isotope yield: num (number), mug, mg, g, or kg
 !              Ztarget         ! charge number of target nucleus
@@ -109,16 +109,20 @@ subroutine prodout
     write(*, '(" E-back [MeV]:", es15.6)') Eback
     write(*, '(" Beam current [mA]: ", f12.3, " mA")') Ibeam
   endif
-  write(*, '(" Target material density [g/cm^3]:", es15.6)') rhotarget
+  write(*, '(" Target material density [g/cm^3]:", es15.6)') rho_target
   write(*, '(" Target area [cm^2]:", es15.6)') Area
-  write(*, '(" Effective target thickness [cm]:", es15.6)') targetdx
-  write(*, '(" Effective target volume [cm^3]:", es15.6)') Vtar
-  write(*, '(" Effective target mass [g]:", es15.6)') Mtar
+  if (k0 > 1) then
+    write(*, '(" Effective target thickness [cm]:", es15.6)') Leff
+  else
+    write(*, '(" Target thickness [cm]:", es15.6)') thickness
+  endif
+  write(*, '(" Effective target volume [cm^3]:", es15.6)') V_target
+  write(*, '(" Effective target mass [g]:", es15.6)') M_target
   write(*, '(" Number of target atoms: ", es15.6)') N_0
   write(*, '(" Number of incident particles [s^-1]:", es15.6)') projnum
   write(*, '(" Produced heat in target [kW]:", es15.6)') heat
   write(*, '(/" (Maximum) production and decay rates per isotope"/)')
-  write(*, '(" Total production rate [s^-1]:", es15.6/)') prate(0, 0, -1)
+  write(*, '(" Total production rate [s^-1]:", es15.6/)') reaction_rate(0, 0, -1)
   write(*, '("#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.", &
  &  "             Half-life               Time of maximum production")')
   if (k0 > 1) then
@@ -150,7 +154,7 @@ subroutine prodout
           halflife = '                                      '
           maxprod = '                                      '
         endif
-        write(*, '(1x, a2, i4, 1x, a1, 5es15.6, f10.5, 2a38)') nuc(iz), ia, isochar(is), prate(iz, ia, is), &
+        write(*, '(1x, a2, i4, 1x, a1, 5es15.6, f10.5, 2a38)') nuc(iz), ia, isochar(is), reaction_rate(iz, ia, is), &
  &        lambda(iz, ia, is), activity(iz, ia, is, it), Niso(iz, ia, is, it), &
  &        yield(iz, ia, is, 1), Nisorel(iz, ia, is, it), halflife, maxprod
       enddo
@@ -202,13 +206,15 @@ subroutine prodout
           call write_real(id4,'E-Back [MeV]',Eback)
         endif
         string='Initial production rate [s^-1]'
-        call write_real(id4,string,prate(iz, ia, is))
+        call write_real(id4,string,reaction_rate(iz, ia, is))
         string='Decay rate [s^-1]'
         call write_real(id4,string,lambda(iz, ia, is))
-        string='Initial production yield ['//rstr//'/mAh]'
+        string='Initial production yield ['//rstr//'/'//trim(yieldstring)//']'
         call write_real(id4,string,yield(iz, ia, is, 1))
         string='Total activity at EOI ['//rstr//']'
-        call write_real(id4,string,activity(iz, ia, is, Ntime))
+        call write_real(id4,string,totactivity(iz, ia, is))
+        string='Specific activity at EOI ['//rstr//'/mg]'
+        call write_real(id4,string,specactivity(iz, ia, is))
         string=''
         write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tirrad(k), k = 1, 5)
         call write_char(id4,'Irradiation time',string)
@@ -230,7 +236,7 @@ subroutine prodout
         call write_char(id4,'Maximum production',string)
         un = ''
         col(1)='Time'
-        un(1) = 'sec'
+        un(1) = 's'
         col(2)='Activity'
         un(2) = trim(rstr)
         col(3)='Isotopes'
