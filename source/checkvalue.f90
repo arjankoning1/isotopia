@@ -5,7 +5,7 @@ subroutine checkvalue
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-03-14   A.J. Koning    A     Original code
+!    1     2026-04-06   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -26,7 +26,7 @@ subroutine checkvalue
 !              numZ, &        ! number of elements
 !              parsym, &      ! symbol of particle
 !              ptype0, &      ! type of incident particle
-!              rhotarget, &   ! target material density
+!              rho_target, &   ! target material density
 !              Starget, &     ! symbol of target nucleus
 !              Tco, &         ! cooling time per unit
 !              Tcool, &       ! cooling time per unit cooling time unit (y, d, h, m, s)
@@ -134,6 +134,10 @@ subroutine checkvalue
     write(*, '(" ISOTOPIA-error: 0 < = Area < 10000 cm^2")')
     stop
   endif
+  if (thickness <= 0. .or. thickness > 10000.) then
+    write(*, '(" ISOTOPIA-error: 0 < = thickness < 10000 cm")')
+    stop
+  endif
   do k = 1, 5
     if (Tirrad(k) < 0 .or. Tirrad(k) >= 1000000) then
       write(*, '(" ISOTOPIA-error: 0 < = Tirrad < 1.e6")')
@@ -156,7 +160,7 @@ subroutine checkvalue
       stop
     endif
   enddo
-  if (rhotarget /=  - 1..and.(rhotarget <= 0..or.rhotarget > 100.)) then
+  if (rho_target /=  - 1..and.(rho_target <= 0..or.rho_target > 100.)) then
     write(*, '(" ISOTOPIA-error: 0 < rhotarget < = 100.")')
     stop
   endif
