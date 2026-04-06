@@ -68,6 +68,7 @@ subroutine reactionrates
 !
 ! **** Photons: read Bremsstrahlung spectrum for incident electron energy
 !
+  number_density = 0.
   M_target = targetmass
   dEint = 0.
   Eint = 0.
@@ -134,15 +135,12 @@ subroutine reactionrates
       phisum = phisum + phi(nE) * dE
     enddo
     Leff = phisum
+    V_target = Area * Leff
     heat = Ibeam * (Ebeam - Eback)
     projnum = Ibeam / (1000. * parZ(k0) * qelem)
     number_density = projnum / V_target
   endif
-  if (k0 <= 1) then
-    V_target = Area * thickness
-  else
-    V_target = Area * Leff
-  endif
+  if (k0 <= 1) V_target = Area * thickness
   M_target = rho_target * V_target
 !
 ! ********************* Calculate reaction rates ***********************
@@ -172,7 +170,7 @@ subroutine reactionrates
         do nE = 1, NintE
           E = Eint(nE)
           if (E < Egrid(1)) cycle
-          if (E > Egrid(N)) cycle
+          if (E >= Egrid(N)) cycle
           call locate(Egrid, 1, N, E, nen)
           if (nen == 0) cycle
           Ea = Egrid(nen)
