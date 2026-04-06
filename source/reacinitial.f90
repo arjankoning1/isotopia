@@ -21,7 +21,7 @@ subroutine reacinitial
 !              numZ, &       ! number of elements
 !              parA, &       ! mass number of particle
 !              parZ, &       ! charge number of particle
-!              rhotarget, &  ! target material density
+!              rho_target, &  ! target material density
 !              Tco, &        ! cooling time per unit
 !              Tcool, &      ! cooling time per unit cooling time unit (y, d, h, m, s)
 !              Tir, &        ! irradiation time per unit
@@ -50,7 +50,7 @@ subroutine reacinitial
     15.4, 18.95, 20.2, 19.84, 13.67, 13.5, 14.78, 15.1, 13.5, 13.5, &
     13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, &
     13.5, 13.5, 13.5, 13.5 /)
-  if (rhotarget ==  -1.) rhotarget = rhotable(Ztarget)
+  if (rho_target ==  -1.) rho_target = rhotable(Ztarget)
 !
 ! ******************* Irradiation and cooling times ********************
 !
