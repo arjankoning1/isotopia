@@ -35,7 +35,7 @@ subroutine natural
 !              numtime, &   ! number of time points
 !              numZ, &      ! number of elements
 !              parsym, &    ! symbol of particle
-!              prate, &     ! production rate per isotope
+!              reaction_rate, &     ! production rate per isotope
 !              Tco, &       ! cooling time per unit
 !              Tcool, &     ! cooling time per unit cooling time unit (y, d, h, m, s)
 !              Td, &        ! half life per time unit
@@ -54,6 +54,7 @@ subroutine natural
   logical           :: resexist(0:numZ, 0:numA, -1:1)    ! logical to determine existence of residual production file
   character(len=3)  :: Astr                              !
   character(len=3)  :: massstring !
+  character(len=6)  :: yieldstring
   character(len=6)  :: finalnuclide !
   character(len=13) :: state                             ! state of final nuclide
   character(len=15) :: Yfile0                            !
@@ -179,6 +180,11 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
     enddo
   enddo
   write(*,'()')
+  if (k0 > 1) then
+    yieldstring='mAh'
+  else
+    yieldstring=trim(yieldunit)
+  endif
   targetnuclide=trim(Starget)//'0'
   do iz = Zcomp, Zcomp - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
@@ -192,16 +198,16 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           topline=trim(targetnuclide)//trim(reaction)//trim(finalnuclide)//' '//trim(quantity)
           call write_header(indent,topline,source,user,date,oformat)
           call write_target(indent)
-          call write_reaction(indent,reaction,0.d0,0.d0,6,5)
+          call write_reaction(indent,reaction,0.d0,0.d0,0,0)
           call write_residual(id2,iz,ia,finalnuclide)
           call write_real(id4,'Beam current [mA]',Ibeam)
           call write_real(id4,'E-Beam [MeV]',Ebeam)
           call write_real(id4,'E-Back [MeV]',Eback)
           string='Initial production rate [s^-1]'
-          call write_real(id4,string,prate(iz, ia, is))
+          call write_real(id4,string,reaction_rate(iz, ia, is))
           string='Decay rate [s^-1]'
           call write_real(id4,string,lambda(iz, ia, is))
-          string='Initial production yield ['//rstr//'/mAh]'
+          string='Initial production yield ['//rstr//'/'//trim(yieldstring)//']'
           call write_real(id4,string,yield(iz, ia, is, 1))
           string='Total activity at EOI ['//rstr//']'
           call write_real(id4,string,activity(iz, ia, is, Ntime))
@@ -227,7 +233,7 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           call write_char(id4,'Maximum production',string)
           un = ''
           col(1)='Time'
-          un(1)='sec'
+          un(1)='s'
           col(2)='Activity'
           un(2)= trim(rstr)
           col(3)='Isotopes'
