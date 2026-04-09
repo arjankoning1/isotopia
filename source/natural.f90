@@ -63,8 +63,8 @@ subroutine natural
   character(len=40) :: form1                             ! format
   character(len=40) :: form2                             ! format
   character(len=16) :: reaction   ! reaction
-  character(len=16) :: col(6)    ! header
-  character(len=16) :: un(6)    ! header
+  character(len=16) :: col(7)    ! header
+  character(len=16) :: un(7)    ! header
   character(len=80) :: quantity   ! quantity
   character(len=80) :: key
   character(len=132) :: string    !
@@ -86,6 +86,12 @@ subroutine natural
   real(sgl)         :: Y                                 ! product yield (in ENDF-6 format)
   real(sgl)         :: Ym                                !
   real(sgl)         :: Th                                !
+  real(sgl)         :: act_out          ! help variable
+  real(sgl)         :: specact_out          ! help variable
+  real(sgl)         :: yield_out          ! help variable
+  real(sgl)         :: Niso_out          ! help variable
+  real(sgl)         :: Nisorel_out          ! help variable
+  real(sgl) :: yfac    ! conversion factor for yields
 !
 ! **************** Create runs and directories per isotope *************
 !
@@ -107,6 +113,8 @@ subroutine natural
 !
 ! ******** Merge output files in results for natural elements **********
 !
+  call conversion
+  yfac = 1.
   indent = 0
   id2 = indent + 2
   id4 = indent + 4
@@ -181,10 +189,10 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
   enddo
   write(*,'()')
   if (k0 > 1) then
-    yieldstring='mAh'
+    yieldstring=trim(cstr)//trim(tstr)
   else
-    yieldstring=trim(yieldunit)
-  endif
+    yieldstring=trim(ystr)
+  endif  
   targetnuclide=trim(Starget)//'0'
   do iz = Zcomp, Zcomp - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
@@ -200,18 +208,26 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           call write_target(indent)
           call write_reaction(indent,reaction,0.d0,0.d0,0,0)
           call write_residual(id2,iz,ia,finalnuclide)
-          call write_real(id4,'Beam current [mA]',Ibeam)
-          call write_real(id4,'E-Beam [MeV]',Ebeam)
-          call write_real(id4,'E-Back [MeV]',Eback)
-          string='Initial production rate [s^-1]'
+          call write_char(id2,'parameters','')
+          if (k0 /= 1) then
+            call write_real(id4,'Beam current [mA]',Ibeam)
+            call write_real(id4,'E-Beam [MeV]',Ebeam)
+            call write_real(id4,'E-Back [MeV]',Eback)
+          endif
+          string='Reaction constant [s^-1]'
           call write_real(id4,string,reaction_rate(iz, ia, is))
-          string='Decay rate [s^-1]'
+          string='Decay constant [s^-1]'
           call write_real(id4,string,lambda(iz, ia, is))
-          string='Initial production yield ['//rstr//'/'//trim(yieldstring)//']'
-          call write_real(id4,string,yield(iz, ia, is, 1))
+          string='Initial production rate ['//rstr//'/'//trim(yieldstring)//']'
+          if (k0 > 1) then
+            call write_real(id4,string,yieldnat(iz, ia, is, 1) * rfac * cfac * tfac)
+          else
+            call write_real(id4,string,yieldnat(iz, ia, is, 1) * rfac)
+          endif
           string='Total activity at EOI ['//rstr//']'
-          call write_real(id4,string,activity(iz, ia, is, Ntime))
-          string='      years     days    hours  minutes seconds'
+          call write_real(id4,string,activitynat(iz, ia, is, Ntime) * rfac)
+          string='Specific activity at EOI ['//trim(rstr)//'/'//trim(ystr)//']'
+          call write_real(id4,string,specactivitynat(iz, ia, is, Ntime) * rfac) 
           string=''
           write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tirrad(k), k = 1, 5)
           call write_char(id4,'Irradiation time',string)
@@ -236,20 +252,30 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           un(1)='s'
           col(2)='Activity'
           un(2)= trim(rstr)
-          col(3)='Isotopes'
-          un(3)= trim(ystr)
-          col(4)='Yield'
-          un(4)= trim(rstr)//'/mAh'
-          col(5)='Isotopic_frac.'
-          col(6)='Time'
-          un(6)='h'
-          Ncol=6
+          col(3)='Spec_activity'
+          un(3) = trim(rstr)//'/'//trim(ystr)
+          col(4)='Prod_rate'
+          if (k0 > 1) then
+            un(4) = trim(rstr)//'/'//trim(cstr)//trim(tstr)
+          else
+            un(4) = trim(rstr)//'/'//trim(ystr)//trim(tstr)
+          endif
+          col(5)='Isotopes'
+          col(6)='Isotopic_frac.'
+          col(7)='Time'
+          un(7)='h'
+          Ncol=7
           call write_quantity(id2,quantity)
           call write_datablock(id2,Ncol,numtime,col,un)
           do it = 1, numtime
             Th = Tgrid(it)/hoursec
-            write(1, '(6es15.6)') Tgrid(it),  activitynat(iz, ia, is, it), Nisonat(iz, ia, is, it), &
- &            yieldnat(iz, ia, is, it), Nisorelnat(iz, ia, is, it), Th
+            act_out = activitynat(iz, ia, is, it) * rfac
+            specact_out = specactivitynat(iz, ia, is, it) * rfac
+            yield_out = yieldnat(iz, ia, is, it) * rfac
+            if (k0 > 1) yield_out = yield_out * cfac * tfac
+            Niso_out = Nisonat(iz, ia, is, it)
+            Nisorel_out = Nisorelnat(iz, ia, is, it)
+            write(1, '(7es15.6)') Tgrid(it), act_out, specact_out, yield_out, Niso_out, Nisorel_out, Th
           enddo
           close (unit = 1)
         endif

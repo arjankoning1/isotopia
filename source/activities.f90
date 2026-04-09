@@ -32,7 +32,6 @@ subroutine activities
 !              Tp, &                              ! irradiation time with maximal yield per time unit
 !              yearsec, &                         ! number of seconds in a year
 !              yield, &                           ! yield of produced isotope in MBq / (mA.h)
-!              yieldunit, &                       ! unit for isotope yield: num (number), mug, mg, g, or kg
 !              Ztarget                            ! charge number of target nucleus
 !
 ! *** Declaration of local data
@@ -45,8 +44,6 @@ subroutine activities
   integer   :: iz      ! charge number of residual nucleus
   real(sgl) :: acmax   ! maximum activity
   real(sgl) :: activity_factor
-  real(sgl) :: rfac    ! conversion factor for radioactivity
-  real(sgl) :: yfac    ! conversion factor for isotope yield
 !
 ! Calculate activities from decay constants and number of nuclides
 !
@@ -55,11 +52,14 @@ subroutine activities
   else
     activity_factor = Ibeam
   endif
+  activity = 0.
+  yield = 0.
+  specactivity = 0.
   do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, Nisomer(iz, ia)
         do it = 1, numtime
-          activity(iz, ia, is, it) = dble(lambda(iz, ia, is)) * Niso(iz, ia, is, it) * 1.e-6
+          activity(iz, ia, is, it) = dble(lambda(iz, ia, is)) * Niso(iz, ia, is, it)
         enddo
         do it = 1, Ntime
           yield(iz, ia, is, it) = max( (activity(iz, ia, is, it) - activity(iz, ia, is, it - 1)) / &
@@ -68,37 +68,17 @@ subroutine activities
       enddo
     enddo
   enddo
-!
-! Transform quantities to user-dependent units
-!
-  rfac = 1.
-  yfac = 1.
-  if (radiounit == 'bq') rfac = 1.e6
-  if (radiounit == 'kbq') rfac = 1.e3
-  if (radiounit == 'gbq') rfac = 1.e-3
-  if (radiounit == 'ci') rfac = 1./3.7e4
-  if (radiounit == 'kci') rfac = 1./3.7e7
-  if (radiounit == 'mci') rfac = 1./3.7e1
-  totactivity = 0.
-  specactivity = 0.
   do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
-      if (yieldunit == 'g') yfac = real(ia)/avogadro
-      if (yieldunit == 'mug') yfac = real(ia)/avogadro*1.e6
-      if (yieldunit == 'mg') yfac = real(ia)/avogadro*1.e3
-      if (yieldunit == 'kg') yfac = real(ia)/avogadro*1.e-3
       do is = -1, Nisomer(iz, ia)
         acmax = 0.
         do it = 1, numtime
-          activity(iz, ia, is, it) = rfac * activity(iz, ia, is, it)
-          yield(iz, ia, is, it) = rfac * yield(iz, ia, is, it)
-          Niso(iz, ia, is, it) = yfac * Niso(iz, ia, is, it)
 !
 ! MV correct the case is=-1  when an isomer is present.
 ! The condition on tmax is to guarantee that if the isomer activity goes to zero, the code is still executed.
 !
           itm = int(Tmaxactivity(iz,ia,-1))
-          if (is.eq.1 .and. Niso(iz,ia,1,itm) > 0.) then
+          if (is == 1 .and. Niso(iz,ia,1,itm) > 0.) then
             Niso(iz,ia,-1,it) = Niso(iz,ia,0,it) + Niso(iz,ia,1,it)
             activity(iz,ia,-1,it) = activity(iz,ia,0,it) + activity(iz,ia,1,it)
           endif
@@ -108,10 +88,9 @@ subroutine activities
             Tmaxactivity(iz, ia, is) = it
             acmax = activity(iz, ia, is, it)
           endif
+          specactivity(iz, ia, is, it) = activity(iz, ia, is, it) / M_target
         enddo
       enddo
-      totactivity(iz, ia, is) = activity(iz, ia, is, Ntime) 
-      specactivity(iz, ia, is) = totactivity(iz, ia, is) / M_target
     enddo
   enddo
   return

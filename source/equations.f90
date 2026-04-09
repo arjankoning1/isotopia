@@ -43,7 +43,6 @@ subroutine equations
 !              V_target, &                            ! active target volume
 !              yearsec, &                         ! number of seconds in a year
 !              yield, &                           ! yield of produced isotope in MBq / (mA.h)
-!              yieldunit, &                       ! unit for isotope yield: num (number), mug, mg, g, or kg
 !              Ztarget                            ! charge number of target nucleus
 !
 ! *** Declaration of local data
@@ -59,7 +58,6 @@ subroutine equations
   integer   :: Zparent ! Z of parent isotope
   real(sgl) :: dT      ! time step
   real(sgl) :: N_p     ! number of isotopes for parent
-  real(sgl) :: activity_factor
   real(dbl) :: enum_i  ! constant
   real(dbl) :: enum_p  ! constant
   real(dbl) :: denom_i ! help variable
@@ -88,7 +86,7 @@ subroutine equations
 ! ******************** Set time grid ***********************************
 !
 ! Ntime is number of time points until end of irration, i.e. before cooling
-! time points bewteen Ntime and numtime are for cooling only
+! time points between Ntime and numtime are for cooling only
 !
   Ntime = numtime / 2
   dT = Tir / Ntime
@@ -161,6 +159,8 @@ subroutine equations
               if (denom_i /= 0) then
                 term_Ti = exp_T / denom_i - exp_i / denom_i
                 Niso(iz, ia, is, it) = enum_i * term_Ti
+              else
+                Niso(iz, ia, is, it) = enum_i * TT * exp_i
               endif
             else
 !
@@ -209,9 +209,6 @@ subroutine equations
                 enddo
               enddo
             endif
-!           activity(iz, ia, is, it) = lambda_i * Niso(iz, ia, is, it) * 1.e-6
-!           if (it <= Ntime) yield(iz, ia, is, it) = max( (activity(iz, ia, is, it) - activity(iz, ia, is, it - 1)) / &
-!&            (activity_factor * dble(Tgrid(it) - Tgrid(it - 1))), 0.)
           endif
           if (Niso(iz, ia, is, it) > 0.) Yexist(iz, ia, is) = .true.
           Nisotot(iz, it) = Nisotot(iz, it) + Niso(iz, ia, is, it)
@@ -237,14 +234,15 @@ subroutine equations
         Tp(iz, ia, is, 5) = int(TT)
       enddo
     enddo
-Loop1: do ia = Acomp, Acomp - Adepth, -1
+    do ia = Acomp, Acomp - Adepth, -1
       do is = -1, 1
-        if ( .not. Yexist(iz, ia, is)) cycle Loop1
-        do it = 0, numtime
-          if (Nisotot(iz, it) /= 0.) Nisorel(iz, ia, is, it) = Niso(iz, ia, is, it) / Nisotot(iz, it)
-        enddo
+        if (Yexist(iz, ia, is)) then
+          do it = 0, numtime
+            if (Nisotot(iz, it) /= 0.) Nisorel(iz, ia, is, it) = Niso(iz, ia, is, it) / Nisotot(iz, it)
+          enddo
+        endif
       enddo
-    enddo Loop1
+    enddo 
   enddo
   return
 end subroutine equations

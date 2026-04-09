@@ -5,7 +5,7 @@ module A0_isotopia_mod
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-06  A.J. Koning    A     Original code
+!    1     2026-04-09  A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -112,7 +112,7 @@ module A0_isotopia_mod
   real(sgl), dimension(0:numen)                  :: Enon       ! incident energy
   real(sgl), dimension(0:numen)                  :: xsnon      ! nonelastic cross section
   real(sgl), dimension(0:numen)                  :: Etot       ! incident energy
-  real(sgl), dimension(0:numen)                  :: xstot      ! nonelastic cross section
+  real(sgl), dimension(0:numen)                  :: xstot      ! total cross section
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! Variables for medical isotope production
@@ -122,8 +122,8 @@ module A0_isotopia_mod
   character(len=1), dimension(5) :: unitTirrad ! irradiation time unit (y,d,h,m,s)
   character(len=3)               :: radiounit  ! unit for radioactivity: Bq, kBq, MBq, Gbq, mCi,
   character(len=3)               :: yieldunit  ! unit for isotope yield: num (number), mug, mg, g, or kg
-  character(len=3)               :: rstr       ! string
-  character(len=3)               :: ystr       ! string
+  character(len=3)               :: timeunit   ! unit for time for production output: s, h or d
+  character(len=3)               :: currentunit ! unit for time for ccelerator current: muA, mA, or A
   integer, dimension(5)          :: Tcool      ! cooling time per unit cooling time unit (y,d,h,m,s)
   integer, dimension(5)          :: Tirrad     ! irradiation time per unit irradiation time unit
   real(sgl)                      :: Area       ! target area in cm^2
@@ -132,7 +132,7 @@ module A0_isotopia_mod
   real(sgl)                      :: Ebeam      ! incident energy in MeV for isotope production
   real(sgl)                      :: Ibeam      ! beam current in mA for isotope production
   real(sgl)                      :: rho_target  ! target material density
-  real(sgl)                      :: targetmass ! target mass (in yieldunit) 
+  real(sgl)                      :: targetmass ! target mass in grams
   real(sgl)                      :: fluxtotal  ! total flux
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -175,6 +175,7 @@ module A0_isotopia_mod
   real(sgl), dimension(0:numZ,0:numA,-1:numisom,0:numtime) :: activity     ! activity of produced isotope in MBq
   real(sgl), dimension(0:numZ,0:numA,-1:numisom,0:numtime) :: Nisonat      ! number of isotopes produced after irradiation
   real(sgl), dimension(0:numZ,0:numA,-1:numisom,0:numtime) :: activitynat  ! activity of produced isotope in MBq
+  real(sgl), dimension(0:numZ,0:numA,-1:numisom,0:numtime) :: specactivitynat  ! activity of produced isotope in MBq
   real(sgl), dimension(0:numZ,0:numA,-1:numisom,0:numtime) :: yield        ! yield of produced isotope in MBq/(mA.h)
   real(sgl), dimension(0:numZ,0:numA,-1:numisom,0:numtime) :: yieldnat     ! yield of produced isotope in MBq/(mA.h)
   real(sgl), dimension(0:numZ,0:numA,-1:numisom,0:numtime) :: Nisorel      ! fraction of number of produced isotopes per ele
@@ -183,7 +184,19 @@ module A0_isotopia_mod
   real(sgl), dimension(0:numZ,0:numA,-1:numisom,0:numtime) :: Nisorelnat   ! fraction of number of produced isotopes per ele
   real(sgl), dimension(0:numZ, 0:numtime)                  :: Nisototnat   ! number of elemental isotopes produced after irr
   real(sgl), dimension(0:numZ,0:numA,-1:numisom)           :: Tmax         ! irradiation time with maximal yield
-  real(sgl), dimension(0:numZ,0:numA,-1:numisom)           :: totactivity  ! total activity of produced isotope at EOI
-  real(sgl), dimension(0:numZ,0:numA,-1:numisom)           :: specactivity ! specific activity of produced isotope at EOI
+  real(sgl), dimension(0:numZ,0:numA,-1:numisom,0:numtime) :: specactivity ! specific activity of produced isotope
+!
+!-----------------------------------------------------------------------------------------------------------------------------------
+! Variables for conversion
+!-----------------------------------------------------------------------------------------------------------------------------------
+!
+  character(len=3)               :: rstr       ! string
+  character(len=3)               :: ystr       ! string
+  character(len=3)               :: tstr       ! string
+  character(len=3)               :: cstr       ! string
+  real(sgl) :: rfac    ! conversion factor for radioactivity
+  real(sgl) :: mfac    ! conversion factor for mass
+  real(sgl) :: tfac    ! conversion factor for time
+  real(sgl) :: cfac    ! conversion factor for current
 end module A0_isotopia_mod
 ! Copyright A.J. Koning 2026

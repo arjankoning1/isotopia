@@ -140,7 +140,14 @@ subroutine reactionrates
     projnum = Ibeam / (1000. * parZ(k0) * qelem)
     number_density = projnum / V_target
   endif
-  if (k0 <= 1) V_target = Area * thickness
+  if (k0 <= 1) then
+    if (targetmass /= -1.) then
+      V_target = targetmass / rho_target 
+      thickness = V_target / Area
+    else
+      V_target = Area * thickness
+    endif
+  endif
   M_target = rho_target * V_target
 !
 ! ********************* Calculate reaction rates ***********************
@@ -154,13 +161,12 @@ subroutine reactionrates
     do ia = Acomp, 0, -1
       do is = -1, 1
         reaction_rate(iz, ia, is) = 0.
+        if ((iz < Zcomp - Zdepth .or. ia < Acomp - Adepth) .and. .not. (iz == 0 .and. ia == 0 .and. is ==  -1)) cycle
         if (iz == 0 .and. ia == 0 .and. is ==  -1) then
           Nenrp = Nennon
           xsrp = xsnon
-          goto 140
         endif
-        if (iz < Zcomp - Zdepth .or. ia < Acomp - Adepth) cycle
-140     ratesum = 0.
+        ratesum = 0.
         call crosssections(iz, ia, is)
         if ( .not. rpexist(iz, ia, is)) cycle
         N = Nenrp

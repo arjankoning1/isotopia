@@ -5,7 +5,7 @@ subroutine input
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2026-04-09   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -74,8 +74,10 @@ subroutine input
   Ebeam = -1.
   Eback = -1.
   Ibeam = 1.
-  radiounit = 'gbq'
-  yieldunit = 'num'
+  timeunit = 'h'
+  radiounit = 'bq'
+  yieldunit = 'g'
+  currentunit = 'ma'
   Area = 1.
   thickness = 0.05
   Tirrad = 0
@@ -87,7 +89,7 @@ subroutine input
   Tcool(1) = 1
   unitTcool(1) = 'd'
   rho_target = -1.
-  targetmass = 1.
+  targetmass = -1.
   fluxtotal = 1.e14
   flagdecay = .true.
   flagZAoutput = .false.
@@ -168,13 +170,23 @@ Loop1:  do i = 1, nlines
       if (istat /= 0) call read_error(line, istat)
       cycle
     endif
+    if (key == 'timeunit') then
+      read(val, * , iostat = istat) timeunit
+      if (istat /= 0) call read_error(line, istat)
+      cycle
+    endif
     if (key == 'radiounit') then
       read(val, * , iostat = istat) radiounit
       if (istat /= 0) call read_error(line, istat)
       cycle
     endif
-    if (key == 'yieldunit') then
+    if (key == 'yieldunit' .or. key == 'massunit') then
       read(val, * , iostat = istat) yieldunit
+      if (istat /= 0) call read_error(line, istat)
+      cycle
+    endif
+    if (key == 'currentunit') then
+      read(val, * , iostat = istat) currentunit
       if (istat /= 0) call read_error(line, istat)
       cycle
     endif
@@ -288,4 +300,4 @@ Loop1:  do i = 1, nlines
   return
   stop
 end subroutine input
-! Copyright A.J. Koning 2023
+! Copyright A.J. Koning 2026

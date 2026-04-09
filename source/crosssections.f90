@@ -217,7 +217,7 @@
       xsrp(iE) = xs
     enddo
     close (unit = 1)
-    if (flagcross) close (unit = 1)
+    if (flagcross) close (unit = 2)
 !
 ! Subtract inelastic cross section from non-elastic cross section
 !

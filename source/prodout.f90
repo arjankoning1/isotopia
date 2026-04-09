@@ -5,7 +5,7 @@ subroutine prodout
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-06   A.J. Koning    A     Original code
+!    1     2026-04-09   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -59,14 +59,14 @@ subroutine prodout
   character(len=3)  :: Astr        !
   character(len=3)  :: massstring !
   character(len=6)  :: finalnuclide !
-  character(len=6)  :: yieldstring     
+  character(len=8)  :: yieldstring     
   character(len=13) :: state       ! state of final nuclide
   character(len=15) :: Yfile       ! file with production yields
   character(len=38) :: halflife    ! half life
   character(len=38) :: maxprod     ! maximum production
   character(len=16) :: reaction   ! reaction
-  character(len=15) :: col(6)    ! header
-  character(len=15) :: un(6)    ! header
+  character(len=15) :: col(7)    ! header
+  character(len=15) :: un(7)    ! header
   character(len=80) :: quantity   ! quantity
   character(len=132) :: string    !
   character(len=132) :: topline    ! topline
@@ -80,24 +80,23 @@ subroutine prodout
   integer           :: id2
   integer           :: id4
   real(sgl)         :: Th          ! time in hours
+  real(sgl)         :: act_out          ! help variable
+  real(sgl)         :: specact_out          ! help variable
+  real(sgl)         :: yield_out          ! help variable
+  real(sgl)         :: Niso_out          ! help variable
+  real(sgl)         :: Nisorel_out          ! help variable
+  real(sgl)         :: yfac
 !
 ! ************************* Main output ********************************
 !
   indent = 0
   id2 = indent + 2
   id4 = indent + 4
-  rstr = 'MBq'
-  ystr = '   '
-  if (radiounit == 'bq') rstr = ' Bq'
-  if (radiounit == 'kbq') rstr = 'KBq'
-  if (radiounit == 'gbq') rstr = 'GBq'
-  if (radiounit == 'ci') rstr = ' Ci'
-  if (radiounit == 'kci') rstr = 'KCi'
-  if (radiounit == 'mci') rstr = 'mCi'
-  if (yieldunit == 'g') ystr = '  g'
-  if (yieldunit == 'mug') ystr = 'mug'
-  if (yieldunit == 'mg') ystr = ' mg'
-  if (yieldunit == 'kg') ystr = ' kg'
+! 
+! Normalization and strings for output
+!
+  call conversion
+  yfac = 1.
   write(*, '(/" Summary of isotope production for ", a1, " + ", a/)') ptype0, trim(targetnuclide)
   string=''
   write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tirrad(k), k = 1, 5) 
@@ -107,7 +106,7 @@ subroutine prodout
   if (k0 /= 1) then
     write(*, '(" E-beam [MeV]:", es15.6)') Ebeam
     write(*, '(" E-back [MeV]:", es15.6)') Eback
-    write(*, '(" Beam current [mA]: ", f12.3, " mA")') Ibeam
+    write(*, '(" Beam current [mA]: ", f12.3)') Ibeam
   endif
   write(*, '(" Target material density [g/cm^3]:", es15.6)') rho_target
   write(*, '(" Target area [cm^2]:", es15.6)') Area
@@ -117,21 +116,25 @@ subroutine prodout
     write(*, '(" Target thickness [cm]:", es15.6)') thickness
   endif
   write(*, '(" Effective target volume [cm^3]:", es15.6)') V_target
-  write(*, '(" Effective target mass [g]:", es15.6)') M_target
+  write(*, '(" Effective target mass [",a,"]:", es15.6)') trim(ystr), M_target * mfac
   write(*, '(" Number of target atoms: ", es15.6)') N_0
-  write(*, '(" Number of incident particles [s^-1]:", es15.6)') projnum
-  write(*, '(" Produced heat in target [kW]:", es15.6)') heat
+  if (k0 > 1) then
+    write(*, '(" Number of incident particles [s^-1]:", es15.6)') projnum
+    write(*, '(" Produced heat in target [kW]:", es15.6)') heat
+  else
+    write(*, '(" Total flux [cm^-2s^-1]:", es15.6)') fluxtotal
+  endif
   write(*, '(/" (Maximum) production and decay rates per isotope"/)')
   write(*, '(" Total production rate [s^-1]:", es15.6/)') reaction_rate(0, 0, -1)
-  write(*, '("#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.", &
- &  "             Half-life               Time of maximum production")')
+  write(*, '("#  Nuc       Activity     Spec. activity   Prod. rate     #isotopes Isotopic frac.", &
+ &  " Reaction const. Decay const.           Half-life               Time of maximum production")')
   if (k0 > 1) then
-    yieldstring='mAh'
+    yieldstring = trim(rstr)//'/'//trim(cstr)//trim(tstr)
   else
-    yieldstring=trim(yieldunit)
+    yieldstring = trim(rstr)//'/'//trim(ystr)//trim(tstr)
   endif
-  write(*, '("#             [s^-1]         [s^-1]         [", a3, "]          [", a3, "]        [", a3, "/", a, "]")') &
- &  rstr, ystr, rstr, trim(yieldstring)
+  write(*, '("#               [", a, "]          [", a, "/", a, "]        [", a, "]            []            []", &
+ &  "        [s^-1]         [s^-1]       ")') trim(rstr), trim(rstr), trim(ystr), trim(yieldstring)
   do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, Nisomer(iz, ia)
@@ -150,13 +153,15 @@ subroutine prodout
         else
           write(maxprod, '(i11, " y ", i3, " d ", i3, " h ", i3, " m ", i3, " s ")') (Tp(iz, ia, is, k), k = 1, 5)
         endif
-        if (is.eq.-1 .and. Niso(iz,ia,0,it) > 0. .and. Niso(iz,ia,1,it) > 0.) then
+        if (is == -1 .and. Niso(iz,ia,0,it) > 0. .and. Niso(iz,ia,1,it) > 0.) then
           halflife = '                                      '
           maxprod = '                                      '
         endif
-        write(*, '(1x, a2, i4, 1x, a1, 5es15.6, f10.5, 2a38)') nuc(iz), ia, isochar(is), reaction_rate(iz, ia, is), &
- &        lambda(iz, ia, is), activity(iz, ia, is, it), Niso(iz, ia, is, it), &
- &        yield(iz, ia, is, 1), Nisorel(iz, ia, is, it), halflife, maxprod
+        yfac = real(ia) / avogadro * mfac
+        write(*, '(1x, a2, i4, 1x, a1, 4es15.6, f10.5, 2es15.6, 2a38)') nuc(iz), ia, isochar(is), &
+ &         activity(iz, ia, is, it) * rfac, specactivity(iz, ia, is, it) * rfac, &
+ &        yield(iz, ia, is, 1) * rfac, Niso(iz, ia, is, it), Nisorel(iz, ia, is, it), &
+ &        reaction_rate(iz, ia, is), lambda(iz, ia, is), halflife, maxprod
       enddo
     enddo
   enddo
@@ -205,16 +210,20 @@ subroutine prodout
           call write_real(id4,'E-Beam [MeV]',Ebeam)
           call write_real(id4,'E-Back [MeV]',Eback)
         endif
-        string='Initial production rate [s^-1]'
+        string='Reaction constant [s^-1]'
         call write_real(id4,string,reaction_rate(iz, ia, is))
-        string='Decay rate [s^-1]'
+        string='Decay constant [s^-1]'
         call write_real(id4,string,lambda(iz, ia, is))
-        string='Initial production yield ['//rstr//'/'//trim(yieldstring)//']'
-        call write_real(id4,string,yield(iz, ia, is, 1))
-        string='Total activity at EOI ['//rstr//']'
-        call write_real(id4,string,totactivity(iz, ia, is))
-        string='Specific activity at EOI ['//rstr//'/mg]'
-        call write_real(id4,string,specactivity(iz, ia, is))
+        string='Initial production rate ['//trim(yieldstring)//']'
+        if (k0 > 1) then
+          call write_real(id4,string,yield(iz, ia, is, 1) * rfac * cfac * tfac)
+        else
+          call write_real(id4,string,yield(iz, ia, is, 1) * rfac)
+        endif
+        string='Total activity at EOI ['//trim(rstr)//']'
+        call write_real(id4,string,activity(iz, ia, is, Ntime) * rfac)
+        string='Specific activity at EOI ['//trim(rstr)//'/'//trim(ystr)//']'
+        call write_real(id4,string,specactivity(iz, ia, is, Ntime) * rfac)
         string=''
         write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tirrad(k), k = 1, 5)
         call write_char(id4,'Irradiation time',string)
@@ -239,24 +248,27 @@ subroutine prodout
         un(1) = 's'
         col(2)='Activity'
         un(2) = trim(rstr)
-        col(3)='Isotopes'
-        un(3) = trim(ystr)
-        col(4)='Yield'
-        if (k0 > 1) then
-          un(4) = trim(rstr//'/mAh')
-        else
-          un(4) = trim(rstr)//'/'//trim(yieldunit)
-        endif
-        col(5)='Isotopic_frac.'
-        col(6)='Time'
-        un(6) = 'h'
-        Ncol=6
+        col(3)='Spec_activity'
+        un(3) = trim(rstr)//'/'//trim(ystr)
+        col(4)='Prod_rate'
+        un(4) = trim(yieldstring)
+        col(5)='Isotopes'
+        col(6)='Isotopic_frac.'
+        col(7)='Time'
+        un(7) = 'h'
+        Ncol=7
         call write_quantity(id2,quantity)
         call write_datablock(id2,Ncol,numtime,col,un)
+        yfac = real(ia) / avogadro * mfac
         do it = 1, numtime
+          act_out = activity(iz, ia, is, it) * rfac
+          specact_out = specactivity(iz, ia, is, it) * rfac
+          yield_out = yield(iz, ia, is, it) * rfac
+          if (k0 > 1) yield_out = yield_out * cfac * tfac
+          Niso_out = Niso(iz, ia, is, it)
+          Nisorel_out = Nisorel(iz, ia, is, it)
           Th = Tgrid(it)/hoursec
-          write(1, '(6es15.6)') Tgrid(it), activity(iz, ia, is, it), Niso(iz, ia, is, it), &
- &          yield(iz, ia, is, it), Nisorel(iz, ia, is, it), Th
+          write(1, '(7es15.6)') Tgrid(it), act_out, specact_out, yield_out, Niso_out, Nisorel_out, Th
         enddo
         close (unit = 1)
       enddo
@@ -265,4 +277,4 @@ subroutine prodout
   write(*, '(/,"  End of ISOTOPIA calculation for ", a1, " + ", a)') ptype0, trim(targetnuclide)
   return
 end subroutine prodout
-! Copyright A.J. Koning 2023
+! Copyright A.J. Koning 2026

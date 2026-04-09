@@ -5,7 +5,7 @@ subroutine checkvalue
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-06   A.J. Koning    A     Original code
+!    1     2026-04-09   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -127,7 +127,7 @@ subroutine checkvalue
     stop
   endif
   if (Ibeam <= 0. .or. Ibeam > 10000.) then
-    write(*, '(" ISOTOPIA-error: 0 < = Ibeam < 1000 mA")')
+    write(*, '(" ISOTOPIA-error: 0 < = Ibeam < 10000 mA")')
     stop
   endif
   if (Area <= 0. .or. Area > 10000.) then
@@ -160,16 +160,33 @@ subroutine checkvalue
       stop
     endif
   enddo
-  if (rho_target /=  - 1..and.(rho_target <= 0..or.rho_target > 100.)) then
-    write(*, '(" ISOTOPIA-error: 0 < rhotarget < = 100.")')
+  if (rho_target /=  - 1. .and. (rho_target <= 0. .or. rho_target > 100.)) then
+    write(*, '(" ISOTOPIA-error: 0 < rhotarget <= 100.")')
     stop
   endif
-  if (targetmass <=  0. .or. targetmass >= 1.e9) then
-    write(*, '(" ISOTOPIA-error: 0 <= targetmass < = 1.e9")')
+  if (targetmass /= -1. .and. (targetmass <=  0. .or. targetmass > 1.e9)) then
+    write(*, '(" ISOTOPIA-error: 0 < targetmass <= 1.e9")')
     stop
   endif
-  if (fluxtotal <=  0. .or. fluxtotal >= 1.e38) then
-    write(*, '(" ISOTOPIA-error: 0 <= fluxtotal < = 1.e38")')
+  if (fluxtotal <=  0. .or. fluxtotal > 1.e38) then
+    write(*, '(" ISOTOPIA-error: 0 < fluxtotal <= 1.e38")')
+    stop
+  endif
+  if (yieldunit /= 'mug' .and. yieldunit /= 'mg' .and. yieldunit /= 'g' .and. yieldunit /= 'kg') then
+    write(*, '(" ISOTOPIA-error: yieldunit must be equal to mug, mg, g or kg")')
+    stop
+  endif
+  if (radiounit /= 'bq' .and. radiounit /= 'kbq' .and. radiounit /= 'mbq' .and. radiounit /= 'gbq' .and. &
+ &  radiounit /= 'ci' .and. radiounit /= 'kci' .and. radiounit /= 'mci') then
+    write(*, '(" ISOTOPIA-error: radiounit must be equal to bq, kbq, mbq, gbq, ci, kci or mci")')
+    stop
+  endif
+  if (timeunit /= 's' .and. timeunit /= 'h' .and. timeunit /= 'd') then
+    write(*, '(" ISOTOPIA-error: timeunit must be equal to s, h or d")')
+    stop
+  endif
+  if (currentunit /= 'mua' .and. currentunit /= 'ma' .and. currentunit /= 'a') then
+    write(*, '(" ISOTOPIA-error: currentunit must be equal to mua, ma or a")')
     stop
   endif
   return

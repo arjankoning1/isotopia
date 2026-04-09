@@ -5,7 +5,7 @@ subroutine inputout
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-06   A.J. Koning    A     Original code
+!    1     2026-04-09   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -43,7 +43,7 @@ subroutine inputout
 !
 ! *************************** Code and version *************************
 !
-  write(*, '(/"    ISOTOPIA-2.22   (Version: April 3, 2026)"/)')
+  write(*, '(/"    ISOTOPIA-2.23   (Version: April 9, 2026)"/)')
   write(*, '(10x, " Simulation of medical isotope production")')
   write(*, '(/" Copyright (C) 2026  A.J. Koning")')
   write(*, '(/" User: ",a)') trim(user)
@@ -86,7 +86,7 @@ subroutine inputout
 !
   write(*, '(" #"/" # Output "/" #")')
   write(*, '(" radiounit             ", a3, " radiounit    unit for radioactivity")') radiounit
-  write(*, '(" yieldunit             ", a3, " yieldunit    unit for isotope yield")') yieldunit
+  write(*, '(" yieldunit (massunit)  ", a3, " yieldunit    unit for isotope yield")') yieldunit
   write(*, '(" ZAoutput              ", a1, "   flagZAoutput output files per Z, A instead of El, A")') yesno(flagZAoutput)
 !
 ! Target
@@ -102,7 +102,7 @@ subroutine inputout
   write(*, '(" rho               ", f7.3, " rho_target   target density [g/cm^3] ")') rho_target
   write(*, '(" targetmass        ", f7.3, " targetmass   target mass ")') targetmass
   if (k0 == 1) write(*, '(" fluxtotal ", es15.6, " fluxtotal    total flux")') fluxtotal
-  write(*, '(" selfshield            ", a1, " flagselfshield  flag for self-shielding ")') yesno(flagselfshield)
+  write(*, '(" selfshield            ", a1, " flagselfshield flag for self-shielding ")') yesno(flagselfshield)
 !
 ! Cross section and decay data
 !
