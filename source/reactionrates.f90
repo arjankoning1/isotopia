@@ -39,6 +39,12 @@ subroutine reactionrates
   character(len=3)   :: Estring          ! string
   character(len=132) :: string           ! line
   character(len=132) :: specfile        ! 
+  character(len=16) :: reaction   ! reaction
+  character(len=15) :: col(7)    ! header
+  character(len=15) :: un(7)    ! header
+  character(len=80) :: quantity   ! quantity
+  character(len=132) :: topline    ! topline
+  integer           :: Ncol       ! counter
   integer, parameter :: numint=10000     ! number of integration points
   integer            :: ia               ! mass number from abundance table
   integer            :: is               ! isotope counter: -1=total, 0=ground state 1=isomer
@@ -48,6 +54,8 @@ subroutine reactionrates
   integer            :: nen              ! energy counter
   integer            :: iE
   integer            :: istat
+  integer           :: indent
+  integer           :: id2
   integer            :: NintE            ! number of integration points
   real(sgl)          :: dE               ! help variable
   real(sgl)          :: S                ! stopping power
@@ -201,6 +209,30 @@ subroutine reactionrates
       enddo
     enddo
   enddo
+!
+! For charged particles: Output of stopping power
+!
+  if (k0 > 1) then
+    reaction='('//ptype0//',x)'
+    quantity='Stopping power'
+    open (unit = 1, file = 'stopping_power.txt', status = 'replace')
+    topline=trim(targetnuclide)//trim(reaction)//' '//trim(quantity)
+    call write_header(indent,topline,source,user,date,oformat)
+    call write_target(indent)
+    call write_reaction(indent,reaction,0.d0,0.d0,0,0)
+    un = ''
+    col(1)='Energy'
+    un(1) = 'MeV'
+    col(2)='Stopping power'
+    un(2) = 'MeV/cm' 
+    Ncol=2
+    call write_quantity(id2,quantity)
+    call write_datablock(id2,Ncol,NintE,col,un)
+    do nE = 1, NintE
+      write(1, '(2es15.6)') Eint(nE), 1./phi(nE)
+    enddo
+    close(unit = 1)
+  endif
   return
 end subroutine reactionrates
 ! Copyright A.J. Koning 2026
