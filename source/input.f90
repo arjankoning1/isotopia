@@ -298,6 +298,5 @@ Loop1:  do i = 1, nlines
     endif
   enddo Loop1
   return
-  stop
 end subroutine input
 ! Copyright A.J. Koning 2026
