@@ -125,6 +125,7 @@ subroutine equations
           Nisorel(iz,ia,is,it)=0.
           Nisonat(iz,ia,is,it)=0.
           activitynat(iz,ia,is,it)=0.
+          specactivitynat(iz,ia,is,it)=0.
           yieldnat(iz,ia,is,it)=0.
           Nisorelnat(iz,ia,is,it)=0.
         enddo

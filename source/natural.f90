@@ -85,6 +85,7 @@ subroutine natural
   real(sgl)         :: Tdum                              !
   real(sgl)         :: Y                                 ! product yield (in ENDF-6 format)
   real(sgl)         :: Ym                                !
+  real(sgl)         :: Ysp                               !
   real(sgl)         :: Th                                !
   real(sgl)         :: act_out          ! help variable
   real(sgl)         :: specact_out          ! help variable
@@ -159,10 +160,11 @@ subroutine natural
                 if (istat /= 0) call read_error(Yf, istat)
                 read(2,'(/)')
                 do it = 1, Ntime
-                  read(2, * , iostat = istat) Tdum, Y, Nis, Ym
+                  read(2, * , iostat = istat) Tdum, Y, Ysp, Ym, Nis
                   if (istat < 0) call read_error(Yf, istat)
                   if (istat > 0) cycle
                   activitynat(iz, ia, is, it) = activitynat(iz, ia, is, it) + abun(iso) * Y
+                  specactivitynat(iz, ia, is, it) = specactivitynat(iz, ia, is, it) + abun(iso) * Ysp
                   yieldnat(iz, ia, is, it) = yieldnat(iz, ia, is, it) + abun(iso) * Ym
                   Nisonat(iz, ia, is, it) = Nisonat(iz, ia, is, it) + abun(iso) * Nis
                   Nisototnat(iz, it) = Nisototnat(iz, it) + abun(iso) * Nis
