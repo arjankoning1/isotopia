@@ -1,12 +1,12 @@
 
-    ISOTOPIA-2.22   (Version: March 17, 2026)
+    ISOTOPIA-2.23   (Version: April 9, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-03-28
+ Date: 2026-04-10
 
  ########## USER INPUT ##########
 
@@ -31,16 +31,10 @@
  element            Lu     Starget      symbol of target nucleus
  mass              176     Atarget      mass number of target nucleus
  #
- # Accelerator 
- #
- Ebeam              -1.000 Ebeam        incident energy in MeV
- Eback              -1.000 Eback        lower end of energy range in MeV
- Ibeam               1.000 Ibeam        beam current in mA
- #
  # Output 
  #
- radiounit             gbq radiounit    unit for radioactivity
- yieldunit             num yieldunit    unit for isotope yield
+ radiounit             bq  radiounit    unit for radioactivity
+ yieldunit (massunit)  g   yieldunit    unit for isotope yield
  ZAoutput              n   flagZAoutput output files per Z, A instead of El, A
  #
  # Target
@@ -48,9 +42,10 @@
  Tirrad              1     Tirrad       d of irradiation time
  Area                1.000 Area         target area in cm^2
  Tcool               1     Tcool        d of cooling time
- rho                -1.000 rhotarget    target density [g/cm^3] 
- targetmass          1.000 targetmass   target mass 
+ rho                -1.000 rho_target   target density [g/cm^3] 
+ targetmass         -1.000 targetmass   target mass 
  fluxtotal    1.000000E+14 fluxtotal    total flux
+ selfshield            n flagselfshield flag for self-shielding 
  #
  # Cross section and decay data
  #
@@ -65,45 +60,44 @@
  Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
  Target material density [g/cm^3]:   9.840000E+00
  Target area [cm^2]:   1.000000E+00
- Effective target thickness [cm]:   0.000000E+00
- Effective target volume [cm^3]:   0.000000E+00
- Effective target mass [g]:   1.000000E+00
- Number of target atoms:    3.421671E+21
- Number of incident particles [s^-1]:   0.000000E+00
- Produced heat in target [kW]:   0.000000E+00
+ Target thickness [cm]:   5.000000E-02
+ Effective target volume [cm^3]:   5.000000E-02
+ Effective target mass [g]:   4.920000E-01
+ Number of target atoms:    1.683462E+21
+ Total flux [cm^-2s^-1]:   1.000000E+14
 
  (Maximum) production and decay rates per isotope
 
  Total production rate [s^-1]:   2.275163E-10
 
-#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.             Half-life               Time of maximum production
-#             [s^-1]         [s^-1]         [GBq]          [   ]        [GBq/num]
- Hf 177     0.000000E+00   0.000000E+00   0.000000E+00   9.365907E+17   0.000000E+00   0.49999                                                                            
- Hf 177 g   0.000000E+00   0.000000E+00   0.000000E+00   9.365907E+17   0.000000E+00   0.49999       stable                                infinite                       
- Hf 177 m   0.000000E+00   6.418029E-01   2.130960E+07   3.320272E+13   2.592247E+02   0.00002          0 y   0 d   0 h   0 m   1 s           0 y   0 d   0 h   0 m  33 s 
- Lu 177     6.289216E-08   1.206941E-06   2.128866E+04   1.765712E+19   2.594585E-01   0.00511                                                                            
- Lu 177 g   6.282640E-08   1.206941E-06   2.128769E+04   1.763772E+19   2.591871E-01   0.00510          0 y   6 d  15 h  31 m  41 s           0 y  82 d   6 h  13 m  41 s 
- Lu 177 m   6.575254E-11   5.004709E-08   9.707344E-01   1.939642E+16   1.125928E-05   0.00001          0 y 160 d   7 h  11 m  40 s           3 y 157 d   6 h  23 m  36 s 
- Lu 176     6.741907E-11   0.000000E+00   0.000000E+00   3.421604E+21   0.000000E+00   0.98978                                                                            
- Lu 176 g   4.061537E-11   0.000000E+00   0.000000E+00   1.200710E+16   0.000000E+00   0.00000       stable                                infinite                       
- Lu 176 m   2.859669E-11   5.296861E-05   9.684000E+01   1.828253E+15   4.952775E-03   0.00000          0 y   0 d   3 h  38 m   6 s           0 y   2 d  16 h  48 m  28 s 
- Lu 175     4.126103E-13   0.000000E+00   0.000000E+00   1.219799E+14   0.000000E+00   0.00000       stable                                infinite                       
- Lu 174     4.785466E-17   6.171182E-09   4.239172E-07   1.410116E+10   1.010482E-12   0.00000                                                                            
- Lu 174 g   2.506107E-17   6.171182E-09   4.570881E-08   7.406815E+09   5.291804E-13   0.00000          3 y 204 d   6 h   0 m   0 s          17 y 217 d  15 h  37 m   4 s 
- Lu 174 m   2.269967E-17   5.649674E-08   3.782084E-07   6.694341E+09   4.387933E-12   0.00000          0 y 142 d   0 h   0 m   0 s           3 y  38 d  13 h  51 m  52 s 
- Yb 176     5.826373E-16   0.000000E+00   0.000000E+00   1.722448E+11   0.000000E+00   0.04014                                                                            
- Yb 176 g   5.477238E-16   0.000000E+00   0.000000E+00   1.619233E+11   0.000000E+00   0.03773       stable                                infinite                       
- Yb 176 m   3.491201E-17   6.080239E-02   1.194574E-04   1.964682E+06   6.913042E-08   0.00021          0 y   0 d   0 h   0 m  11 s           0 y   0 d   0 h   5 m  19 s 
- Yb 175     7.570137E-18   1.916974E-06   3.953653E-06   2.062444E+09   4.957229E-11   0.00048          0 y   4 d   4 h  26 m  24 s           0 y  54 d  13 h  57 m   2 s 
- Yb 174     3.909487E-19   0.000000E+00   0.000000E+00   1.193469E+08   0.000000E+00   0.00003       stable                                infinite                       
- Yb 173     3.392534E-25   0.000000E+00   0.000000E+00   3.955039E+12   0.000000E+00   0.92162       stable                                infinite                       
- Yb 172     0.000000E+00   0.000000E+00   0.000000E+00   1.225810E+07   0.000000E+00   0.00000       stable                                infinite                       
- Yb 171     0.000000E+00   0.000000E+00   0.000000E+00   3.389667E+00   0.000000E+00   0.00000       stable                                infinite                       
- Tm 174     1.449110E-27   2.139343E-03   4.958370E-15   2.317706E-03   2.798261E-18   0.00000          0 y   0 d   0 h   5 m  24 s           0 y   0 d   2 h   5 m   5 s 
- Tm 173     2.345199E-14   2.336661E-05   6.958718E-02   2.978060E+12   1.837703E-06   0.99997          0 y   0 d   8 h  14 m  24 s           0 y   5 d  17 h  10 m  54 s 
- Tm 172     3.452823E-19   3.027372E-06   2.719111E-07   8.981753E+07   3.567327E-12   0.00003          0 y   2 d  15 h  36 m   0 s           0 y  36 d   7 h  22 m  23 s 
- Tm 171     2.316615E-23   1.146077E-08   7.845131E-14   6.845206E+03   9.084506E-19   0.00000          1 y 334 d  18 h   0 m   0 s          11 y  20 d  15 h   9 m  52 s 
- Tm 170     8.481437E-35   6.238387E-08   1.559982E-24   2.500617E-08   1.810325E-29   0.00000          0 y 128 d  14 h  23 m  20 s           2 y 314 d  20 h  20 m  40 s 
+#  Nuc       Activity     Spec. activity   Prod. rate     #isotopes Isotopic frac. Reaction const. Decay const.           Half-life               Time of maximum production
+#               [Bq]          [Bq/g]        [Bq/gh]            []            []        [s^-1]         [s^-1]       
+ Hf 177     0.000000E+00   0.000000E+00   0.000000E+00   9.211440E+17   0.49999   0.000000E+00   0.000000E+00                                                                            
+ Hf 177 g   0.000000E+00   0.000000E+00   0.000000E+00   9.211440E+17   0.49999   0.000000E+00   0.000000E+00       stable                                infinite                       
+ Hf 177 m   2.095817E+13   4.259790E+13   5.181897E+08   3.265514E+13   0.00002   0.000000E+00   6.418029E-01          0 y   0 d   0 h   0 m   1 s           0 y   0 d   0 h   0 m  33 s 
+ Lu 177     1.047402E+13   2.130997E+13   2.594584E+08   8.687303E+18   0.00511   6.289216E-08   1.206941E-06                                                                            
+ Lu 177 g   1.047354E+13   2.128768E+13   2.591871E+08   8.677760E+18   0.00510   6.282640E-08   1.206941E-06          0 y   6 d  15 h  31 m  41 s           0 y  82 d   6 h  13 m  41 s 
+ Lu 177 m   4.776013E+08   9.707344E+08   1.125928E+04   9.543039E+15   0.00001   6.575254E-11   5.004709E-08          0 y 160 d   7 h  11 m  40 s           3 y 157 d   6 h  23 m  36 s 
+ Lu 176     0.000000E+00   0.000000E+00   0.000000E+00   1.683429E+21   0.98978   6.741907E-11   0.000000E+00                                                                            
+ Lu 176 g   0.000000E+00   0.000000E+00   0.000000E+00   5.907493E+15   0.00000   4.061537E-11   0.000000E+00       stable                                infinite                       
+ Lu 176 m   4.764528E+10   9.683999E+10   4.952775E+06   8.995003E+14   0.00000   2.859669E-11   5.296861E-05          0 y   0 d   3 h  38 m   6 s           0 y   2 d  16 h  48 m  28 s 
+ Lu 175     0.000000E+00   0.000000E+00   0.000000E+00   6.001414E+13   0.00000   4.126103E-13   0.000000E+00       stable                                infinite                       
+ Lu 174     2.085673E+02   8.728197E+01   1.010482E-03   6.937768E+09   0.00000   4.785466E-17   6.171182E-09                                                                            
+ Lu 174 g   2.248873E+01   4.570880E+01   5.291805E-04   3.644153E+09   0.00000   2.506107E-17   6.171182E-09          3 y 204 d   6 h   0 m   0 s          17 y 217 d  15 h  37 m   4 s 
+ Lu 174 m   1.860785E+02   3.782084E+02   4.387932E-03   3.293616E+09   0.00000   2.269967E-17   5.649674E-08          0 y 142 d   0 h   0 m   0 s           3 y  38 d  13 h  51 m  52 s 
+ Yb 176     0.000000E+00   0.000000E+00   0.000000E+00   3.259964E+15   0.49979   5.826373E-16   0.000000E+00                                                                            
+ Yb 176 g   0.000000E+00   0.000000E+00   0.000000E+00   3.259959E+15   0.49979   5.477238E-16   0.000000E+00       stable                                infinite                       
+ Yb 176 m   4.764491E+10   9.683925E+10   4.907790E+06   7.836026E+11   0.00012   3.491201E-17   6.080239E-02          0 y   0 d   0 h   0 m  11 s           0 y   0 d   0 h   5 m  19 s 
+ Yb 175     1.945197E+03   3.953653E+03   4.957229E-02   1.014723E+09   0.00000   7.570137E-18   1.916974E-06          0 y   4 d   4 h  26 m  24 s           0 y  54 d  13 h  57 m   2 s 
+ Yb 174     0.000000E+00   0.000000E+00   0.000000E+00   6.773543E+07   0.00000   3.909487E-19   0.000000E+00       stable                                infinite                       
+ Yb 173     0.000000E+00   0.000000E+00   0.000000E+00   1.945879E+12   0.00030   3.392534E-25   0.000000E+00       stable                                infinite                       
+ Yb 172     0.000000E+00   0.000000E+00   0.000000E+00   6.030986E+06   0.00000   0.000000E+00   0.000000E+00       stable                                infinite                       
+ Yb 171     0.000000E+00   0.000000E+00   0.000000E+00   1.667716E+00   0.00000   0.000000E+00   0.000000E+00       stable                                infinite                       
+ Tm 174     2.439518E-06   4.958370E-06   2.798260E-09   1.140312E-03   0.00000   1.449110E-27   2.139343E-03          0 y   0 d   0 h   5 m  24 s           0 y   0 d   2 h   5 m   5 s 
+ Tm 173     3.423689E+07   6.958717E+07   1.837702E+03   1.465206E+12   0.99997   2.345199E-14   2.336661E-05          0 y   0 d   8 h  14 m  24 s           0 y   5 d  17 h  10 m  54 s 
+ Tm 172     1.337803E+02   2.719111E+02   3.567327E-03   4.419022E+07   0.00003   3.452823E-19   3.027372E-06          0 y   2 d  15 h  36 m   0 s           0 y  36 d   7 h  22 m  23 s 
+ Tm 171     3.859805E-05   7.845131E-05   9.084506E-10   3.367842E+03   0.00000   2.316615E-23   1.146077E-08          1 y 334 d  18 h   0 m   0 s          11 y  20 d  15 h   9 m  52 s 
+ Tm 170     7.675111E-16   1.559982E-15   1.810325E-20   1.230304E-08   0.00000   8.481437E-35   6.238387E-08          0 y 128 d  14 h  23 m  20 s           2 y 314 d  20 h  20 m  40 s 
 
 file: Hf177.act
 file: Hf177g.act

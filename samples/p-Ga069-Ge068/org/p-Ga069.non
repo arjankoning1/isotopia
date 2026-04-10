@@ -2,7 +2,7 @@
 #   title: Ga69(p,non) Cross section
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-03-28
+#   date: 2026-04-10
 #   format: YANDF-0.4
 # target: 
 #   Z: 31

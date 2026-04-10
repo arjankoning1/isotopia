@@ -4,3 +4,6 @@ mass 124
 Ebeam 12.
 Eback 8.
 Ibeam 0.150
+radiounit Gbq
+#timeunit s
+Ibeam 1.

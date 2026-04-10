@@ -1,12 +1,12 @@
 
-    ISOTOPIA-2.22   (Version: March 17, 2026)
+    ISOTOPIA-2.23   (Version: April 9, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-03-28
+ Date: 2026-04-10
 
  ########## USER INPUT ##########
 
@@ -41,8 +41,8 @@
  #
  # Output 
  #
- radiounit             gbq radiounit    unit for radioactivity
- yieldunit             num yieldunit    unit for isotope yield
+ radiounit             bq  radiounit    unit for radioactivity
+ yieldunit (massunit)  g   yieldunit    unit for isotope yield
  ZAoutput              n   flagZAoutput output files per Z, A instead of El, A
  #
  # Target
@@ -50,9 +50,9 @@
  Tirrad              1     Tirrad       d of irradiation time
  Area                1.000 Area         target area in cm^2
  Tcool               1     Tcool        d of cooling time
- rho                -1.000 rhotarget    target density [g/cm^3] 
- targetmass          1.000 targetmass   target mass 
- fluxtotal    1.000000E+14 fluxtotal    total flux
+ rho                -1.000 rho_target   target density [g/cm^3] 
+ targetmass         -1.000 targetmass   target mass 
+ selfshield            n flagselfshield flag for self-shielding 
  #
  # Cross section and decay data
  #
@@ -67,13 +67,13 @@
  Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
  E-beam [MeV]:   1.600000E+01
  E-back [MeV]:   3.000000E+00
- Beam current [mA]:        1.000 mA
+ Beam current [mA]:        1.000
  Target material density [g/cm^3]:   1.430000E-03
  Target area [cm^2]:   1.000000E+00
  Effective target thickness [cm]:   2.547108E+02
  Effective target volume [cm^3]:   2.547108E+02
  Effective target mass [g]:   3.642364E-01
- Number of target atoms:    1.218602E+22
+ Number of target atoms:    1.218601E+22
  Number of incident particles [s^-1]:   6.241509E+15
  Produced heat in target [kW]:   1.300000E+01
 
@@ -81,20 +81,20 @@
 
  Total production rate [s^-1]:   4.675893E-09
 
-#  Nuc     Production rate Decay rate     Activity       #isotopes      Yield          Isotopic frac.             Half-life               Time of maximum production
-#             [s^-1]         [s^-1]         [GBq]          [   ]        [GBq/mAh]
- F   19     2.398627E-12   0.000000E+00   0.000000E+00   2.524937E+15   0.000000E+00   0.01670       stable                                infinite                       
- F   18     1.285295E-09   1.052826E-04   1.565523E+04   1.486972E+17   1.507693E+00   0.98319          0 y   0 d   1 h  49 m  43 s           0 y   1 d   2 h  26 m  35 s 
- F   17     1.488864E-11   1.074813E-02   1.814318E+02   1.688030E+13   1.049952E-01   0.00068          0 y   0 d   0 h   1 m   4 s           0 y   0 d   0 h  22 m  42 s 
- O   18     6.051059E-10   0.000000E+00   0.000000E+00   1.218109E+22   0.000000E+00   0.99991       stable                                infinite                       
- O   17     8.280212E-10   0.000000E+00   0.000000E+00   8.872798E+17   0.000000E+00   0.00007       stable                                infinite                       
- O   16     1.504110E-10   0.000000E+00   0.000000E+00   1.583317E+17   0.000000E+00   0.00001       stable                                infinite                       
- N   16     9.007981E-17   9.721559E-02   1.097705E-03   1.129145E+07   6.352461E-07   0.00000          0 y   0 d   0 h   0 m   7 s           0 y   0 d   0 h   2 m  53 s 
- N   15     1.224593E-09   0.000000E+00   0.000000E+00   1.289079E+18   0.000000E+00   0.74332       stable                                infinite                       
- N   14     4.228631E-10   0.000000E+00   0.000000E+00   4.451307E+17   0.000000E+00   0.25668       stable                                infinite                       
- C   14     9.917411E-11   3.853515E-12   4.022936E-04   1.043965E+17   4.657098E-09   0.99983       5699 y 315 d   8 h  29 m  52 s          48 y  59 d  19 h  48 m  16 s 
- C   13     1.709153E-14   0.000000E+00   0.000000E+00   1.799156E+13   0.000000E+00   0.00017       stable                                infinite                       
- B   11     3.958286E-11   0.000000E+00   0.000000E+00   4.166726E+16   0.000000E+00   1.00000       stable                                infinite                       
+#  Nuc       Activity     Spec. activity   Prod. rate     #isotopes Isotopic frac. Reaction const. Decay const.           Half-life               Time of maximum production
+#               [Bq]          [Bq/g]        [Bq/mAh]            []            []        [s^-1]         [s^-1]       
+ F   19     0.000000E+00   0.000000E+00   0.000000E+00   2.524936E+15   0.01670   2.398627E-12   0.000000E+00       stable                                infinite                       
+ F   18     1.565524E+13   4.298098E+13   1.507693E+09   1.486972E+17   0.98319   1.285295E-09   1.052826E-04          0 y   0 d   1 h  49 m  43 s           0 y   1 d   2 h  26 m  35 s 
+ F   17     1.814318E+11   4.981156E+11   1.049953E+08   1.688031E+13   0.00068   1.488864E-11   1.074813E-02          0 y   0 d   0 h   1 m   4 s           0 y   0 d   0 h  22 m  42 s 
+ O   18     0.000000E+00   0.000000E+00   0.000000E+00   1.218109E+22   0.99991   6.051058E-10   0.000000E+00       stable                                infinite                       
+ O   17     0.000000E+00   0.000000E+00   0.000000E+00   8.872799E+17   0.00007   8.280213E-10   0.000000E+00       stable                                infinite                       
+ O   16     0.000000E+00   0.000000E+00   0.000000E+00   1.583317E+17   0.00001   1.504111E-10   0.000000E+00       stable                                infinite                       
+ N   16     1.097705E+06   3.013717E+06   6.352461E+02   1.129145E+07   0.00000   9.007983E-17   9.721559E-02          0 y   0 d   0 h   0 m   7 s           0 y   0 d   0 h   2 m  53 s 
+ N   15     0.000000E+00   0.000000E+00   0.000000E+00   1.289080E+18   0.74332   1.224594E-09   0.000000E+00       stable                                infinite                       
+ N   14     0.000000E+00   0.000000E+00   0.000000E+00   4.451309E+17   0.25668   4.228633E-10   0.000000E+00       stable                                infinite                       
+ C   14     4.022936E+05   1.104485E+06   4.657098E+00   1.043965E+17   0.99983   9.917412E-11   3.853515E-12       5699 y 315 d   8 h  29 m  52 s          48 y  59 d  19 h  48 m  16 s 
+ C   13     0.000000E+00   0.000000E+00   0.000000E+00   1.799156E+13   0.00017   1.709154E-14   0.000000E+00       stable                                infinite                       
+ B   11     0.000000E+00   0.000000E+00   0.000000E+00   4.166726E+16   1.00000   3.958287E-11   0.000000E+00       stable                                infinite                       
 
 file: F019.act
 file: F018.act
