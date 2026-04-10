@@ -180,7 +180,7 @@ subroutine equations
 !
 ! Account for isomeric decay of parent
 !
-                do is_p = -1, -1
+                do is_p = -1, 1
                   if ((isob ==  -1 .and. rtyp(Zparent, ia, is_p) == 1) .or. (isob == 1 .and. rtyp(Zparent, ia, is_p) == 2)) then
                     lambda_p = dble(lambda(Zparent, ia, is_p))
                     denom_ip = lambda_i - lambda_p
