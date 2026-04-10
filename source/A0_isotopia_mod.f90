@@ -123,7 +123,7 @@ module A0_isotopia_mod
   character(len=3)               :: radiounit  ! unit for radioactivity: Bq, kBq, MBq, Gbq, mCi,
   character(len=3)               :: yieldunit  ! unit for isotope yield: num (number), mug, mg, g, or kg
   character(len=3)               :: timeunit   ! unit for time for production output: s, h or d
-  character(len=3)               :: currentunit ! unit for time for ccelerator current: muA, mA, or A
+  character(len=3)               :: currentunit ! unit for accelerator current: muA, mA, or A
   integer, dimension(5)          :: Tcool      ! cooling time per unit cooling time unit (y,d,h,m,s)
   integer, dimension(5)          :: Tirrad     ! irradiation time per unit irradiation time unit
   real(sgl)                      :: Area       ! target area in cm^2
