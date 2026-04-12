@@ -5,7 +5,7 @@ subroutine inputout
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-09   A.J. Koning    A     Original code
+!    1     2026-04-11   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -43,7 +43,7 @@ subroutine inputout
 !
 ! *************************** Code and version *************************
 !
-  write(*, '(/"    ISOTOPIA-2.23   (Version: April 9, 2026)"/)')
+  write(*, '(/"    ISOTOPIA-2.23   (Version: April 11, 2026)"/)')
   write(*, '(10x, " Simulation of medical isotope production")')
   write(*, '(/" Copyright (C) 2026  A.J. Koning")')
   write(*, '(/" User: ",a)') trim(user)
