@@ -115,7 +115,11 @@ subroutine natural
 ! ******** Merge output files in results for natural elements **********
 !
   call conversion
-  yfac = 1.
+  if (k0 > 1) then
+    yfac =  rfac * cfac * tfac
+  else
+    yfac =  rfac * mfac * tfac
+  endif
   indent = 0
   id2 = indent + 2
   id4 = indent + 4
@@ -191,7 +195,7 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
   enddo
   write(*,'()')
   if (k0 > 1) then
-    yieldstring=trim(cstr)//trim(tstr)
+    yieldstring='('//trim(cstr)//'.'//trim(tstr)//')'
   else
     yieldstring=trim(ystr)
   endif  
@@ -221,15 +225,11 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           string='Decay constant [s^-1]'
           call write_real(id4,string,lambda(iz, ia, is))
           string='Initial production rate ['//rstr//'/'//trim(yieldstring)//']'
-          if (k0 > 1) then
-            call write_real(id4,string,yieldnat(iz, ia, is, 1) * rfac * cfac * tfac)
-          else
-            call write_real(id4,string,yieldnat(iz, ia, is, 1) * rfac)
-          endif
+          call write_real(id4,string,yieldnat(iz, ia, is, 1) * yfac)
           string='Total activity at EOI ['//rstr//']'
           call write_real(id4,string,activitynat(iz, ia, is, Ntime) * rfac)
           string='Specific activity at EOI ['//trim(rstr)//'/'//trim(ystr)//']'
-          call write_real(id4,string,specactivitynat(iz, ia, is, Ntime) * rfac) 
+          call write_real(id4,string,specactivitynat(iz, ia, is, Ntime) * rfac * mfac) 
           string=''
           write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tirrad(k), k = 1, 5)
           call write_char(id4,'Irradiation time',string)
@@ -272,9 +272,8 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           do it = 1, numtime
             Th = Tgrid(it)/hoursec
             act_out = activitynat(iz, ia, is, it) * rfac
-            specact_out = specactivitynat(iz, ia, is, it) * rfac
-            yield_out = yieldnat(iz, ia, is, it) * rfac
-            if (k0 > 1) yield_out = yield_out * cfac * tfac
+            specact_out = specactivitynat(iz, ia, is, it) * rfac * mfac
+            yield_out = yieldnat(iz, ia, is, it) * yfac
             Niso_out = Nisonat(iz, ia, is, it)
             Nisorel_out = Nisorelnat(iz, ia, is, it)
             write(1, '(7es15.6)') Tgrid(it), act_out, specact_out, yield_out, Niso_out, Nisorel_out, Th
