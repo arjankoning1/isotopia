@@ -69,14 +69,14 @@ subroutine reactionrates
   real(sgl)          :: Eint(0:numint)   ! energy on integration grid
   real(sgl)          :: dEint(numint)    ! delta energy on integration grid
   real(sgl)          :: ratesum          ! integration sum
-  real(sgl)          :: number_density   ! number densitym
+  real(sgl)          :: projrate_density ! projectile rate densitym
   real(sgl)          :: xs               ! help variable
   real(sgl)          :: xsa              ! help variable
   real(sgl)          :: xsb              ! help variable
 !
 ! **** Photons: read Bremsstrahlung spectrum for incident electron energy
 !
-  number_density = 0.
+  projrate_density = 0.
   M_target = targetmass
   dEint = 0.
   Eint = 0.
@@ -144,9 +144,9 @@ subroutine reactionrates
     enddo
     Leff = phisum
     V_target = Area * Leff
-    heat = Ibeam * (Ebeam - Eback)
+    heat = Ibeam * (Ebeam - Eback) / parZ(k0)
     projnum = Ibeam / (1000. * parZ(k0) * qelem)
-    number_density = projnum / V_target
+    projrate_density = projnum / V_target
   endif
   if (k0 <= 1) then
     if (targetmass /= -1.) then
@@ -163,12 +163,13 @@ subroutine reactionrates
 ! locate   : subroutine to find value in ordered table
 ! pol1     : subroutine for interpolation of first order
 !
+  reaction_rate = 0.
+  sacs = 0.
   Egrid = 0.
   call crosssections(0, 0, -1)
   do iz = Zcomp + 1, 0, -1
     do ia = Acomp, 0, -1
       do is = -1, 1
-        reaction_rate(iz, ia, is) = 0.
         if ((iz < Zcomp - Zdepth .or. ia < Acomp - Adepth) .and. .not. (iz == 0 .and. ia == 0 .and. is ==  -1)) cycle
         if (iz == 0 .and. ia == 0 .and. is ==  -1) then
           Nenrp = Nennon
@@ -203,8 +204,10 @@ subroutine reactionrates
 !
         if (k0 <= 1) then
           reaction_rate(iz, ia, is) = fluxtotal  * ratesum * 1.e-27
+          sacs(iz, ia, is) = ratesum
         else
-          reaction_rate(iz, ia, is) = number_density * ratesum * 1.e-27
+          reaction_rate(iz, ia, is) = projrate_density * ratesum * 1.e-27
+          if (Leff > 0.) sacs(iz, ia, is) = ratesum / Leff
         endif
       enddo
     enddo
