@@ -59,7 +59,7 @@ subroutine prodout
   character(len=3)  :: Astr        !
   character(len=3)  :: massstring !
   character(len=6)  :: finalnuclide !
-  character(len=8)  :: yieldstring     
+  character(len=12) :: yieldstring     
   character(len=13) :: state       ! state of final nuclide
   character(len=15) :: Yfile       ! file with production yields
   character(len=38) :: halflife    ! half life
@@ -96,7 +96,11 @@ subroutine prodout
 ! Normalization and strings for output
 !
   call conversion
-  yfac = 1.
+  if (k0 > 1) then
+    yfac =  rfac * cfac * tfac
+  else
+    yfac =  rfac * mfac * tfac
+  endif
   write(*, '(/" Summary of isotope production for ", a1, " + ", a/)') ptype0, trim(targetnuclide)
   string=''
   write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tirrad(k), k = 1, 5) 
@@ -129,9 +133,9 @@ subroutine prodout
   write(*, '("#  Nuc       Activity     Spec. activity   Prod. rate     #isotopes Isotopic frac.", &
  &  " Reaction const. Decay const.           Half-life               Time of maximum production")')
   if (k0 > 1) then
-    yieldstring = trim(rstr)//'/'//trim(cstr)//trim(tstr)
+    yieldstring = trim(rstr)//'/('//trim(cstr)//'.'//trim(tstr)//')'
   else
-    yieldstring = trim(rstr)//'/'//trim(ystr)//trim(tstr)
+    yieldstring = trim(rstr)//'/('//trim(ystr)//'.'//trim(tstr)//')'
   endif
   write(*, '("#               [", a, "]          [", a, "/", a, "]        [", a, "]            []            []", &
  &  "        [s^-1]         [s^-1]       ")') trim(rstr), trim(rstr), trim(ystr), trim(yieldstring)
@@ -157,10 +161,9 @@ subroutine prodout
           halflife = '                                      '
           maxprod = '                                      '
         endif
-        yfac = real(ia) / avogadro * mfac
         write(*, '(1x, a2, i4, 1x, a1, 4es15.6, f10.5, 2es15.6, 2a38)') nuc(iz), ia, isochar(is), &
- &         activity(iz, ia, is, it) * rfac, specactivity(iz, ia, is, it) * rfac, &
- &        yield(iz, ia, is, 1) * rfac, Niso(iz, ia, is, it), Nisorel(iz, ia, is, it), &
+ &         activity(iz, ia, is, it) * rfac, specactivity(iz, ia, is, it) * rfac * mfac, &
+ &        yield(iz, ia, is, 1) * yfac, Niso(iz, ia, is, it), Nisorel(iz, ia, is, it), &
  &        reaction_rate(iz, ia, is), lambda(iz, ia, is), halflife, maxprod
       enddo
     enddo
@@ -214,16 +217,14 @@ subroutine prodout
         call write_real(id4,string,reaction_rate(iz, ia, is))
         string='Decay constant [s^-1]'
         call write_real(id4,string,lambda(iz, ia, is))
+        string='Spectrum averaged cross section [mb]'
+        call write_real(id4,string,sacs(iz, ia, is))
         string='Initial production rate ['//trim(yieldstring)//']'
-        if (k0 > 1) then
-          call write_real(id4,string,yield(iz, ia, is, 1) * rfac * cfac * tfac)
-        else
-          call write_real(id4,string,yield(iz, ia, is, 1) * rfac)
-        endif
+        call write_real(id4,string,yield(iz, ia, is, 1) * yfac)
         string='Total activity at EOI ['//trim(rstr)//']'
         call write_real(id4,string,activity(iz, ia, is, Ntime) * rfac)
         string='Specific activity at EOI ['//trim(rstr)//'/'//trim(ystr)//']'
-        call write_real(id4,string,specactivity(iz, ia, is, Ntime) * rfac)
+        call write_real(id4,string,specactivity(iz, ia, is, Ntime) * rfac * mfac)
         string=''
         write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tirrad(k), k = 1, 5)
         call write_char(id4,'Irradiation time',string)
@@ -259,12 +260,10 @@ subroutine prodout
         Ncol=7
         call write_quantity(id2,quantity)
         call write_datablock(id2,Ncol,numtime,col,un)
-        yfac = real(ia) / avogadro * mfac
         do it = 1, numtime
           act_out = activity(iz, ia, is, it) * rfac
-          specact_out = specactivity(iz, ia, is, it) * rfac
-          yield_out = yield(iz, ia, is, it) * rfac
-          if (k0 > 1) yield_out = yield_out * cfac * tfac
+          specact_out = specactivity(iz, ia, is, it) * rfac * mfac
+          yield_out = yield(iz, ia, is, it) * yfac
           Niso_out = Niso(iz, ia, is, it)
           Nisorel_out = Nisorel(iz, ia, is, it)
           Th = Tgrid(it)/hoursec
