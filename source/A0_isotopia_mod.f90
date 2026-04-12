@@ -5,7 +5,7 @@ module A0_isotopia_mod
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-09  A.J. Koning    A     Original code
+!    1     2026-04-11  A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -162,6 +162,7 @@ module A0_isotopia_mod
   real(sgl)                                                :: projnum      ! number of incident particles [s^-1]
   real(sgl)                                                :: heat         ! produced heat
   real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: reaction_rate ! reaction rate per isotope
+  real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: sacs         ! spectrum averaged cross section
   real(sgl), dimension(0:numen)                            :: Erp          ! incident energy
   real(sgl), dimension(0:numen)                            :: xsrp         ! residual production cross section in mb
   integer                                                  :: Ntime        ! number of time points
