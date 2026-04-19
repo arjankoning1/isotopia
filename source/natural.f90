@@ -5,7 +5,7 @@ subroutine natural
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2026-04-19   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -54,7 +54,7 @@ subroutine natural
   logical           :: resexist(0:numZ, 0:numA, -1:1)    ! logical to determine existence of residual production file
   character(len=3)  :: Astr                              !
   character(len=3)  :: massstring !
-  character(len=6)  :: yieldstring
+  character(len=12) :: yieldstring
   character(len=6)  :: finalnuclide !
   character(len=13) :: state                             ! state of final nuclide
   character(len=15) :: Yfile0                            !
@@ -87,6 +87,7 @@ subroutine natural
   real(sgl)         :: Ym                                !
   real(sgl)         :: Ysp                               !
   real(sgl)         :: Th                                !
+  real(sgl)         :: RR                                !
   real(sgl)         :: act_out          ! help variable
   real(sgl)         :: specact_out          ! help variable
   real(sgl)         :: yield_out          ! help variable
@@ -153,10 +154,17 @@ subroutine natural
             resexist(iz, ia, is) = .true.
             Yfile(iz, ia, is) = trim(Yfile0)
             Yf=trim(Yfile0)//natstring(iso)
+            RR = 0.
             open (2, status = 'old', file = Yf)
             do 
               read(2,'(a)',iostat = istat) line
               if (istat == -1) exit
+              key='Reaction constant [s^-1]'
+              keyix=index(line,trim(key))
+              if (keyix > 0) then
+                read(line(keyix+len_trim(key)+2:80),*, iostat = istat) RR
+                if (istat /= 0) call read_error(Yf, istat)
+              endif
               key='entries'
               keyix=index(line,trim(key))
               if (keyix > 0) then
@@ -173,6 +181,7 @@ subroutine natural
                   Nisonat(iz, ia, is, it) = Nisonat(iz, ia, is, it) + abun(iso) * Nis
                   Nisototnat(iz, it) = Nisototnat(iz, it) + abun(iso) * Nis
                 enddo
+                reaction_ratenat(iz, ia, is) = reaction_rate(iz, ia, is) + abun(iso) * RR
                 exit
               endif
             enddo
@@ -195,10 +204,10 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
   enddo
   write(*,'()')
   if (k0 > 1) then
-    yieldstring='('//trim(cstr)//'.'//trim(tstr)//')'
+    yieldstring = trim(rstr)//'/('//trim(cstr)//'.'//trim(tstr)//')'
   else
-    yieldstring=trim(ystr)
-  endif  
+    yieldstring = trim(rstr)//'/('//trim(ystr)//'.'//trim(tstr)//')'
+  endif 
   targetnuclide=trim(Starget)//'0'
   do iz = Zcomp, Zcomp - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
@@ -215,40 +224,42 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           call write_reaction(indent,reaction,0.d0,0.d0,0,0)
           call write_residual(id2,iz,ia,finalnuclide)
           call write_char(id2,'parameters','')
-          if (k0 /= 1) then
-            call write_real(id4,'Beam current [mA]',Ibeam)
+          if (k0 > 1) then
             call write_real(id4,'E-Beam [MeV]',Ebeam)
             call write_real(id4,'E-Back [MeV]',Eback)
           endif
+          if (k0 /= 1) call write_real(id4,'Beam current [mA]',Ibeam)
           string='Reaction constant [s^-1]'
           call write_real(id4,string,reaction_rate(iz, ia, is))
           string='Decay constant [s^-1]'
           call write_real(id4,string,lambda(iz, ia, is))
-          string='Initial production rate ['//rstr//'/'//trim(yieldstring)//']'
+          string='Initial production rate ['//trim(yieldstring)//']'
           call write_real(id4,string,yieldnat(iz, ia, is, 1) * yfac)
-          string='Total activity at EOI ['//rstr//']'
+          string='Total activity at EOI ['//trim(rstr)//']'
           call write_real(id4,string,activitynat(iz, ia, is, Ntime) * rfac)
           string='Specific activity at EOI ['//trim(rstr)//'/'//trim(ystr)//']'
           call write_real(id4,string,specactivitynat(iz, ia, is, Ntime) * rfac * mfac) 
           string=''
-          write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tirrad(k), k = 1, 5)
-          call write_char(id4,'Irradiation time',string)
-          write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tcool(k), k = 1, 5)
-          call write_char(id4,'Cooling time',string)
+          write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")') &
+ &          Tir, (Tirrad(k), k = 1, 5)
+          call write_char(id4,'Irradiation time [s]',string)
+          write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")') &
+ &          Tco, (Tcool(k), k = 1, 5)
+          call write_char(id4,'Cooling time [s]',string)
           if (Thalf(iz, ia, is) > 1.e17) then
             string='stable'
           else
-            write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') &
- &            (Td(iz, ia, is, k), k = 1, 5)
+            write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")') &
+ &            Thalf(iz, ia, is),(Td(iz, ia, is, k), k = 1, 5)
           endif
-          call write_char(id4,'Half-life',string)
+          call write_char(id4,'Half-life [s]',string)
           if (Tmax(iz, ia, is) > 1.e17) then
             string='infinity'
           else
-            write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")')  &
- &            (Tp(iz, ia, is, k), k = 1, 5)
+            write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")')  &
+ &            Tmax(iz, ia, is), (Tp(iz, ia, is, k), k = 1, 5)
           endif
-          call write_char(id4,'Maximum production',string)
+          call write_char(id4,'Maximum production [s]',string)
           un = ''
           col(1)='Time'
           un(1)='s'
@@ -257,13 +268,9 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           col(3)='Spec_activity'
           un(3) = trim(rstr)//'/'//trim(ystr)
           col(4)='Prod_rate'
-          if (k0 > 1) then
-            un(4) = trim(rstr)//'/'//trim(cstr)//trim(tstr)
-          else
-            un(4) = trim(rstr)//'/'//trim(ystr)//trim(tstr)
-          endif
-          col(5)='Isotopes'
-          col(6)='Isotopic_frac.'
+          un(4) = trim(yieldstring)
+          col(5)='#Isotopes'
+          col(6)='Isot_fraction'
           col(7)='Time'
           un(7)='h'
           Ncol=7
@@ -296,4 +303,4 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
   write( * , * ) " End of ISOTOPIA for natural target"
   return
 end subroutine natural
-! Copyright A.J. Koning 2023
+! Copyright A.J. Koning 2026
