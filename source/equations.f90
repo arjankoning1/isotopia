@@ -118,6 +118,7 @@ subroutine equations
         do it=1,5
           Tp(iz,ia,is,it)=0.
         enddo
+        reaction_ratenat(iz,ia,is)=0.
         do it=0,numtime
           Niso(iz,ia,is,it)=0.
           activity(iz,ia,is,it)=0.
@@ -174,7 +175,7 @@ subroutine equations
 ! 2. Production from decay of other isotope
 !
             if (flagdecay) then
-              do isob = -1, 1
+              do isob = -1, 1, 2
                 Zparent = iz + isob
                 if (Zparent < 0) cycle
 !
