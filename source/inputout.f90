@@ -5,7 +5,7 @@ subroutine inputout
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-11   A.J. Koning    A     Original code
+!    1     2026-04-19   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -43,7 +43,7 @@ subroutine inputout
 !
 ! *************************** Code and version *************************
 !
-  write(*, '(/"    ISOTOPIA-2.23   (Version: April 11, 2026)"/)')
+  write(*, '(/"    ISOTOPIA-2.23   (Version: April 19, 2026)"/)')
   write(*, '(10x, " Simulation of medical isotope production")')
   write(*, '(/" Copyright (C) 2026  A.J. Koning")')
   write(*, '(/" User: ",a)') trim(user)
@@ -93,11 +93,11 @@ subroutine inputout
 !
   write(*, '(" #"/" # Target"/" #")')
   do i = 1, 5
-    if (Tirrad(i) > 0) write(*, '(" Tirrad      ", i9, "     Tirrad       ", a1, " of irradiation time")') Tirrad(i), unitTirrad(i)
+    if (Tirrad(i) > 0) write(*, '(" Tirrad      ", i9, "     Tirrad       ", a1, " irradiation time")') Tirrad(i), unitTirrad(i)
   enddo
   write(*, '(" Area              ", f7.3, " Area         target area in cm^2")') Area
   do i = 1, 5
-    if (Tcool(i) > 0) write(*, '(" Tcool       ", i9, "     Tcool        ", a1, " of cooling time")') Tcool(i), unitTcool(i)
+    if (Tcool(i) > 0) write(*, '(" Tcool       ", i9, "     Tcool        ", a1, " cooling time")') Tcool(i), unitTcool(i)
   enddo
   write(*, '(" rho               ", f7.3, " rho_target   target density [g/cm^3] ")') rho_target
   write(*, '(" targetmass        ", f7.3, " targetmass   target mass ")') targetmass
