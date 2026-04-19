@@ -5,7 +5,7 @@ subroutine prodout
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-09   A.J. Koning    A     Original code
+!    1     2026-04-19   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -103,15 +103,17 @@ subroutine prodout
   endif
   write(*, '(/" Summary of isotope production for ", a1, " + ", a/)') ptype0, trim(targetnuclide)
   string=''
-  write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tirrad(k), k = 1, 5) 
-  write(*, '(" Maximal irradiation time: ", a)') trim(string)
-  write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tcool(k), k = 1, 5) 
-  write(*, '(" Cooling time: ", a)') trim(string)
-  if (k0 /= 1) then
+  write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")') &
+ &  Tir, (Tirrad(k), k = 1, 5) 
+  write(*, '(" Maximal irradiation time [s]: ", a)') trim(string)
+  write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")') &
+ &  Tco, (Tcool(k), k = 1, 5) 
+  write(*, '(" Cooling time [s]: ", a)') trim(string)
+  if (k0 > 1) then
     write(*, '(" E-beam [MeV]:", es15.6)') Ebeam
     write(*, '(" E-back [MeV]:", es15.6)') Eback
-    write(*, '(" Beam current [mA]: ", f12.3)') Ibeam
   endif
+  if (k0 /= 1) write(*, '(" Beam current [mA]: ", f12.3)') Ibeam
   write(*, '(" Target material density [g/cm^3]:", es15.6)') rho_target
   write(*, '(" Target area [cm^2]:", es15.6)') Area
   if (k0 > 1) then
@@ -130,14 +132,14 @@ subroutine prodout
   endif
   write(*, '(/" (Maximum) production and decay rates per isotope"/)')
   write(*, '(" Total production rate [s^-1]:", es15.6/)') reaction_rate(0, 0, -1)
-  write(*, '("#  Nuc       Activity     Spec. activity   Prod. rate     #isotopes Isotopic frac.", &
- &  " Reaction const. Decay const.           Half-life               Time of maximum production")')
+  write(*, '("#  Nuc       Activity     Spec_activity    Prod_rate      #Isotopes Isot_fraction ", &
+ &  " Reac_constant   Decay_constant            Half-life                      Time of maximum production")')
   if (k0 > 1) then
     yieldstring = trim(rstr)//'/('//trim(cstr)//'.'//trim(tstr)//')'
   else
     yieldstring = trim(rstr)//'/('//trim(ystr)//'.'//trim(tstr)//')'
   endif
-  write(*, '("#               [", a, "]          [", a, "/", a, "]        [", a, "]            []            []", &
+  write(*, '("#              [", a, "]          [", a, "/", a, "]        [", a, "]        []            []", &
  &  "        [s^-1]         [s^-1]       ")') trim(rstr), trim(rstr), trim(ystr), trim(yieldstring)
   do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
@@ -208,11 +210,11 @@ subroutine prodout
         call write_reaction(indent,reaction,0.d0,0.d0,0,0)
         call write_residual(id2,iz,ia,finalnuclide)
         call write_char(id2,'parameters','')
-        if (k0 /= 1) then
-          call write_real(id4,'Beam current [mA]',Ibeam)
+        if (k0 > 1) then
           call write_real(id4,'E-Beam [MeV]',Ebeam)
           call write_real(id4,'E-Back [MeV]',Eback)
         endif
+        if (k0 /= 1) call write_real(id4,'Beam current [mA]',Ibeam)
         string='Reaction constant [s^-1]'
         call write_real(id4,string,reaction_rate(iz, ia, is))
         string='Decay constant [s^-1]'
@@ -226,24 +228,26 @@ subroutine prodout
         string='Specific activity at EOI ['//trim(rstr)//'/'//trim(ystr)//']'
         call write_real(id4,string,specactivity(iz, ia, is, Ntime) * rfac * mfac)
         string=''
-        write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tirrad(k), k = 1, 5)
-        call write_char(id4,'Irradiation time',string)
-        write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') (Tcool(k), k = 1, 5)
-        call write_char(id4,'Cooling time',string)
+        write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")') &
+ &        Tir, (Tirrad(k), k = 1, 5)
+        call write_char(id4,'Irradiation time [s]',string)
+        write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")') &
+ &        Tco, (Tcool(k), k = 1, 5)
+        call write_char(id4,'Cooling time [s]',string)
         if (Thalf(iz, ia, is) > 1.e17) then
           string='stable'
         else
-          write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")') &
- & (Td(iz, ia, is, k), k = 1, 5)
+          write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")') &
+ &          Thalf(iz, ia, is), (Td(iz, ia, is, k), k = 1, 5)
         endif
-        call write_char(id4,'Half-life',string)
+        call write_char(id4,'Half-life [s]',string)
         if (Tmax(iz, ia, is) > 1.e17) then
           string='infinity'
         else
-          write(string, '(" ",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds ")')  &
- & (Tp(iz, ia, is, k), k = 1, 5)
+          write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")')  &
+ &         Tmax(iz, ia, is), (Tp(iz, ia, is, k), k = 1, 5)
         endif
-        call write_char(id4,'Maximum production',string)
+        call write_char(id4,'Maximum production [s]',string)
         un = ''
         col(1)='Time'
         un(1) = 's'
@@ -253,8 +257,8 @@ subroutine prodout
         un(3) = trim(rstr)//'/'//trim(ystr)
         col(4)='Prod_rate'
         un(4) = trim(yieldstring)
-        col(5)='Isotopes'
-        col(6)='Isotopic_frac.'
+        col(5)='#Isotopes'
+        col(6)='Isot_fraction'
         col(7)='Time'
         un(7) = 'h'
         Ncol=7
