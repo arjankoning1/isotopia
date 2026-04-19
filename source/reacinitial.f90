@@ -68,6 +68,11 @@ subroutine reacinitial
     if (unitTirrad(k) == 'm') Tir = Tir+minutesec*Tirrad(k)
     if (unitTirrad(k) == 's') Tir = Tir+Tirrad(k)
   enddo
+  if (unitTirrad(1) == ' ') then
+    if (timeunit == 's') Tir = Tirrad(1) 
+    if (timeunit == 'h') Tir = Tirrad(1) * hoursec
+    if (timeunit == 'd') Tir = Tirrad(1) * daysec
+  endif
 !
 ! Transform back to year, day, hour, minute, second (enabling general input)
 !
@@ -92,6 +97,11 @@ subroutine reacinitial
     if (unitTcool(k) == 'm') Tco = Tco+minutesec*Tcool(k)
     if (unitTcool(k) == 's') Tco = Tco+Tcool(k)
   enddo
+  if (unitTcool(1) == ' ') then
+    if (timeunit == 's') Tco = Tcool(1) 
+    if (timeunit == 'h') Tco = Tcool(1) * hoursec
+    if (timeunit == 'd') Tco = Tcool(1) * daysec
+  endif
 !
 ! Transform back to year, day, hour, minute, second (enabling general input)
 !
