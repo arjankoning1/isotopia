@@ -2,7 +2,7 @@
 #   title: As75(p,x)Zn69g Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 33
@@ -15,25 +15,26 @@
 #     A: 69
 #     nuclide: Zn69g
 #   parameters: 
-#     Beam current [mA]:  1.500000E-01
 #     E-Beam [MeV]:  4.000000E+01
 #     E-Back [MeV]:  3.000000E+01
+#     Beam current [mA]:  1.500000E-01
 #     Reaction constant [s^-1]:  3.357661E-16
 #     Decay constant [s^-1]:  2.048307E-04
-#     Initial production rate [Bq/mAh]:  1.094839E+07
+#     Spectrum averaged cross section [mb]:  3.586377E-04
+#     Initial production rate [Bq/(mA.h)]:  1.094839E+07
 #     Total activity at EOI [Bq]:  2.644219E+06
 #     Specific activity at EOI [Bq/g]:  2.695784E+06
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years   0 days  0 hours 56 minutes 24 seconds
-#     Maximum production:       0 years   0 days 16 hours 22 minutes 49 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    3.384000E+03 (     0 years   0 days  0 hours 56 minutes 24 seconds)
+#     Maximum production [s]:    5.896956E+04 (     0 years   0 days 16 hours 22 minutes 49 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]        [Bq/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   7.882843E+05   8.036569E+05   1.094839E+07   3.848467E+09   2.159150E-04   4.800000E-01
    3.456000E+03   1.341589E+06   1.367752E+06   7.684786E+06   6.549744E+09   1.337593E-04   9.600000E-01
    5.184000E+03   1.729958E+06   1.763695E+06   5.394019E+06   8.445795E+09   9.902577E-05   1.440000E+00

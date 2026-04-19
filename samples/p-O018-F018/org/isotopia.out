@@ -1,12 +1,12 @@
 
-    ISOTOPIA-2.23   (Version: April 9, 2026)
+    ISOTOPIA-2.23   (Version: April 19, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-04-10
+ Date: 2026-04-19
 
  ########## USER INPUT ##########
 
@@ -47,9 +47,9 @@
  #
  # Target
  #
- Tirrad              1     Tirrad       d of irradiation time
+ Tirrad              1     Tirrad       d irradiation time
  Area                1.000 Area         target area in cm^2
- Tcool               1     Tcool        d of cooling time
+ Tcool               1     Tcool        d cooling time
  rho                -1.000 rho_target   target density [g/cm^3] 
  targetmass         -1.000 targetmass   target mass 
  selfshield            n flagselfshield flag for self-shielding 
@@ -63,8 +63,8 @@
 
  Summary of isotope production for p + O18
 
- Maximal irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
- Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ Maximal irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+ Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
  E-beam [MeV]:   1.600000E+01
  E-back [MeV]:   3.000000E+00
  Beam current [mA]:        1.000
@@ -81,18 +81,18 @@
 
  Total production rate [s^-1]:   4.675893E-09
 
-#  Nuc       Activity     Spec. activity   Prod. rate     #isotopes Isotopic frac. Reaction const. Decay const.           Half-life               Time of maximum production
-#               [Bq]          [Bq/g]        [Bq/mAh]            []            []        [s^-1]         [s^-1]       
+#  Nuc       Activity     Spec_activity    Prod_rate      #Isotopes Isot_fraction  Reac_constant   Decay_constant            Half-life                      Time of maximum production
+#              [Bq]          [Bq/g]        [Bq/(mA.h)]        []            []        [s^-1]         [s^-1]       
  F   19     0.000000E+00   0.000000E+00   0.000000E+00   2.524936E+15   0.01670   2.398627E-12   0.000000E+00       stable                                infinite                       
- F   18     1.565524E+13   4.298098E+13   1.507693E+09   1.486972E+17   0.98319   1.285295E-09   1.052826E-04          0 y   0 d   1 h  49 m  43 s           0 y   1 d   2 h  26 m  35 s 
- F   17     1.814318E+11   4.981156E+11   1.049953E+08   1.688031E+13   0.00068   1.488864E-11   1.074813E-02          0 y   0 d   0 h   1 m   4 s           0 y   0 d   0 h  22 m  42 s 
+ F   18     1.565524E+13   4.298098E+13   5.427695E+12   1.486972E+17   0.98319   1.285295E-09   1.052826E-04          0 y   0 d   1 h  49 m  43 s           0 y   1 d   2 h  26 m  35 s 
+ F   17     1.814318E+11   4.981156E+11   3.779829E+11   1.688031E+13   0.00068   1.488864E-11   1.074813E-02          0 y   0 d   0 h   1 m   4 s           0 y   0 d   0 h  22 m  42 s 
  O   18     0.000000E+00   0.000000E+00   0.000000E+00   1.218109E+22   0.99991   6.051058E-10   0.000000E+00       stable                                infinite                       
  O   17     0.000000E+00   0.000000E+00   0.000000E+00   8.872799E+17   0.00007   8.280213E-10   0.000000E+00       stable                                infinite                       
  O   16     0.000000E+00   0.000000E+00   0.000000E+00   1.583317E+17   0.00001   1.504111E-10   0.000000E+00       stable                                infinite                       
- N   16     1.097705E+06   3.013717E+06   6.352461E+02   1.129145E+07   0.00000   9.007983E-17   9.721559E-02          0 y   0 d   0 h   0 m   7 s           0 y   0 d   0 h   2 m  53 s 
+ N   16     1.097705E+06   3.013717E+06   2.286886E+06   1.129145E+07   0.00000   9.007983E-17   9.721559E-02          0 y   0 d   0 h   0 m   7 s           0 y   0 d   0 h   2 m  53 s 
  N   15     0.000000E+00   0.000000E+00   0.000000E+00   1.289080E+18   0.74332   1.224594E-09   0.000000E+00       stable                                infinite                       
  N   14     0.000000E+00   0.000000E+00   0.000000E+00   4.451309E+17   0.25668   4.228633E-10   0.000000E+00       stable                                infinite                       
- C   14     4.022936E+05   1.104485E+06   4.657098E+00   1.043965E+17   0.99983   9.917412E-11   3.853515E-12       5699 y 315 d   8 h  29 m  52 s          48 y  59 d  19 h  48 m  16 s 
+ C   14     4.022936E+05   1.104485E+06   1.676555E+04   1.043965E+17   0.99983   9.917412E-11   3.853515E-12       5699 y 315 d   8 h  29 m  52 s          48 y  59 d  19 h  48 m  16 s 
  C   13     0.000000E+00   0.000000E+00   0.000000E+00   1.799156E+13   0.00017   1.709154E-14   0.000000E+00       stable                                infinite                       
  B   11     0.000000E+00   0.000000E+00   0.000000E+00   4.166726E+16   1.00000   3.958287E-11   0.000000E+00       stable                                infinite                       
 

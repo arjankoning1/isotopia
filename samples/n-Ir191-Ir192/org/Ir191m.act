@@ -2,7 +2,7 @@
 #   title: Ir191(n,x)Ir191m Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 77
@@ -17,21 +17,22 @@
 #   parameters: 
 #     Reaction constant [s^-1]:  1.184199E-11
 #     Decay constant [s^-1]:  1.414586E-01
-#     Initial production rate [Bq/gh]:  2.160719E+07
+#     Spectrum averaged cross section [mb]:  1.184199E+02
+#     Initial production rate [Bq/(g.h)]:  7.778589E+10
 #     Total activity at EOI [Bq]:  4.181682E+10
 #     Specific activity at EOI [Bq/g]:  3.733644E+10
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years   0 days  0 hours  0 minutes  4 seconds
-#     Maximum production:       0 years   0 days  0 hours  2 minutes 22 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    4.900000E+00 (     0 years   0 days  0 hours  0 minutes  4 seconds)
+#     Maximum production [s]:    1.423019E+02 (     0 years   0 days  0 hours  2 minutes 22 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]         [Bq/gh]          []             []             [h]
-   1.728000E+03   4.181769E+10   3.733723E+10   2.160719E+07   2.956179E+11   8.370861E-11   4.800000E-01
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(g.h)]         []             []             [h]
+   1.728000E+03   4.181769E+10   3.733723E+10   7.778589E+10   2.956179E+11   8.370861E-11   4.800000E-01
    3.456000E+03   4.181767E+10   3.733721E+10   0.000000E+00   2.956178E+11   8.370384E-11   9.600000E-01
    5.184000E+03   4.181766E+10   3.733719E+10   0.000000E+00   2.956176E+11   8.369908E-11   1.440000E+00
    6.912000E+03   4.181764E+10   3.733717E+10   0.000000E+00   2.956175E+11   8.369432E-11   1.920000E+00

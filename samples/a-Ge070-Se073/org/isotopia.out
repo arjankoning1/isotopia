@@ -1,12 +1,12 @@
 
-    ISOTOPIA-2.23   (Version: April 9, 2026)
+    ISOTOPIA-2.23   (Version: April 19, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-04-10
+ Date: 2026-04-19
 
  ########## USER INPUT ##########
 
@@ -48,9 +48,9 @@
  #
  # Target
  #
- Tirrad              1     Tirrad       d of irradiation time
+ Tirrad              1     Tirrad       d irradiation time
  Area                1.000 Area         target area in cm^2
- Tcool               1     Tcool        d of cooling time
+ Tcool               1     Tcool        d cooling time
  rho                -1.000 rho_target   target density [g/cm^3] 
  targetmass         -1.000 targetmass   target mass 
  selfshield            n flagselfshield flag for self-shielding 
@@ -64,8 +64,8 @@
 
  Summary of isotope production for a + Ge70
 
- Maximal irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
- Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ Maximal irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+ Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
  E-beam [MeV]:   2.800000E+01
  E-back [MeV]:   1.300000E+01
  Beam current [mA]:        0.150
@@ -76,31 +76,31 @@
  Effective target mass [g]:   8.344742E-02
  Number of target atoms:    7.179030E+20
  Number of incident particles [s^-1]:   4.681132E+14
- Produced heat in target [kW]:   2.250000E+00
+ Produced heat in target [kW]:   1.125000E+00
 
  (Maximum) production and decay rates per isotope
 
  Total production rate [s^-1]:   5.162136E-10
 
-#  Nuc       Activity     Spec. activity   Prod. rate     #isotopes Isotopic frac. Reaction const. Decay const.           Half-life               Time of maximum production
-#               [Bq]          [Bq/g]        [Bq/mAh]            []            []        [s^-1]         [s^-1]       
+#  Nuc       Activity     Spec_activity    Prod_rate      #Isotopes Isot_fraction  Reac_constant   Decay_constant            Half-life                      Time of maximum production
+#              [Bq]          [Bq/g]        [Bq/(mA.h)]        []            []        [s^-1]         [s^-1]       
  Se  74     0.000000E+00   0.000000E+00   0.000000E+00   3.516412E+13   0.00371   5.669307E-13   0.000000E+00       stable                                infinite                       
- Se  73     1.006531E+11   1.156372E+12   1.875839E+07   2.303081E+15   0.37806   1.489600E-10   2.692880E-05                                                                            
- Se  73 g   5.806846E+10   6.958689E+11   1.128822E+07   2.156370E+15   0.22750   8.963950E-11   2.692880E-05          0 y   0 d   7 h   9 m   0 s           0 y   4 d  16 h   2 m  54 s 
- Se  73 m   4.258541E+10   5.103263E+11   6.480348E+07   1.467134E+14   0.02252   5.932058E-11   2.902626E-04          0 y   0 d   0 h  39 m  48 s           0 y   0 d  12 h  40 m  13 s 
- Se  72     3.396933E+09   4.070747E+10   2.728529E+05   3.556760E+15   0.37525   5.974205E-11   9.550639E-07          0 y   8 d   9 h  36 m   0 s           0 y  91 d   5 h  13 m  53 s 
- As  73     1.913611E+09   2.293194E+10   4.207172E+04   1.915391E+16   0.83374   8.252844E-11   9.990706E-08          0 y  80 d   7 h  12 m   0 s           1 y 247 d  21 h  57 m  44 s 
- As  72     5.066493E+10   6.071480E+11   5.167312E+06   6.841603E+15   0.32621   1.466798E-10   7.405419E-06          0 y   1 d   2 h   0 m   0 s           0 y  14 d  23 h   2 m  29 s 
- As  71     1.646077E+07   1.972592E+08   1.435194E+03   5.580940E+12   0.00027   1.019295E-13   2.949462E-06          0 y   2 d  17 h  16 m  48 s           0 y  33 d  22 h  50 m  59 s 
+ Se  73     1.006531E+11   1.156372E+12   6.753022E+10   2.303081E+15   0.37806   1.489600E-10   2.692880E-05                                                                            
+ Se  73 g   5.806846E+10   6.958689E+11   4.063758E+10   2.156370E+15   0.22750   8.963950E-11   2.692880E-05          0 y   0 d   7 h   9 m   0 s           0 y   4 d  16 h   2 m  54 s 
+ Se  73 m   4.258541E+10   5.103263E+11   2.332925E+11   1.467134E+14   0.02252   5.932058E-11   2.902626E-04          0 y   0 d   0 h  39 m  48 s           0 y   0 d  12 h  40 m  13 s 
+ Se  72     3.396933E+09   4.070747E+10   9.822703E+08   3.556760E+15   0.37525   5.974205E-11   9.550639E-07          0 y   8 d   9 h  36 m   0 s           0 y  91 d   5 h  13 m  53 s 
+ As  73     1.913611E+09   2.293194E+10   1.514582E+08   1.915391E+16   0.83374   8.252844E-11   9.990706E-08          0 y  80 d   7 h  12 m   0 s           1 y 247 d  21 h  57 m  44 s 
+ As  72     5.066493E+10   6.071480E+11   1.860232E+10   6.841603E+15   0.32621   1.466798E-10   7.405419E-06          0 y   1 d   2 h   0 m   0 s           0 y  14 d  23 h   2 m  29 s 
+ As  71     1.646077E+07   1.972592E+08   5.166699E+06   5.580940E+12   0.00027   1.019295E-13   2.949462E-06          0 y   2 d  17 h  16 m  48 s           0 y  33 d  22 h  50 m  59 s 
  Ge  72     0.000000E+00   0.000000E+00   0.000000E+00   3.052701E+15   0.00000   1.088370E-11   0.000000E+00       stable                                infinite                       
- Ge  71     2.345433E+06   2.810671E+07   8.631388E+01   3.341623E+12   0.00000   2.545077E-14   7.018842E-07          0 y  11 d  10 h  19 m  12 s           0 y 119 d   1 h  30 m  43 s 
+ Ge  71     2.345433E+06   2.810671E+07   3.107300E+05   3.341623E+12   0.00000   2.545077E-14   7.018842E-07          0 y  11 d  10 h  19 m  12 s           0 y 119 d   1 h  30 m  43 s 
  Ge  70     0.000000E+00   0.000000E+00   0.000000E+00   7.178710E+20   1.00000   5.452766E-11   0.000000E+00       stable                                infinite                       
- Ge  69     2.507058E+09   3.004356E+10   2.365635E+05   5.084665E+14   0.00000   1.006747E-11   4.930625E-06          0 y   1 d  15 h   3 m   0 s           0 y  21 d  12 h  21 m  15 s 
- Ge  68     9.303781E+02   1.114927E+04   7.188003E-02   3.142225E+10   0.00000   5.072509E-16   2.960889E-08          0 y 270 d  22 h  48 m  20 s           4 y 149 d  22 h  55 m  28 s 
+ Ge  69     2.507058E+09   3.004356E+10   8.516284E+08   5.084665E+14   0.00000   1.006747E-11   4.930625E-06          0 y   1 d  15 h   3 m   0 s           0 y  21 d  12 h  21 m  15 s 
+ Ge  68     9.303781E+02   1.114927E+04   2.587681E+02   3.142225E+10   0.00000   5.072509E-16   2.960889E-08          0 y 270 d  22 h  48 m  20 s           4 y 149 d  22 h  55 m  28 s 
  Ga  69     0.000000E+00   0.000000E+00   0.000000E+00   1.682670E+14   1.00000   8.431143E-13   0.000000E+00       stable                                infinite                       
- Ga  68     1.457032E+03   1.746048E+04   5.909584E-01   8.532232E+06   0.00000   8.213721E-19   1.707680E-04          0 y   0 d   1 h   7 m  39 s           0 y   0 d  20 h  40 m  24 s 
+ Ga  68     1.457032E+03   1.746048E+04   2.127450E+03   8.532232E+06   0.00000   8.213721E-19   1.707680E-04          0 y   0 d   1 h   7 m  39 s           0 y   0 d  20 h  40 m  24 s 
  Zn  66     0.000000E+00   0.000000E+00   0.000000E+00   6.331146E+12   1.00000   1.020734E-13   0.000000E+00       stable                                infinite                       
- Zn  65     9.770995E-02   1.170916E+00   7.550005E-06   2.973614E+06   0.00000   4.800993E-20   3.285899E-08          0 y 244 d   3 h  36 m  40 s           4 y  25 d   8 h  13 m  44 s 
+ Zn  65     9.770995E-02   1.170916E+00   2.718002E-02   2.973614E+06   0.00000   4.800993E-20   3.285899E-08          0 y 244 d   3 h  36 m  40 s           4 y  25 d   8 h  13 m  44 s 
 
 file: Se074.act
 file: Se073.act

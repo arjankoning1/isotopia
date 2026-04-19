@@ -2,7 +2,7 @@
 #   title: Rb0(p,x)Kr83 m Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 37
@@ -15,25 +15,25 @@
 #     A: 83
 #     nuclide: Kr83 m
 #   parameters: 
-#     Beam current [mA]:  1.000000E+00
 #     E-Beam [MeV]:  7.000000E+01
 #     E-Back [MeV]:  3.000000E+01
+#     Beam current [mA]:  1.000000E+00
 #     Reaction constant [s^-1]:  2.274324E-11
 #     Decay constant [s^-1]:  1.052136E-04
-#     Initial production rate [Bq /mAh]:  1.261820E+15
-#     Total activity at EOI [Bq ]:  4.316008E+11
+#     Initial production rate [Bq/(mA.h)]:  1.261820E+15
+#     Total activity at EOI [Bq]:  4.316008E+11
 #     Specific activity at EOI [Bq/g]:  8.161730E+10
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years   0 days  1 hours 49 minutes 48 seconds
-#     Maximum production:       0 years   1 days  1 hours  4 minutes 38 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    6.588000E+03 (     0 years   0 days  1 hours 49 minutes 48 seconds)
+#     Maximum production [s]:    9.027803E+04 (     0 years   1 days  1 hours  4 minutes 38 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]        [Bq/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   1.682427E+11   3.170306E+10   1.261820E+15   1.599059E+15   1.213500E-02   4.800000E-01
    3.456000E+03   3.104523E+11   5.849986E+10   1.066572E+15   2.950686E+15   1.082730E-02   9.600000E-01
    5.184000E+03   4.308596E+11   8.118795E+10   9.030547E+14   4.095094E+15   9.790259E-03   1.440000E+00

@@ -2,7 +2,7 @@
 #   title: Ga0(p,x)Ni59 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 31
@@ -15,25 +15,25 @@
 #     A: 59
 #     nuclide: Ni59
 #   parameters: 
-#     Beam current [mA]:  1.000000E+00
 #     E-Beam [MeV]:  6.000000E+01
 #     E-Back [MeV]:  1.500000E+01
+#     Beam current [mA]:  1.000000E+00
 #     Reaction constant [s^-1]:  0.000000E+00
 #     Decay constant [s^-1]:  2.890064E-13
-#     Initial production rate [Bq /mAh]:  4.336326E+04
-#     Total activity at EOI [Bq ]:  2.890011E+02
+#     Initial production rate [Bq/(mA.h)]:  4.336326E+04
+#     Total activity at EOI [Bq]:  2.890011E+02
 #     Specific activity at EOI [Bq/g]:  6.480827E+01
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:   76000 years  30 days  8 hours 10 minutes 40 seconds
-#     Maximum production:       0 years   0 days  0 hours  0 minutes  0 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    2.398380E+12 ( 76000 years  30 days  8 hours 10 minutes 40 seconds)
+#     Maximum production [s]:    0.000000E+00 (     0 years   0 days  0 hours  0 minutes  0 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]        [Bq/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   5.781766E+00   1.296557E+00   4.336326E+04   2.000567E+13   1.039541E-02   4.800000E-01
    3.456000E+03   1.156346E+01   2.593098E+00   4.336272E+04   4.001109E+13   9.643337E-03   9.600000E-01
    5.184000E+03   1.734508E+01   3.889622E+00   4.336217E+04   6.001627E+13   9.264880E-03   1.440000E+00

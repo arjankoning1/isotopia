@@ -2,7 +2,7 @@
 #   title: Ga69(p,x)Ga68 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 31
@@ -15,25 +15,26 @@
 #     A: 68
 #     nuclide: Ga68
 #   parameters: 
-#     Beam current [mA]:  1.000000E+00
 #     E-Beam [MeV]:  2.500000E+01
 #     E-Back [MeV]:  1.500000E+01
+#     Beam current [mA]:  1.000000E+00
 #     Reaction constant [s^-1]:  2.728757E-09
 #     Decay constant [s^-1]:  1.707680E-04
-#     Initial production rate [Ci/mAh]:  1.032521E+02
+#     Spectrum averaged cross section [mb]:  4.371950E+02
+#     Initial production rate [Ci/(mA.h)]:  1.032521E+02
 #     Total activity at EOI [Ci]:  4.024904E+02
 #     Specific activity at EOI [Ci/g]:  6.522344E+02
-#     Irradiation time:       0 years   7 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years   0 days  1 hours  7 minutes 39 seconds
-#     Maximum production:       0 years   0 days 16 hours 23 minutes  2 seconds
+#     Irradiation time [s]:    6.048000E+05 (     0 years   7 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    4.059000E+03 (     0 years   0 days  1 hours  7 minutes 39 seconds)
+#     Maximum production [s]:    5.898266E+04 (     0 years   0 days 16 hours 23 minutes  2 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Ci]          [Ci/g]        [Ci/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Ci]          [Ci/g]       [Ci/(mA.h)]        []             []             [h]
    1.209600E+04   3.469270E+02   5.621940E+02   1.032521E+02   7.516807E+16   1.395761E-05   3.360000E+00
    2.419200E+04   3.909913E+02   6.336001E+02   1.311437E+01   8.471540E+16   1.573174E-05   6.720000E+00
    3.628800E+04   3.966704E+02   6.428031E+02   1.690213E+00   8.594589E+16   1.596161E-05   1.008000E+01
@@ -50,7 +51,7 @@
    1.693440E+05   3.986637E+02   6.460333E+02   3.195829E-02   8.637778E+16   1.605705E-05   4.704000E+01
    1.814400E+05   3.987711E+02   6.462072E+02   3.194986E-02   8.640104E+16   1.606277E-05   5.040000E+01
    1.935360E+05   3.988784E+02   6.463812E+02   3.194142E-02   8.642429E+16   1.606848E-05   5.376000E+01
-   2.056320E+05   3.989856E+02   6.465549E+02   3.190768E-02   8.644752E+16   1.607419E-05   5.712000E+01
+   2.056320E+05   3.989856E+02   6.465549E+02   3.190769E-02   8.644752E+16   1.607419E-05   5.712000E+01
    2.177280E+05   3.990928E+02   6.467285E+02   3.189081E-02   8.647074E+16   1.607990E-05   6.048000E+01
    2.298240E+05   3.991999E+02   6.469021E+02   3.188238E-02   8.649395E+16   1.608560E-05   6.384000E+01
    2.419200E+05   3.993069E+02   6.470756E+02   3.185708E-02   8.651714E+16   1.609131E-05   6.720000E+01
@@ -58,7 +59,7 @@
    2.661120E+05   3.995208E+02   6.474221E+02   3.182334E-02   8.656349E+16   1.610272E-05   7.392000E+01
    2.782080E+05   3.996277E+02   6.475953E+02   3.179803E-02   8.658664E+16   1.610842E-05   7.728000E+01
    2.903040E+05   3.997345E+02   6.477684E+02   3.179803E-02   8.660979E+16   1.611412E-05   8.064000E+01
-   3.024000E+05   3.998412E+02   6.479414E+02   3.176429E-02   8.663291E+16   1.611982E-05   8.400000E+01
+   3.024000E+05   3.998412E+02   6.479414E+02   3.176430E-02   8.663291E+16   1.611982E-05   8.400000E+01
    3.144960E+05   3.999479E+02   6.481143E+02   3.175586E-02   8.665602E+16   1.612552E-05   8.736000E+01
    3.265920E+05   4.000545E+02   6.482870E+02   3.173056E-02   8.667912E+16   1.613122E-05   9.072000E+01
    3.386880E+05   4.001611E+02   6.484597E+02   3.171369E-02   8.670221E+16   1.613692E-05   9.408000E+01

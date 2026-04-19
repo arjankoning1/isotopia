@@ -1,12 +1,12 @@
 
-    ISOTOPIA-2.23   (Version: April 9, 2026)
+    ISOTOPIA-2.23   (Version: April 19, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-04-10
+ Date: 2026-04-19
 
  ########## USER INPUT ##########
 
@@ -47,9 +47,9 @@
  #
  # Target
  #
- Tirrad              1     Tirrad       d of irradiation time
+ Tirrad              1     Tirrad       d irradiation time
  Area                1.000 Area         target area in cm^2
- Tcool               1     Tcool        d of cooling time
+ Tcool               1     Tcool        d cooling time
  rho                -1.000 rho_target   target density [g/cm^3] 
  targetmass         -1.000 targetmass   target mass 
  selfshield            n flagselfshield flag for self-shielding 
@@ -63,10 +63,8 @@
 
  Summary of isotope production for g + Ra226
 
- Maximal irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
- Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
- E-beam [MeV]:   2.000000E+01
- E-back [MeV]:  -1.000000E+00
+ Maximal irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+ Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
  Beam current [mA]:        0.150
  Target material density [g/cm^3]:   5.500000E+00
  Target area [cm^2]:   1.000000E+00
@@ -80,23 +78,23 @@
 
  Total production rate [s^-1]:   2.579886E-12
 
-#  Nuc       Activity     Spec. activity   Prod. rate     #isotopes Isotopic frac. Reaction const. Decay const.           Half-life               Time of maximum production
-#               [Bq]          [Bq/g]        [Bq/gh]            []            []        [s^-1]         [s^-1]       
- Ac 225     3.493116E+06   6.351121E+06   1.526861E+00   4.354130E+12   0.33333   0.000000E+00   8.022537E-07                                                                            
- Ac 225 g   1.746558E+06   6.351121E+06   1.526861E+00   2.177065E+12   0.33333   0.000000E+00   8.022537E-07          0 y  10 d   0 h   0 m   0 s           0 y 182 d  11 h   8 m  53 s 
- Ac 225 m   1.746558E+06   6.351121E+06   1.526861E+00   2.177065E+12   0.33333   0.000000E+00   8.022537E-07          0 y  10 d   0 h   0 m   0 s           0 y 182 d  11 h   8 m  53 s 
- Ra 226     1.005972E+10   3.658079E+10   2.116944E+07   7.327826E+20   1.00000   1.053841E-13   1.372811E-11       1599 y 352 d  23 h  53 m  36 s        4751 y 255 d   1 h  14 m  40 s 
- Ra 225     5.117152E+07   1.860783E+08   2.203477E+03   9.440138E+13   0.00000   1.526222E-12   5.420633E-07          0 y  14 d  19 h  12 m   0 s           0 y 261 d  16 h  14 m  54 s 
- Ra 224     1.173278E+08   4.266465E+08   5.412800E+03   5.323417E+13   0.00000   9.234129E-13   2.203994E-06          0 y   3 d  15 h  21 m  36 s           0 y  71 d  17 h  22 m  36 s 
- Ra 223     2.359390E+04   8.579600E+04   1.022802E+00   3.361509E+10   0.00000   5.472012E-16   7.018842E-07          0 y  11 d  10 h  19 m  12 s           0 y 206 d   8 h  28 m  22 s 
- Fr 225     5.275726E+03   1.918446E+04   1.102661E+01   1.826703E+06   0.99840   7.199578E-18   2.888113E-03          0 y   0 d   0 h   4 m   0 s           0 y   0 d   2 h   0 m  14 s 
- Fr 224     4.302811E+00   1.564659E+01   9.032175E-03   1.240287E+03   0.00068   5.871879E-21   3.469205E-03                                                                            
- Fr 224 g   2.617784E+00   9.519216E+00   5.495079E-03   7.545776E+02   0.00041   3.572389E-21   3.469205E-03          0 y   0 d   0 h   3 m  19 s           0 y   0 d   1 h  40 m  58 s 
- Fr 224 m   1.685027E+00   6.127369E+00   3.537096E-03   4.857097E+02   0.00027   2.299491E-21   3.469205E-03          0 y   0 d   0 h   3 m  19 s           0 y   0 d   1 h  40 m  58 s 
- Fr 223     2.387037E-01   8.680136E-01   3.012784E-04   4.504447E+02   0.00025   3.257497E-22   5.299291E-04          0 y   0 d   0 h  21 m  48 s           0 y   0 d  10 h   1 m  59 s 
- Rn 221     2.996543E+01   1.089652E+02   3.468215E-02   6.484646E+04   0.99753   4.089266E-20   4.620981E-04          0 y   0 d   0 h  25 m   0 s           0 y   0 d  11 h  25 m  24 s 
- Rn 220     1.996666E+00   7.260604E+00   4.201739E-03   1.607364E+02   0.00449   2.724773E-21   1.242199E-02          0 y   0 d   0 h   0 m  55 s           0 y   0 d   0 h  29 m  54 s 
- Rn 219     4.221478E-08   1.535083E-07   8.883581E-11   2.411761E-07   0.00000   5.760887E-29   1.750372E-01          0 y   0 d   0 h   0 m   3 s           0 y   0 d   0 h   2 m  22 s 
+#  Nuc       Activity     Spec_activity    Prod_rate      #Isotopes Isot_fraction  Reac_constant   Decay_constant            Half-life                      Time of maximum production
+#              [Bq]          [Bq/g]        [Bq/(g.h)]        []            []        [s^-1]         [s^-1]       
+ Ac 225     3.493116E+06   6.351121E+06   5.496698E+03   4.354130E+12   0.33333   0.000000E+00   8.022537E-07                                                                            
+ Ac 225 g   1.746558E+06   6.351121E+06   5.496698E+03   2.177065E+12   0.33333   0.000000E+00   8.022537E-07          0 y  10 d   0 h   0 m   0 s           0 y 182 d  11 h   8 m  53 s 
+ Ac 225 m   1.746558E+06   6.351121E+06   5.496698E+03   2.177065E+12   0.33333   0.000000E+00   8.022537E-07          0 y  10 d   0 h   0 m   0 s           0 y 182 d  11 h   8 m  53 s 
+ Ra 226     1.005972E+10   3.658079E+10   7.620997E+10   7.327826E+20   1.00000   1.053841E-13   1.372811E-11       1599 y 352 d  23 h  53 m  36 s        4751 y 255 d   1 h  14 m  40 s 
+ Ra 225     5.117152E+07   1.860783E+08   7.932516E+06   9.440138E+13   0.00000   1.526222E-12   5.420633E-07          0 y  14 d  19 h  12 m   0 s           0 y 261 d  16 h  14 m  54 s 
+ Ra 224     1.173278E+08   4.266465E+08   1.948608E+07   5.323417E+13   0.00000   9.234129E-13   2.203994E-06          0 y   3 d  15 h  21 m  36 s           0 y  71 d  17 h  22 m  36 s 
+ Ra 223     2.359390E+04   8.579600E+04   3.682088E+03   3.361509E+10   0.00000   5.472012E-16   7.018842E-07          0 y  11 d  10 h  19 m  12 s           0 y 206 d   8 h  28 m  22 s 
+ Fr 225     5.275726E+03   1.918446E+04   3.969579E+04   1.826703E+06   0.99840   7.199578E-18   2.888113E-03          0 y   0 d   0 h   4 m   0 s           0 y   0 d   2 h   0 m  14 s 
+ Fr 224     4.302811E+00   1.564659E+01   3.251583E+01   1.240287E+03   0.00068   5.871879E-21   3.469205E-03                                                                            
+ Fr 224 g   2.617784E+00   9.519216E+00   1.978228E+01   7.545776E+02   0.00041   3.572389E-21   3.469205E-03          0 y   0 d   0 h   3 m  19 s           0 y   0 d   1 h  40 m  58 s 
+ Fr 224 m   1.685027E+00   6.127369E+00   1.273355E+01   4.857097E+02   0.00027   2.299491E-21   3.469205E-03          0 y   0 d   0 h   3 m  19 s           0 y   0 d   1 h  40 m  58 s 
+ Fr 223     2.387037E-01   8.680136E-01   1.084602E+00   4.504447E+02   0.00025   3.257497E-22   5.299291E-04          0 y   0 d   0 h  21 m  48 s           0 y   0 d  10 h   1 m  59 s 
+ Rn 221     2.996543E+01   1.089652E+02   1.248557E+02   6.484646E+04   0.99753   4.089266E-20   4.620981E-04          0 y   0 d   0 h  25 m   0 s           0 y   0 d  11 h  25 m  24 s 
+ Rn 220     1.996666E+00   7.260604E+00   1.512626E+01   1.607364E+02   0.00449   2.724773E-21   1.242199E-02          0 y   0 d   0 h   0 m  55 s           0 y   0 d   0 h  29 m  54 s 
+ Rn 219     4.221478E-08   1.535083E-07   3.198089E-07   2.411761E-07   0.00000   5.760887E-29   1.750372E-01          0 y   0 d   0 h   0 m   3 s           0 y   0 d   0 h   2 m  22 s 
 
 file: Ac225.act
 file: Ac225g.act

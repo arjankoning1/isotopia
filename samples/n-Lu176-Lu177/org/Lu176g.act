@@ -2,7 +2,7 @@
 #   title: Lu176(n,x)Lu176g Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 71
@@ -17,20 +17,21 @@
 #   parameters: 
 #     Reaction constant [s^-1]:  4.061537E-11
 #     Decay constant [s^-1]:  0.000000E+00
-#     Initial production rate [Bq/gh]:  0.000000E+00
+#     Spectrum averaged cross section [mb]:  4.061536E+02
+#     Initial production rate [Bq/(g.h)]:  0.000000E+00
 #     Total activity at EOI [Bq]:  0.000000E+00
 #     Specific activity at EOI [Bq/g]:  0.000000E+00
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life: stable
-#     Maximum production: infinity
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]: stable
+#     Maximum production [s]: infinity
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]         [Bq/gh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(g.h)]         []             []             [h]
    1.728000E+03   0.000000E+00   0.000000E+00   0.000000E+00   1.181510E+14   7.016812E-08   4.800000E-01
    3.456000E+03   0.000000E+00   0.000000E+00   0.000000E+00   2.363019E+14   1.403059E-07   9.600000E-01
    5.184000E+03   0.000000E+00   0.000000E+00   0.000000E+00   3.544528E+14   2.104133E-07   1.440000E+00

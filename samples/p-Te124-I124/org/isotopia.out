@@ -1,12 +1,12 @@
 
-    ISOTOPIA-2.23   (Version: April 9, 2026)
+    ISOTOPIA-2.23   (Version: April 19, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-04-10
+ Date: 2026-04-19
 
  ########## USER INPUT ##########
 
@@ -18,9 +18,6 @@
  ebeam 12.
  eback 8.
  ibeam 0.150
- radiounit gbq
- #timeunit s
- ibeam 1.
 
  USER INPUT FILE + DEFAULTS
 
@@ -41,19 +38,19 @@
  #
  Ebeam              12.000 Ebeam        incident energy in MeV
  Eback               8.000 Eback        lower end of energy range in MeV
- Ibeam               1.000 Ibeam        beam current in mA
+ Ibeam               0.150 Ibeam        beam current in mA
  #
  # Output 
  #
- radiounit             gbq radiounit    unit for radioactivity
+ radiounit             bq  radiounit    unit for radioactivity
  yieldunit (massunit)  g   yieldunit    unit for isotope yield
  ZAoutput              n   flagZAoutput output files per Z, A instead of El, A
  #
  # Target
  #
- Tirrad              1     Tirrad       d of irradiation time
+ Tirrad              1     Tirrad       d irradiation time
  Area                1.000 Area         target area in cm^2
- Tcool               1     Tcool        d of cooling time
+ Tcool               1     Tcool        d cooling time
  rho                -1.000 rho_target   target density [g/cm^3] 
  targetmass         -1.000 targetmass   target mass 
  selfshield            n flagselfshield flag for self-shielding 
@@ -67,43 +64,43 @@
 
  Summary of isotope production for p + Te124
 
- Maximal irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
- Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
+ Maximal irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+ Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
  E-beam [MeV]:   1.200000E+01
  E-back [MeV]:   8.000000E+00
- Beam current [mA]:        1.000
+ Beam current [mA]:        0.150
  Target material density [g/cm^3]:   6.240000E+00
  Target area [cm^2]:   1.000000E+00
  Effective target thickness [cm]:   2.826721E-02
  Effective target volume [cm^3]:   2.826721E-02
  Effective target mass [g]:   1.763874E-01
  Number of target atoms:    8.566370E+20
- Number of incident particles [s^-1]:   6.241509E+15
- Produced heat in target [kW]:   4.000000E+00
+ Number of incident particles [s^-1]:   9.362264E+14
+ Produced heat in target [kW]:   6.000000E-01
 
  (Maximum) production and decay rates per isotope
 
- Total production rate [s^-1]:   3.528222E-09
+ Total production rate [s^-1]:   5.292333E-10
 
-#  Nuc       Activity     Spec. activity   Prod. rate     #isotopes Isotopic frac. Reaction const. Decay const.           Half-life               Time of maximum production
-#               [GBq]          [GBq/g]        [GBq/mAh]            []            []        [s^-1]         [s^-1]       
- I  125     1.471563E-01   8.342790E-01   1.713210E-06   1.089694E+15   0.00538   1.481124E-11   1.350437E-07          0 y  59 d   9 h  46 m   0 s           0 y 320 d  18 h  17 m  54 s 
- I  124     3.864076E+02   2.190676E+03   4.846436E-03   2.011379E+17   0.99244   2.949823E-09   1.921108E-06          0 y   4 d   4 h  13 m  26 s           0 y  38 d   0 h  35 m  20 s 
- I  123     6.447456E+00   3.655281E+01   1.295418E-04   4.428006E+14   0.00218   1.051686E-11   1.456063E-05          0 y   0 d  13 h  13 m  24 s           0 y   6 d  14 h  51 m  45 s 
- Te 124     0.000000E+00   0.000000E+00   0.000000E+00   8.563759E+20   1.00000   1.239422E-10   0.000000E+00       stable                                infinite                       
- Te 123     0.000000E+00   0.000000E+00   0.000000E+00   3.355985E+14   0.00000   1.736073E-15   0.000000E+00                                                                            
- Te 123 g   0.000000E+00   0.000000E+00   0.000000E+00   3.355344E+14   0.00000   8.697886E-16   0.000000E+00       stable                                infinite                       
- Te 123 m   4.355231E-02   2.469128E-01   7.594974E-09   6.487351E+14   0.00000   8.662846E-16   6.713420E-08          0 y 119 d  12 h   0 m   0 s           1 y 170 d  19 h  13 m  40 s 
- Te 122     0.000000E+00   0.000000E+00   0.000000E+00   1.328815E+07   0.00000   1.795643E-19   0.000000E+00       stable                                infinite                       
- Sb 123     0.000000E+00   0.000000E+00   0.000000E+00   8.712262E+03   0.00000   1.177298E-22   0.000000E+00       stable                                infinite                       
- Sb 121     0.000000E+00   0.000000E+00   0.000000E+00   3.302738E+13   1.00000   4.463029E-13   0.000000E+00       stable                                infinite                       
- Sb 120     1.089606E-06   6.296947E-06   4.597600E-10   3.433164E+06   0.00000   1.296973E-18   7.265694E-04                                                                            
- Sb 120 g   1.087169E-06   6.163531E-06   4.499107E-10   1.496305E+06   0.00000   1.269189E-18   7.265694E-04          0 y   0 d   0 h  15 m  54 s           0 y   0 d   4 h  40 m  39 s 
- Sb 120 m   2.698161E-09   1.529679E-08   3.311059E-14   1.937219E+06   0.00000   2.778463E-20   1.392802E-06          0 y   5 d  18 h  14 m  24 s           0 y  49 d  19 h  19 m  29 s 
- Sn 120     0.000000E+00   0.000000E+00   0.000000E+00   1.875906E+08   1.00000   8.036710E-21   0.000000E+00       stable                                infinite                       
- In 117     1.878129E-15   1.041616E-14   3.935423E-19   8.019579E-03   0.46141   2.145318E-27   2.674179E-04                                                                            
- In 117 g   1.720643E-15   9.754906E-15   3.685175E-19   6.434284E-03   0.43280   2.008900E-27   2.674179E-04          0 y   0 d   0 h  43 m  12 s           0 y   0 d  11 h  40 m  16 s 
- In 117 m   1.577152E-16   8.941407E-16   1.441342E-20   1.586373E-03   0.10654   1.841935E-28   9.941870E-05          0 y   0 d   1 h  56 m  12 s           0 y   1 d   4 h  37 m  45 s 
+#  Nuc       Activity     Spec_activity    Prod_rate      #Isotopes Isot_fraction  Reac_constant   Decay_constant            Half-life                      Time of maximum production
+#              [Bq]          [Bq/g]        [Bq/(mA.h)]        []            []        [s^-1]         [s^-1]       
+ I  125     2.207631E+07   1.251581E+08   6.167572E+06   1.634753E+14   0.00538   2.221686E-12   1.350437E-07          0 y  59 d   9 h  46 m   0 s           1 y 111 d  14 h  17 m  36 s 
+ I  124     5.796887E+10   3.286451E+11   1.744722E+10   3.017471E+16   0.99244   4.424734E-10   1.921108E-06          0 y   4 d   4 h  13 m  26 s           0 y  49 d   9 h  32 m  56 s 
+ I  123     9.672694E+08   5.483778E+09   4.663516E+08   6.643046E+13   0.00218   1.577530E-12   1.456063E-05          0 y   0 d  13 h  13 m  24 s           0 y   8 d   3 h   1 m  23 s 
+ Te 124     0.000000E+00   0.000000E+00   0.000000E+00   8.565978E+20   1.00000   1.859133E-11   0.000000E+00       stable                                infinite                       
+ Te 123     0.000000E+00   0.000000E+00   0.000000E+00   5.034453E+13   0.00000   2.604110E-16   0.000000E+00                                                                            
+ Te 123 g   0.000000E+00   0.000000E+00   0.000000E+00   5.033492E+13   0.00000   1.304683E-16   0.000000E+00       stable                                infinite                       
+ Te 123 m   6.533660E+06   3.704154E+07   2.734196E+04   9.732238E+13   0.00000   1.299427E-16   6.713420E-08          0 y 119 d  12 h   0 m   0 s           2 y 111 d   1 h  56 m  24 s 
+ Te 122     0.000000E+00   0.000000E+00   0.000000E+00   1.993480E+06   0.00000   2.693465E-20   0.000000E+00       stable                                infinite                       
+ Sb 123     0.000000E+00   0.000000E+00   0.000000E+00   1.307008E+03   0.00000   1.765947E-23   0.000000E+00       stable                                infinite                       
+ Sb 121     0.000000E+00   0.000000E+00   0.000000E+00   4.954748E+12   1.00000   6.694543E-14   0.000000E+00       stable                                infinite                       
+ Sb 120     1.634826E+02   9.447831E+02   1.655141E+03   5.150702E+05   0.00000   1.945460E-19   7.265694E-04                                                                            
+ Sb 120 g   1.630835E+02   9.245754E+02   1.619684E+03   2.244568E+05   0.00000   1.903784E-19   7.265694E-04          0 y   0 d   0 h  15 m  54 s           0 y   0 d   5 h  24 m  10 s 
+ Sb 120 m   4.047776E-01   2.294822E+00   1.191984E-01   2.906212E+05   0.00000   4.167695E-21   1.392802E-06          0 y   5 d  18 h  14 m  24 s           0 y  65 d  11 h  15 m   7 s 
+ Sn 120     0.000000E+00   0.000000E+00   0.000000E+00   2.814217E+07   1.00000   1.205506E-21   0.000000E+00       stable                                infinite                       
+ In 117     2.817861E-07   1.562763E-06   1.416756E-06   1.203254E-03   0.46140   3.217977E-28   2.674179E-04                                                                            
+ In 117 g   2.581280E-07   1.463415E-06   1.326667E-06   9.652608E-04   0.43243   3.013350E-28   2.674179E-04          0 y   0 d   0 h  43 m  12 s           0 y   0 d  13 h  38 m  30 s 
+ In 117 m   2.366269E-08   1.341518E-07   5.188844E-08   2.380105E-04   0.10654   2.762903E-29   9.941870E-05          0 y   0 d   1 h  56 m  12 s           0 y   1 d   9 h  55 m  44 s 
 
 file: I125.act
 file: I124.act

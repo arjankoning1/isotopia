@@ -2,7 +2,7 @@
 #   title: Mo100(g,x)Nb99m Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 42
@@ -16,27 +16,26 @@
 #     nuclide: Nb99m
 #   parameters: 
 #     Beam current [mA]:  1.500000E-01
-#     E-Beam [MeV]:  2.000000E+01
-#     E-Back [MeV]: -1.000000E+00
 #     Reaction constant [s^-1]:  1.006029E-17
 #     Decay constant [s^-1]:  4.443251E-03
-#     Initial production rate [Bq/gh]:  3.504425E+01
+#     Spectrum averaged cross section [mb]:  1.006029E-04
+#     Initial production rate [Bq/(g.h)]:  1.261593E+05
 #     Total activity at EOI [Bq]:  3.095869E+04
 #     Specific activity at EOI [Bq/g]:  6.058451E+04
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years   0 days  0 hours  2 minutes 36 seconds
-#     Maximum production:       0 years   0 days  1 hours 24 minutes 33 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    1.560000E+02 (     0 years   0 days  0 hours  2 minutes 36 seconds)
+#     Maximum production [s]:    5.073046E+03 (     0 years   0 days  1 hours 24 minutes 33 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]         [Bq/gh]          []             []             [h]
-   1.728000E+03   3.094436E+04   6.055646E+04   3.504425E+01   6.964350E+06   8.386878E-01   4.800000E-01
-   3.456000E+03   3.095868E+04   6.058450E+04   1.622207E-02   6.967574E+06   8.387201E-01   9.600000E-01
-   5.184000E+03   3.095869E+04   6.058451E+04   8.847597E-06   6.967576E+06   8.386849E-01   1.440000E+00
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(g.h)]         []             []             [h]
+   1.728000E+03   3.094436E+04   6.055646E+04   1.261593E+05   6.964350E+06   8.386878E-01   4.800000E-01
+   3.456000E+03   3.095868E+04   6.058450E+04   5.839946E+01   6.967574E+06   8.387201E-01   9.600000E-01
+   5.184000E+03   3.095869E+04   6.058451E+04   3.185135E-02   6.967576E+06   8.386849E-01   1.440000E+00
    6.912000E+03   3.095869E+04   6.058451E+04   0.000000E+00   6.967576E+06   8.386434E-01   1.920000E+00
    8.640000E+03   3.095869E+04   6.058451E+04   0.000000E+00   6.967576E+06   8.385943E-01   2.400000E+00
    1.036800E+04   3.095869E+04   6.058451E+04   0.000000E+00   6.967576E+06   8.385373E-01   2.880000E+00

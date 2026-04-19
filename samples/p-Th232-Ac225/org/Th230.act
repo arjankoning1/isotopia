@@ -2,7 +2,7 @@
 #   title: Th232(p,x)Th230 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 90
@@ -15,25 +15,26 @@
 #     A: 230
 #     nuclide: Th230
 #   parameters: 
-#     Beam current [mA]:  1.000000E-01
 #     E-Beam [MeV]:  1.920000E+02
 #     E-Back [MeV]:  1.700000E+02
+#     Beam current [mA]:  1.000000E-01
 #     Reaction constant [s^-1]:  5.102704E-11
 #     Decay constant [s^-1]:  2.913069E-13
-#     Initial production rate [Bq/mAh]:  1.503810E+04
+#     Spectrum averaged cross section [mb]:  8.175432E+01
+#     Initial production rate [Bq/(mA.h)]:  1.503810E+04
 #     Total activity at EOI [Bq]:  3.664088E+04
 #     Specific activity at EOI [Bq/g]:  3.921300E+03
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:   75399 years 330 days 17 hours  8 minutes 16 seconds
-#     Maximum production:     228 years 227 days  8 hours  4 minutes 16 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    2.379440E+12 ( 75399 years 330 days 17 hours  8 minutes 16 seconds)
+#     Maximum production [s]:    7.214775E+09 (   228 years 227 days  8 hours  4 minutes 16 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]        [Bq/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   7.218289E+02   7.724999E+01   1.503810E+04   2.477899E+15   1.021611E-07   4.800000E-01
    3.456000E+03   1.454864E+03   1.556993E+02   1.527156E+04   4.994266E+15   2.059085E-07   9.600000E-01
    5.184000E+03   2.187900E+03   2.341487E+02   1.527158E+04   7.510636E+15   3.096563E-07   1.440000E+00

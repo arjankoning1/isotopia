@@ -2,7 +2,7 @@
 #   title: Ga71(p,x)Cu62 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 31
@@ -15,25 +15,26 @@
 #     A: 62
 #     nuclide: Cu62
 #   parameters: 
-#     Beam current [mA]:  1.000000E+00
 #     E-Beam [MeV]:  6.000000E+01
 #     E-Back [MeV]:  1.500000E+01
+#     Beam current [mA]:  1.000000E+00
 #     Reaction constant [s^-1]:  1.036253E-15
 #     Decay constant [s^-1]:  1.184867E-03
-#     Initial production rate [Bq/mAh]:  7.317766E+07
+#     Spectrum averaged cross section [mb]:  1.660261E-04
+#     Initial production rate [Bq/(mA.h)]:  7.317766E+07
 #     Total activity at EOI [Bq]:  4.030565E+07
 #     Specific activity at EOI [Bq/g]:  8.783903E+06
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years   0 days  0 hours  9 minutes 45 seconds
-#     Maximum production:       0 years   0 days  2 hours 48 minutes 46 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    5.850000E+02 (     0 years   0 days  0 hours  9 minutes 45 seconds)
+#     Maximum production [s]:    1.012624E+04 (     0 years   0 days  2 hours 48 minutes 46 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]        [Bq/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   3.512528E+07   7.654933E+06   7.317766E+07   2.964491E+10   9.933623E-06   4.800000E-01
    3.456000E+03   3.965823E+07   8.642809E+06   9.443650E+06   3.347062E+10   5.901164E-06   9.600000E-01
    5.184000E+03   4.024282E+07   8.770212E+06   1.217908E+06   3.396400E+10   4.072339E-06   1.440000E+00

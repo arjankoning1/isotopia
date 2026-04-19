@@ -2,7 +2,7 @@
 #   title: Ga69(p,x)Ge70 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 31
@@ -15,25 +15,26 @@
 #     A: 70
 #     nuclide: Ge70
 #   parameters: 
-#     Beam current [mA]:  1.000000E+00
 #     E-Beam [MeV]:  2.500000E+01
 #     E-Back [MeV]:  1.500000E+01
+#     Beam current [mA]:  1.000000E+00
 #     Reaction constant [s^-1]:  7.691317E-12
 #     Decay constant [s^-1]:  0.000000E+00
-#     Initial production rate [Ci/mAh]:  0.000000E+00
+#     Spectrum averaged cross section [mb]:  1.232285E+00
+#     Initial production rate [Ci/(mA.h)]:  0.000000E+00
 #     Total activity at EOI [Ci]:  0.000000E+00
 #     Specific activity at EOI [Ci/g]:  0.000000E+00
-#     Irradiation time:       0 years   7 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life: stable
-#     Maximum production: infinity
+#     Irradiation time [s]:    6.048000E+05 (     0 years   7 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]: stable
+#     Maximum production [s]: infinity
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Ci]          [Ci/g]        [Ci/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Ci]          [Ci/g]       [Ci/(mA.h)]        []             []             [h]
    1.209600E+04   0.000000E+00   0.000000E+00   0.000000E+00   5.010456E+14   2.297769E-03   3.360000E+00
    2.419200E+04   0.000000E+00   0.000000E+00   0.000000E+00   1.002047E+15   2.310104E-03   6.720000E+00
    3.628800E+04   0.000000E+00   0.000000E+00   0.000000E+00   1.503006E+15   2.322094E-03   1.008000E+01

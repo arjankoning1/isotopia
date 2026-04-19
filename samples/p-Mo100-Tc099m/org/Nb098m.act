@@ -2,7 +2,7 @@
 #   title: Mo100(p,x)Nb98m Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 42
@@ -15,25 +15,26 @@
 #     A: 98
 #     nuclide: Nb98m
 #   parameters: 
-#     Beam current [mA]:  1.500000E-01
 #     E-Beam [MeV]:  1.600000E+01
 #     E-Back [MeV]:  1.200000E+01
+#     Beam current [mA]:  1.500000E-01
 #     Reaction constant [s^-1]:  1.892443E-22
 #     Decay constant [s^-1]:  2.251940E-04
-#     Initial production rate [Bq/mAh]:  1.093886E+00
+#     Spectrum averaged cross section [mb]:  2.021352E-10
+#     Initial production rate [Bq/(mA.h)]:  1.093886E+00
 #     Total activity at EOI [Bq]:  2.443047E-01
 #     Specific activity at EOI [Bq/g]:  1.139563E+00
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years   0 days  0 hours 51 minutes 18 seconds
-#     Maximum production:       0 years   0 days 15 hours 12 minutes 25 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    3.078000E+03 (     0 years   0 days  0 hours 51 minutes 18 seconds)
+#     Maximum production [s]:    5.474523E+04 (     0 years   0 days 15 hours 12 minutes 25 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]        [Bq/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   7.875979E-02   3.673763E-01   1.093886E+00   3.497419E+02   2.838205E-11   4.800000E-01
    3.456000E+03   1.321306E-01   6.163254E-01   7.412617E-01   5.867413E+02   2.701123E-11   9.600000E-01
    5.184000E+03   1.682969E-01   7.850234E-01   5.023088E-01   7.473417E+02   2.580253E-11   1.440000E+00

@@ -2,7 +2,7 @@
 #   title: Rb85(p,x)Ge71 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 37
@@ -15,25 +15,26 @@
 #     A: 71
 #     nuclide: Ge71
 #   parameters: 
-#     Beam current [mA]:  1.000000E+00
 #     E-Beam [MeV]:  7.000000E+01
 #     E-Back [MeV]:  3.000000E+01
+#     Beam current [mA]:  1.000000E+00
 #     Reaction constant [s^-1]:  7.228353E-17
 #     Decay constant [s^-1]:  7.018842E-07
-#     Initial production rate [Bq/mAh]:  6.825692E+03
+#     Spectrum averaged cross section [mb]:  1.158110E-05
+#     Initial production rate [Bq/(mA.h)]:  6.825692E+03
 #     Total activity at EOI [Bq]:  1.589921E+05
 #     Specific activity at EOI [Bq/g]:  3.012326E+04
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years  11 days 10 hours 19 minutes 12 seconds
-#     Maximum production:       0 years  75 days  3 hours 35 minutes 36 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    9.875520E+05 (     0 years  11 days 10 hours 19 minutes 12 seconds)
+#     Maximum production [s]:    6.492936E+06 (     0 years  75 days  3 hours 35 minutes 36 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]        [Bq/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   3.276332E+03   6.207466E+02   6.825692E+03   4.667910E+09   5.174866E-03   4.800000E-01
    3.456000E+03   6.548649E+03   1.240732E+03   6.817327E+03   9.330098E+09   5.171774E-03   9.600000E-01
    5.184000E+03   9.816955E+03   1.859958E+03   6.808971E+03   1.398657E+10   5.168664E-03   1.440000E+00

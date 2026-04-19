@@ -2,7 +2,7 @@
 #   title: Ra226(p,x)At217 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 88
@@ -15,25 +15,26 @@
 #     A: 217
 #     nuclide: At217
 #   parameters: 
-#     Beam current [mA]:  1.000000E-01
 #     E-Beam [MeV]:  1.680000E+01
 #     E-Back [MeV]:  4.000000E+00
+#     Beam current [mA]:  1.000000E-01
 #     Reaction constant [s^-1]:  4.565974E-28
 #     Decay constant [s^-1]:  2.145967E+01
-#     Initial production rate [Bq/mAh]:  1.816715E-05
+#     Spectrum averaged cross section [mb]:  7.315495E-16
+#     Initial production rate [Bq/(mA.h)]:  1.816715E-05
 #     Total activity at EOI [Bq]:  8.720068E-07
 #     Specific activity at EOI [Bq/g]:  1.216655E-06
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years   0 days  0 hours  0 minutes  0 seconds
-#     Maximum production:       0 years   0 days  0 hours  0 minutes  1 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    3.230000E-02 (     0 years   0 days  0 hours  0 minutes  0 seconds)
+#     Maximum production [s]:    1.179066E+00 (     0 years   0 days  0 hours  0 minutes  1 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]        [Bq/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   8.720231E-07   1.216678E-06   1.816715E-05   4.063545E-08   1.000000E+00   4.800000E-01
    3.456000E+03   8.720227E-07   1.216678E-06   0.000000E+00   4.063543E-08   1.000000E+00   9.600000E-01
    5.184000E+03   8.720224E-07   1.216677E-06   0.000000E+00   4.063541E-08   1.000000E+00   1.440000E+00

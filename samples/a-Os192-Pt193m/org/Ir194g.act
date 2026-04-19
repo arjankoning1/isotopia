@@ -2,7 +2,7 @@
 #   title: Os192(a,x)Ir194g Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 76
@@ -15,25 +15,26 @@
 #     A: 194
 #     nuclide: Ir194g
 #   parameters: 
-#     Beam current [mA]:  1.500000E-01
 #     E-Beam [MeV]:  4.000000E+01
 #     E-Back [MeV]:  3.000000E+01
+#     Beam current [mA]:  1.500000E-01
 #     Reaction constant [s^-1]:  3.315852E-12
 #     Decay constant [s^-1]:  9.976212E-06
-#     Initial production rate [Bq/mAh]:  2.932564E+08
+#     Spectrum averaged cross section [mb]:  7.083441E+00
+#     Initial production rate [Bq/(mA.h)]:  2.932564E+08
 #     Total activity at EOI [Bq]:  7.136179E+08
 #     Specific activity at EOI [Bq/g]:  6.007611E+09
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years   0 days 19 hours 18 minutes  0 seconds
-#     Maximum production:       0 years  11 days  1 hours 35 minutes 27 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    6.948000E+04 (     0 years   0 days 19 hours 18 minutes  0 seconds)
+#     Maximum production [s]:    9.561279E+05 (     0 years  11 days  1 hours 35 minutes 27 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]        [Bq/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   2.111446E+07   1.777526E+08   2.932564E+08   2.116481E+12   1.726758E-01   4.800000E-01
    3.456000E+03   4.186802E+07   3.524670E+08   2.882439E+08   4.196785E+12   1.731757E-01   9.600000E-01
    5.184000E+03   6.226685E+07   5.241951E+08   2.833171E+08   6.241533E+12   1.735653E-01   1.440000E+00

@@ -2,7 +2,7 @@
 #   title: Ga0(p,x)Co60 m Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 31
@@ -15,25 +15,25 @@
 #     A: 60
 #     nuclide: Co60 m
 #   parameters: 
-#     Beam current [mA]:  1.000000E+00
 #     E-Beam [MeV]:  6.000000E+01
 #     E-Back [MeV]:  1.500000E+01
+#     Beam current [mA]:  1.000000E+00
 #     Reaction constant [s^-1]:  1.471527E-16
 #     Decay constant [s^-1]:  1.103386E-03
-#     Initial production rate [Bq /mAh]:  5.750923E+13
-#     Total activity at EOI [Bq ]:  2.434832E-02
+#     Initial production rate [Bq/(mA.h)]:  5.750923E+13
+#     Total activity at EOI [Bq]:  2.434832E-02
 #     Specific activity at EOI [Bq/g]:  5.306286E-03
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years   0 days  0 hours 10 minutes 28 seconds
-#     Maximum production:       0 years   0 days  3 hours  0 minutes  9 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    6.282000E+02 (     0 years   0 days  0 hours 10 minutes 28 seconds)
+#     Maximum production [s]:    1.080946E+04 (     0 years   0 days  3 hours  0 minutes  9 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]        [Bq/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   7.667897E+09   1.719508E+09   5.750923E+13   6.949425E+12   7.809770E-02   4.800000E-01
    3.456000E+03   8.807077E+09   1.974966E+09   8.543845E+12   7.981861E+12   4.891228E-02   9.600000E-01
    5.184000E+03   8.976240E+09   2.012901E+09   1.268718E+12   8.135175E+12   3.481808E-02   1.440000E+00

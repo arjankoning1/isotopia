@@ -2,7 +2,7 @@
 #   title: Rb0(p,x)Sr85 m Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-10
+#   date: 2026-04-19
 #   format: YANDF-0.4
 # target: 
 #   Z: 37
@@ -15,25 +15,25 @@
 #     A: 85
 #     nuclide: Sr85 m
 #   parameters: 
-#     Beam current [mA]:  1.000000E+00
 #     E-Beam [MeV]:  7.000000E+01
 #     E-Back [MeV]:  3.000000E+01
+#     Beam current [mA]:  1.000000E+00
 #     Reaction constant [s^-1]:  1.927355E-10
 #     Decay constant [s^-1]:  1.708690E-04
-#     Initial production rate [Bq /mAh]:  5.728106E+15
-#     Total activity at EOI [Bq ]:  1.157405E+06
+#     Initial production rate [Bq/(mA.h)]:  5.728106E+15
+#     Total activity at EOI [Bq]:  1.157405E+06
 #     Specific activity at EOI [Bq/g]:  2.159017E+05
-#     Irradiation time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Cooling time:       0 years   1 days  0 hours  0 minutes  0 seconds
-#     Half-life:       0 years   0 days  1 hours  7 minutes 36 seconds
-#     Maximum production:       0 years   0 days 16 hours 13 minutes 45 seconds
+#     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
+#     Half-life [s]:    4.056600E+03 (     0 years   0 days  1 hours  7 minutes 36 seconds)
+#     Maximum production [s]:    5.842564E+04 (     0 years   0 days 16 hours 13 minutes 45 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
 #     columns: 7
 #     entries: 100
-##     Time         Activity     Spec_activity    Prod_rate      Isotopes    Isotopic_frac.      Time
-##      [s]           [Bq]          [Bq/g]        [Bq/mAh]          []             []             [h]
+##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
+##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   7.637473E+11   1.424690E+11   5.728106E+15   4.469784E+15   2.396674E-02   4.800000E-01
    3.456000E+03   1.332222E+12   2.485120E+11   4.263562E+15   7.796746E+15   2.111817E-02   9.600000E-01
    5.184000E+03   1.755349E+12   3.274418E+11   3.173449E+15   1.027307E+16   1.870702E-02   1.440000E+00
