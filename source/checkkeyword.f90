@@ -23,7 +23,7 @@ subroutine checkkeyword
 ! *** Declaration of local data
 !
   implicit none
-  integer, parameter :: numkey=30         ! number of keywords
+  integer, parameter :: numkey=31         ! number of keywords
   integer            :: i
   integer            :: j
   character(len=132) :: key               ! keyword
@@ -40,7 +40,7 @@ subroutine checkkeyword
 !
   data (keyword(i), i = 1, numkey) / ' ', 'abundance', 'adepth', 'area', 'crosspath', 'currentunit', &
  &  'decay', 'eback', 'ebeam', 'element', 'fluxtotal', 'format', 'ibeam', 'mass', 'massunit', 'outcross', &
- &  'projectile', 'radiounit', 'rho', 'selfshield', 'source', 'targetmass', 'timeunit', 'tirrad', 'tcool', &
+ &  'projectile', 'radiounit', 'rho', 'selfshield', 'source', 'targetmass', 'thickness', 'timeunit', 'tirrad', 'tcool', &
  &  'user', 'xsfile', 'yieldunit', 'zaoutput', 'zdepth'/
 !
 ! A keyword can be de-activated by putting a # in front of it.
