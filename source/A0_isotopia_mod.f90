@@ -5,7 +5,7 @@ module A0_isotopia_mod
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-11  A.J. Koning    A     Original code
+!    1     2026-04-19  A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -186,6 +186,7 @@ module A0_isotopia_mod
   real(sgl), dimension(0:numZ, 0:numtime)                  :: Nisototnat   ! number of elemental isotopes produced after irr
   real(sgl), dimension(0:numZ,0:numA,-1:numisom)           :: Tmax         ! irradiation time with maximal yield
   real(sgl), dimension(0:numZ,0:numA,-1:numisom,0:numtime) :: specactivity ! specific activity of produced isotope
+  real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: reaction_ratenat ! reaction rate
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! Variables for conversion
