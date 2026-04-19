@@ -54,7 +54,7 @@ subroutine stoppingpower(E, dEdx)
   eta = beta * gam
   Wmax = 2. * emass * (eta **2)
   term1 = 0.1535 * rho_target * Ztarget / real(Atarget) * (parZ(k0) **2) / (beta **2)
-  term2 = log(2. * emass * (eta **2.) * Wmax / (Imean **2)) - 2. * beta **2
+  term2 = log((Wmax ** 2) / (Imean **2)) - 2. * beta **2
   dEdx = term1 * term2
   return
 end subroutine stoppingpower
