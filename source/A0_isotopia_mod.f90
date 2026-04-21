@@ -134,6 +134,7 @@ module A0_isotopia_mod
   real(sgl)                      :: rho_target  ! target material density
   real(sgl)                      :: targetmass ! target mass in grams
   real(sgl)                      :: fluxtotal  ! total flux
+  real(sgl)                      :: fgamma     ! electron-to-photon conversion effience
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! Variables for decay data
