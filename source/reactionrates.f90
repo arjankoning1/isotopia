@@ -5,7 +5,7 @@ subroutine reactionrates
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-06   A.J. Koning    A     Original code
+!    1     2026-04-20   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -60,7 +60,9 @@ subroutine reactionrates
   real(sgl)          :: dE               ! help variable
   real(sgl)          :: S                ! stopping power
   real(sgl)          :: phi(numint)      ! spectrum
+  real(sgl)          :: G(numint)        ! energy-dependent self-shielding
   real(sgl)          :: phisum           ! integration sum
+  real(sgl)          :: xsmacro          ! macroscopic cross section
   real(sgl)          :: E                ! incident energy
   real(sgl)          :: Ea               ! start energy of local adjustment
   real(sgl)          :: Eb               ! end energy of local adjustment
@@ -69,8 +71,10 @@ subroutine reactionrates
   real(sgl)          :: Eint(0:numint)   ! energy on integration grid
   real(sgl)          :: dEint(numint)    ! delta energy on integration grid
   real(sgl)          :: ratesum          ! integration sum
-  real(sgl)          :: projrate_density ! projectile rate densitym
+  real(sgl)          :: projrate_density ! projectile rate density
+  real(sgl)          :: number_density   ! 
   real(sgl)          :: xs               ! help variable
+  real(sgl)          :: term             ! help variable
   real(sgl)          :: xsa              ! help variable
   real(sgl)          :: xsb              ! help variable
 !
@@ -148,6 +152,10 @@ subroutine reactionrates
     projnum = Ibeam / (1000. * parZ(k0) * qelem)
     projrate_density = projnum / V_target
   endif
+  if (k0 == 0) then
+    projnum = Ibeam / (1000. * qelem)
+    fluxtotal = projnum * fgamma
+  endif
   if (k0 <= 1) then
     if (targetmass /= -1.) then
       V_target = targetmass / rho_target 
@@ -166,6 +174,8 @@ subroutine reactionrates
   reaction_rate = 0.
   sacs = 0.
   Egrid = 0.
+  number_density = avogadro / Atarget * rho_target
+  G = 1.
   call crosssections(0, 0, -1)
   do iz = Zcomp + 1, 0, -1
     do ia = Acomp, 0, -1
@@ -194,7 +204,12 @@ subroutine reactionrates
           xsb = xsrp(nen + 1)
           call pol1(Ea, Eb, xsa, xsb, E, xs)
           if (k0 == 1) then
-            ratesum = ratesum + phi(nE) * xs
+            if (flagselfshield) then
+              xsmacro = number_density * xstot(nen)
+              term = xsmacro * thickness
+              if (term > 0.) G(nE) = (1. - exp(-term))/term
+            endif
+            ratesum = ratesum + G(nE) * phi(nE) * xs
           else
             ratesum = ratesum + phi(nE) * xs * dEint(nE)
           endif
