@@ -101,7 +101,7 @@ subroutine inputout
   enddo
   write(*, '(" rho               ", f7.3, " rho_target   target density [g/cm^3] ")') rho_target
   write(*, '(" targetmass        ", f7.3, " targetmass   target mass ")') targetmass
-  if (k0 == 1) write(*, '(" fluxtotal ", es15.6, " fluxtotal    total flux")') fluxtotal
+  if (k0 <= 1) write(*, '(" fluxtotal ", es15.6, " fluxtotal    total flux")') fluxtotal
   write(*, '(" selfshield            ", a1, " flagselfshield flag for self-shielding ")') yesno(flagselfshield)
 !
 ! Cross section and decay data
