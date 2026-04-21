@@ -94,7 +94,7 @@ subroutine checkvalue
     write(*, '(" ISOTOPIA-error: 5 < Target mass < = ", i3)') numA
     stop
   endif
-  if (k0 > 1) then
+  if (k0 /= 1) then
     if (Ebeam ==  -1.) then
       write(*, '(" ISOTOPIA-error: incident energy must be given")')
       stop
@@ -103,17 +103,19 @@ subroutine checkvalue
       write(*, '(" ISOTOPIA-error: 0 < Ebeam < 250 MeV")')
       stop
     endif
-    if (Eback ==  -1.) then
-      Eback = max(Ebeam - 5., 0.1)
-    else
-      if (Eback <= 0..or.Eback > 250.) then
-        write(*, '(" ISOTOPIA-error: 0 < Eback < 250 MeV")')
+    if (k0 > 1) then
+      if (Eback ==  -1.) then
+        Eback = max(Ebeam - 5., 0.1)
+      else
+        if (Eback <= 0..or.Eback > 250.) then
+          write(*, '(" ISOTOPIA-error: 0 < Eback < 250 MeV")')
+          stop
+        endif
+      endif
+      if (Eback >= Ebeam) then
+        write(*, '(" ISOTOPIA-error: Ebeam must be larger than Eback")')
         stop
       endif
-    endif
-    if (Eback >= Ebeam) then
-      write(*, '(" ISOTOPIA-error: Ebeam must be larger than Eback")')
-      stop
     endif
   endif
   Zdepth = min(Zdepth, Ztarget)
@@ -170,6 +172,10 @@ subroutine checkvalue
   endif
   if (fluxtotal <=  0. .or. fluxtotal > 1.e38) then
     write(*, '(" ISOTOPIA-error: 0 < fluxtotal <= 1.e38")')
+    stop
+  endif
+  if (fgamma <  0. .or. fgamma > 1.) then
+    write(*, '(" ISOTOPIA-error: 0 < fgamma <= 1.")')
     stop
   endif
   if (yieldunit /= 'mug' .and. yieldunit /= 'mg' .and. yieldunit /= 'g' .and. yieldunit /= 'kg') then
