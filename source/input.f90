@@ -79,6 +79,7 @@ subroutine input
   yieldunit = 'g'
   currentunit = 'ma'
   Area = 1.
+  fgamma = 0.3
   thickness = 0.05
   Tirrad = 0
   unitTirrad = ' '
@@ -167,6 +168,11 @@ Loop1:  do i = 1, nlines
     endif
     if (key == 'thickness') then
       read(val, * , iostat = istat) thickness
+      if (istat /= 0) call read_error(line, istat)
+      cycle
+    endif
+    if (key == 'fgamma') then
+      read(val, * , iostat = istat) fgamma
       if (istat /= 0) call read_error(line, istat)
       cycle
     endif
