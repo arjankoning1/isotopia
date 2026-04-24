@@ -5,7 +5,7 @@ subroutine reactionrates
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-20   A.J. Koning    A     Original code
+!    1     2026-04-24   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -74,9 +74,11 @@ subroutine reactionrates
   real(sgl)          :: projrate_density ! projectile rate density
   real(sgl)          :: number_density   ! 
   real(sgl)          :: xs               ! help variable
+  real(sgl)          :: xst              ! help variable
   real(sgl)          :: term             ! help variable
   real(sgl)          :: xsa              ! help variable
   real(sgl)          :: xsb              ! help variable
+  real(sgl)          :: Gav              ! help variable
 !
 ! **** Photons: read Bremsstrahlung spectrum for incident electron energy
 !
@@ -85,6 +87,7 @@ subroutine reactionrates
   dEint = 0.
   Eint = 0.
   phi = 0.
+  Eaverage = 0.
   if (k0 == 0) then
     iE = min(200, int(Ebeam))
     iE = max(iE, 1)
@@ -104,6 +107,7 @@ subroutine reactionrates
     NintE = nen
     do nen = 2, nintE
       dEint(nen-1) = Eint(nen) - Eint(nen-1)
+      Eaverage = Eaverage + Eint(nen) * phi(nen) * dEint(nen-1)
     enddo
     dEint(NintE) = dEint(NintE-1)
   endif
@@ -126,6 +130,7 @@ subroutine reactionrates
       read(string, *) iE, Ea, Eb, dum,  phi(nen)
       Eint(nen) = 0.5 * (Ea + Eb) * 1.e-6
       dEint(nen) = abs(Ea - Eb) * 1.e-6
+      Eaverage = Eaverage + Eint(nen) * phi(nen)
     enddo
     close(1)
     NintE = nen
@@ -145,12 +150,14 @@ subroutine reactionrates
       call stoppingpower(Eint(nE), S)
       if (S /= 0.) phi(nE) = 1. / S
       phisum = phisum + phi(nE) * dE
+      Eaverage = Eaverage + Eint(nE) * phi(nE)
     enddo
     Leff = phisum
     V_target = Area * Leff
     heat = Ibeam * (Ebeam - Eback) / parZ(k0)
     projnum = Ibeam / (1000. * parZ(k0) * qelem)
     projrate_density = projnum / V_target
+    Eaverage = Eaverage / Leff
   endif
   if (k0 == 0) then
     projnum = Ibeam / (1000. * qelem)
@@ -172,10 +179,10 @@ subroutine reactionrates
 ! pol1     : subroutine for interpolation of first order
 !
   reaction_rate = 0.
+  selfshield = 0.
   sacs = 0.
   Egrid = 0.
   number_density = avogadro / Atarget * rho_target
-  G = 1.
   call crosssections(0, 0, -1)
   do iz = Zcomp + 1, 0, -1
     do ia = Acomp, 0, -1
@@ -186,6 +193,7 @@ subroutine reactionrates
           xsrp = xsnon
         endif
         ratesum = 0.
+        Gav = 0.
         call crosssections(iz, ia, is)
         if ( .not. rpexist(iz, ia, is)) cycle
         N = Nenrp
@@ -205,9 +213,23 @@ subroutine reactionrates
           call pol1(Ea, Eb, xsa, xsb, E, xs)
           if (k0 == 1) then
             if (flagselfshield) then
-              xsmacro = number_density * xstot(nen)
+              call locate(Etot, 1, Nentot, E, nen)
+              if (nen == 0) cycle
+              Ea = Etot(nen)
+              Eb = Etot(nen + 1)
+              xsa = xstot(nen)
+              xsb = xstot(nen + 1)
+              call pol1(Ea, Eb, xsa, xsb, E, xst)
+              xsmacro = number_density * xst * 1.e-27
               term = xsmacro * thickness
-              if (term > 0.) G(nE) = (1. - exp(-term))/term
+              if (term > 0.) then
+                G(nE) = (1. - exp(-term))/term
+                Gav = Gav + G(nE) * phi(nE)
+              else
+                G(nE) = 1.
+              endif
+            else
+              G(nE) = 1.
             endif
             ratesum = ratesum + G(nE) * phi(nE) * xs
           else
@@ -220,6 +242,13 @@ subroutine reactionrates
         if (k0 <= 1) then
           reaction_rate(iz, ia, is) = fluxtotal  * ratesum * 1.e-27
           sacs(iz, ia, is) = ratesum
+          if (k0 == 1) then
+            if (flagselfshield) then
+              selfshield(iz, ia, is) = Gav
+            else
+              selfshield(iz, ia, is) = 1.
+            endif
+          endif
         else
           reaction_rate(iz, ia, is) = projrate_density * ratesum * 1.e-27
           if (Leff > 0.) sacs(iz, ia, is) = ratesum / Leff
