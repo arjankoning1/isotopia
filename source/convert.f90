@@ -1,53 +1,49 @@
 subroutine convert(i)
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
-! Purpose: Convert input line from upper case to lowercase
+! Purpose   : Convert input line from upper case to lowercase
 !
-! Revision    Date      Author      Quality  Description
-! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+! Author    : Arjan Koning
+!
+! 2026-04-24: Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
+!
   use A0_isotopia_mod
 !
-! use A0_isotopia_mod, only: & ! General module with all global variables
-!              abun, &      ! natural abundance
-!              crosspath, & ! directory containing cross sections
-!              inline, &    ! input line
-!              path         ! directory containing files to be read
+! Variables for reading input lines
+!   inline           ! input line
 !
 ! *** Declaration of local data
 !
   implicit none
-  character(len=132) :: str    ! input line
-  integer            :: i      ! level
-  integer            :: k      ! designator for particle
+  integer, parameter :: numkey=6        ! number of keywords
+  character(len=132) :: keyword(numkey) ! keyword
+  character(len=132) :: str             ! input line
+  integer            :: i               ! counter
+  integer            :: k               ! counter
+  integer            :: lkey            ! length of keyword
+  integer            :: m               ! counter
 !
 ! ************** Convert uppercase to lowercase characters *************
 !
-! For easy handling of all the input parameters, the whole input is
-! converted to lowercase characters, with the exception of filenames or
-! other character strings.
+! For easy handling of all the input parameters, the whole input, both keywords and values, is converted to lowercase characters,
+! with the exception of filenames or other character strings.
 !
+  data (keyword(m), m = 1, numkey) / 'abundance', 'crosspath', 'format', 'source', 'user',  'xsfile'/
   str = inline(i)
   do k = 1, 132
-    if (inline(i)(k:k) >= 'A' .and. inline(i)(k:k) <= 'Z') inline(i)(k:k) = char(ichar(inline(i)(k:k)) + 32)
+    if (inline(i)(k:k) >= 'A' .and. inline(i)(k:k) <= 'Z') inline(i)(k:k) = achar(iachar(inline(i)(k:k)) + 32)
   enddo
-  do k = 0, 60
-    if (inline(i)(k+1:k+6) == 'xsfile') then
-      inline(i)(k + 7:132) = str(k + 7:132)
-      return
-    endif
-    if (inline(i)(k+1:k+9) == 'abundance') then
-      inline(i)(k + 10:132) = str(k + 10:132)
-      return
-    endif
-    if (inline(i)(k+1:k+9) == 'crosspath') then
-      inline(i)(k + 10:132) = str(k + 10:132)
-      return
-    endif
+  do k = 0, 110
+    do m = numkey, 1, -1
+      lkey = len_trim(keyword(m))
+      if (inline(i)(k+1:k+lkey) == trim(keyword(m))) then
+        inline(i)(k + lkey + 1:132) = str(k + lkey + 1:132)
+        return
+      endif
+    enddo
   enddo
-  return
 end subroutine convert
-! Copyright A.J. Koning 2023
+! Copyright A.J. Koning 2026
