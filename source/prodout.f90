@@ -5,7 +5,7 @@ subroutine prodout
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-19   A.J. Koning    A     Original code
+!    1     2026-04-23   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -123,6 +123,7 @@ subroutine prodout
   endif
   write(*, '(" Effective target volume [cm^3]:", es15.6)') V_target
   write(*, '(" Effective target mass [",a,"]:", es15.6)') trim(ystr), M_target * mfac
+  write(*, '(" Average energy of spectrum [MeV]: ", es15.6)') Eaverage
   write(*, '(" Number of target atoms: ", es15.6)') N_0
   if (k0 > 1) then
     write(*, '(" Number of incident particles [s^-1]:", es15.6)') projnum
@@ -221,6 +222,10 @@ subroutine prodout
         call write_real(id4,string,lambda(iz, ia, is))
         string='Spectrum averaged cross section [mb]'
         call write_real(id4,string,sacs(iz, ia, is))
+        if (k0 == 1) then
+          string='Average self-shielding factor'
+          call write_real(id4,string,selfshield(iz, ia, is))
+        endif
         string='Initial production rate ['//trim(yieldstring)//']'
         call write_real(id4,string,yield(iz, ia, is, 1) * yfac)
         string='Total activity at EOI ['//trim(rstr)//']'
