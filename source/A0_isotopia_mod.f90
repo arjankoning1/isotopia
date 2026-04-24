@@ -5,7 +5,7 @@ module A0_isotopia_mod
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-19  A.J. Koning    A     Original code
+!    1     2026-04-24  A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -134,7 +134,7 @@ module A0_isotopia_mod
   real(sgl)                      :: rho_target  ! target material density
   real(sgl)                      :: targetmass ! target mass in grams
   real(sgl)                      :: fluxtotal  ! total flux
-  real(sgl)                      :: fgamma     ! electron-to-photon conversion effience
+  real(sgl)                      :: fgamma     ! electron-to-photon conversion effiency
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! Variables for decay data
@@ -162,7 +162,9 @@ module A0_isotopia_mod
   real(sgl)                                                :: M_target         ! active target mass
   real(sgl)                                                :: projnum      ! number of incident particles [s^-1]
   real(sgl)                                                :: heat         ! produced heat
+  real(sgl)                                                :: Eaverage    ! average energy of spectrum
   real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: reaction_rate ! reaction rate per isotope
+  real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: selfshield    ! average self-shielding factor
   real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: sacs         ! spectrum averaged cross section
   real(sgl), dimension(0:numen)                            :: Erp          ! incident energy
   real(sgl), dimension(0:numen)                            :: xsrp         ! residual production cross section in mb
