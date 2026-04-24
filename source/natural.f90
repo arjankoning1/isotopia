@@ -5,7 +5,7 @@ subroutine natural
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-19   A.J. Koning    A     Original code
+!    1     2026-04-24   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -181,7 +181,7 @@ subroutine natural
                   Nisonat(iz, ia, is, it) = Nisonat(iz, ia, is, it) + abun(iso) * Nis
                   Nisototnat(iz, it) = Nisototnat(iz, it) + abun(iso) * Nis
                 enddo
-                reaction_ratenat(iz, ia, is) = reaction_rate(iz, ia, is) + abun(iso) * RR
+                reaction_ratenat(iz, ia, is) = reaction_ratenat(iz, ia, is) + abun(iso) * RR
                 exit
               endif
             enddo
@@ -230,7 +230,7 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           endif
           if (k0 /= 1) call write_real(id4,'Beam current [mA]',Ibeam)
           string='Reaction constant [s^-1]'
-          call write_real(id4,string,reaction_rate(iz, ia, is))
+          call write_real(id4,string,reaction_ratenat(iz, ia, is))
           string='Decay constant [s^-1]'
           call write_real(id4,string,lambda(iz, ia, is))
           string='Initial production rate ['//trim(yieldstring)//']'
