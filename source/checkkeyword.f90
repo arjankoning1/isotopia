@@ -5,7 +5,7 @@ subroutine checkkeyword
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-09   A.J. Koning    A     Original code
+!    1     2026-04-24   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -23,7 +23,7 @@ subroutine checkkeyword
 ! *** Declaration of local data
 !
   implicit none
-  integer, parameter :: numkey=31         ! number of keywords
+  integer, parameter :: numkey=32         ! number of keywords
   integer            :: i
   integer            :: j
   character(len=132) :: key               ! keyword
@@ -39,7 +39,7 @@ subroutine checkkeyword
 ! ISOTOPIA will stop if a keyword is incorrect
 !
   data (keyword(i), i = 1, numkey) / ' ', 'abundance', 'adepth', 'area', 'crosspath', 'currentunit', &
- &  'decay', 'eback', 'ebeam', 'element', 'fluxtotal', 'format', 'ibeam', 'mass', 'massunit', 'outcross', &
+ &  'decay', 'eback', 'ebeam', 'element', 'fgamma', 'fluxtotal', 'format', 'ibeam', 'mass', 'massunit', 'outcross', &
  &  'projectile', 'radiounit', 'rho', 'selfshield', 'source', 'targetmass', 'thickness', 'timeunit', 'tirrad', 'tcool', &
  &  'user', 'xsfile', 'yieldunit', 'zaoutput', 'zdepth'/
 !
