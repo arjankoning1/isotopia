@@ -174,7 +174,7 @@ subroutine checkvalue
     write(*, '(" ISOTOPIA-error: 0 < fluxtotal <= 1.e38")')
     stop
   endif
-  if (fgamma <  0. .or. fgamma > 1.) then
+  if (fgamma <= 0. .or. fgamma > 1.) then
     write(*, '(" ISOTOPIA-error: 0 < fgamma <= 1.")')
     stop
   endif
