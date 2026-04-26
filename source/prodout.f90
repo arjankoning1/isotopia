@@ -98,7 +98,7 @@ subroutine prodout
   if (k0 > 1) then
     yfac =  rfac * cfac * tfac
   else
-    yfac =  rfac * mfac * tfac
+    yfac =  rfac / mfac * tfac
   endif
   write(*, '(/" Summary of isotope production for ", a1, " + ", a/)') ptype0, trim(targetnuclide)
   string=''
@@ -164,7 +164,7 @@ subroutine prodout
           maxprod = '                                      '
         endif
         write(*, '(1x, a2, i4, 1x, a1, 4es15.6, f10.5, 2es15.6, 2a38)') nuc(iz), ia, isochar(is), &
- &         activity(iz, ia, is, it) * rfac, specactivity(iz, ia, is, it) * rfac * mfac, &
+ &         activity(iz, ia, is, it) * rfac, specactivity(iz, ia, is, it) * rfac / mfac, &
  &        yield(iz, ia, is, 1) * yfac, Niso(iz, ia, is, it), Nisorel(iz, ia, is, it), &
  &        reaction_rate(iz, ia, is), lambda(iz, ia, is), halflife, maxprod
       enddo
@@ -216,6 +216,8 @@ subroutine prodout
           string = 'Beam current ['//trim(cstr)//']'
           call write_real(id4,string,Ibeam_input)
         endif
+        string='Number of target atoms'
+        call write_real(id4,string,N_0)
         string='Reaction constant [s^-1]'
         call write_real(id4,string,reaction_rate(iz, ia, is))
         string='Decay constant [s^-1]'
@@ -231,7 +233,7 @@ subroutine prodout
         string='Total activity at EOI ['//trim(rstr)//']'
         call write_real(id4,string,activity(iz, ia, is, Ntime) * rfac)
         string='Specific activity at EOI ['//trim(rstr)//'/'//trim(ystr)//']'
-        call write_real(id4,string,specactivity(iz, ia, is, Ntime) * rfac * mfac)
+        call write_real(id4,string,specactivity(iz, ia, is, Ntime) * rfac / mfac)
         string=''
         write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")') &
  &        Tir, (Tirrad(k), k = 1, 5)
@@ -271,7 +273,7 @@ subroutine prodout
         call write_datablock(id2,Ncol,numtime,col,un)
         do it = 1, numtime
           act_out = activity(iz, ia, is, it) * rfac
-          specact_out = specactivity(iz, ia, is, it) * rfac * mfac
+          specact_out = specactivity(iz, ia, is, it) * rfac / mfac
           yield_out = yield(iz, ia, is, it) * yfac
           Niso_out = Niso(iz, ia, is, it)
           Nisorel_out = Nisorel(iz, ia, is, it)

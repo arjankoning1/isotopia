@@ -94,7 +94,7 @@ subroutine conversion
     cfac = 1.
   endif
   Ibeam = Ibeam_input * cfac
-  if (targetmass_input /= -1.) targetmass = targetmass_input * mfac
+  if (targetmass_input /= -1.) targetmass = targetmass_input / mfac
   return
 end subroutine conversion
 ! Copyright A.J. Koning 2026

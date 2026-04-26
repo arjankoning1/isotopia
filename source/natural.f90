@@ -88,6 +88,8 @@ subroutine natural
   real(sgl)         :: Ysp                               !
   real(sgl)         :: Th                                !
   real(sgl)         :: RR                                !
+  real(sgl)         :: NN                                !
+  real(sgl)         :: N_0_nat                           !
   real(sgl)         :: act_out          ! help variable
   real(sgl)         :: specact_out          ! help variable
   real(sgl)         :: yield_out          ! help variable
@@ -118,7 +120,7 @@ subroutine natural
   if (k0 > 1) then
     yfac =  rfac * cfac * tfac
   else
-    yfac =  rfac * mfac * tfac
+    yfac =  rfac / mfac * tfac
   endif
   indent = 0
   id2 = indent + 2
@@ -129,6 +131,7 @@ subroutine natural
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, 1
         resexist(iz, ia, is) = .false.
+        N_0_nat = 0.
         do iso = 1, isonum
           if (flagZAoutput) then
             Yfile0 = 'Y000000.tot'
@@ -154,10 +157,17 @@ subroutine natural
             Yfile(iz, ia, is) = trim(Yfile0)
             Yf=trim(Yfile0)//natstring(iso)
             RR = 0.
+            NN = 0.
             open (2, status = 'old', file = Yf)
             do 
               read(2,'(a)',iostat = istat) line
               if (istat == -1) exit
+              key='Number of target atoms'
+              keyix=index(line,trim(key))
+              if (keyix > 0) then
+                read(line(keyix+len_trim(key)+2:80),*, iostat = istat) NN
+                if (istat /= 0) call read_error(Yf, istat)
+              endif
               key='Reaction constant [s^-1]'
               keyix=index(line,trim(key))
               if (keyix > 0) then
@@ -181,6 +191,7 @@ subroutine natural
                   Nisototnat(iz, it) = Nisototnat(iz, it) + abun(iso) * Nis
                 enddo
                 reaction_ratenat(iz, ia, is) = reaction_ratenat(iz, ia, is) + abun(iso) * RR
+                N_0_nat = N_0_nat + abun(iso) * NN
                 exit
               endif
             enddo
@@ -198,7 +209,7 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
       enddo
     enddo Loop1
     do it = 1, Ntime
-      Nelrel(iz, it) = Nisototnat(iz, it) / N_0
+      Nelrel(iz, it) = Nisototnat(iz, it) / N_0_nat
     enddo
   enddo
   write(*,'()')
@@ -231,6 +242,8 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
             string = 'Beam current ['//trim(cstr)//']'
             call write_real(id4,string,Ibeam_input)
           endif
+          string='Number of target atoms'
+          call write_real(id4,string,N_0_nat)
           string='Reaction constant [s^-1]'
           call write_real(id4,string,reaction_ratenat(iz, ia, is))
           string='Decay constant [s^-1]'
@@ -240,7 +253,7 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           string='Total activity at EOI ['//trim(rstr)//']'
           call write_real(id4,string,activitynat(iz, ia, is, Ntime) * rfac)
           string='Specific activity at EOI ['//trim(rstr)//'/'//trim(ystr)//']'
-          call write_real(id4,string,specactivitynat(iz, ia, is, Ntime) * rfac * mfac) 
+          call write_real(id4,string,specactivitynat(iz, ia, is, Ntime) * rfac / mfac) 
           string=''
           write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")') &
  &          Tir, (Tirrad(k), k = 1, 5)
@@ -281,7 +294,7 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
           do it = 1, numtime
             Th = Tgrid(it)/hoursec
             act_out = activitynat(iz, ia, is, it) * rfac
-            specact_out = specactivitynat(iz, ia, is, it) * rfac * mfac
+            specact_out = specactivitynat(iz, ia, is, it) * rfac / mfac
             yield_out = yieldnat(iz, ia, is, it) * yfac
             Niso_out = Nisonat(iz, ia, is, it)
             Nisorel_out = Nisorelnat(iz, ia, is, it)
