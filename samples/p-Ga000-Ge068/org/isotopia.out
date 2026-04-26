@@ -6,14 +6,14 @@
    69Ga   0.601080
    71Ga   0.398920
 
-    ISOTOPIA-2.23   (Version: April 19, 2026)
+    ISOTOPIA-2.23   (Version: April 26, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-04-21
+ Date: 2026-04-26
 
  ########## USER INPUT ##########
 
@@ -44,7 +44,7 @@
  #
  Ebeam              60.000 Ebeam        incident energy in MeV
  Eback              15.000 Eback        lower end of energy range in MeV
- Ibeam               1.000 Ibeam        beam current in mA
+ Ibeam               1.000 Ibeam_input  beam current in mA
  #
  # Output 
  #
@@ -57,9 +57,7 @@
  Tirrad              1     Tirrad       d irradiation time
  Area                1.000 Area         target area in cm^2
  Tcool               1     Tcool        d cooling time
- rho                -1.000 rho_target   target density [g/cm^3] 
- targetmass         -1.000 targetmass   target mass 
- selfshield            n flagselfshield flag for self-shielding 
+ selfshield            y flagselfshield flag for self-shielding 
  #
  # Cross section and decay data
  #
@@ -80,6 +78,7 @@
  Effective target thickness [cm]:   7.545388E-01
  Effective target volume [cm^3]:   7.545388E-01
  Effective target mass [g]:   4.459324E+00
+ Average energy of spectrum [MeV]:    4.103160E+01
  Number of target atoms:    3.891982E+22
  Number of incident particles [s^-1]:   6.241509E+15
  Produced heat in target [kW]:   4.500000E+01
@@ -92,15 +91,15 @@
 #              [Bq]          [Bq/g]        [Bq/(mA.h)]        []            []        [s^-1]         [s^-1]       
  Ge  70     0.000000E+00   0.000000E+00   0.000000E+00   7.815457E+15   0.00238   2.324896E-12   0.000000E+00       stable                                infinite                       
  Ge  69     2.951075E+12   6.617763E+11   1.504138E+11   5.985195E+17   0.18243   2.186572E-10   4.930625E-06          0 y   1 d  15 h   3 m   0 s           0 y  15 d   8 h  57 m  54 s 
- Ge  68     7.904283E+10   1.772529E+10   3.298576E+09   2.669564E+18   0.81370   7.951422E-10   2.960889E-08          0 y 270 d  22 h  48 m  20 s           2 y   2 d  19 h  35 m  48 s 
+ Ge  68     7.904283E+10   1.772529E+10   3.298577E+09   2.669564E+18   0.81370   7.951422E-10   2.960889E-08          0 y 270 d  22 h  48 m  20 s           2 y   2 d  19 h  35 m  48 s 
  Ge  67     2.332391E+12   5.230370E+11   3.169698E+12   3.815830E+15   0.00510   5.993607E-11   6.112409E-04          0 y   0 d   0 h  18 m  54 s           0 y   0 d   5 h   9 m  45 s 
  Ge  66     9.179112E+10   2.058409E+10   2.620877E+10   1.077423E+15   0.00033   2.361224E-12   8.519508E-05          0 y   0 d   2 h  15 m  36 s           0 y   1 d   6 h  36 m  57 s 
- Ge  65     2.856512E+08   6.405706E+07   5.951067E+08   1.273412E+10   0.00000   7.339567E-15   2.243195E-02          0 y   0 d   0 h   0 m  30 s           0 y   0 d   0 h  11 m   7 s 
+ Ge  65     2.856512E+08   6.405706E+07   5.951066E+08   1.273412E+10   0.00000   7.339567E-15   2.243195E-02          0 y   0 d   0 h   0 m  30 s           0 y   0 d   0 h  11 m   7 s 
  Ga  69     0.000000E+00   0.000000E+00   0.000000E+00   3.889587E+22   0.99985   7.753573E-10   0.000000E+00       stable                                infinite                       
  Ga  68     7.177284E+13   1.609500E+13   3.819194E+13   4.202945E+17   0.00001   1.843285E-09   1.707680E-04          0 y   0 d   1 h   7 m  39 s           0 y   0 d  16 h  24 m  16 s 
  Ga  67     1.208160E+13   2.709290E+12   5.454057E+11   4.911235E+18   0.00013   1.562824E-09   2.459993E-06          0 y   3 d   6 h  16 m   8 s           0 y  27 d  13 h  51 m  41 s 
  Ga  66     1.097832E+13   2.461880E+12   9.477635E+11   5.411020E+17   0.00001   3.391175E-10   2.028882E-05          0 y   0 d   9 h  29 m  24 s           0 y   4 d  12 h  56 m  34 s 
- Ga  65     8.734730E+11   1.958757E+11   1.330496E+12   1.149261E+15   0.00000   2.243798E-11   7.600298E-04          0 y   0 d   0 h  15 m  12 s           0 y   0 d   4 h  13 m  53 s 
+ Ga  65     8.734730E+11   1.958757E+11   1.330497E+12   1.149261E+15   0.00000   2.243798E-11   7.600298E-04          0 y   0 d   0 h  15 m  12 s           0 y   0 d   4 h  13 m  53 s 
  Ga  64     5.786473E+08   1.297612E+08   1.204926E+09   1.315830E+11   0.00000   1.486802E-14   4.397584E-03          0 y   0 d   0 h   2 m  37 s           0 y   0 d   0 h  50 m  31 s 
  Zn  68     0.000000E+00   0.000000E+00   0.000000E+00   6.279848E+18   0.52237   1.497051E-10   0.000000E+00       stable                                infinite                       
  Zn  67     0.000000E+00   0.000000E+00   0.000000E+00   1.570579E+18   0.13064   3.121475E-10   0.000000E+00       stable                                infinite                       
@@ -129,7 +128,7 @@
  Ni  58     0.000000E+00   0.000000E+00   0.000000E+00   6.686505E+11   0.00000   1.989062E-16   0.000000E+00       stable                                infinite                       
  Co  63     2.270486E+07   5.091548E+06   4.730179E+07   8.975196E+08   0.00001   5.833823E-16   2.529734E-02          0 y   0 d   0 h   0 m  27 s           0 y   0 d   0 h   9 m  56 s 
  Co  62     2.798853E+07   6.276417E+06   5.831446E+07   2.306315E+10   0.00000   7.192044E-16   7.701635E-03                                                                            
- Co  62 g   9.902892E+06   2.220716E+06   2.063103E+07   1.285817E+09   0.00001   2.544467E-16   7.701635E-03          0 y   0 d   0 h   1 m  30 s           0 y   0 d   0 h  30 m   3 s 
+ Co  62 g   9.902892E+06   2.220716E+06   2.063102E+07   1.285817E+09   0.00001   2.544467E-16   7.701635E-03          0 y   0 d   0 h   1 m  30 s           0 y   0 d   0 h  30 m   3 s 
  Co  62 m   1.808648E+07   4.055879E+06   2.871175E+07   2.177744E+10   0.00002   4.647578E-16   8.305142E-04          0 y   0 d   0 h  13 m  54 s           0 y   0 d   3 h  54 m   7 s 
  Co  61     1.258161E+10   2.821417E+09   4.789406E+09   1.078195E+14   0.01710   3.234616E-13   1.166914E-04          0 y   0 d   1 h  39 m   0 s           0 y   0 d  23 h   6 m   3 s 
  Co  60     1.497930E+10   4.997644E+05   5.804072E+05   3.413245E+14   0.47283   9.940933E-13   4.167126E-09                                                                            
@@ -214,14 +213,14 @@ file: Cr053.act.069
 
   End of ISOTOPIA calculation for p + Ga69
 
-    ISOTOPIA-2.23   (Version: April 19, 2026)
+    ISOTOPIA-2.23   (Version: April 26, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-04-21
+ Date: 2026-04-26
 
  ########## USER INPUT ##########
 
@@ -252,7 +251,7 @@ file: Cr053.act.069
  #
  Ebeam              60.000 Ebeam        incident energy in MeV
  Eback              15.000 Eback        lower end of energy range in MeV
- Ibeam               1.000 Ibeam        beam current in mA
+ Ibeam               1.000 Ibeam_input  beam current in mA
  #
  # Output 
  #
@@ -265,9 +264,7 @@ file: Cr053.act.069
  Tirrad              1     Tirrad       d irradiation time
  Area                1.000 Area         target area in cm^2
  Tcool               1     Tcool        d cooling time
- rho                -1.000 rho_target   target density [g/cm^3] 
- targetmass         -1.000 targetmass   target mass 
- selfshield            n flagselfshield flag for self-shielding 
+ selfshield            y flagselfshield flag for self-shielding 
  #
  # Cross section and decay data
  #
@@ -288,6 +285,7 @@ file: Cr053.act.069
  Effective target thickness [cm]:   7.764096E-01
  Effective target volume [cm^3]:   7.764096E-01
  Effective target mass [g]:   4.588581E+00
+ Average energy of spectrum [MeV]:    4.103160E+01
  Number of target atoms:    3.891983E+22
  Number of incident particles [s^-1]:   6.241509E+15
  Produced heat in target [kW]:   4.500000E+01
@@ -313,7 +311,7 @@ file: Cr053.act.069
  Ga  66     7.808346E+10   1.701691E+10   6.768717E+09   3.848595E+15   0.00000   2.422715E-12   2.028882E-05          0 y   0 d   9 h  29 m  24 s           0 y   4 d  12 h  37 m  18 s 
  Ga  65     2.222329E+08   4.843173E+07   3.385130E+08   2.924002E+11   0.00000   5.710652E-15   7.600298E-04          0 y   0 d   0 h  15 m  12 s           0 y   0 d   4 h  13 m  22 s 
  Zn  70     0.000000E+00   0.000000E+00   0.000000E+00   4.377252E+18   0.50523   6.722752E-11   0.000000E+00       stable                                infinite                       
- Zn  69     3.602496E+12   9.689468E+11   2.762215E+12   1.505762E+17   0.00251   1.141379E-10   2.048307E-04                                                                            
+ Zn  69     3.602496E+12   9.689468E+11   2.762216E+12   1.505762E+17   0.00251   1.141379E-10   2.048307E-04                                                                            
  Zn  69 g   1.608650E+12   3.505768E+11   9.988510E+11   7.853559E+15   0.00159   4.118025E-11   2.048307E-04          0 y   0 d   0 h  56 m  24 s           0 y   0 d  13 h  53 m  28 s 
  Zn  69 m   1.994215E+12   4.346040E+11   1.413957E+11   1.427244E+17   0.01647   7.295758E-11   1.397249E-05          0 y   0 d  13 h  46 m  48 s           0 y   6 d   6 h  19 m  54 s 
  Zn  68     0.000000E+00   0.000000E+00   0.000000E+00   2.578681E+18   0.29764   1.862449E-10   0.000000E+00       stable                                infinite                       
@@ -323,7 +321,7 @@ file: Cr053.act.069
  Zn  64     0.000000E+00   0.000000E+00   0.000000E+00   8.985229E+16   0.01037   2.672891E-11   0.000000E+00       stable                                infinite                       
  Zn  63     1.901041E+09   4.142983E+08   1.605978E+09   6.319003E+12   0.00000   4.885768E-14   3.008451E-04          0 y   0 d   0 h  38 m  24 s           0 y   0 d   9 h  48 m  45 s 
  Cu  69     6.508296E+09   1.418368E+09   1.354682E+10   1.605602E+12   0.00028   1.672272E-13   4.053492E-03          0 y   0 d   0 h   2 m  51 s           0 y   0 d   0 h  54 m  23 s 
- Cu  68     3.802640E+10   8.287267E+09   7.922349E+10   6.858341E+12   0.00030   9.770788E-13   2.228769E-02                                                                            
+ Cu  68     3.802640E+10   8.287267E+09   7.922348E+10   6.858341E+12   0.00030   9.770788E-13   2.228769E-02                                                                            
  Cu  68 g   1.960882E+10   4.273395E+09   4.085170E+10   8.798047E+11   0.00029   5.038320E-13   2.228769E-02          0 y   0 d   0 h   0 m  31 s           0 y   0 d   0 h  11 m   9 s 
  Cu  68 m   1.841804E+10   4.013886E+09   3.818478E+10   5.978613E+12   0.00072   4.732471E-13   3.080654E-03          0 y   0 d   0 h   3 m  45 s           0 y   0 d   1 h  10 m   4 s 
  Cu  67     4.623978E+10   1.007714E+10   2.191944E+09   1.486563E+16   0.12248   5.042828E-12   3.110515E-06          0 y   2 d  13 h  54 m   0 s           0 y  22 d  14 h   3 m   4 s 
@@ -333,8 +331,8 @@ file: Cr053.act.069
  Cu  63     0.000000E+00   0.000000E+00   0.000000E+00   2.726907E+15   0.02247   7.642027E-13   0.000000E+00       stable                                infinite                       
  Cu  62     4.032782E+07   8.788735E+06   7.317766E+07   3.403573E+10   0.00000   1.036253E-15   1.184867E-03          0 y   0 d   0 h   9 m  45 s           0 y   0 d   2 h  48 m  46 s 
  Ni  67     8.743901E+06   1.905579E+06   1.821646E+07   2.649104E+08   0.00000   2.246672E-16   3.300701E-02          0 y   0 d   0 h   0 m  21 s           0 y   0 d   0 h   7 m  44 s 
- Ni  66     5.182002E+08   1.129326E+08   2.499267E+07   1.464109E+14   0.00387   5.055282E-14   3.539355E-06          0 y   2 d   6 h  24 m   0 s           0 y  20 d   6 h  23 m  46 s 
- Ni  65     1.225550E+10   2.670869E+09   3.163895E+09   1.604016E+14   0.00424   3.154882E-13   7.640511E-05          0 y   0 d   2 h  31 m  12 s           0 y   1 d   9 h  39 m  26 s 
+ Ni  66     5.182002E+08   1.129326E+08   2.499268E+07   1.464109E+14   0.00387   5.055282E-14   3.539355E-06          0 y   2 d   6 h  24 m   0 s           0 y  20 d   6 h  23 m  46 s 
+ Ni  65     1.225550E+10   2.670869E+09   3.163894E+09   1.604016E+14   0.00424   3.154882E-13   7.640511E-05          0 y   0 d   2 h  31 m  12 s           0 y   1 d   9 h  39 m  26 s 
  Ni  64     0.000000E+00   0.000000E+00   0.000000E+00   1.513680E+16   0.40048   5.010864E-13   0.000000E+00       stable                                infinite                       
  Ni  63     6.845026E+05   1.491752E+05   2.852268E+04   3.135037E+15   0.08294   9.219266E-13   2.183395E-10        100 y 218 d   9 h  36 m   0 s          15 y 261 d   2 h  23 m  28 s 
  Ni  62     0.000000E+00   0.000000E+00   0.000000E+00   1.395859E+16   0.36930   4.065509E-12   0.000000E+00       stable                                infinite                       
@@ -360,7 +358,7 @@ file: Cr053.act.069
  Mn  59     7.695205E+03   1.677034E+03   1.603168E+04   5.095742E+04   0.52531   1.977219E-19   1.510125E-01          0 y   0 d   0 h   0 m   4 s           0 y   0 d   0 h   1 m  51 s 
  Mn  58     3.082684E+02   6.718169E+01   6.422262E+02   1.045690E+04   0.29892   7.920699E-21   1.063109E-02                                                                            
  Mn  58 g   1.026536E+02   2.237153E+01   2.138616E+02   9.655975E+03   0.09954   2.637596E-21   1.063109E-02          0 y   0 d   0 h   1 m   5 s           0 y   0 d   0 h  22 m  14 s 
- Mn  58 m   2.056148E+02   4.481012E+01   4.283643E+02   8.009267E+02   0.00826   5.283102E-21   2.567212E-01          0 y   0 d   0 h   0 m   2 s           0 y   0 d   0 h   1 m   7 s 
+ Mn  58 m   2.056148E+02   4.481012E+01   4.283642E+02   8.009267E+02   0.00826   5.283102E-21   2.567212E-01          0 y   0 d   0 h   0 m   2 s           0 y   0 d   0 h   1 m   7 s 
  Mn  57     5.351635E+01   1.166294E+01   1.114924E+02   6.593543E+03   0.06797   1.375058E-21   8.116477E-03          0 y   0 d   0 h   1 m  25 s           0 y   0 d   0 h  28 m  35 s 
 
 file: Ge072.act.071

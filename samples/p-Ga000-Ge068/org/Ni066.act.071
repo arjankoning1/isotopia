@@ -2,7 +2,7 @@
 #   title: Ga71(p,x)Ni66 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 31
@@ -18,10 +18,11 @@
 #     E-Beam [MeV]:  6.000000E+01
 #     E-Back [MeV]:  1.500000E+01
 #     Beam current [mA]:  1.000000E+00
+#     Number of target atoms:  3.891983E+22
 #     Reaction constant [s^-1]:  5.055282E-14
 #     Decay constant [s^-1]:  3.539355E-06
 #     Spectrum averaged cross section [mb]:  8.099454E-03
-#     Initial production rate [Bq/(mA.h)]:  2.499267E+07
+#     Initial production rate [Bq/(mA.h)]:  2.499268E+07
 #     Total activity at EOI [Bq]:  5.182002E+08
 #     Specific activity at EOI [Bq/g]:  1.129326E+08
 #     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
@@ -35,11 +36,11 @@
 #     entries: 100
 ##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
 ##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
-   1.728000E+03   1.199648E+07   2.614422E+06   2.499267E+07   3.389455E+12   6.647963E-03   4.800000E-01
+   1.728000E+03   1.199648E+07   2.614422E+06   2.499268E+07   3.389455E+12   6.647963E-03   4.800000E-01
    3.456000E+03   2.391967E+07   5.212869E+06   2.483997E+07   6.758201E+12   6.535805E-03   9.600000E-01
    5.184000E+03   3.577001E+07   7.795440E+06   2.468820E+07   1.010636E+13   6.431110E-03   1.440000E+00
    6.912000E+03   4.754794E+07   1.036223E+07   2.453735E+07   1.343407E+13   6.331117E-03   1.920000E+00
-   8.640000E+03   5.925390E+07   1.291334E+07   2.438742E+07   1.674144E+13   6.234904E-03   2.400000E+00
+   8.640000E+03   5.925390E+07   1.291334E+07   2.438743E+07   1.674144E+13   6.234904E-03   2.400000E+00
    1.036800E+04   7.088834E+07   1.544886E+07   2.423841E+07   2.002860E+13   6.142045E-03   2.880000E+00
    1.209600E+04   8.245168E+07   1.796889E+07   2.409030E+07   2.329568E+13   6.052288E-03   3.360000E+00
    1.382400E+04   9.394437E+07   2.047351E+07   2.394310E+07   2.654280E+13   5.965459E-03   3.840000E+00

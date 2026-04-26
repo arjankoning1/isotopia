@@ -1,12 +1,12 @@
 
-    ISOTOPIA-2.23   (Version: April 19, 2026)
+    ISOTOPIA-2.23   (Version: April 26, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-04-21
+ Date: 2026-04-26
 
  ########## USER INPUT ##########
 
@@ -38,7 +38,7 @@
  #
  Ebeam              40.000 Ebeam        incident energy in MeV
  Eback              30.000 Eback        lower end of energy range in MeV
- Ibeam               0.150 Ibeam        beam current in mA
+ Ibeam               0.150 Ibeam_input  beam current in mA
  #
  # Output 
  #
@@ -51,9 +51,7 @@
  Tirrad              1     Tirrad       d irradiation time
  Area                1.000 Area         target area in cm^2
  Tcool               1     Tcool        d cooling time
- rho                -1.000 rho_target   target density [g/cm^3] 
- targetmass         -1.000 targetmass   target mass 
- selfshield            n flagselfshield flag for self-shielding 
+ selfshield            y flagselfshield flag for self-shielding 
  #
  # Cross section and decay data
  #
@@ -74,6 +72,7 @@
  Effective target thickness [cm]:   1.714811E-01
  Effective target volume [cm^3]:   1.714811E-01
  Effective target mass [g]:   9.808717E-01
+ Average energy of spectrum [MeV]:    3.518296E+01
  Number of target atoms:    7.875929E+21
  Number of incident particles [s^-1]:   9.362264E+14
  Produced heat in target [kW]:   1.500000E+00
@@ -93,7 +92,7 @@
  Se  72     3.742793E+09   3.815782E+09   1.082311E+09   3.918893E+15   0.01871   6.000193E-12   9.550639E-07          0 y   8 d   9 h  36 m   0 s           0 y  81 d  10 h   7 m  30 s 
  As  75     0.000000E+00   0.000000E+00   0.000000E+00   7.875138E+21   0.99993   1.482780E-10   0.000000E+00       stable                                infinite                       
  As  74     7.060565E+10   7.198256E+10   1.999066E+10   1.564800E+17   0.00002   2.344786E-10   4.512119E-07          0 y  17 d  18 h  43 m  10 s           0 y 153 d   7 h   3 m   4 s 
- As  73     4.518757E+10   4.606879E+10   5.866006E+09   4.522960E+17   0.00006   3.018312E-10   9.990706E-08          0 y  80 d   7 h  12 m   0 s           1 y 156 d  16 h  50 m   8 s 
+ As  73     4.518757E+10   4.606879E+10   5.866007E+09   4.522960E+17   0.00006   3.018312E-10   9.990706E-08          0 y  80 d   7 h  12 m   0 s           1 y 156 d  16 h  50 m   8 s 
  As  72     7.829551E+10   7.982237E+10   2.889431E+10   1.057273E+16   0.00000   2.076932E-11   7.405419E-06          0 y   1 d   2 h   0 m   0 s           0 y  13 d  16 h  35 m  32 s 
  As  71     2.088793E+08   2.129527E+08   6.556482E+07   7.081946E+13   0.00000   1.179021E-13   2.949462E-06          0 y   2 d  17 h  16 m  48 s           0 y  30 d  18 h  28 m  52 s 
  Ge  74     0.000000E+00   0.000000E+00   0.000000E+00   8.332672E+15   0.07916   1.224590E-11   0.000000E+00       stable                                infinite                       
@@ -123,7 +122,7 @@
  Cu  66     1.293147E+04   1.318365E+04   1.760207E+05   5.708786E+06   0.00091   1.641910E-18   2.265187E-03          0 y   0 d   0 h   5 m   6 s           0 y   0 d   1 h  46 m  33 s 
  Cu  65     0.000000E+00   0.000000E+00   0.000000E+00   2.640491E+08   0.00378   3.880529E-19   0.000000E+00       stable                                infinite                       
  Ni  64     0.000000E+00   0.000000E+00   0.000000E+00   1.636730E+09   0.91905   2.405378E-18   0.000000E+00       stable                                infinite                       
- Ni  63     3.147631E-02   3.209014E-02   8.743931E-03   1.441622E+08   0.08095   2.118663E-19   2.183395E-10        100 y 218 d   9 h  36 m   0 s          56 y  37 d   5 h  20 m   0 s 
+ Ni  63     3.147631E-02   3.209014E-02   8.743932E-03   1.441622E+08   0.08095   2.118663E-19   2.183395E-10        100 y 218 d   9 h  36 m   0 s          56 y  37 d   5 h  20 m   0 s 
 
 file: Se076.act
 file: Se075.act

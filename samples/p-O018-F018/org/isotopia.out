@@ -1,12 +1,12 @@
 
-    ISOTOPIA-2.23   (Version: April 19, 2026)
+    ISOTOPIA-2.23   (Version: April 26, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-04-21
+ Date: 2026-04-26
 
  ########## USER INPUT ##########
 
@@ -37,7 +37,7 @@
  #
  Ebeam              16.000 Ebeam        incident energy in MeV
  Eback               3.000 Eback        lower end of energy range in MeV
- Ibeam               1.000 Ibeam        beam current in mA
+ Ibeam               1.000 Ibeam_input  beam current in mA
  #
  # Output 
  #
@@ -50,9 +50,7 @@
  Tirrad              1     Tirrad       d irradiation time
  Area                1.000 Area         target area in cm^2
  Tcool               1     Tcool        d cooling time
- rho                -1.000 rho_target   target density [g/cm^3] 
- targetmass         -1.000 targetmass   target mass 
- selfshield            n flagselfshield flag for self-shielding 
+ selfshield            y flagselfshield flag for self-shielding 
  #
  # Cross section and decay data
  #
@@ -73,6 +71,7 @@
  Effective target thickness [cm]:   2.547108E+02
  Effective target volume [cm^3]:   2.547108E+02
  Effective target mass [g]:   3.642364E-01
+ Average energy of spectrum [MeV]:    1.070306E+01
  Number of target atoms:    1.218601E+22
  Number of incident particles [s^-1]:   6.241509E+15
  Produced heat in target [kW]:   1.300000E+01

@@ -2,7 +2,7 @@
 #   title: Os192(a,x)Ir191g Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 76
@@ -18,6 +18,7 @@
 #     E-Beam [MeV]:  4.000000E+01
 #     E-Back [MeV]:  3.000000E+01
 #     Beam current [mA]:  1.500000E-01
+#     Number of target atoms:  3.725749E+20
 #     Reaction constant [s^-1]:  1.147648E-15
 #     Decay constant [s^-1]:  0.000000E+00
 #     Spectrum averaged cross section [mb]:  2.451647E-03

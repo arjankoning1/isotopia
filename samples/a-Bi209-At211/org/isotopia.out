@@ -1,12 +1,12 @@
 
-    ISOTOPIA-2.23   (Version: April 19, 2026)
+    ISOTOPIA-2.23   (Version: April 26, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-04-21
+ Date: 2026-04-26
 
  ########## USER INPUT ##########
 
@@ -38,7 +38,7 @@
  #
  Ebeam              28.000 Ebeam        incident energy in MeV
  Eback              10.000 Eback        lower end of energy range in MeV
- Ibeam               0.100 Ibeam        beam current in mA
+ Ibeam               0.100 Ibeam_input  beam current in mA
  #
  # Output 
  #
@@ -51,9 +51,7 @@
  Tirrad              1     Tirrad       d irradiation time
  Area                1.000 Area         target area in cm^2
  Tcool               1     Tcool        d cooling time
- rho                -1.000 rho_target   target density [g/cm^3] 
- targetmass         -1.000 targetmass   target mass 
- selfshield            n flagselfshield flag for self-shielding 
+ selfshield            y flagselfshield flag for self-shielding 
  #
  # Cross section and decay data
  #
@@ -74,6 +72,7 @@
  Effective target thickness [cm]:   1.517277E-02
  Effective target volume [cm^3]:   1.517277E-02
  Effective target mass [g]:   1.479345E-01
+ Average energy of spectrum [MeV]:    1.985227E+01
  Number of target atoms:    4.262595E+20
  Number of incident particles [s^-1]:   3.120755E+14
  Produced heat in target [kW]:   9.000000E-01
@@ -90,7 +89,7 @@
  At 211     2.196096E+10   1.484506E+11   2.290440E+10   8.228195E+14   1.00000   5.722317E-11   2.668989E-05          0 y   0 d   7 h  12 m  50 s           0 y   5 d  12 h  47 m  14 s 
  Po 212     1.460416E+06   9.872051E+06   3.042535E+07   1.292929E+07   0.00000   3.426122E-15   2.325997E+06                                                                            
  Po 212 g   1.261705E+06   8.528805E+06   2.628551E+07   5.424360E-01   0.00000   2.959945E-15   2.325997E+06          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
- Po 212 m   1.987118E+05   1.343242E+06   4.139828E+06   1.292929E+07   0.01191   4.661756E-16   1.536912E-02          0 y   0 d   0 h   0 m  45 s           0 y   0 d   0 h  20 m  43 s 
+ Po 212 m   1.987118E+05   1.343242E+06   4.139829E+06   1.292929E+07   0.01191   4.661756E-16   1.536912E-02          0 y   0 d   0 h   0 m  45 s           0 y   0 d   0 h  20 m  43 s 
  Po 211     3.359928E+05   2.271227E+06   6.999852E+06   1.068020E+06   0.00023   7.882355E-16   1.343309E+00                                                                            
  Po 211 g   3.133014E+05   2.117838E+06   6.527112E+06   2.332311E+05   0.00021   7.350015E-16   1.343309E+00          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m  17 s 
  Po 211 m   2.269144E+04   1.533884E+05   4.727383E+05   8.347892E+05   0.00077   5.323387E-17   2.718224E-02          0 y   0 d   0 h   0 m  25 s           0 y   0 d   0 h  12 m   4 s 

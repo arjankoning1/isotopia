@@ -2,7 +2,7 @@
 #   title: Ga0(p,x)Mn58 g Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 31
@@ -18,9 +18,10 @@
 #     E-Beam [MeV]:  6.000000E+01
 #     E-Back [MeV]:  1.500000E+01
 #     Beam current [mA]:  1.000000E+00
-#     Reaction constant [s^-1]:  2.637596E-21
+#     Number of target atoms:  0.000000E+00
+#     Reaction constant [s^-1]:  1.052190E-21
 #     Decay constant [s^-1]:  1.063109E-02
-#     Initial production rate [Bq/(mA.h)]:  3.071292E+05
+#     Initial production rate [Bq/(mA.h)]:  3.071292E+02
 #     Total activity at EOI [Bq]:  0.000000E+00
 #     Specific activity at EOI [Bq/g]:  0.000000E+00
 #     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
@@ -34,7 +35,7 @@
 #     entries: 100
 ##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
 ##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
-   1.728000E+03   4.095057E+01   8.924450E+00   3.071292E+05   3.851961E+03   1.284571E-06   4.800000E-01
+   1.728000E+03   4.095057E+01   8.924450E+00   3.071292E+02   3.851961E+03   1.284571E-06   4.800000E-01
    3.456000E+03   4.095005E+01   8.924338E+00   0.000000E+00   3.851913E+03   9.551593E-07   9.600000E-01
    5.184000E+03   4.094954E+01   8.924223E+00   0.000000E+00   3.851864E+03   7.792857E-07   1.440000E+00
    6.912000E+03   4.094901E+01   8.924111E+00   0.000000E+00   3.851815E+03   6.705993E-07   1.920000E+00

@@ -1,12 +1,12 @@
 
-    ISOTOPIA-2.23   (Version: April 19, 2026)
+    ISOTOPIA-2.23   (Version: April 26, 2026)
 
            Simulation of medical isotope production
 
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-04-21
+ Date: 2026-04-26
 
  ########## USER INPUT ##########
 
@@ -38,7 +38,7 @@
  #
  Ebeam              12.000 Ebeam        incident energy in MeV
  Eback               8.000 Eback        lower end of energy range in MeV
- Ibeam               0.150 Ibeam        beam current in mA
+ Ibeam               0.150 Ibeam_input  beam current in mA
  #
  # Output 
  #
@@ -51,9 +51,7 @@
  Tirrad              1     Tirrad       d irradiation time
  Area                1.000 Area         target area in cm^2
  Tcool               1     Tcool        d cooling time
- rho                -1.000 rho_target   target density [g/cm^3] 
- targetmass         -1.000 targetmass   target mass 
- selfshield            n flagselfshield flag for self-shielding 
+ selfshield            y flagselfshield flag for self-shielding 
  #
  # Cross section and decay data
  #
@@ -74,6 +72,7 @@
  Effective target thickness [cm]:   2.826721E-02
  Effective target volume [cm^3]:   2.826721E-02
  Effective target mass [g]:   1.763874E-01
+ Average energy of spectrum [MeV]:    1.009582E+01
  Number of target atoms:    8.566370E+20
  Number of incident particles [s^-1]:   9.362264E+14
  Produced heat in target [kW]:   6.000000E-01
@@ -84,7 +83,7 @@
 
 #  Nuc       Activity     Spec_activity    Prod_rate      #Isotopes Isot_fraction  Reac_constant   Decay_constant            Half-life                      Time of maximum production
 #              [Bq]          [Bq/g]        [Bq/(mA.h)]        []            []        [s^-1]         [s^-1]       
- I  125     2.207631E+07   1.251581E+08   6.167572E+06   1.634753E+14   0.00538   2.221686E-12   1.350437E-07          0 y  59 d   9 h  46 m   0 s           1 y 111 d  14 h  17 m  36 s 
+ I  125     2.207631E+07   1.251581E+08   6.167573E+06   1.634753E+14   0.00538   2.221686E-12   1.350437E-07          0 y  59 d   9 h  46 m   0 s           1 y 111 d  14 h  17 m  36 s 
  I  124     5.796887E+10   3.286451E+11   1.744722E+10   3.017471E+16   0.99244   4.424734E-10   1.921108E-06          0 y   4 d   4 h  13 m  26 s           0 y  49 d   9 h  32 m  56 s 
  I  123     9.672694E+08   5.483778E+09   4.663516E+08   6.643046E+13   0.00218   1.577530E-12   1.456063E-05          0 y   0 d  13 h  13 m  24 s           0 y   8 d   3 h   1 m  23 s 
  Te 124     0.000000E+00   0.000000E+00   0.000000E+00   8.565978E+20   1.00000   1.859133E-11   0.000000E+00       stable                                infinite                       
@@ -100,7 +99,7 @@
  Sn 120     0.000000E+00   0.000000E+00   0.000000E+00   2.814217E+07   1.00000   1.205506E-21   0.000000E+00       stable                                infinite                       
  In 117     2.817861E-07   1.562763E-06   1.416756E-06   1.203254E-03   0.46140   3.217977E-28   2.674179E-04                                                                            
  In 117 g   2.581280E-07   1.463415E-06   1.326667E-06   9.652608E-04   0.43243   3.013350E-28   2.674179E-04          0 y   0 d   0 h  43 m  12 s           0 y   0 d  13 h  38 m  30 s 
- In 117 m   2.366269E-08   1.341518E-07   5.188844E-08   2.380105E-04   0.10654   2.762903E-29   9.941870E-05          0 y   0 d   1 h  56 m  12 s           0 y   1 d   9 h  55 m  44 s 
+ In 117 m   2.366269E-08   1.341518E-07   5.188845E-08   2.380105E-04   0.10654   2.762903E-29   9.941870E-05          0 y   0 d   1 h  56 m  12 s           0 y   1 d   9 h  55 m  44 s 
 
 file: I125.act
 file: I124.act

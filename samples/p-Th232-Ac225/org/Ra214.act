@@ -2,7 +2,7 @@
 #   title: Th232(p,x)Ra214 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 90
@@ -18,10 +18,11 @@
 #     E-Beam [MeV]:  1.920000E+02
 #     E-Back [MeV]:  1.700000E+02
 #     Beam current [mA]:  1.000000E-01
+#     Number of target atoms:  2.425486E+22
 #     Reaction constant [s^-1]:  2.182950E-12
 #     Decay constant [s^-1]:  2.817671E-01
 #     Spectrum averaged cross section [mb]:  3.497472E+00
-#     Initial production rate [Bq/(mA.h)]:  1.103064E+12
+#     Initial production rate [Bq/(mA.h)]:  1.103063E+12
 #     Total activity at EOI [Bq]:  5.294190E+10
 #     Specific activity at EOI [Bq/g]:  5.665832E+09
 #     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
@@ -35,7 +36,7 @@
 #     entries: 100
 ##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
 ##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
-   1.728000E+03   5.294705E+10   5.666383E+09   1.103064E+12   1.879107E+11   4.642614E-04   4.800000E-01
+   1.728000E+03   5.294705E+10   5.666383E+09   1.103063E+12   1.879107E+11   4.642614E-04   4.800000E-01
    3.456000E+03   5.294694E+10   5.666372E+09   0.000000E+00   1.879103E+11   2.423988E-04   9.600000E-01
    5.184000E+03   5.294683E+10   5.666360E+09   0.000000E+00   1.879099E+11   1.644013E-04   1.440000E+00
    6.912000E+03   5.294673E+10   5.666350E+09   0.000000E+00   1.879095E+11   1.245752E-04   1.920000E+00

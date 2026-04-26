@@ -2,7 +2,7 @@
 #   title: Mo100(p,x)Tc100 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 42
@@ -18,6 +18,7 @@
 #     E-Beam [MeV]:  1.600000E+01
 #     E-Back [MeV]:  1.200000E+01
 #     Beam current [mA]:  1.500000E-01
+#     Number of target atoms:  1.291054E+21
 #     Reaction constant [s^-1]:  6.029836E-11
 #     Decay constant [s^-1]:  4.387007E-02
 #     Spectrum averaged cross section [mb]:  6.440573E+01

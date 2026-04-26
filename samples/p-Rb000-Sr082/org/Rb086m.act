@@ -2,7 +2,7 @@
 #   title: Rb0(p,x)Rb86 m Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 37
@@ -18,9 +18,10 @@
 #     E-Beam [MeV]:  7.000000E+01
 #     E-Back [MeV]:  3.000000E+01
 #     Beam current [mA]:  1.000000E+00
-#     Reaction constant [s^-1]:  6.703537E-10
+#     Number of target atoms:  0.000000E+00
+#     Reaction constant [s^-1]:  1.865594E-10
 #     Decay constant [s^-1]:  1.136307E-02
-#     Initial production rate [Bq/(mA.h)]:  5.232130E+16
+#     Initial production rate [Bq/(mA.h)]:  5.232130E+13
 #     Total activity at EOI [Bq]:  0.000000E+00
 #     Specific activity at EOI [Bq/g]:  0.000000E+00
 #     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
@@ -34,7 +35,7 @@
 #     entries: 100
 ##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
 ##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
-   1.728000E+03   6.976175E+12   1.291348E+12   5.232130E+16   6.139340E+14   1.641790E-08   4.800000E-01
+   1.728000E+03   6.976175E+12   1.291348E+12   5.232130E+13   6.139340E+14   1.641790E-08   4.800000E-01
    3.456000E+03   6.976080E+12   1.291330E+12   0.000000E+00   6.139256E+14   1.641775E-08   9.600000E-01
    5.184000E+03   6.975983E+12   1.291313E+12   0.000000E+00   6.139173E+14   1.641761E-08   1.440000E+00
    6.912000E+03   6.975890E+12   1.291295E+12   0.000000E+00   6.139089E+14   1.641747E-08   1.920000E+00

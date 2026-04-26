@@ -2,7 +2,7 @@
 #   title: Mo100(g,x)Mo100 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 42
@@ -15,10 +15,12 @@
 #     A: 100
 #     nuclide: Mo100
 #   parameters: 
+#     E-Beam [MeV]:  2.000000E+01
 #     Beam current [mA]:  1.500000E-01
-#     Reaction constant [s^-1]:  2.221569E-13
+#     Number of target atoms:  3.077314E+21
+#     Reaction constant [s^-1]:  2.220191E-13
 #     Decay constant [s^-1]:  0.000000E+00
-#     Spectrum averaged cross section [mb]:  7.909656E-01
+#     Spectrum averaged cross section [mb]:  7.904752E-01
 #     Initial production rate [Bq/(g.h)]:  0.000000E+00
 #     Total activity at EOI [Bq]:  0.000000E+00
 #     Specific activity at EOI [Bq/g]:  0.000000E+00

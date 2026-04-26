@@ -2,7 +2,7 @@
 #   title: Ga69(p,x)Ge65 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 31
@@ -18,10 +18,11 @@
 #     E-Beam [MeV]:  6.000000E+01
 #     E-Back [MeV]:  1.500000E+01
 #     Beam current [mA]:  1.000000E+00
+#     Number of target atoms:  3.891982E+22
 #     Reaction constant [s^-1]:  7.339567E-15
 #     Decay constant [s^-1]:  2.243195E-02
 #     Spectrum averaged cross section [mb]:  1.175928E-03
-#     Initial production rate [Bq/(mA.h)]:  5.951067E+08
+#     Initial production rate [Bq/(mA.h)]:  5.951066E+08
 #     Total activity at EOI [Bq]:  2.854789E+08
 #     Specific activity at EOI [Bq/g]:  6.401844E+07
 #     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
@@ -35,7 +36,7 @@
 #     entries: 100
 ##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
 ##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
-   1.728000E+03   2.856512E+08   6.405706E+07   5.951067E+08   1.273412E+10   1.795805E-07   4.800000E-01
+   1.728000E+03   2.856512E+08   6.405706E+07   5.951066E+08   1.273412E+10   1.795805E-07   4.800000E-01
    3.456000E+03   2.856476E+08   6.405627E+07   0.000000E+00   1.273397E+10   9.092491E-08   9.600000E-01
    5.184000E+03   2.856442E+08   6.405549E+07   0.000000E+00   1.273381E+10   6.107949E-08   1.440000E+00
    6.912000E+03   2.856406E+08   6.405470E+07   0.000000E+00   1.273365E+10   4.604096E-08   1.920000E+00

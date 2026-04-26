@@ -2,7 +2,7 @@
 #   title: Ga71(p,x)Ga65 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 31
@@ -18,6 +18,7 @@
 #     E-Beam [MeV]:  6.000000E+01
 #     E-Back [MeV]:  1.500000E+01
 #     Beam current [mA]:  1.000000E+00
+#     Number of target atoms:  3.891983E+22
 #     Reaction constant [s^-1]:  5.710652E-15
 #     Decay constant [s^-1]:  7.600298E-04
 #     Spectrum averaged cross section [mb]:  9.149472E-04
@@ -36,7 +37,7 @@
 ##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
 ##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
    1.728000E+03   1.624863E+08   3.541101E+07   3.385130E+08   2.137893E+11   5.493112E-12   4.800000E-01
-   3.456000E+03   2.061804E+08   4.493338E+07   9.102954E+07   2.712794E+11   6.970325E-12   9.600000E-01
+   3.456000E+03   2.061804E+08   4.493338E+07   9.102953E+07   2.712794E+11   6.970325E-12   9.600000E-01
    5.184000E+03   2.179287E+08   4.749371E+07   2.447560E+07   2.867371E+11   7.367567E-12   1.440000E+00
    6.912000E+03   2.210861E+08   4.818180E+07   6.577800E+06   2.908913E+11   7.474379E-12   1.920000E+00
    8.640000E+03   2.219331E+08   4.836640E+07   1.764667E+06   2.920058E+11   7.503086E-12   2.400000E+00

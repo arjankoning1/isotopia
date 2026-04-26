@@ -2,7 +2,7 @@
 #   title: Rb87(p,x)Br85 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 37
@@ -18,6 +18,7 @@
 #     E-Beam [MeV]:  7.000000E+01
 #     E-Back [MeV]:  3.000000E+01
 #     Beam current [mA]:  1.000000E+00
+#     Number of target atoms:  3.739433E+22
 #     Reaction constant [s^-1]:  1.766379E-13
 #     Decay constant [s^-1]:  3.983605E-03
 #     Spectrum averaged cross section [mb]:  2.830051E-02

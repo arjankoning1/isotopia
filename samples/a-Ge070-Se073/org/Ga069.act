@@ -2,7 +2,7 @@
 #   title: Ge70(a,x)Ga69 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 32
@@ -18,6 +18,7 @@
 #     E-Beam [MeV]:  2.800000E+01
 #     E-Back [MeV]:  1.300000E+01
 #     Beam current [mA]:  1.500000E-01
+#     Number of target atoms:  7.179030E+20
 #     Reaction constant [s^-1]:  8.431143E-13
 #     Decay constant [s^-1]:  0.000000E+00
 #     Spectrum averaged cross section [mb]:  1.801090E+00

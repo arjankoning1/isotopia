@@ -2,7 +2,7 @@
 #   title: Th232(p,x)Pa225 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 90
@@ -18,6 +18,7 @@
 #     E-Beam [MeV]:  1.920000E+02
 #     E-Back [MeV]:  1.700000E+02
 #     Beam current [mA]:  1.000000E-01
+#     Number of target atoms:  2.425486E+22
 #     Reaction constant [s^-1]:  5.220180E-13
 #     Decay constant [s^-1]:  4.077336E-01
 #     Spectrum averaged cross section [mb]:  8.363650E-01

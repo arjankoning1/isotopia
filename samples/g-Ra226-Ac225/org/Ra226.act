@@ -2,7 +2,7 @@
 #   title: Ra226(g,x)Ra226 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-04-21
+#   date: 2026-04-26
 #   format: YANDF-0.4
 # target: 
 #   Z: 88
@@ -15,17 +15,19 @@
 #     A: 226
 #     nuclide: Ra226
 #   parameters: 
+#     E-Beam [MeV]:  2.000000E+01
 #     Beam current [mA]:  1.500000E-01
-#     Reaction constant [s^-1]:  2.959901E-13
+#     Number of target atoms:  7.327826E+20
+#     Reaction constant [s^-1]:  2.958177E-13
 #     Decay constant [s^-1]:  1.372811E-11
-#     Spectrum averaged cross section [mb]:  1.053841E+00
+#     Spectrum averaged cross section [mb]:  1.053227E+00
 #     Initial production rate [Bq/(g.h)]:  7.620997E+10
 #     Total activity at EOI [Bq]:  1.005971E+10
 #     Specific activity at EOI [Bq/g]:  3.658077E+10
 #     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
 #     Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
 #     Half-life [s]:    5.049110E+10 (  1599 years 352 days 23 hours 53 minutes 36 seconds)
-#     Maximum production [s]:    9.857797E+10 (  3123 years 272 days 23 hours 19 minutes 28 seconds)
+#     Maximum production [s]:    9.858448E+10 (  3123 years 348 days  6 hours  6 minutes 56 seconds)
 #   quantity: 
 #     type: Isotope production
 #   datablock: 
