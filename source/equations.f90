@@ -19,7 +19,7 @@ subroutine equations
 !              daysec, &                          ! number of seconds in a day
 !              dbl, selected_real_kind(15, 307) & ! double precision kind
 !              hoursec, &                         ! number of seconds in an hour
-!              Ibeam, &                           ! beam current in mA for isotope production
+!              Ibeam, &                           ! beam current for isotope production
 !              iso, &                             ! counter for isotope
 !              isotope, &                         ! isotope of natural element
 !              lambda, &                          ! decay rate per isotope

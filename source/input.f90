@@ -5,7 +5,7 @@ subroutine input
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-09   A.J. Koning    A     Original code
+!    1     2026-04-25   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -20,7 +20,7 @@ subroutine input
 !              Eback, &       ! lower end of energy range in MeV for isotope
 !              Ebeam, &       ! incident energy in MeV for isotope production
 !              flagnatural, & ! flag for calculation of natural element
-!              Ibeam, &       ! beam current in mA for isotope production
+!              Ibeam, &       ! beam current for isotope production
 !              inline, &      ! input line
 !              iso, &         ! counter for isotope
 !              nlines, &      ! number of input lines
@@ -73,7 +73,7 @@ subroutine input
   Adepth = 20
   Ebeam = -1.
   Eback = -1.
-  Ibeam = 1.
+  Ibeam_input = 1.
   timeunit = 'h'
   radiounit = 'bq'
   yieldunit = 'g'
@@ -90,12 +90,12 @@ subroutine input
   Tcool(1) = 1
   unitTcool(1) = 'd'
   rho_target = -1.
-  targetmass = -1.
+  targetmass_input = -1.
   fluxtotal = 1.e14
   flagdecay = .true.
   flagZAoutput = .false.
   flagcross = .false.
-  flagselfshield = .false.
+  flagselfshield = .true.
   xsfile = ' '
   source ='ISOTOPIA'
   oformat ='YANDF-0.4'
@@ -152,7 +152,7 @@ Loop1:  do i = 1, nlines
       cycle
     endif
     if (key == 'ibeam') then
-      read(val, * , iostat = istat) Ibeam
+      read(val, * , iostat = istat) Ibeam_input
       if (istat /= 0) call read_error(line, istat)
       cycle
     endif
@@ -232,7 +232,7 @@ Loop1:  do i = 1, nlines
       cycle
     endif
     if (key == 'targetmass') then
-      read(val, * , iostat = istat) targetmass
+      read(val, * , iostat = istat) targetmass_input
       if (istat /= 0) call read_error(line, istat)
       cycle
     endif

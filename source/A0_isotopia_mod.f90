@@ -5,7 +5,7 @@ module A0_isotopia_mod
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-24  A.J. Koning    A     Original code
+!    1     2026-04-26  A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -130,9 +130,11 @@ module A0_isotopia_mod
   real(sgl)                      :: thickness  ! target thickness in cm
   real(sgl)                      :: Eback      ! lower end of energy range in MeV for isotope
   real(sgl)                      :: Ebeam      ! incident energy in MeV for isotope production
+  real(sgl)                      :: Ibeam_input! beam current in mA for isotope production
   real(sgl)                      :: Ibeam      ! beam current in mA for isotope production
   real(sgl)                      :: rho_target  ! target material density
   real(sgl)                      :: targetmass ! target mass in grams
+  real(sgl)                      :: targetmass_input ! target mass in grams
   real(sgl)                      :: fluxtotal  ! total flux
   real(sgl)                      :: fgamma     ! electron-to-photon conversion effiency
 !
@@ -164,7 +166,7 @@ module A0_isotopia_mod
   real(sgl)                                                :: heat         ! produced heat
   real(sgl)                                                :: Eaverage    ! average energy of spectrum
   real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: reaction_rate ! reaction rate per isotope
-  real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: selfshield    ! average self-shielding factor
+  real(sgl)                                                :: selfshield_av ! average self-shielding factor
   real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: sacs         ! spectrum averaged cross section
   real(sgl), dimension(0:numen)                            :: Erp          ! incident energy
   real(sgl), dimension(0:numen)                            :: xsrp         ! residual production cross section in mb

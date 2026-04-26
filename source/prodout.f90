@@ -5,7 +5,7 @@ subroutine prodout
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-23   A.J. Koning    A     Original code
+!    1     2026-04-25   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -17,7 +17,7 @@ subroutine prodout
 !              Eback, &        ! lower end of energy range in MeV for isotope
 !              Ebeam, &        ! incident energy in MeV for isotope production
 !              heat, &         ! produced heat
-!              Ibeam, &        ! beam current in mA for isotope production
+!              Ibeam, &        ! beam current for isotope production
 !              iso, &          ! counter for isotope
 !              isochar, &      ! symbol of isomer
 !              isotope, &      ! isotope of natural element
@@ -95,7 +95,6 @@ subroutine prodout
 ! 
 ! Normalization and strings for output
 !
-  call conversion
   if (k0 > 1) then
     yfac =  rfac * cfac * tfac
   else
@@ -109,11 +108,11 @@ subroutine prodout
   write(string, '(es15.6," (",i6, " years ", i3, " days", i3, " hours", i3, " minutes", i3, " seconds)")') &
  &  Tco, (Tcool(k), k = 1, 5) 
   write(*, '(" Cooling time [s]: ", a)') trim(string)
-  if (k0 > 1) then
+  if (k0 /= 1) then
     write(*, '(" E-beam [MeV]:", es15.6)') Ebeam
-    write(*, '(" E-back [MeV]:", es15.6)') Eback
+    if (k0 > 1) write(*, '(" E-back [MeV]:", es15.6)') Eback
   endif
-  if (k0 /= 1) write(*, '(" Beam current [mA]: ", f12.3)') Ibeam
+  if (k0 /= 1) write(*, '(" Beam current [",a,"]: ", f12.3)') trim(cstr), Ibeam_input
   write(*, '(" Target material density [g/cm^3]:", es15.6)') rho_target
   write(*, '(" Target area [cm^2]:", es15.6)') Area
   if (k0 > 1) then
@@ -211,11 +210,12 @@ subroutine prodout
         call write_reaction(indent,reaction,0.d0,0.d0,0,0)
         call write_residual(id2,iz,ia,finalnuclide)
         call write_char(id2,'parameters','')
-        if (k0 > 1) then
+        if (k0 /= 1) then
           call write_real(id4,'E-Beam [MeV]',Ebeam)
-          call write_real(id4,'E-Back [MeV]',Eback)
+          if (k0 > 1) call write_real(id4,'E-Back [MeV]',Eback)
+          string = 'Beam current ['//trim(cstr)//']'
+          call write_real(id4,string,Ibeam_input)
         endif
-        if (k0 /= 1) call write_real(id4,'Beam current [mA]',Ibeam)
         string='Reaction constant [s^-1]'
         call write_real(id4,string,reaction_rate(iz, ia, is))
         string='Decay constant [s^-1]'
@@ -224,7 +224,7 @@ subroutine prodout
         call write_real(id4,string,sacs(iz, ia, is))
         if (k0 == 1) then
           string='Average self-shielding factor'
-          call write_real(id4,string,selfshield(iz, ia, is))
+          call write_real(id4,string,selfshield_av)
         endif
         string='Initial production rate ['//trim(yieldstring)//']'
         call write_real(id4,string,yield(iz, ia, is, 1) * yfac)

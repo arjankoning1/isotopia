@@ -16,7 +16,7 @@ subroutine reactionrates
 !              Eback, &     ! lower end of energy range in MeV for isotope
 !              Ebeam, &     ! incident energy in MeV for isotope production
 !              heat, &      ! produced heat
-!              Ibeam, &     ! beam current in mA for isotope production
+!              Ibeam, &     ! beam current for isotope production
 !              iso, &       ! counter for isotope
 !              isotope, &   ! isotope of natural element
 !              k0, &        ! index of incident particle
@@ -78,7 +78,6 @@ subroutine reactionrates
   real(sgl)          :: term             ! help variable
   real(sgl)          :: xsa              ! help variable
   real(sgl)          :: xsb              ! help variable
-  real(sgl)          :: Gav              ! help variable
 !
 ! **** Photons: read Bremsstrahlung spectrum for incident electron energy
 !
@@ -105,11 +104,16 @@ subroutine reactionrates
     enddo
     close(1)
     NintE = nen
-    do nen = 2, nintE
-      dEint(nen-1) = Eint(nen) - Eint(nen-1)
-      Eaverage = Eaverage + Eint(nen) * phi(nen) * dEint(nen-1)
+    do nE = 1, NintE
+      if (nE == 1) then
+        dEint(nE) = 0.5 * (Eint(2) - Eint(1))
+      elseif (nE == NintE) then
+        dEint(nE) = 0.5 * (Eint(NintE) - Eint(NintE-1))
+      else
+        dEint(nE) = 0.5 * (Eint(nE+1) - Eint(nE-1))
+      endif
+      Eaverage = Eaverage + Eint(nE) * phi(nE) * dEint(nE)
     enddo
-    dEint(NintE) = dEint(NintE-1)
   endif
 !
 ! **** Neutrons: read neutron spectrum 
@@ -150,21 +154,22 @@ subroutine reactionrates
       call stoppingpower(Eint(nE), S)
       if (S /= 0.) phi(nE) = 1. / S
       phisum = phisum + phi(nE) * dE
-      Eaverage = Eaverage + Eint(nE) * phi(nE)
+      Eaverage = Eaverage + Eint(nE) * phi(nE) * dEint(nE)
     enddo
     Leff = phisum
     V_target = Area * Leff
-    heat = Ibeam * (Ebeam - Eback) / parZ(k0)
-    projnum = Ibeam / (1000. * parZ(k0) * qelem)
+! Ibeam is in A, energies are in MeV, heat is in kW
+    heat = 1000. * Ibeam * (Ebeam - Eback) / parZ(k0)
+    projnum = Ibeam / (parZ(k0) * qelem)
     projrate_density = projnum / V_target
     Eaverage = Eaverage / Leff
   endif
   if (k0 == 0) then
-    projnum = Ibeam / (1000. * qelem)
-    fluxtotal = projnum * fgamma
+    projnum = Ibeam / qelem
+    fluxtotal = projnum * fgamma / Area
   endif
   if (k0 <= 1) then
-    if (targetmass /= -1.) then
+    if (targetmass_input /= -1.) then
       V_target = targetmass / rho_target 
       thickness = V_target / Area
     else
@@ -179,11 +184,35 @@ subroutine reactionrates
 ! pol1     : subroutine for interpolation of first order
 !
   reaction_rate = 0.
-  selfshield = 0.
   sacs = 0.
   Egrid = 0.
+  G = 1.
+  selfshield_av = 1.
   number_density = avogadro / Atarget * rho_target
   call crosssections(0, 0, -1)
+!
+! Self-shielding
+!
+  if (flagselfshield .and. k0 == 1) then
+    selfshield_av = 0.
+    do nE = 1, NintE
+      E = Eint(nE)
+      call locate(Etot, 1, Nentot, E, nen)
+      if (nen == 0) cycle
+      Ea = Etot(nen)
+      Eb = Etot(nen + 1)
+      xsa = xstot(nen)
+      xsb = xstot(nen + 1)
+      call pol1(Ea, Eb, xsa, xsb, E, xst)
+      xsmacro = number_density * xst * 1.e-27
+      term = xsmacro * thickness
+      if (term > 0.) G(nE) = (1. - exp(-term))/term
+      selfshield_av = selfshield_av + G(nE) * phi(nE)
+    enddo
+  endif
+!
+! Loop over residual nuclides
+!
   do iz = Zcomp + 1, 0, -1
     do ia = Acomp, 0, -1
       do is = -1, 1
@@ -193,7 +222,6 @@ subroutine reactionrates
           xsrp = xsnon
         endif
         ratesum = 0.
-        Gav = 0.
         call crosssections(iz, ia, is)
         if ( .not. rpexist(iz, ia, is)) cycle
         N = Nenrp
@@ -212,25 +240,6 @@ subroutine reactionrates
           xsb = xsrp(nen + 1)
           call pol1(Ea, Eb, xsa, xsb, E, xs)
           if (k0 == 1) then
-            if (flagselfshield) then
-              call locate(Etot, 1, Nentot, E, nen)
-              if (nen == 0) cycle
-              Ea = Etot(nen)
-              Eb = Etot(nen + 1)
-              xsa = xstot(nen)
-              xsb = xstot(nen + 1)
-              call pol1(Ea, Eb, xsa, xsb, E, xst)
-              xsmacro = number_density * xst * 1.e-27
-              term = xsmacro * thickness
-              if (term > 0.) then
-                G(nE) = (1. - exp(-term))/term
-                Gav = Gav + G(nE) * phi(nE)
-              else
-                G(nE) = 1.
-              endif
-            else
-              G(nE) = 1.
-            endif
             ratesum = ratesum + G(nE) * phi(nE) * xs
           else
             ratesum = ratesum + phi(nE) * xs * dEint(nE)
@@ -242,13 +251,6 @@ subroutine reactionrates
         if (k0 <= 1) then
           reaction_rate(iz, ia, is) = fluxtotal  * ratesum * 1.e-27
           sacs(iz, ia, is) = ratesum
-          if (k0 == 1) then
-            if (flagselfshield) then
-              selfshield(iz, ia, is) = Gav
-            else
-              selfshield(iz, ia, is) = 1.
-            endif
-          endif
         else
           reaction_rate(iz, ia, is) = projrate_density * ratesum * 1.e-27
           if (Leff > 0.) sacs(iz, ia, is) = ratesum / Leff

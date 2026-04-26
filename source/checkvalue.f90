@@ -5,7 +5,7 @@ subroutine checkvalue
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-09   A.J. Koning    A     Original code
+!    1     2026-04-25   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -17,7 +17,7 @@ subroutine checkvalue
 !              Eback, &       ! lower end of energy range in MeV for isotope
 !              Ebeam, &       ! incident energy in MeV for isotope production
 !              flagnatural, & ! flag for calculation of natural element
-!              Ibeam, &       ! beam current in mA for isotope production
+!              Ibeam, &       ! beam current for isotope production
 !              iso, &         ! counter for isotope
 !              isotope, &     ! isotope of natural element
 !              k0, &          ! index of incident particle
@@ -128,7 +128,7 @@ subroutine checkvalue
     write(*, '(" ISOTOPIA-error: 0 < = Adepth < = Atarget")')
     stop
   endif
-  if (Ibeam <= 0. .or. Ibeam > 10000.) then
+  if (Ibeam_input <= 0. .or. Ibeam_input > 10000.) then
     write(*, '(" ISOTOPIA-error: 0 < = Ibeam < 10000 mA")')
     stop
   endif
@@ -166,7 +166,7 @@ subroutine checkvalue
     write(*, '(" ISOTOPIA-error: 0 < rhotarget <= 100.")')
     stop
   endif
-  if (targetmass /= -1. .and. (targetmass <=  0. .or. targetmass > 1.e9)) then
+  if (targetmass_input /= -1. .and. (targetmass_input <=  0. .or. targetmass_input > 1.e9)) then
     write(*, '(" ISOTOPIA-error: 0 < targetmass <= 1.e9")')
     stop
   endif

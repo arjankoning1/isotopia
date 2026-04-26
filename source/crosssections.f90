@@ -56,6 +56,11 @@
   integer            :: nen            ! energy counter
   real(sgl)          :: E              ! incident energy
   real(sgl)          :: xs             ! help variable
+  real(sgl)          :: Ea               ! help variable
+  real(sgl)          :: Eb               ! help variable
+  real(sgl)          :: xsa              ! help variable
+  real(sgl)          :: xsb              ! help variable
+  real(sgl)          :: xsr              ! help variable
 !
 ! ******************* Read non-elastic and total cross sections ******************
 !
@@ -230,7 +235,12 @@
         if (E > Ein(Nenrp)) cycle
         call locate(Ein, 1, Nenrp, E, nen)
         if (nen == 0) cycle
-        xsnon(i) = xsnon(i) - xsrp(nen)
+        Ea = Ein(nen)
+        Eb = Ein(nen + 1)
+        xsa = xsrp(nen)
+        xsb = xsrp(nen + 1)
+        call pol1(Ea, Eb, xsa, xsb, E, xsr)
+        xsnon(i) = xsnon(i) - xsr
       enddo
       if (flagcross) then
         csfile = parsym(k0)//'-'//trim(nuclide)//'-non.xs'

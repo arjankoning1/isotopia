@@ -1,11 +1,11 @@
 subroutine conversion
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
-! Purpose: Converion factors 
+! Purpose: Conversion factors 
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-09   A.J. Koning    A     Original code
+!    1     2026-04-25   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -83,16 +83,18 @@ subroutine conversion
   endif
   if (currentunit == 'ma') then
     cstr = 'mA'
-    cfac = 1.
+    cfac = 1.e-3
   endif
   if (currentunit == 'mua') then
     cstr = 'muA'
-    cfac = 1.e-3
+    cfac = 1.e-6
   endif
   if (currentunit == 'a') then
     cstr = 'A'
-    cfac = 1000.
+    cfac = 1.
   endif
+  Ibeam = Ibeam_input * cfac
+  if (targetmass_input /= -1.) targetmass = targetmass_input * mfac
   return
 end subroutine conversion
 ! Copyright A.J. Koning 2026

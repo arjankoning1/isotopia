@@ -5,7 +5,7 @@ subroutine isotopiainput
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2026-04-25   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Declaration of local data
@@ -15,6 +15,7 @@ subroutine isotopiainput
 ! checkkeyword: subroutine to check for errors in keywords
 ! checkvalue  : subroutine to check for errors in values
 ! checkfiles  : subroutine to check for errors in external data files
+! conversion  : subroutine with conversion factors 
 ! inputout    : subroutine to write input parameters
 !
   call readinput
@@ -22,7 +23,8 @@ subroutine isotopiainput
   call checkkeyword
   call checkvalue
   call checkfiles
+  call conversion
   call inputout
   return
 end subroutine isotopiainput
-! Copyright A.J. Koning 2023
+! Copyright A.J. Koning 2026

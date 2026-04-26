@@ -5,7 +5,7 @@ subroutine stoppingpower(E, dEdx)
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2026-04-26   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -46,7 +46,7 @@ subroutine stoppingpower(E, dEdx)
 !
 ! ********************* Bethe-Bloch formula ****************************
 !
-! The formula for the stopping power can be found on page 24 of
+! The Bethe-Bloch formula for the stopping power can be found on page 24 of
 ! W.R. Leo, "Techniques for nuclear and particle physics experiments", Springer Verlag, Berlin, 1994
 !
   Imean = Ztarget * (9.76 + 58.8 * Ztarget **( - 1.19)) * 1.e-6
@@ -58,4 +58,4 @@ subroutine stoppingpower(E, dEdx)
   dEdx = term1 * term2
   return
 end subroutine stoppingpower
-! Copyright A.J. Koning 2023
+! Copyright A.J. Koning 2026

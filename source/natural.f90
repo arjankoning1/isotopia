@@ -17,7 +17,7 @@ subroutine natural
 !              activity, &  ! activity of produced isotope in MBq
 !              Eback, &     ! lower end of energy range in MeV for isotope
 !              Ebeam, &     ! incident energy in MeV for isotope production
-!              Ibeam, &     ! beam current in mA for isotope production
+!              Ibeam, &     ! beam current for isotope production
 !              iso, &       ! counter for isotope
 !              isochar, &   ! symbol of isomer
 !              isonum, &    ! number of isotopes in element
@@ -115,7 +115,6 @@ subroutine natural
 !
 ! ******** Merge output files in results for natural elements **********
 !
-  call conversion
   if (k0 > 1) then
     yfac =  rfac * cfac * tfac
   else
@@ -228,7 +227,10 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
             call write_real(id4,'E-Beam [MeV]',Ebeam)
             call write_real(id4,'E-Back [MeV]',Eback)
           endif
-          if (k0 /= 1) call write_real(id4,'Beam current [mA]',Ibeam)
+          if (k0 /= 1) then
+            string = 'Beam current ['//trim(cstr)//']'
+            call write_real(id4,string,Ibeam_input)
+          endif
           string='Reaction constant [s^-1]'
           call write_real(id4,string,reaction_ratenat(iz, ia, is))
           string='Decay constant [s^-1]'
