@@ -67,7 +67,7 @@ The *isotopia/* directory contains the following directories and files:
 + `doc/` contains the tutorial in pdf format
 + `samples/` contains the input and output files of the sample cases, and the *verify* script for the user to run the sample cases
 
-In total, you will need about 50 Mb of free disk space to install ISOTOPIA.
+In total, you will need about 20 Gb of free disk space to install ISOTOPIA.
 
 ## Sample cases
 
