@@ -82,6 +82,11 @@ subroutine equations
 ! ************ Initial condition for irradiation ***********************
 !
   N_0 = avogadro / Atarget * M_target
+  if (iso == 1) then
+    N_0_nat = abun(1) * N_0
+  else
+    N_0_nat = N_0_nat + abun(iso) * N_0
+  endif
 !
 ! ******************** Set time grid ***********************************
 !

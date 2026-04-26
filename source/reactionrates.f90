@@ -73,6 +73,7 @@ subroutine reactionrates
   real(sgl)          :: ratesum          ! integration sum
   real(sgl)          :: projrate_density ! projectile rate density
   real(sgl)          :: number_density   ! 
+  real(sgl)          :: norm             ! help variable
   real(sgl)          :: xs               ! help variable
   real(sgl)          :: xst              ! help variable
   real(sgl)          :: term             ! help variable
@@ -104,6 +105,7 @@ subroutine reactionrates
     enddo
     close(1)
     NintE = nen
+    norm = 0.
     do nE = 1, NintE
       if (nE == 1) then
         dEint(nE) = 0.5 * (Eint(2) - Eint(1))
@@ -112,8 +114,10 @@ subroutine reactionrates
       else
         dEint(nE) = 0.5 * (Eint(nE+1) - Eint(nE-1))
       endif
+      norm = norm + phi(nE) * dEint(nE)
       Eaverage = Eaverage + Eint(nE) * phi(nE) * dEint(nE)
     enddo
+    if (norm > 0.) Eaverage = Eaverage / norm
   endif
 !
 ! **** Neutrons: read neutron spectrum 

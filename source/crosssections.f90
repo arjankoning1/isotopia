@@ -240,7 +240,7 @@
         xsa = xsrp(nen)
         xsb = xsrp(nen + 1)
         call pol1(Ea, Eb, xsa, xsb, E, xsr)
-        xsnon(i) = xsnon(i) - xsr
+        xsnon(i) = max(xsnon(i) - xsr, 0.)
       enddo
       if (flagcross) then
         csfile = parsym(k0)//'-'//trim(nuclide)//'-non.xs'

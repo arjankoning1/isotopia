@@ -88,8 +88,6 @@ subroutine natural
   real(sgl)         :: Ysp                               !
   real(sgl)         :: Th                                !
   real(sgl)         :: RR                                !
-  real(sgl)         :: NN                                !
-  real(sgl)         :: N_0_nat                           !
   real(sgl)         :: act_out          ! help variable
   real(sgl)         :: specact_out          ! help variable
   real(sgl)         :: yield_out          ! help variable
@@ -131,7 +129,6 @@ subroutine natural
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, 1
         resexist(iz, ia, is) = .false.
-        N_0_nat = 0.
         do iso = 1, isonum
           if (flagZAoutput) then
             Yfile0 = 'Y000000.tot'
@@ -157,17 +154,10 @@ subroutine natural
             Yfile(iz, ia, is) = trim(Yfile0)
             Yf=trim(Yfile0)//natstring(iso)
             RR = 0.
-            NN = 0.
             open (2, status = 'old', file = Yf)
             do 
               read(2,'(a)',iostat = istat) line
               if (istat == -1) exit
-              key='Number of target atoms'
-              keyix=index(line,trim(key))
-              if (keyix > 0) then
-                read(line(keyix+len_trim(key)+2:80),*, iostat = istat) NN
-                if (istat /= 0) call read_error(Yf, istat)
-              endif
               key='Reaction constant [s^-1]'
               keyix=index(line,trim(key))
               if (keyix > 0) then
@@ -191,7 +181,6 @@ subroutine natural
                   Nisototnat(iz, it) = Nisototnat(iz, it) + abun(iso) * Nis
                 enddo
                 reaction_ratenat(iz, ia, is) = reaction_ratenat(iz, ia, is) + abun(iso) * RR
-                N_0_nat = N_0_nat + abun(iso) * NN
                 exit
               endif
             enddo
