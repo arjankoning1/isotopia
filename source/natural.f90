@@ -191,14 +191,14 @@ subroutine natural
         enddo
       enddo
     enddo
-Loop1: do ia = Acomp, Acomp - Adepth, -1
+    do ia = Acomp, Acomp - Adepth, -1
       do is = -1, numisom
-        if ( .not. resexist(iz, ia, is)) cycle Loop1
+        if ( .not. resexist(iz, ia, is)) cycle
         do it = 1, Ntime
           if (Nisototnat(iz, it) /= 0.) Nisorelnat(iz, ia, is, it) = Nisonat(iz, ia, is, it) / Nisototnat(iz, it)
         enddo
       enddo
-    enddo Loop1
+    enddo 
     do it = 1, Ntime
       Nelrel(iz, it) = Nisototnat(iz, it) / N_0_nat
     enddo
