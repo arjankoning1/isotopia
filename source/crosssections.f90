@@ -1,3 +1,4 @@
+subroutine crosssections(iz, ia, is)
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! Purpose: Residual production, total and non-elastic cross sections
