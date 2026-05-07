@@ -33,7 +33,7 @@ subroutine inputout
 !              unitTcool, &  ! cooling time unit (y, d, h, m, s)
 !              unitTirrad, & ! irradiation time unit (y, d, h, m, s)
 !              yield, &      ! yield of produced isotope 
-!              yieldunit     ! unit for isotope yield: num (number), mug, mg, g, or kg
+!              yieldunit     ! unit for isotope yield: mug, mg, g, or kg
 !
 ! *** Declaration of local data
 !
