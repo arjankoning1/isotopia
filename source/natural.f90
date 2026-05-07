@@ -135,6 +135,7 @@ subroutine natural
             write(Yfile0(2:7), '(2i3.3)') iz, ia
             if (is == 0) Yfile0(9:11) = 'L00'
             if (is == 1) Yfile0(9:11) = 'L01'
+            if (is == 2) Yfile0(9:11) = 'L02'
           else
             write(Astr(1:3), '(i3.3)') ia
             Yfile0 = trim(nuc(iz)) //Astr
