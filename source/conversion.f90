@@ -30,7 +30,7 @@ subroutine conversion
     rfac = 1.
   endif
   if (radiounit == 'kbq') then
-    rstr = 'KBq'
+    rstr = 'kBq'
     rfac = 1.e-3
   endif
   if (radiounit == 'mbq') then
@@ -46,7 +46,7 @@ subroutine conversion
     rfac = 1./3.7e10
   endif
   if (radiounit == 'kci') then
-    rstr = 'KCi'
+    rstr = 'kCi'
     rfac = 1./3.7e13
   endif
   if (radiounit == 'mci') then
