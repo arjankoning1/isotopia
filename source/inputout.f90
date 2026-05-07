@@ -81,6 +81,7 @@ subroutine inputout
     if (k0 > 1) write(*, '(" Eback             ", f7.3, " Eback        lower end of energy range in MeV")') Eback
     write(*, '(" Ibeam             ", f7.3, " Ibeam_input  beam current in ",a)') Ibeam_input, trim(cstr)
   endif
+  write(*, '(" fgamma            ", f7.3, " fgamma       electron-to-photon conversion effiency")') fgamma
 !
 ! Output
 !
