@@ -1,4 +1,3 @@
-   subroutine crosssections(iz, ia, is)
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! Purpose: Residual production, total and non-elastic cross sections
@@ -166,10 +165,8 @@
 !
 ! **************** Read residual production cross sections *************
 !
-  rpexist(iz, ia, is) = .false.
   Nenrp = 0
   flagiso = .false.
-  Nisomer(iz, ia) = -1
   ZAstring = '000000 '
   write(ZAstring(1:3), '(i3.3)') iz
   write(ZAstring(4:6), '(i3.3)') ia
@@ -190,7 +187,7 @@
   inquire (file = csfile, exist = lexist)
   if (lexist) then
     rpexist(iz, ia, is) = .true.
-    Nisomer(iz, ia) = max(Nisomer(iz, ia), is)
+    Nisomer(iz, ia) = is
     if (is >= 0) flagiso = .true.
     flagpositive = .false.
     iE = 0
