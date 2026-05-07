@@ -165,12 +165,13 @@ subroutine equations
             if (it <= Ntime) then
               exp_T = exp( -R_T * TT)
               exp_i = exp( -lambda_i * TT)
-              if (denom_i /= 0) then
-                term_Ti = exp_T / denom_i - exp_i / denom_i
-                Niso(iz, ia, is, it) = enum_i * term_Ti
+              eps_decay = 1.d-12 * max(abs(lambda_i), abs(R_T), 1.d-30)
+              if (abs(denom_i) > eps_decay) then
+                term_Ti = (exp_T - exp_i) / denom_i
               else
-                Niso(iz, ia, is, it) = enum_i * TT * exp_i
+                term_Ti = TT * exp_i
               endif
+              Niso(iz, ia, is, it) = enum_i * term_Ti
             else
 !
 ! Cooling
@@ -216,7 +217,6 @@ subroutine equations
                         Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
                       endif
                     else
-                    eps_decay = 1.d-12 * max(abs(lambda_i), abs(lambda_p), abs(R_T), 1.d-30)
 !
 ! Cooling only
 !
