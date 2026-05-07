@@ -175,7 +175,7 @@
   write(ZAstring(4:6), '(i3.3)') ia
   if (is == 0) ZAstring = trim(ZAstring)//'g'
   if (is == 1) ZAstring = trim(ZAstring)//'m'
-  Nisomer(iz, ia) = max(Nisomer(iz, ia), is)
+  if (is == 2) ZAstring = trim(ZAstring)//'n'
 !
 ! Read cross sections and check for positive values in energy range of interest.
 !
@@ -190,6 +190,7 @@
   inquire (file = csfile, exist = lexist)
   if (lexist) then
     rpexist(iz, ia, is) = .true.
+    Nisomer(iz, ia) = max(Nisomer(iz, ia), is)
     if (is >= 0) flagiso = .true.
     flagpositive = .false.
     iE = 0
