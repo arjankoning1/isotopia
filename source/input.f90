@@ -59,6 +59,7 @@ subroutine input
   integer            :: iz          ! charge number of residual nucleus
   integer            :: k           ! designator for particle
   integer            :: lental      ! length of string
+  real(sgl)          :: T
 !
 ! ************ Read first set of variables from input lines ************
 !
@@ -81,6 +82,7 @@ subroutine input
   Area = 1.
   fgamma = 0.3
   thickness = 0.05
+  T = 0
   Tirrad = 0
   unitTirrad = ' '
   Tcool = 0
@@ -218,9 +220,9 @@ Loop1:  do i = 1, nlines
       Tirrad(1) = 0
       unitTirrad(1) = ' '
       do k = 1, 5
-        read(word(2*k), '(i9)', iostat = istat) Tirrad(k)
-        if (istat < 0) call read_error(line, istat)
-        if (istat > 0) cycle Loop1
+        read(word(2*k), *, iostat = istat) T
+        if (istat /= 0) cycle Loop1
+        Tirrad(k) = int(T)
         read(word(2*k+1), '(a1)', iostat = istat) unitTirrad(k)
         if (istat /= 0) call read_error(line, istat)
       enddo
@@ -245,9 +247,9 @@ Loop1:  do i = 1, nlines
       Tcool(1) = 0
       unitTcool(1) = ' '
       do k = 1, 5
-        read(word(2 * k), '(i9)' , iostat = istat) Tcool(k)
-        if (istat < 0) call read_error(line, istat)
-        if (istat > 0) cycle Loop1
+        read(word(2 * k), * , iostat = istat) T
+        if (istat /= 0) cycle Loop1
+        Tcool(k) = T
         read(word(2 * k + 1), '(a1)' , iostat = istat) unitTcool(k)
         if (istat /= 0) call read_error(line, istat)
       enddo
