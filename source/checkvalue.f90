@@ -118,12 +118,14 @@ subroutine checkvalue
       endif
     endif
   endif
-  if (Zdepth < 0 .or. Zdepth > Ztarget - 1) then
-    write(*, '(" ISOTOPIA-error: 0 < = Zdepth < = Ztarget - 1")')
+  Zdepth = min(Zdepth, Ztarget -1)
+  Adepth = min(Adepth, Atarget -1)
+  if (Zdepth < 0 ) then
+    write(*, '(" ISOTOPIA-error: Zdepth >= 0")')
     stop
   endif
-  if (Adepth < 0 .or. Adepth > Atarget - 1) then
-    write(*, '(" ISOTOPIA-error: 0 < = Adepth < = Atarget - 1")')
+  if (Adepth < 0 ) then
+    write(*, '(" ISOTOPIA-error:  Adepth >= 0")')
     stop
   endif
   if (Ibeam_input <= 0. .or. Ibeam_input > 10000.) then
