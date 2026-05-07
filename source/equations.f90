@@ -78,6 +78,8 @@ subroutine equations
   real(dbl) :: term_pi ! help variable
   real(dbl) :: term_Ti ! help variable
   real(dbl) :: TT      ! help variable
+  real(dbl) :: tau     ! help variable
+  real(dbl) :: eps_decay ! help variable
 !
 ! ************ Initial condition for irradiation ***********************
 !
@@ -196,7 +198,12 @@ subroutine equations
                         enum_p = dble(N_0) * R_Tp
                         denom_p = lambda_p - R_T
                         exp_p = exp( -lambda_p * TT)
-                        term_pi = exp_p / denom_ip - exp_i / denom_ip
+                        eps_decay = 1.d-12 * max(abs(lambda_i), abs(lambda_p), 1.d-30)
+                        if (abs(denom_ip) > eps_decay) then
+                          term_pi = (exp_p - exp_i) / denom_ip
+                        else
+                          term_pi = TT * exp_p
+                        endif
                         term = lambda_p * enum_p / denom_p * (term_Ti - term_pi)
                         Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
                       endif
@@ -208,7 +215,13 @@ subroutine equations
                       exp_cp = exp( -lambda_p * (TT - Tir))
                       exp_ci = exp( -lambda_i * (TT - Tir))
                       if (denom_ip /= 0.) then
-                        term = N_p * lambda_p / denom_ip * (exp_cp - exp_ci)
+                        tau = TT - Tir
+                        eps_decay = 1.d-12 * max(abs(lambda_i), abs(lambda_p), 1.d-30)
+                        if (abs(denom_ip) > eps_decay) then
+                          term = N_p * lambda_p / denom_ip * (exp_cp - exp_ci)
+                        else
+                          term = N_p * lambda_p * tau * exp_cp
+                        endif
                         Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
                       endif
                     endif
