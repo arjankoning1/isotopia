@@ -224,7 +224,7 @@ subroutine reactionrates
 !
   do iz = Zcomp + 1, 0, -1
     do ia = Acomp, 0, -1
-      do is = -1, Nisomer(iz, ia)
+      do is = -1, 2
         if ((iz < Zcomp - Zdepth .or. ia < Acomp - Adepth) .and. .not. (iz == 0 .and. ia == 0 .and. is ==  -1)) cycle
         if (iz == 0 .and. ia == 0 .and. is ==  -1) then
           Nenrp = Nennon
