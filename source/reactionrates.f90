@@ -192,6 +192,8 @@ subroutine reactionrates
 ! locate   : subroutine to find value in ordered table
 ! pol1     : subroutine for interpolation of first order
 !
+  Nisomer = -1
+  rpexist = .false.
   reaction_rate = 0.
   sacs = 0.
   Egrid = 0.
