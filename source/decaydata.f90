@@ -5,7 +5,7 @@ subroutine decaydata
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2023-02-25   A.J. Koning    A     Original code
+!    1     2026-02-25   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -139,4 +139,4 @@ Loop1: do
   enddo
   return
 end subroutine decaydata
-! Copyright A.J. Koning 2023
+! Copyright A.J. Koning 2026
