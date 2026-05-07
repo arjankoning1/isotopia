@@ -130,8 +130,8 @@ module A0_isotopia_mod
   real(sgl)                      :: thickness  ! target thickness in cm
   real(sgl)                      :: Eback      ! lower end of energy range in MeV for isotope
   real(sgl)                      :: Ebeam      ! incident energy in MeV for isotope production
-  real(sgl)                      :: Ibeam_input! beam current in mA for isotope production
-  real(sgl)                      :: Ibeam      ! beam current in mA for isotope production
+  real(sgl)                      :: Ibeam_input! beam current for isotope production
+  real(sgl)                      :: Ibeam      ! beam current for isotope production
   real(sgl)                      :: rho_target  ! target material density
   real(sgl)                      :: targetmass ! target mass in grams
   real(sgl)                      :: targetmass_input ! target mass in grams
