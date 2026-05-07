@@ -1,0 +1,6 @@
+projectile p
+element As
+mass 75
+Ebeam 40.
+Eback 30.
+Ibeam 0.150
