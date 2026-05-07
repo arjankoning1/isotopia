@@ -117,7 +117,12 @@ subroutine reactionrates
       norm = norm + phi(nE) * dEint(nE)
       Eaverage = Eaverage + Eint(nE) * phi(nE) * dEint(nE)
     enddo
-    if (norm > 0.) Eaverage = Eaverage / norm
+    if (norm > 0.) then
+      Eaverage = Eaverage / norm
+      do nE = 1, NintE
+        phi(nE) = phi(nE) / norm
+      enddo
+    endif
   endif
 !
 ! **** Neutrons: read neutron spectrum 
@@ -219,7 +224,7 @@ subroutine reactionrates
 !
   do iz = Zcomp + 1, 0, -1
     do ia = Acomp, 0, -1
-      do is = -1, 1
+      do is = -1, Nisomer(iz, ia)
         if ((iz < Zcomp - Zdepth .or. ia < Acomp - Adepth) .and. .not. (iz == 0 .and. ia == 0 .and. is ==  -1)) cycle
         if (iz == 0 .and. ia == 0 .and. is ==  -1) then
           Nenrp = Nennon
