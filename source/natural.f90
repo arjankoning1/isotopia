@@ -127,7 +127,7 @@ subroutine natural
   reaction='('//ptype0//',x)'
   do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
-      do is = -1, Nisomer(iz, ia)
+      do is = -1, numisom
         resexist(iz, ia, is) = .false.
         do iso = 1, isonum
           if (flagZAoutput) then
@@ -192,7 +192,7 @@ subroutine natural
       enddo
     enddo
 Loop1: do ia = Acomp, Acomp - Adepth, -1
-      do is = -1, Nisomer(iz, ia)
+      do is = -1, numisom
         if ( .not. resexist(iz, ia, is)) cycle Loop1
         do it = 1, Ntime
           if (Nisototnat(iz, it) /= 0.) Nisorelnat(iz, ia, is, it) = Nisonat(iz, ia, is, it) / Nisototnat(iz, it)
@@ -212,7 +212,7 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
   targetnuclide=trim(Starget)//'0'
   do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
-      do is = -1, Nisomer(iz, ia)
+      do is = -1, numisom
         if (resexist(iz, ia, is)) then
           massstring='   '
           write(massstring,'(i3)') ia
