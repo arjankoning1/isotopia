@@ -39,7 +39,7 @@ subroutine input
 !              unitTcool, &   ! cooling time unit (y, d, h, m, s)
 !              unitTirrad, &  ! irradiation time unit (y, d, h, m, s)
 !              yield, &       ! yield of produced isotope in MBq / (mA.h)
-!              yieldunit, &   ! unit for isotope yield: num (number), mug, mg, g, or kg
+!              yieldunit, &   ! unit for isotope yield: mug, mg, g, or kg
 !              Ztarget        ! charge number of target nucleus
 !
 ! *** Declaration of local data
@@ -249,7 +249,7 @@ Loop1:  do i = 1, nlines
       do k = 1, 5
         read(word(2 * k), * , iostat = istat) T
         if (istat /= 0) cycle Loop1
-        Tcool(k) = T
+        Tcool(k) = int(T)
         read(word(2 * k + 1), '(a1)' , iostat = istat) unitTcool(k)
         if (istat /= 0) call read_error(line, istat)
       enddo
@@ -283,8 +283,7 @@ Loop1:  do i = 1, nlines
       endif
       is = -1
       read(word(5), * , iostat = istat) is
-      if (istat < 0) call read_error(line, istat)
-      if (istat > 0) cycle Loop1
+      if (istat /= 0) cycle Loop1
       if (is <  -1 .or. is > 1)  call read_error(line, istat)
       xsfile(iz, ia, is) = word(4)
       cycle
