@@ -1,0 +1,51 @@
+# header:
+#   title: Os192(a,x)Re190m cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2026-01-15
+#   format: YANDF-0.4
+# endf:
+#   library: tendl.2025
+#   author: A.J. Koning
+#   year: 2025
+# target:
+#   Z: 76
+#   A: 192
+#   nuclide: Os192
+# reaction:
+#   type: (a,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+#   residual:
+#     Z: 75
+#     A: 190
+#     nuclide: Re190m
+#     level:
+#       isomer: 1
+#   quantity:
+#     type: cross section
+#   datablock:
+#     columns: 2
+#     entries: 20
+##       E             xs
+##     [MeV]          [mb]
+   3.500000E+01   9.167631E-11
+   4.000000E+01   1.299438E-07
+   4.500000E+01   1.333493E-05
+   5.000000E+01   1.538328E-04
+   5.500000E+01   5.177031E-04
+   6.000000E+01   8.012370E-04
+   6.500000E+01   9.429634E-04
+   7.000000E+01   9.174693E-04
+   7.500000E+01   9.170640E-04
+   8.000000E+01   1.056713E-03
+   9.000000E+01   5.272838E-03
+   1.000000E+02   1.956621E-02
+   1.100000E+02   4.493487E-02
+   1.200000E+02   8.452621E-02
+   1.300000E+02   1.209135E-01
+   1.400000E+02   1.482684E-01
+   1.500000E+02   2.391009E-01
+   1.600000E+02   2.941773E-01
+   1.800000E+02   3.255891E-01
+   2.000000E+02   5.893641E-01
