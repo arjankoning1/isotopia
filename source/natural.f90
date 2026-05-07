@@ -125,9 +125,9 @@ subroutine natural
   id4 = indent + 4
   quantity='Isotope production'
   reaction='('//ptype0//',x)'
-  do iz = Zcomp, Zcomp - Zdepth, -1
+  do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
-      do is = -1, 1
+      do is = -1, Nisomer(iz, ia)
         resexist(iz, ia, is) = .false.
         do iso = 1, isonum
           if (flagZAoutput) then
@@ -140,6 +140,7 @@ subroutine natural
             Yfile0 = trim(nuc(iz)) //Astr
             if (is == 0) Yfile0 = trim(Yfile0)//'g'
             if (is == 1) Yfile0 = trim(Yfile0)//'m'
+            if (is == 2) Yfile0 = trim(Yfile0)//'n'
             Yfile0 = trim(Yfile0)//'.act'
           endif
           if (is >= 1) then
@@ -190,7 +191,7 @@ subroutine natural
       enddo
     enddo
 Loop1: do ia = Acomp, Acomp - Adepth, -1
-      do is = -1, 1
+      do is = -1, Nisomer(iz, ia)
         if ( .not. resexist(iz, ia, is)) cycle Loop1
         do it = 1, Ntime
           if (Nisototnat(iz, it) /= 0.) Nisorelnat(iz, ia, is, it) = Nisonat(iz, ia, is, it) / Nisototnat(iz, it)
@@ -208,9 +209,9 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
     yieldstring = trim(rstr)//'/('//trim(ystr)//'.'//trim(tstr)//')'
   endif 
   targetnuclide=trim(Starget)//'0'
-  do iz = Zcomp, Zcomp - Zdepth, -1
+  do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
-      do is = -1, 1
+      do is = -1, Nisomer(iz, ia)
         if (resexist(iz, ia, is)) then
           massstring='   '
           write(massstring,'(i3)') ia
@@ -299,9 +300,9 @@ Loop1: do ia = Acomp, Acomp - Adepth, -1
   form2='(f8.1,xxf8.5)'
   write(form2(7:8), '(i2)') Zdepth+1
   open (2, status = 'unknown', file = 'elements.out')
-  write(2, fmt = form1) (nuc(iz), iz = Zcomp, Zcomp - Zdepth, -1)
+  write(2, fmt = form1) (nuc(iz), iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1)
   do it = 1, Ntime
-    write(2, fmt = form2) Tgrid(it), (Nelrel(iz, it), iz = Zcomp, Zcomp - Zdepth, -1)
+    write(2, fmt = form2) Tgrid(it), (Nelrel(iz, it), iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1)
   enddo
   write( * , '()' ) 
   write( * , * ) " End of ISOTOPIA for natural target"
