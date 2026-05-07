@@ -129,7 +129,7 @@ subroutine checkvalue
     stop
   endif
   if (Ibeam_input <= 0. .or. Ibeam_input > 10000.) then
-    write(*, '(" ISOTOPIA-error: 0 < = Ibeam < 10000 mA")')
+    write(*, '(" ISOTOPIA-error: 0 < = Ibeam < 10000 in selected currentunit")')
     stop
   endif
   if (Area <= 0. .or. Area > 10000.) then
