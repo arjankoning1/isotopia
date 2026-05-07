@@ -195,8 +195,6 @@ subroutine equations
                     if (it <= Ntime) then
                       R_Tp = dble(reaction_rate(Zparent, ia, is_p))
                       if (R_Tp > 0. .and. lambda_p > 0.) then
-                        enum_p = dble(N_0) * R_Tp
-                        denom_p = lambda_p - R_T
                         exp_p = exp( -lambda_p * TT)
                         eps_decay = 1.d-12 * max(abs(lambda_i), abs(lambda_p), 1.d-30)
                         if (abs(denom_ip) > eps_decay) then
@@ -204,10 +202,21 @@ subroutine equations
                         else
                           term_pi = TT * exp_p
                         endif
-                        term = lambda_p * enum_p / denom_p * (term_Ti - term_pi)
+                        enum_p = dble(N_0) * R_Tp
+                        denom_p = lambda_p - R_T
+                        if (abs(denom_p) > eps_decay) then
+                          term = lambda_p * enum_p / denom_p * (term_Ti - term_pi)
+                        else
+                          if (abs(denom_i) > eps_decay) then
+                            term = R_T * enum_p * (TT * exp_T * denom_i - exp_T + exp_i) / (denom_i * denom_i)
+                          else
+                            term = 0.5d0 * R_T * enum_p * TT * TT * exp_T
+                          endif
+                        endif
                         Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
                       endif
                     else
+                    eps_decay = 1.d-12 * max(abs(lambda_i), abs(lambda_p), abs(R_T), 1.d-30)
 !
 ! Cooling only
 !
