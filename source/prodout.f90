@@ -50,7 +50,7 @@ subroutine prodout
 !              Tp, &           ! irradiation time with maximal yield per time unit
 !              V_target, &         ! active target volume
 !              yield, &        ! yield of produced isotope in MBq / (mA.h)
-!              yieldunit, &    ! unit for isotope yield: num (number), mug, mg, g, or kg
+!              yieldunit, &    ! unit for isotope yield:  mug, mg, g, or kg
 !              Ztarget         ! charge number of target nucleus
 !
 ! *** Declaration of local data
@@ -191,6 +191,7 @@ subroutine prodout
           Yfile = trim(nuc(iz)) //Astr
           if (is == 0) Yfile = trim(Yfile)//'g'
           if (is == 1) Yfile = trim(Yfile)//'m'
+          if (is == 2) Yfile = trim(Yfile)//'n'
           Yfile = trim(Yfile)//'.act'//natstring(iso)
         endif
         if (is >= 1) then
