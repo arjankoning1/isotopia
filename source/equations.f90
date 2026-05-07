@@ -115,7 +115,7 @@ subroutine equations
       Nisototnat(iz,it)=0.
     enddo
     do ia = Acomp, Acomp - Adepth, -1
-      do is = -1, 1
+      do is = -1, Nisomer(iz, ia)
         Yexist(iz,ia,is)=.false.
         if (iz /= Zcomp + 1 .and.  .not. rpexist(iz, ia, is)) cycle
         Tmax(iz,ia,is)=0.
@@ -186,7 +186,7 @@ subroutine equations
 !
 ! Account for isomeric decay of parent
 !
-                do is_p = -1, 1
+                do is_p = -1, Nisomer(Zparent, ia)
                   if ((isob ==  -1 .and. rtyp(Zparent, ia, is_p) == 1) .or. (isob == 1 .and. rtyp(Zparent, ia, is_p) == 2)) then
                     lambda_p = dble(lambda(Zparent, ia, is_p))
                     denom_ip = lambda_i - lambda_p
@@ -242,7 +242,7 @@ subroutine equations
       enddo
     enddo
     do ia = Acomp, Acomp - Adepth, -1
-      do is = -1, 1
+      do is = -1, Nisomer(iz, ia)
         if (Yexist(iz, ia, is)) then
           do it = 0, numtime
             if (Nisotot(iz, it) /= 0.) Nisorel(iz, ia, is, it) = Niso(iz, ia, is, it) / Nisotot(iz, it)
