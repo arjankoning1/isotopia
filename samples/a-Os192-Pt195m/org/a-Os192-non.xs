@@ -2,7 +2,7 @@
 #   title: Os192(a,non) Cross section
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-05-07
+#   date: 2026-05-08
 #   format: YANDF-0.4
 # target: 
 #   Z: 76
