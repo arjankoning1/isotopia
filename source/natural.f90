@@ -51,7 +51,7 @@ subroutine natural
 !
   implicit none
   logical           :: lexist                            ! logical to determine existence
-  logical           :: resexist(0:numZ, 0:numA, -1:1)    ! logical to determine existence of residual production file
+  logical           :: resexist(0:numZ, 0:numA, -1:numisom)    ! logical to determine existence of residual production file
   character(len=3)  :: Astr                              !
   character(len=3)  :: massstring !
   character(len=12) :: yieldstring
@@ -59,7 +59,7 @@ subroutine natural
   character(len=13) :: state                             ! state of final nuclide
   character(len=15) :: Yfile0                            !
   character(len=20) :: Yf
-  character(len=15) :: Yfile(0:numZ, 0:numA, -1:1)       ! file with production yields
+  character(len=15) :: Yfile(0:numZ, 0:numA, -1:numisom)       ! file with production yields
   character(len=40) :: form1                             ! format
   character(len=40) :: form2                             ! format
   character(len=16) :: reaction   ! reaction
