@@ -6,7 +6,7 @@
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-04-26
+ Date: 2026-05-07
 
  ########## USER INPUT ##########
 
@@ -54,8 +54,8 @@
  #
  # Cross section and decay data
  #
- Zdepth              8     Zdepth       depth to which Z numbers are scanned for cross sections
- Adepth             18     Adepth       depth to which A numbers are scanned for cross sections
+ Zdepth              7     Zdepth       depth to which Z numbers are scanned for cross sections
+ Adepth             17     Adepth       depth to which A numbers are scanned for cross sections
  decay               y     flagdecay    flag to include decay of nuclides (n only for diagnosis) 
 
 
