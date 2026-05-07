@@ -18,7 +18,7 @@ subroutine checkkeyword
 !              path, &      ! directory containing files to be read
 !              radiounit, & ! unit for radioactivity: Bq, kBq, MBq, Gbq, mCi,
 !              yield, &     ! yield of produced isotope in MBq / (mA.h)
-!              yieldunit    ! unit for isotope yield: num (number), mug, mg, g, or kg
+!              yieldunit    ! unit for isotope yield:  mug, mg, g, or kg
 !
 ! *** Declaration of local data
 !
