@@ -284,7 +284,7 @@ Loop1:  do i = 1, nlines
       is = -1
       read(word(5), * , iostat = istat) is
       if (istat /= 0) cycle Loop1
-      if (is <  -1 .or. is > 1)  call read_error(line, istat)
+      if (is <  -1 .or. is > numisom)  call read_error(line, istat)
       xsfile(iz, ia, is) = word(4)
       cycle
     endif
