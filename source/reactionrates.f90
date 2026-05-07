@@ -94,7 +94,7 @@ subroutine reactionrates
     Estring = '000'
     write(Estring(1:3), '(i3.3)') iE
     specfile = trim(path)//'files/photon_spectra/brems_'//Estring//'MeV.txt'
-    open (unit = 1, status = 'unknown', file = specfile)
+    open (unit = 1, status = 'old', file = specfile)
     nen = 0
     do
       read(1, '(a)', iostat = istat) string
@@ -133,7 +133,7 @@ subroutine reactionrates
     Estring = '000'
     write(Estring(1:3), '(i3.3)') iE
     specfile = trim(path)//'files/neutron_spectra/n-hfr.dat'
-    open (unit = 1, status = 'unknown', file = specfile)
+    open (unit = 1, status = 'old', file = specfile)
     nen = 0
     do
       read(1, '(a)', iostat = istat) string
