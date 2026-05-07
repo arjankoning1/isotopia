@@ -57,13 +57,23 @@ for f in ${files} ; do
   if [ -e outputdiff ]; then
     rm outputdiff
   fi
+  tmpdiff=`mktemp`
   for of in `ls -1` ; do
-    diff ${of} ../org/${of} | grep -v date >> /dev/null
-    if [ $? -eq 1 ] ; then
+    if [ "${of}" == "outputdiff" ] ; then
+      continue
+    fi
+    if [ ! -e ../org/${of} ] ; then
       echo $of >> outputdiff
-      diff ${of} ../org/${of} | grep -v date >> outputdiff
+      echo "Missing reference file: ../org/${of}" >> outputdiff
+      continue
+    fi
+    diff ${of} ../org/${of} | grep -v date > ${tmpdiff}
+    if [ -s ${tmpdiff} ] ; then
+      echo $of >> outputdiff
+      cat ${tmpdiff} >> outputdiff
     fi
   done
+  rm -f ${tmpdiff}
   cd $homedir
   if [ $ii -ge $iimax ] ; then 
     break
