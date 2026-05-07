@@ -214,16 +214,14 @@ subroutine equations
                       N_p = Niso(Zparent, ia, is_p, Ntime)
                       exp_cp = exp( -lambda_p * (TT - Tir))
                       exp_ci = exp( -lambda_i * (TT - Tir))
-                      if (denom_ip /= 0.) then
-                        tau = TT - Tir
-                        eps_decay = 1.d-12 * max(abs(lambda_i), abs(lambda_p), 1.d-30)
-                        if (abs(denom_ip) > eps_decay) then
-                          term = N_p * lambda_p / denom_ip * (exp_cp - exp_ci)
-                        else
-                          term = N_p * lambda_p * tau * exp_cp
-                        endif
-                        Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
-                      endif
+                      tau = TT - Tir
+                      eps_decay = 1.d-12 * max(abs(lambda_i), abs(lambda_p), 1.d-30)
+                      if (abs(denom_ip) > eps_decay) then
+                        term = N_p * lambda_p / denom_ip * (exp_cp - exp_ci)
+                      else
+                        term = N_p * lambda_p * tau * exp_cp
+                    endif
+                      Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
                     endif
                   endif
                 enddo
