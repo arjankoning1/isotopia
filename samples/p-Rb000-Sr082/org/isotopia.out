@@ -45,6 +45,7 @@
  Ebeam              70.000 Ebeam        incident energy in MeV
  Eback              30.000 Eback        lower end of energy range in MeV
  Ibeam               1.000 Ibeam_input  beam current in mA
+ fgamma              0.300 fgamma       electron-to-photon conversion effiency
  #
  # Output 
  #
@@ -308,6 +309,7 @@ file: Zn068.act.085
  Ebeam              70.000 Ebeam        incident energy in MeV
  Eback              30.000 Eback        lower end of energy range in MeV
  Ibeam               1.000 Ibeam_input  beam current in mA
+ fgamma              0.300 fgamma       electron-to-photon conversion effiency
  #
  # Output 
  #

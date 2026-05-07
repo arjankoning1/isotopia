@@ -30,6 +30,7 @@
  projectile          n     ptype0       type of incident particle
  element            Ir     Starget      symbol of target nucleus
  mass              191     Atarget      mass number of target nucleus
+ fgamma              0.300 fgamma       electron-to-photon conversion effiency
  #
  # Output 
  #

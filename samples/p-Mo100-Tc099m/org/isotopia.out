@@ -39,6 +39,7 @@
  Ebeam              16.000 Ebeam        incident energy in MeV
  Eback              12.000 Eback        lower end of energy range in MeV
  Ibeam               0.150 Ibeam_input  beam current in mA
+ fgamma              0.300 fgamma       electron-to-photon conversion effiency
  #
  # Output 
  #
@@ -85,7 +86,7 @@
 #              [Bq]          [Bq/g]        [Bq/(mA.h)]        []            []        [s^-1]         [s^-1]       
  Ru 101     0.000000E+00   0.000000E+00   0.000000E+00   5.809994E+13   0.01699   0.000000E+00   0.000000E+00       stable                                infinite                       
  Ru 100     0.000000E+00   0.000000E+00   0.000000E+00   3.362020E+15   0.98301   0.000000E+00   0.000000E+00       stable                                infinite                       
- Ru  99     0.000000E+00   0.000000E+00   0.000000E+00   3.630139E+08   0.00000   0.000000E+00   0.000000E+00       stable                                infinite                       
+ Ru  99     0.000000E+00   0.000000E+00   0.000000E+00   3.631279E+08   0.00000   0.000000E+00   0.000000E+00       stable                                infinite                       
  Tc 101     6.821752E+08   6.364034E+09   7.151905E+09   8.385135E+11   0.00005   1.056790E-12   8.135531E-04          0 y   0 d   0 h  14 m  12 s           0 y   0 d   4 h  38 m  52 s 
  Tc 100     3.892415E+10   3.631246E+11   5.406132E+11   8.872597E+11   0.00047   6.029836E-11   4.387007E-02          0 y   0 d   0 h   0 m  15 s           0 y   0 d   0 h   6 m  41 s 
  Tc  99     1.330644E+11   4.456195E+04   1.322761E+03   3.981607E+16   0.53891   8.317805E-10   1.026401E-13                                                                            
