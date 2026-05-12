@@ -91,7 +91,7 @@ subroutine checkvalue
     Atarget = isotope(iso)
   endif
   if (Atarget <= 5 .or. Atarget > numA) then
-    write(*, '(" ISOTOPIA-error: 5 < Target mass < = ", i3)') numA
+    write(*, '(" ISOTOPIA-error: 5 < Target mass <= ", i3)') numA
     stop
   endif
   if (k0 /= 1) then
@@ -99,7 +99,7 @@ subroutine checkvalue
       write(*, '(" ISOTOPIA-error: incident energy must be given")')
       stop
     endif
-    if (Ebeam <= 0..or.Ebeam > 250.) then
+    if (Ebeam <= 0. .or. Ebeam > 250.) then
       write(*, '(" ISOTOPIA-error: 0 < Ebeam < 250 MeV")')
       stop
     endif
@@ -107,7 +107,7 @@ subroutine checkvalue
       if (Eback ==  -1.) then
         Eback = max(Ebeam - 5., 0.1)
       else
-        if (Eback <= 0..or.Eback > 250.) then
+        if (Eback <= 0. .or. Eback > 250.) then
           write(*, '(" ISOTOPIA-error: 0 < Eback < 250 MeV")')
           stop
         endif
@@ -133,20 +133,20 @@ subroutine checkvalue
     stop
   endif
   if (Area <= 0. .or. Area > 10000.) then
-    write(*, '(" ISOTOPIA-error: 0 < = Area < 10000 cm^2")')
+    write(*, '(" ISOTOPIA-error: 0 <  Area <= 10000 cm^2")')
     stop
   endif
   if (thickness <= 0. .or. thickness > 10000.) then
-    write(*, '(" ISOTOPIA-error: 0 < = thickness < 10000 cm")')
+    write(*, '(" ISOTOPIA-error: 0 <  thickness <= 10000 cm")')
     stop
   endif
   do k = 1, 5
-    if (Tirrad(k) < 0 .or. Tirrad(k) >= 1000000) then
-      write(*, '(" ISOTOPIA-error: 0 < = Tirrad < 1.e6")')
+    if (Tirrad(k) < 0 .or. Tirrad(k) > 1000000) then
+      write(*, '(" ISOTOPIA-error: 0 < = Tirrad <= 1.e6")')
       stop
     endif
-    if (Tcool(k) < 0 .or. Tcool(k) >= 1000000) then
-      write(*, '(" ISOTOPIA-error: 0 < = Tcool < 1.e6")')
+    if (Tcool(k) < 0 .or. Tcool(k) > 1000000) then
+      write(*, '(" ISOTOPIA-error: 0 < = Tcool <= 1.e6")')
       stop
     endif
   enddo
