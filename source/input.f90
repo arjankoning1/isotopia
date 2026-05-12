@@ -201,19 +201,19 @@ Loop1:  do i = 1, nlines
     if (key == 'zaoutput') then
       if (ch == 'n') flagZAoutput = .false.
       if (ch == 'y') flagZAoutput = .true.
-      if (ch /= 'y' .and. ch /= 'n') cycle
+      if (ch /= 'y' .and. ch /= 'n') call read_error(line, istat)
       cycle
     endif
     if (key == 'selfshield') then
       if (ch == 'n') flagselfshield = .false.
       if (ch == 'y') flagselfshield = .true.
-      if (ch /= 'y' .and. ch /= 'n') cycle
+      if (ch /= 'y' .and. ch /= 'n') call read_error(line, istat)
       cycle
     endif
     if (key == 'outcross') then
       if (ch == 'n') flagcross = .false.
       if (ch == 'y') flagcross = .true.
-      if (ch /= 'y' .and. ch /= 'n') cycle
+      if (ch /= 'y' .and. ch /= 'n') call read_error(line, istat)
       cycle
     endif
     if (key == 'tirrad') then
@@ -258,7 +258,7 @@ Loop1:  do i = 1, nlines
     if (key == 'decay') then
       if (ch == 'n') flagdecay = .false.
       if (ch == 'y') flagdecay = .true.
-      if (ch /= 'y' .and. ch /= 'n') cycle
+      if (ch /= 'y' .and. ch /= 'n') call read_error(line, istat)
       cycle
     endif
     if (key == 'crosspath') then
@@ -281,11 +281,11 @@ Loop1:  do i = 1, nlines
         write(*, '(" ISOTOPIA-error: Z, A index out of range ", a)') trim(inline(i))
         stop
       endif
+      xsfile(iz, ia, is) = word(4)
       is = -1
       read(word(5), * , iostat = istat) is
       if (istat /= 0) cycle Loop1
       if (is <  -1 .or. is > numisom)  call read_error(line, istat)
-      xsfile(iz, ia, is) = word(4)
       cycle
     endif
     if (key == 'source') then
