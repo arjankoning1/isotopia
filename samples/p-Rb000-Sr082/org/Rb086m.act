@@ -2,7 +2,7 @@
 #   title: Rb0(p,x)Rb86 m Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-05-13
+#   date: 2026-05-17
 #   format: YANDF-0.4
 # target: 
 #   Z: 37
@@ -21,7 +21,7 @@
 #     Number of target atoms:  1.869716E+22
 #     Reaction constant [s^-1]:  1.865594E-10
 #     Decay constant [s^-1]:  1.136307E-02
-#     Initial production rate [Bq/(mA.h)]:  2.616065E+13
+#     Initial production rate [Bq/(mA.h)]:  7.266848E+12
 #     Total activity at EOI [Bq]:  0.000000E+00
 #     Specific activity at EOI [Bq/g]:  0.000000E+00
 #     Irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
@@ -35,7 +35,7 @@
 #     entries: 100
 ##     Time         Activity     Spec_activity    Prod_rate      #Isotopes    Isot_fraction      Time
 ##      [s]           [Bq]          [Bq/g]       [Bq/(mA.h)]        []             []             [h]
-   1.728000E+03   3.488087E+12   1.291348E+12   2.616065E+13   3.069668E+14   1.641789E-08   4.800000E-01
+   1.728000E+03   3.488087E+12   1.291348E+12   7.266848E+12   3.069668E+14   1.641789E-08   4.800000E-01
    3.456000E+03   3.488040E+12   1.291330E+12   0.000000E+00   3.069627E+14   1.641774E-08   9.600000E-01
    5.184000E+03   3.487992E+12   1.291313E+12   0.000000E+00   3.069585E+14   1.641760E-08   1.440000E+00
    6.912000E+03   3.487945E+12   1.291295E+12   0.000000E+00   3.069544E+14   1.641746E-08   1.920000E+00

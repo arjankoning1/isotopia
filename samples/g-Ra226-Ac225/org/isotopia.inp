@@ -1,5 +1,11 @@
 projectile g
 element Ra
 mass 226
-Ebeam 20.
-Ibeam 0.150
+ebeam 30.
+ibeam 0.667
+currentunit A
+tirrad 10.
+timeunit d
+targetmass 1.0
+yieldunit g
+tcool 0.

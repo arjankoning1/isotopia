@@ -1,5 +1,10 @@
 projectile p
 element Ga
 mass 0
-Ebeam 60.
-Eback 15.
+ebeam 30.
+eback 20.
+ibeam 0.20
+tirrad 48.
+timeunit h
+radiounit Gbq
+outcross y

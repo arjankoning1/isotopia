@@ -1,3 +1,7 @@
 projectile n
 element Ir
 mass 191
+fluxtotal 1.e14
+tirrad 1.
+timeunit d
+targetmass 0.010

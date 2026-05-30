@@ -1,0 +1,45 @@
+# header:
+#   title: Ga71(p,x)Ga65 cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2026-01-15
+#   format: YANDF-0.4
+# endf:
+#   library: tendl.2025
+#   author: A.J. Koning
+#   year: 2025
+# target:
+#   Z: 31
+#   A: 71
+#   nuclide: Ga71
+# reaction:
+#   type: (p,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+#   residual:
+#     Z: 31
+#     A: 65
+#     nuclide: Ga65
+#   quantity:
+#     type: cross section
+#   datablock:
+#     columns: 2
+#     entries: 16
+##       E             xs
+##     [MeV]          [mb]
+   5.500000E+01   4.110852E-05
+   6.000000E+01   1.157746E-02
+   6.500000E+01   1.027364E-01
+   7.000000E+01   3.596313E-01
+   7.500000E+01   9.309215E-01
+   8.000000E+01   1.576292E+00
+   9.000000E+01   3.584448E+00
+   1.000000E+02   4.696625E+00
+   1.100000E+02   4.841928E+00
+   1.200000E+02   4.679922E+00
+   1.300000E+02   4.555923E+00
+   1.400000E+02   4.473196E+00
+   1.500000E+02   4.204970E+00
+   1.600000E+02   4.432962E+00
+   1.800000E+02   4.500906E+00
+   2.000000E+02   4.486230E+00

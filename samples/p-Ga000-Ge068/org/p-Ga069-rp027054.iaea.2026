@@ -1,0 +1,38 @@
+# header:
+#   title: Ga69(p,x)Co54 cross section
+#   source: ENDF
+#   user: Arjan Koning
+#   date: 2026-01-15
+#   format: YANDF-0.4
+# endf:
+#   library: tendl.2025
+#   author: A.J. Koning
+#   year: 2025
+# target:
+#   Z: 31
+#   A: 69
+#   nuclide: Ga69
+# reaction:
+#   type: (p,x)
+#   ENDF_MF: 6
+#   ENDF_MT: 5
+#   residual:
+#     Z: 27
+#     A: 54
+#     nuclide: Co54
+#   quantity:
+#     type: cross section
+#   datablock:
+#     columns: 2
+#     entries: 9
+##       E             xs
+##     [MeV]          [mb]
+   1.000000E+02   2.021936E-10
+   1.100000E+02   1.296788E-06
+   1.200000E+02   5.439352E-05
+   1.300000E+02   4.320832E-04
+   1.400000E+02   1.809278E-03
+   1.500000E+02   4.710981E-03
+   1.600000E+02   1.033434E-02
+   1.800000E+02   2.860496E-02
+   2.000000E+02   5.312387E-02

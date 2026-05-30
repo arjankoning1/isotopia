@@ -6,7 +6,7 @@
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-05-13
+ Date: 2026-05-18
 
  ########## USER INPUT ##########
 
@@ -15,8 +15,14 @@
  projectile g
  element ra
  mass 226
- ebeam 20.
- ibeam 0.150
+ ebeam 30.
+ ibeam 0.667
+ currentunit a
+ tirrad 10.
+ timeunit d
+ targetmass 1.0
+ yieldunit g
+ tcool 0.
 
  USER INPUT FILE + DEFAULTS
 
@@ -35,8 +41,8 @@
  #
  # Accelerator 
  #
- Ebeam              20.000 Ebeam        incident energy in MeV
- Ibeam               0.150 Ibeam_input  beam current in mA
+ Ebeam              30.000 Ebeam        incident energy in MeV
+ Ibeam               0.667 Ibeam_input  beam current in A
  fgamma              0.300 fgamma       electron-to-photon conversion effiency
  #
  # Output 
@@ -47,9 +53,9 @@
  #
  # Target
  #
- Tirrad              1     Tirrad       d irradiation time
+ Tirrad             10     Tirrad         irradiation time
  Area                1.000 Area         target area in cm^2
- Tcool               1     Tcool        d cooling time
+ targetmass      1.000 targetmass_input target mass 
  selfshield            y flagselfshield flag for self-shielding 
  #
  # Cross section and decay data
@@ -61,44 +67,46 @@
 
  Summary of isotope production for g + Ra226
 
- Maximal irradiation time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
- Cooling time [s]:    8.640000E+04 (     0 years   1 days  0 hours  0 minutes  0 seconds)
- E-beam [MeV]:   2.000000E+01
- Beam current [mA]:        0.150
+ Maximal irradiation time [s]:    8.640000E+05 (     0 years  10 days  0 hours  0 minutes  0 seconds)
+ Cooling time [s]:    0.000000E+00 (     0 years   0 days  0 hours  0 minutes  0 seconds)
+ E-beam [MeV]:   3.000000E+01
+ Beam current [A]:        0.667
  Target material density [g/cm^3]:   5.500000E+00
  Target area [cm^2]:   1.000000E+00
- Target thickness [cm]:   5.000000E-02
- Effective target volume [cm^3]:   5.000000E-02
- Effective target mass [g]:   2.750000E-01
- Average energy of spectrum [MeV]:    3.005104E+00
- Number of target atoms:    7.327826E+20
- Total flux [cm^-2s^-1]:   2.808679E+14
+ Target thickness [cm]:   1.818182E-01
+ Effective target volume [cm^3]:   1.818182E-01
+ Effective target mass [g]:   1.000000E+00
+ Average energy of spectrum [MeV]:    4.056709E+00
+ Number of target atoms:    2.664664E+21
+ Total flux [cm^-2s^-1]:   1.248926E+18
 
  (Maximum) production and decay rates per isotope
 
- Total production rate [s^-1]:   7.245003E-12
+ Total production rate [s^-1]:   4.868619E-08
 
 #  Nuc       Activity     Spec_activity    Prod_rate      #Isotopes Isot_fraction  Reac_constant   Decay_constant            Half-life                      Time of maximum production
-#              [Bq]          [Bq/g]        [Bq/(g.h)]        []            []        [s^-1]         [s^-1]       
- Ac 225     4.905473E+06   1.783808E+07   1.543831E+04   6.114616E+12   1.00000   0.000000E+00   8.022537E-07          0 y  10 d   0 h   0 m   0 s           0 y 167 d  13 h  38 m  50 s 
- Ra 226     1.005972E+10   3.658079E+10   7.620997E+10   7.327826E+20   1.00000   2.958177E-13   1.372811E-11       1599 y 352 d  23 h  53 m  36 s        3123 y 348 d   3 h  50 m  24 s 
- Ra 225     1.437229E+08   5.226289E+08   2.227967E+07   2.651405E+14   0.00000   4.286626E-12   5.420633E-07          0 y  14 d  19 h  12 m   0 s           0 y 239 d  15 h   9 m  40 s 
- Ra 224     3.294405E+08   1.197966E+09   5.471429E+07   1.494744E+14   0.00000   2.592819E-12   2.203994E-06          0 y   3 d  15 h  21 m  36 s           0 y  66 d   7 h  14 m  29 s 
- Ra 223     6.112316E+04   2.222660E+05   9.538945E+03   8.708439E+10   0.00000   1.417598E-15   7.018842E-07          0 y  11 d  10 h  19 m  12 s           0 y 189 d   7 h  51 m   9 s 
- Fr 225     1.459700E+04   5.307999E+04   1.098312E+05   5.054164E+06   0.99854   1.991996E-17   2.888113E-03          0 y   0 d   0 h   4 m   0 s           0 y   0 d   1 h  54 m  16 s 
- Fr 224     1.085428E+01   3.947011E+01   8.202450E+01   3.128751E+03   0.00062   1.481242E-20   3.469205E-03                                                                            
- Fr 224 g   6.608203E+00   2.402983E+01   4.993741E+01   1.904818E+03   0.00038   9.017959E-21   3.469205E-03          0 y   0 d   0 h   3 m  19 s           0 y   0 d   1 h  36 m   1 s 
- Fr 224 m   4.246078E+00   1.544028E+01   3.208710E+01   1.223934E+03   0.00024   5.794458E-21   3.469205E-03          0 y   0 d   0 h   3 m  19 s           0 y   0 d   1 h  36 m   1 s 
- Fr 223     6.282634E-01   2.284594E+00   2.854651E+00   1.185561E+03   0.00023   8.573668E-22   5.299291E-04          0 y   0 d   0 h  21 m  48 s           0 y   0 d   9 h  29 m  30 s 
- Rn 221     8.207886E+01   2.984686E+02   3.419948E+02   1.776221E+05   0.99752   1.120099E-19   4.620981E-04          0 y   0 d   0 h  25 m   0 s           0 y   0 d  10 h  48 m   9 s 
- Rn 220     5.478476E+00   1.992173E+01   4.150360E+01   4.410303E+02   0.00449   7.476264E-21   1.242199E-02          0 y   0 d   0 h   0 m  55 s           0 y   0 d   0 h  28 m  31 s 
- Rn 219     1.182597E-07   4.300353E-07   8.959070E-07   6.756264E-07   0.00000   1.613845E-28   1.750372E-01          0 y   0 d   0 h   0 m   3 s           0 y   0 d   0 h   2 m  16 s 
+#              [Bq]          [Bq/g]        [Bq/(g.d)]        []            []        [s^-1]         [s^-1]       
+ Ac 225     1.434385E+13   1.434385E+13   2.105765E+10   1.787944E+19       NaN   0.000000E+00   8.022537E-07          0 y  10 d   0 h   0 m   0 s           0 y  43 d   0 h  52 m  32 s 
+ Ra 226     3.655003E+10   3.655003E+10   1.827501E+11   2.662423E+21   0.99920   1.311330E-09   1.372811E-11       1599 y 352 d  23 h  53 m  36 s           5 y 117 d  10 h   0 m  48 s 
+ Ra 225     2.390979E+13   2.390979E+13   3.047261E+12   4.410885E+19   0.01682   2.453926E-08   5.420633E-07          0 y  14 d  19 h  12 m   0 s           0 y  56 d  12 h  51 m  16 s 
+ Ra 224     4.755605E+13   4.755605E+13   1.072466E+13   2.157722E+19   0.00823   2.154815E-08   2.203994E-06          0 y   3 d  15 h  21 m  36 s           0 y  20 d  11 h  22 m  29 s 
+ Ra 223     2.188504E+12   2.188504E+12   1.618206E+11   3.118041E+18       NaN   1.007895E-09   7.018842E-07          0 y  11 d  10 h  19 m  12 s           0 y  47 d   6 h  44 m  50 s 
+ Ra 222     8.359009E+10   8.359009E+10   4.179505E+11   4.582611E+12   0.00000   3.139616E-11   1.824071E-02          0 y   0 d   0 h   0 m  38 s           0 y   0 d   0 h  11 m  43 s 
+ Fr 225     8.808172E+09   8.808172E+09   4.404086E+10   3.049801E+12   0.67316   3.308273E-12   2.888113E-03          0 y   0 d   0 h   4 m   0 s           0 y   0 d   1 h   3 m  25 s 
+ Fr 224     2.323359E+09   2.323360E+09   1.161680E+10   6.697094E+11   0.14782   8.726364E-13   3.469205E-03                                                                            
+ Fr 224 g   1.301961E+09   1.301961E+09   6.509806E+09   3.752910E+11   0.08283   4.890068E-13   3.469205E-03          0 y   0 d   0 h   3 m  19 s           0 y   0 d   0 h  53 m  40 s 
+ Fr 224 m   1.021398E+09   1.021398E+09   5.106989E+09   2.944184E+11   0.06498   3.836293E-13   3.469205E-03          0 y   0 d   0 h   3 m  19 s           0 y   0 d   0 h  53 m  40 s 
+ Fr 223         Infinity       Infinity   3.746243E+08       Infinity       NaN   2.814199E-14   5.299291E-04          0 y   0 d   0 h  21 m  48 s           0 y   0 d   4 h  52 m  21 s 
+ Rn 221     1.476415E+08   1.476415E+08   7.382074E+08   3.195025E+11   0.99055   5.546686E-14   4.620981E-04          0 y   0 d   0 h  25 m   0 s           0 y   0 d   5 h  30 m  20 s 
+ Rn 220         Infinity       Infinity   1.893300E+08       Infinity       NaN   1.422232E-14   1.242199E-02          0 y   0 d   0 h   0 m  55 s           0 y   0 d   0 h  16 m  42 s 
+ Rn 219     7.071791E+04   7.071791E+04   3.535896E+05   4.040166E+05   0.00000   2.656148E-17   1.750372E-01          0 y   0 d   0 h   0 m   3 s           0 y   0 d   0 h   1 m  26 s 
 
 file: Ac225.act
 file: Ra226.act
 file: Ra225.act
 file: Ra224.act
 file: Ra223.act
+file: Ra222.act
 file: Fr225.act
 file: Fr224.act
 file: Fr224g.act
