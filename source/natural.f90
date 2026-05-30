@@ -176,9 +176,9 @@ subroutine natural
                   read(2, * , iostat = istat) Tdum, Y, Ysp, Ym, Nis
                   if (istat < 0) call read_error(Yf, istat)
                   if (istat > 0) cycle
-                  activitynat(iz, ia, is, it) = activitynat(iz, ia, is, it) + abun(iso) * Y
-                  specactivitynat(iz, ia, is, it) = specactivitynat(iz, ia, is, it) + abun(iso) * Ysp
-                  yieldnat(iz, ia, is, it) = yieldnat(iz, ia, is, it) + abun(iso) * Ym
+                  activitynat(iz, ia, is, it) = activitynat(iz, ia, is, it) + abun(iso) * Y / rfac
+                  specactivitynat(iz, ia, is, it) = specactivitynat(iz, ia, is, it) + abun(iso) * Ysp * mfac / rfac
+                  yieldnat(iz, ia, is, it) = yieldnat(iz, ia, is, it) + abun(iso) * Ym / yfac
                   Nisonat(iz, ia, is, it) = Nisonat(iz, ia, is, it) + abun(iso) * Nis
                   Nisototnat(iz, it) = Nisototnat(iz, it) + abun(iso) * Nis
                 enddo
