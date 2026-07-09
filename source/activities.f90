@@ -5,7 +5,7 @@ subroutine activities
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-04-01   A.J. Koning    A     Original code
+!    1     2026-07-09   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -55,6 +55,15 @@ subroutine activities
   activity = 0.
   yield = 0.
   specactivity = 0.
+  if (iso == 1) then
+    Nisonat=0.
+    activitynat=0.
+    specactivitynat=0.
+    yieldnat=0.
+    Nisorelnat=0.
+    Nisototnat=0.
+    reaction_ratenat=0.
+  endif
   do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, Nisomer(iz, ia)
@@ -93,6 +102,28 @@ subroutine activities
       enddo
     enddo
   enddo
+  if (flagnatural) then
+    do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
+      do ia = Acomp, Acomp - Adepth, -1
+        do is = -1, Nisomer(iz, ia)
+          do it = 1, numtime
+            activitynat(iz, ia, is, it) = activitynat(iz, ia, is, it) + abun(iso) * activity(iz, ia, is, it)
+            specactivitynat(iz, ia, is, it) = specactivitynat(iz, ia, is, it) + abun(iso) * specactivity(iz, ia, is, it)
+            yieldnat(iz, ia, is, it) = yieldnat(iz, ia, is, it) + abun(iso) * yield(iz, ia, is, it)
+            Nisonat(iz, ia, is, it) = Nisonat(iz, ia, is, it) + abun(iso) * Niso(iz, ia, is, it)
+            Nisototnat(iz, it) = Nisototnat(iz, it) + abun(iso) * Niso(iz, ia, is, it)
+          enddo
+          reaction_ratenat(iz, ia, is) = reaction_ratenat(iz, ia, is) + abun(iso) * reaction_rate(iz, ia, is)
+          if (iso == isonum) then
+            do it = 1, numtime
+              if (Nisototnat(iz, it) /= 0.) Nisorelnat(iz, ia, is, it) = Nisonat(iz, ia, is, it) / Nisototnat(iz, it)
+              Nelrel(iz, it) = Nisototnat(iz, it) / N_0_nat
+            enddo
+          endif
+        enddo
+      enddo
+    enddo
+  endif
   return
 end subroutine activities
 ! Copyright A.J. Koning 2026
