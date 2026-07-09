@@ -5,7 +5,7 @@ module A0_isotopia_mod
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-05-12  A.J. Koning    A     Original code
+!    1     2026-07-09  A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -158,6 +158,7 @@ module A0_isotopia_mod
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
   logical, dimension(0:numZ, 0:numA, -1:numisom)           :: Yexist       ! logical for yield
+  logical, dimension(0:numZ, 0:numA, -1:numisom)           :: Ynatexist    ! logical for yield
   integer                                                  :: Nenrp        ! number of incident energies for residual prod
   real(sgl)                                                :: Leff         ! effective thickness of target
   real(sgl)                                                :: V_target         ! active target volume
@@ -168,7 +169,6 @@ module A0_isotopia_mod
   real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: reaction_rate ! reaction rate per isotope
   real(sgl)                                                :: selfshield_av ! average self-shielding factor
   real(sgl), dimension(-1:numZ, -1:numA, -1:numisom)       :: sacs         ! spectrum averaged cross section
-  real(sgl), dimension(0:numen)                            :: Erp          ! incident energy
   real(sgl), dimension(0:numen)                            :: xsrp         ! residual production cross section in mb
   integer                                                  :: Ntime        ! number of time points
   integer, dimension(0:numZ,0:numA,-1:numisom)             :: Tmaxactivity ! time of maximum activity of produced isoto
