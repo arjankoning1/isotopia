@@ -2,7 +2,7 @@
 #   title: Yb176(n,x)Yb176 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-05-17
+#   date: 2026-07-09
 #   format: YANDF-0.4
 # target: 
 #   Z: 70
@@ -19,7 +19,7 @@
 #     Reaction constant [s^-1]:  9.110631E-11
 #     Decay constant [s^-1]:  0.000000E+00
 #     Spectrum averaged cross section [mb]:  9.110630E+02
-#     Average self-shielding factor:  9.933999E-01
+#     Average self-shielding factor:  9.934000E-01
 #     Initial production rate [Bq/(g.h)]:  0.000000E+00
 #     Total activity at EOI [Bq]:  0.000000E+00
 #     Specific activity at EOI [Bq/g]:  0.000000E+00

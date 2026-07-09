@@ -2,7 +2,7 @@
 #   title: Lu176(n,x)Lu176 Isotope production
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-05-17
+#   date: 2026-07-09
 #   format: YANDF-0.4
 # target: 
 #   Z: 71
@@ -16,9 +16,9 @@
 #     nuclide: Lu176
 #   parameters: 
 #     Number of target atoms:  1.683462E+21
-#     Reaction constant [s^-1]:  6.704484E-11
+#     Reaction constant [s^-1]:  6.704485E-11
 #     Decay constant [s^-1]:  0.000000E+00
-#     Spectrum averaged cross section [mb]:  6.704484E+02
+#     Spectrum averaged cross section [mb]:  6.704485E+02
 #     Average self-shielding factor:  8.513359E-01
 #     Initial production rate [Bq/(g.h)]:  0.000000E+00
 #     Total activity at EOI [Bq]:  0.000000E+00
