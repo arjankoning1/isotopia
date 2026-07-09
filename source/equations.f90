@@ -5,7 +5,7 @@ subroutine equations
 !
 ! Revision    Date      Author      Quality  Description
 ! ======================================================
-!    1     2026-02-26   A.J. Koning    A     Original code
+!    1     2026-07-09   A.J. Koning    A     Original code
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
 ! *** Use data from other modules
@@ -114,28 +114,20 @@ subroutine equations
   do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do it=0,numtime
       Nisotot(iz,it)=0.
-      Nisototnat(iz,it)=0.
     enddo
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, Nisomer(iz, ia)
         Yexist(iz,ia,is)=.false.
-        if (iz /= Zcomp + 1 .and.  .not. rpexist(iz, ia, is)) cycle
+        if (iz /= Zcomp + 1 .and. .not. rpexist(iz, ia, is)) cycle
         Tmax(iz,ia,is)=0.
         Tmaxactivity(iz,ia,is)=0.
         do it=1,5
           Tp(iz,ia,is,it)=0.
         enddo
-        reaction_ratenat(iz,ia,is)=0.
+        if (iso == 1) Ynatexist(iz,ia,is)=.false.
         do it=0,numtime
           Niso(iz,ia,is,it)=0.
-          activity(iz,ia,is,it)=0.
-          yield(iz,ia,is,it)=0.
           Nisorel(iz,ia,is,it)=0.
-          Nisonat(iz,ia,is,it)=0.
-          activitynat(iz,ia,is,it)=0.
-          specactivitynat(iz,ia,is,it)=0.
-          yieldnat(iz,ia,is,it)=0.
-          Nisorelnat(iz,ia,is,it)=0.
         enddo
         if (iz == Ztarget .and. ia == Atarget .and. is ==  -1) then
           Niso(iz, ia, is, 0) = dble(N_0)
@@ -237,7 +229,10 @@ subroutine equations
               enddo
             endif
           endif
-          if (Niso(iz, ia, is, it) > 0.) Yexist(iz, ia, is) = .true.
+          if (Niso(iz, ia, is, it) > 0.) then
+            Yexist(iz, ia, is) = .true.
+            Ynatexist(iz, ia, is) = .true.
+          endif
           Nisotot(iz, it) = Nisotot(iz, it) + Niso(iz, ia, is, it)
         enddo
         if ( .not. Yexist(iz, ia, is)) cycle
