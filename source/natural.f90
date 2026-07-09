@@ -50,44 +50,29 @@ subroutine natural
 ! *** Declaration of local data
 !
   implicit none
-  logical           :: lexist                            ! logical to determine existence
-  logical           :: resexist(0:numZ, 0:numA, -1:numisom)    ! logical to determine existence of residual production file
   character(len=3)  :: Astr                              !
   character(len=3)  :: massstring !
   character(len=12) :: yieldstring
   character(len=6)  :: finalnuclide !
-  character(len=13) :: state                             ! state of final nuclide
   character(len=15) :: Yfile0                            !
-  character(len=20) :: Yf
-  character(len=15) :: Yfile(0:numZ, 0:numA, -1:numisom)       ! file with production yields
   character(len=40) :: form1                             ! format
   character(len=40) :: form2                             ! format
   character(len=16) :: reaction   ! reaction
   character(len=16) :: col(7)    ! header
   character(len=16) :: un(7)    ! header
   character(len=80) :: quantity   ! quantity
-  character(len=80) :: key
   character(len=132) :: string    !
   character(len=132) :: topline    ! topline
-  character(len=132) :: line        !
   integer           :: Ncol       ! counter
-  integer           :: keyix
   integer           :: ia                                ! mass number from abundance table
   integer           :: is                                ! isotope counter: -1=total, 0=ground state 1=isomer
   integer           :: it                                ! counter for tritons
   integer           :: iz                                ! charge number of residual nucleus
   integer           :: k                                 ! designator for particle
-  integer           :: istat                             ! istat
   integer           :: indent
   integer           :: id2
   integer           :: id4
-  real(sgl)         :: Nis                               ! number of produced isotopes
-  real(sgl)         :: Tdum                              !
-  real(sgl)         :: Y                                 ! product yield (in ENDF-6 format)
-  real(sgl)         :: Ym                                !
-  real(sgl)         :: Ysp                               !
   real(sgl)         :: Th                                !
-  real(sgl)         :: RR                                !
   real(sgl)         :: act_out          ! help variable
   real(sgl)         :: specact_out          ! help variable
   real(sgl)         :: yield_out          ! help variable
@@ -125,11 +110,17 @@ subroutine natural
   id4 = indent + 4
   quantity='Isotope production'
   reaction='('//ptype0//',x)'
+  write(*,'()')
+  if (k0 > 1) then
+    yieldstring = trim(rstr)//'/('//trim(cstr)//'.'//trim(tstr)//')'
+  else
+    yieldstring = trim(rstr)//'/('//trim(ystr)//'.'//trim(tstr)//')'
+  endif 
+  targetnuclide=trim(Starget)//'0'
   do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, numisom
-        resexist(iz, ia, is) = .false.
-        do iso = 1, isonum
+        if (Ynatexist(iz, ia, is)) then
           if (flagZAoutput) then
             Yfile0 = 'Y000000.tot'
             write(Yfile0(2:7), '(2i3.3)') iz, ia
@@ -144,81 +135,11 @@ subroutine natural
             if (is == 2) Yfile0 = trim(Yfile0)//'n'
             Yfile0 = trim(Yfile0)//'.act'
           endif
-          if (is >= 1) then
-            state = ' Isomer=     '
-            write(state(10:10), '(a1)') isochar(is)
-          else
-            state = ' Ground state'
-          endif
-          inquire (file = trim(Yfile0) //natstring(iso), exist = lexist)
-          if (lexist) then
-            resexist(iz, ia, is) = .true.
-            Yfile(iz, ia, is) = trim(Yfile0)
-            Yf=trim(Yfile0)//natstring(iso)
-            RR = 0.
-            open (2, status = 'old', file = Yf)
-            do 
-              read(2,'(a)',iostat = istat) line
-              if (istat == -1) exit
-              key='Reaction constant [s^-1]'
-              keyix=index(line,trim(key))
-              if (keyix > 0) then
-                read(line(keyix+len_trim(key)+2:80),*, iostat = istat) RR
-                if (istat /= 0) call read_error(Yf, istat)
-              endif
-              key='entries'
-              keyix=index(line,trim(key))
-              if (keyix > 0) then
-                read(line(keyix+len_trim(key)+2:80),*, iostat = istat) Ntime
-                if (istat /= 0) call read_error(Yf, istat)
-                read(2,'(/)')
-                do it = 1, Ntime
-                  read(2, * , iostat = istat) Tdum, Y, Ysp, Ym, Nis
-                  if (istat < 0) call read_error(Yf, istat)
-                  if (istat > 0) cycle
-                  activitynat(iz, ia, is, it) = activitynat(iz, ia, is, it) + abun(iso) * Y / rfac
-                  specactivitynat(iz, ia, is, it) = specactivitynat(iz, ia, is, it) + abun(iso) * Ysp * mfac / rfac
-                  yieldnat(iz, ia, is, it) = yieldnat(iz, ia, is, it) + abun(iso) * Ym / yfac
-                  Nisonat(iz, ia, is, it) = Nisonat(iz, ia, is, it) + abun(iso) * Nis
-                  Nisototnat(iz, it) = Nisototnat(iz, it) + abun(iso) * Nis
-                enddo
-                reaction_ratenat(iz, ia, is) = reaction_ratenat(iz, ia, is) + abun(iso) * RR
-                exit
-              endif
-            enddo
-            close (unit = 2)
-          endif
-        enddo
-      enddo
-    enddo
-    do ia = Acomp, Acomp - Adepth, -1
-      do is = -1, numisom
-        if ( .not. resexist(iz, ia, is)) cycle
-        do it = 1, Ntime
-          if (Nisototnat(iz, it) /= 0.) Nisorelnat(iz, ia, is, it) = Nisonat(iz, ia, is, it) / Nisototnat(iz, it)
-        enddo
-      enddo
-    enddo 
-    do it = 1, Ntime
-      Nelrel(iz, it) = Nisototnat(iz, it) / N_0_nat
-    enddo
-  enddo
-  write(*,'()')
-  if (k0 > 1) then
-    yieldstring = trim(rstr)//'/('//trim(cstr)//'.'//trim(tstr)//')'
-  else
-    yieldstring = trim(rstr)//'/('//trim(ystr)//'.'//trim(tstr)//')'
-  endif 
-  targetnuclide=trim(Starget)//'0'
-  do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
-    do ia = Acomp, Acomp - Adepth, -1
-      do is = -1, numisom
-        if (resexist(iz, ia, is)) then
           massstring='   '
           write(massstring,'(i3)') ia
           finalnuclide=trim(nuc(iz))//adjustl(massstring)//isochar(is)
-          write(*,'("file: ",a)') trim(Yfile(iz, ia, is))
-          open (1, status = 'unknown', file = Yfile(iz, ia, is))
+          write(*,'("file: ",a)') trim(Yfile0)
+          open (1, status = 'unknown', file = Yfile0)
           topline=trim(targetnuclide)//trim(reaction)//trim(finalnuclide)//' '//trim(quantity)
           call write_header(indent,topline,source,user,date,oformat)
           call write_target(indent)
