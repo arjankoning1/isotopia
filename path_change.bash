@@ -7,13 +7,16 @@ echo
 # Script to change the code directory in machine.f or machine.f90
 #
 # Set user
+# set nuclear data library
 #
 user='Arjan Koning'
+libname='iaea.2026'
 #
 #  Ensure that the code directory is changed by replacing
 #    the path name in subroutine machine.f or machine.f90
 #
 codedir=`pwd`'/'
+#
 if [ -e machine.f ] ; then
   ffile=machine.f
 fi
@@ -31,5 +34,9 @@ if [ -e $ffile ] ; then
   mv -f tmp $ffile
   echo 'Replaced code directory in ' $ffile' by:'
   grep '  codedir =' $ffile
+  echo 
+  sed "s/  libname.*/  libname = '${libname}'/" $ffile > tmp
+  mv -f tmp $ffile
+  echo 'Replaced iaea library name in ' $ffile' by:' $libname
   echo
 fi
