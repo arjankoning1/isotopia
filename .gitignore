@@ -118,3 +118,9 @@ t6copy
 exforcopy
 create
 clean
+
+# libs
+isotopia.libs/
+*.act
+*.out
+outputdiff
