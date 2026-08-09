@@ -24,16 +24,21 @@ To download ISOTOPIA, you can use one of the following options:
 https://nds.iaea.org/talys/isotopia.tar
 tar zxf isotopia.tar
 ```
+ISOTOPIA requires the cross section database *isotopia.libs/*
+This can be obtained as follows
+```
+https://nds.iaea.org/talys/codes/isotopia.libs.tar
+tar zxf isotopia.libs.tar
+```
+and place the resulting directory *isotopia.libs/* in your home directory.
 
 #### 2. Using git (latest beta version):
 ```
 git clone https://github.com/arjankoning1/isotopia.git
 ```
 ISOTOPIA requires the cross section database *isotopia.libs/*
-This can be obtained as follows
 ```
-https://nds.iaea.org/talys/codes/isotopia.libs.tar
-tar zxf isotopia.libs.tar
+git clone https://github.com/arjankoning1/isotopia.libs.git
 ```
 and place the resulting directory *isotopia.libs/* in your home directory.
 
