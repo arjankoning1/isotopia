@@ -37,6 +37,7 @@ and place the resulting directory *isotopia.libs/* in your home directory.
 git clone https://github.com/arjankoning1/isotopia.git
 ```
 ISOTOPIA requires the cross section database *isotopia.libs/*
+This can be obtained as follows
 ```
 git clone https://github.com/arjankoning1/isotopia.libs.git
 ```
