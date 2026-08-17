@@ -273,6 +273,8 @@ subroutine reactionrates
 ! For charged particles: Output of stopping power
 !
   if (k0 > 1) then
+    indent = 0
+    id2 = indent + 2
     reaction='('//ptype0//',x)'
     quantity='Stopping power'
     open (unit = 1, file = 'stopping_power.txt', status = 'replace')
