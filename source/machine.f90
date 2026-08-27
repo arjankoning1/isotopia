@@ -4,43 +4,66 @@ subroutine machine
 ! Purpose: Machine dependent statements
 !
 ! Revision    Date      Author      Quality  Description
-! ======================================================
+! =====================================================
 !    1     2024-12-19   A.J. Koning    A     Original code
+!    2     2026-08-27   A.J. Koning    A     Runtime definition of ISOTOPIA directory and user
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
-! *** Use data from other modules
   use A0_isotopia_mod
 !
-!              crosspath, & ! directory containing cross sections
-!              iso, &       ! counter for isotope
-!              isonum, &    ! number of isotopes in element
-!              libname, &   ! library name
-!              natstring, & ! string extension for file names
-!              path         ! directory containing files to be read
-!
-! *** Declaration of local data
-!
   implicit none
-  character(len=132) :: codedir   ! code directory
-  character(len=132) :: basedir   ! base directory
-  integer            :: i         ! level
-  integer            :: ix        ! level
-  integer            :: year      ! year
-  integer            :: month     ! month
-  integer            :: day       ! day
-  integer            :: values(8) ! date and time values
+  logical             :: lexist
+  character(len=1024) :: code_dir
+  character(len=1024) :: base_dir
+  character(len=1024) :: isotopia_dir
+  character(len=1024) :: isotopia_user
+  integer             :: envstat
+  integer             :: i
+  integer             :: n
+  integer             :: year
+  integer             :: month
+  integer             :: day
+  integer             :: values(8)
 !
 ! ************************ Set directories *****************************
 !
-  codedir = '/Users/koning/isotopia/'
-  path = trim(codedir)
-  ix = index(codedir,'/isotopia/')
-  basedir = codedir(1:ix)
+  call get_environment_variable('ISOTOPIA_DIR', isotopia_dir, length=n, status=envstat)
+  if (envstat == 0 .and. n > 0) then
+    code_dir = trim(isotopia_dir)
+  else
+    code_dir = '/path/to/isotopia/'
+  endif
 !
-! ************************ Set nuclear data directory ******************
+! Remove a trailing slash, if present, and determine the parent directory.
+! By default isotopia.libs is a sibling directory of ISOTOPIA.
 !
-  crosspath = trim(basedir)//'isotopia.libs/'
+  i = len_trim(code_dir)
+  if (i > 1) then
+    if (code_dir(i:i) == '/') code_dir = code_dir(:i - 1)
+  endif
+  i = scan(trim(code_dir), '/', back=.true.)
+  if (i > 0) then
+    base_dir = code_dir(:i)
+  else
+    base_dir = './'
+  endif
+!
+  path = trim(code_dir)//'/'
+  crosspath = trim(base_dir)//'isotopia.libs/'
   libname = 'iaea.2026'
+!
+! Test accessibility of the internal ISOTOPIA data files.
+!
+  inquire (file=trim(path)//'files/abundance/z001', exist=lexist)
+  if (.not. lexist) then
+    write(*, '(a)') 'ISOTOPIA error: data files not found.'
+    write(*, '(2a)') 'Expected file: ', trim(path)//'files/abundance/z001'
+    write(*, '(a)') 'Set the ISOTOPIA_DIR environment variable:'
+    write(*, '(a)') '  export ISOTOPIA_DIR=/path/to/isotopia'
+    write(*, '(a)') 'Alternatively, edit code_dir in source/machine.f90'
+    write(*, '(a)') 'and rebuild ISOTOPIA.'
+    error stop 77
+  endif
 !
 ! ************************ Set counter for isotope *********************
 !
@@ -60,7 +83,13 @@ subroutine machine
   write(date(1:4),'(i4.4)') year
   write(date(6:7),'(i2.2)') month
   write(date(9:10),'(i2.2)') day
-  user = 'Arjan Koning'
+!
+  call get_environment_variable('ISOTOPIA_USER', isotopia_user, length=n, status=envstat)
+  if (envstat == 0 .and. n > 0) then
+    user = trim(isotopia_user)
+  else
+    user = 'Unknown User'
+  endif
   return
 end subroutine machine
-! Copyright A.J. Koning 2024
+! Copyright A.J. Koning 2026
