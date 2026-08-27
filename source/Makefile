@@ -1,48 +1,54 @@
-# This file is part of ISOTOPIA
-# 
-#    Author: Arjan Koning Copyright: (C) 2024
+# ISOTOPIA Makefile
 #
-# ISOTOPIA is free software; you can redistribute it and/or modify it
-# under the terms of the MIT License; see LICENSE file for more details.
-#
-# Basic installation (verified with the sample cases)
-#
-# FC="gfortran " FFLAGS=" "
-#
-# Distribution FC & FFLAGS (options provided by J-C Sublet)
-#
-# FC="gfortran " FFLAGS=" -Ofast "
-# FC="ifort    " FFLAGS=" -Ofast "
-# FC="nagfor   " FFLAGS=" -w     "
-#
-# Development FC & FFLAGS  (options provided by J-C Sublet)
-#
-# FC="gfortran " FFLAGS=" -Wall -fcheck=all -Og -g -fbacktrace   "
-# FC="ifort    " FFLAGS=" -O0 -g -traceback -check all -debug all"
-# FC="nagfor   " FFLAGS=" -C=all -O0 -g -gline                   "
-#
-CWD = $(shell pwd)
-PREFIX ?= $(CWD)/../
+# Examples:
+#   make
+#   make FC=gfortran FFLAGS="-w -O3 -ffp-contract=off"
+#   make FC=ifx FFLAGS="-O3"
+#   make clean
+#   make check
 
-FC = gfortran
-FFLAGS = -w
+ifeq ($(origin FC), default)
+  FC = gfortran
+endif
 
-fsub = $(shell echo [A-z]*.f90)
-obj = $(fsub:.f=.o)
-src = $(fsub)
+ifeq ($(origin FFLAGS), undefined)
+  ifneq ($(findstring gfortran,$(FC)),)
+    FFLAGS = -w -O3 -ffp-contract=off
+  else
+    FFLAGS =
+  endif
+endif
 
-all: change isotopia install clean
+ISOTOPIA_DIR := $(abspath ..)
+BIN_DIR      := $(ISOTOPIA_DIR)/bin
+TARGET       := $(BIN_DIR)/isotopia
 
-change : 
-	../path_change.bash
+ISOTOPIA_LIBS_CHECK := $(abspath $(ISOTOPIA_DIR)/../isotopia.libs)
 
-isotopia : $(obj)
-	$(FC) $(FFLAGS) -o  isotopia  $(obj)
+SOURCES := $(sort $(wildcard *.f) $(wildcard *.f90))
 
-install:
-	mkdir -p $(PREFIX)bin
-	mv isotopia $(PREFIX)bin  
+.PHONY: all install clean check
+
+all install: $(TARGET)
+
+$(TARGET): $(SOURCES)
+	@echo "Compiler: $(FC)"
+	@echo "Flags:    $(FFLAGS)"
+	@mkdir -p "$(BIN_DIR)"
+	$(FC) $(FFLAGS) -o "$(TARGET)" $(SOURCES)
+	@rm -f *.o *.mod
+	@echo "Installed: $(TARGET)"
 
 clean:
-	rm -f *.o *.mod
+	rm -f *.o *.mod isotopia "$(TARGET)"
 
+check: all
+	@test -d "$(ISOTOPIA_LIBS_CHECK)" || { \
+	  echo "ISOTOPIA check error: sibling isotopia.libs directory not found:" >&2; \
+	  echo "  $(ISOTOPIA_LIBS_CHECK)" >&2; \
+	  exit 1; \
+	}
+	cd "$(ISOTOPIA_DIR)/samples" && \
+	  ISOTOPIA_DIR="$(ISOTOPIA_DIR)" \
+	  ISOTOPIA_USER="Arjan Koning" \
+	  ./verify
