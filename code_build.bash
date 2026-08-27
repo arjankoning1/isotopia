@@ -15,7 +15,7 @@ code=$1
 # If needed, adapt the following compilation variables.
 #
 FC='gfortran'
-FFLAGS='-w'
+FFLAGS='-w -O3 -ffp-contract=off '
 #
 # Basic installation (verified with the sample cases)
 #
