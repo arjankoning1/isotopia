@@ -2,7 +2,7 @@
 #   title: Te124(p,x) Stopping power
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-07-16
+#   date: 2026-08-30
 #   format: YANDF-0.4
 # target: 
 #   Z: 52
@@ -10,11 +10,11 @@
 #   nuclide: Te124
 # reaction: 
 #   type: (p,x)
-# quantity: 
-#   type: Stopping power
-# datablock: 
-#   columns: 2
-#   entries: 100
+#   quantity: 
+#     type: Stopping power
+#   datablock: 
+#     columns: 2
+#     entries: 100
 ##    Energy     Stopping power
 ##     [MeV]        [MeV/cm]
    8.020000E+00   3.307203E+02

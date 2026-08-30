@@ -2,7 +2,7 @@
 #   title: O18(p,x) Stopping power
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-07-16
+#   date: 2026-08-30
 #   format: YANDF-0.4
 # target: 
 #   Z: 8
@@ -10,11 +10,11 @@
 #   nuclide: O18
 # reaction: 
 #   type: (p,x)
-# quantity: 
-#   type: Stopping power
-# datablock: 
-#   columns: 2
-#   entries: 100
+#   quantity: 
+#     type: Stopping power
+#   datablock: 
+#     columns: 2
+#     entries: 100
 ##    Energy     Stopping power
 ##     [MeV]        [MeV/cm]
    3.065000E+00   2.422002E-01

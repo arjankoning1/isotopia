@@ -2,7 +2,7 @@
 #   title: Ga71(p,x) Stopping power
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-07-16
+#   date: 2026-08-30
 #   format: YANDF-0.4
 # target: 
 #   Z: 31
@@ -10,11 +10,11 @@
 #   nuclide: Ga71
 # reaction: 
 #   type: (p,x)
-# quantity: 
-#   type: Stopping power
-# datablock: 
-#   columns: 2
-#   entries: 100
+#   quantity: 
+#     type: Stopping power
+#   datablock: 
+#     columns: 2
+#     entries: 100
 ##    Energy     Stopping power
 ##     [MeV]        [MeV/cm]
    1.522500E+01   2.290006E+02

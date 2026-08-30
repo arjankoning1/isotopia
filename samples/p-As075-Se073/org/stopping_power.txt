@@ -2,7 +2,7 @@
 #   title: As75(p,x) Stopping power
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-07-16
+#   date: 2026-08-30
 #   format: YANDF-0.4
 # target: 
 #   Z: 33
@@ -10,11 +10,11 @@
 #   nuclide: As75
 # reaction: 
 #   type: (p,x)
-# quantity: 
-#   type: Stopping power
-# datablock: 
-#   columns: 2
-#   entries: 100
+#   quantity: 
+#     type: Stopping power
+#   datablock: 
+#     columns: 2
+#     entries: 100
 ##    Energy     Stopping power
 ##     [MeV]        [MeV/cm]
    3.005000E+01   1.310441E+02

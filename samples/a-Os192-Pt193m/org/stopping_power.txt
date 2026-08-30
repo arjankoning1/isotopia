@@ -2,7 +2,7 @@
 #   title: Os192(a,x) Stopping power
 #   source: ISOTOPIA
 #   user: Arjan Koning
-#   date: 2026-07-16
+#   date: 2026-08-30
 #   format: YANDF-0.4
 # target: 
 #   Z: 76
@@ -10,11 +10,11 @@
 #   nuclide: Os192
 # reaction: 
 #   type: (a,x)
-# quantity: 
-#   type: Stopping power
-# datablock: 
-#   columns: 2
-#   entries: 100
+#   quantity: 
+#     type: Stopping power
+#   datablock: 
+#     columns: 2
+#     entries: 100
 ##    Energy     Stopping power
 ##     [MeV]        [MeV/cm]
    3.005000E+01   4.213550E+03
