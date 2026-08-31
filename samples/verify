@@ -1,85 +1,15 @@
-#!/bin/bash
-#
-# verify: Run ISOTOPIA sample cases (Version July 21 2022) (C) Copyright 2022 Arjan Koning All Rights Reserved
-#
-# Extended by Viktor Zerkin for the option to run only a few, and not all, sample cases and to give more descriptive output
-#
-# This script runs ISOTOPIA for each sample case present in the new/ directories and determines
-# the numerical differences with the results of the org/ directories
-#
-# Examples: verify     (run all sample cases)"
-#           verify 2   (run only the first 2 sample case)"
-#
-# For Windows, change diff --> FC  and /dev/null --> NUL
-# ISOTOPIA executable
-#
-cwd=`pwd`
-isotopia=${cwd}/../bin/isotopia
-#
-# Main output and number of sample cases
-#
-start=`date +%F,%T`
-echo "________Script [$0] starting on: `uname -n` at: $start"
-files=`find . -name isotopia.inp | grep new | sort`
-nfiles=`find . -name isotopia.inp | grep new | sort | wc -l`
-iimax=1000
-if [ "$1" != "" ] ; then 
-  iimax=$1 
-else 
-  iimax=${nfiles}
-fi
-if [ $iimax -ge $nfiles ] ; then 
-  iimax=$nfiles
-fi
-iimax=`printf "%2d"  $(echo $iimax)`
-nfiles=`printf "%2d"  $(echo $nfiles)`
-echo "________in total there are ${nfiles} sample cases"
-echo "________going to run ISOTOPIA on ${iimax} sample cases"
-#
-# Loop over sample cases
-#
-homedir=`pwd`
-echo "________ISOTOPIA executable: $isotopia"
-ls -la ${isotopia}
-echo ""
-ii=0
-for f in ${files} ; do
-  dir=`dirname ${f}`
-  cd ${dir}
-  ii=$((ii+1))
-  echo "${ii}/${nfiles} *** Sample case " $dir
-  $isotopia < isotopia.inp > isotopia.out
-  errCode=$?
-  if [ $errCode -ne 0 ] ; then 
-    echo "___________error=$errCode on $dir"
-  fi
-  echo
-  if [ -e outputdiff ]; then
-    rm outputdiff
-  fi
-  tmpdiff=`mktemp`
-  for of in `ls -1` ; do
-    if [ "${of}" == "outputdiff" ] ; then
-      continue
-    fi
-    if [ ! -e ../org/${of} ] ; then
-      echo $of >> outputdiff
-      echo "Missing reference file: ../org/${of}" >> outputdiff
-      continue
-    fi
-    diff ${of} ../org/${of} | grep -v date > ${tmpdiff}
-    if [ -s ${tmpdiff} ] ; then
-      echo $of >> outputdiff
-      cat ${tmpdiff} >> outputdiff
-    fi
-  done
-  rm -f ${tmpdiff}
-  cd $homedir
-  if [ $ii -ge $iimax ] ; then 
-    break
-  fi
-done
-end=`date +%F,%T`
-echo "*** All sample cases done " 
-echo "Start: " $start
-echo "End  : " $end
+#!/usr/bin/env bash
+# Run ISOTOPIA user cases in new/ and compare them with org/ references.
+set -u; set -o pipefail
+samples_dir=$(cd "$(dirname "$0")" && pwd); cd "$samples_dir"; isotopia="$samples_dir/../bin/isotopia"
+usage(){ echo "Usage: ./verify_new [--isotopia /path/to/isotopia]"; }
+while [[ $# -gt 0 ]]; do case "$1" in -i|--isotopia) [[ $# -ge 2 ]] || { echo "*** ISOTOPIA verify error: $1 requires a pathname" >&2; exit 2; }; isotopia=$2; shift 2;; -h|--help) usage; exit 0;; *) echo "*** ISOTOPIA verify error: unknown option: $1" >&2; usage >&2; exit 2;; esac; done
+resolve(){ local p=$1 d; [[ "$p" == /* ]] || { d=$(cd "$(dirname "$p")" 2>/dev/null && pwd) || return 1; p="$d/$(basename "$p")"; }; [[ -x "$p" ]] || return 1; printf '%s\n' "$p"; }
+isotopia=$(resolve "$isotopia") || { echo "*** ISOTOPIA verify error: executable not found" >&2; exit 2; }
+cases=(); while IFS= read -r f; do cases+=("$f"); done < <(find . -type f -path '*/new/isotopia.inp' -print | LC_ALL=C sort); nfiles=${#cases[@]}; [[ "$nfiles" -gt 0 ]] || { echo "*** ISOTOPIA verify error: no sample cases found" >&2; exit 2; }
+tmpdir=$(mktemp -d "${TMPDIR:-/tmp}/isotopia_verify.XXXXXX") || exit 2; cleanup(){ rm -rf "$tmpdir"; }; interrupted(){ echo "*** ISOTOPIA verification interrupted; stopping after the current command." >&2; exit "$1"; }; trap cleanup EXIT; trap 'interrupted 130' INT; trap 'interrupted 143' TERM HUP
+norm(){ awk '/^[[:space:]]*User:[[:space:]]/ {next} /^[[:space:]]*Date:[[:space:]]/ {next} /^[[:space:]]*Execution time:/ {next} /^[[:space:]]*#[[:space:]]*user:[[:space:]]/ {next} /^[[:space:]]*#[[:space:]]*date:[[:space:]]/ {next} {print}' "$1"; }; files(){ local d=$1 x; shopt -s nullglob; for x in "$d"/* "$d"/.[!.]* "$d"/..?*; do [[ -f "$x" ]] && basename "$x"; done; shopt -u nullglob; }
+: > times.log; : > files_dif.log; total=$(date +%s); runs=0; missing=0; diffs=0; casesdiff=0; ii=0; echo; echo "ISOTOPIA sample verification"; echo "ISOTOPIA executable: $isotopia"; echo "Sample cases:       $nfiles"; echo
+for f in "${cases[@]}"; do ii=$((ii+1)); new=$(dirname "$f"); case_dir=$(dirname "$new"); org="$case_dir/org"; name=${case_dir#./}; echo "$ii/$nfiles  *** Sample case $name"; [[ -d "$org" ]] || { echo "*** Missing reference directory: $org" >&2; missing=$((missing+1)); continue; }; rm -f "$new/outputdiff"; t0=$(date +%s); (cd "$new" && "$isotopia" < isotopia.inp > isotopia.out); err=$?; [[ "$err" -eq 0 ]] || { echo "*** ISOTOPIA failed for $name: exit status $err" >&2; runs=$((runs+1)); }; names="$tmpdir/names"; { files "$new"; files "$org"; } | LC_ALL=C sort -u > "$names"; changed=0
+while IFS= read -r x; do [[ "$x" != outputdiff && "$x" != .DS_Store ]] || continue; nf="$new/$x"; of="$org/$x"; if [[ ! -f "$nf" ]]; then printf '\n===== %s =====\nMissing file in new results\n' "$x" >> "$new/outputdiff"; missing=$((missing+1)); diffs=$((diffs+1)); changed=1; continue; fi; if [[ ! -f "$of" ]]; then printf '\n===== %s =====\nNo reference file in org/\n' "$x" >> "$new/outputdiff"; diffs=$((diffs+1)); changed=1; continue; fi; norm "$nf" > "$tmpdir/n"; norm "$of" > "$tmpdir/o"; diff -u "$tmpdir/o" "$tmpdir/n" > "$tmpdir/d"; ds=$?; if [[ "$ds" -eq 1 ]]; then printf '\n===== %s =====\n' "$x" >> "$new/outputdiff"; cat "$tmpdir/d" >> "$new/outputdiff"; diffs=$((diffs+1)); changed=1; elif [[ "$ds" -gt 1 ]]; then runs=$((runs+1)); fi; done < "$names"; [[ "$changed" -eq 1 ]] && { casesdiff=$((casesdiff+1)); echo "          differences: $new/outputdiff"; } || { rm -f "$new/outputdiff"; echo "          no differences"; }; dt=$(($(date +%s)-t0)); echo "          time: $dt s"; done
+elapsed=$(($(date +%s)-total)); echo "------------------------------------------------------------"; echo "ISOTOPIA sample verification completed"; echo "Cases run: $ii"; echo "Cases with differences: $casesdiff"; echo "Files with differences: $diffs"; echo "Missing files: $missing"; echo "Execution errors: $runs"; [[ "$runs" -eq 0 && "$missing" -eq 0 ]]
