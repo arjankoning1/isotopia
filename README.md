@@ -38,7 +38,7 @@ Keep the code and cross-section library as sibling directories:
 ```text
 parent_directory/
 ├── isotopia/
-├── isotopia.libs/
+└── isotopia.libs/
 ```
 
 #### 2. Using git (latest beta version)
@@ -143,8 +143,9 @@ The separate sibling `isotopia.libs/` repository contains the cross-section data
 The sample cases assume:
 
 ```text
-.../isotopia/
-.../isotopia.libs/
+parent_directory/
+├── isotopia/
+└── isotopia.libs/
 ```
 
 Run:
