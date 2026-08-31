@@ -36,8 +36,9 @@ tar zxf isotopia.libs.tar
 Keep the code and cross-section library as sibling directories:
 
 ```text
-.../isotopia/
-.../isotopia.libs/
+parent_directory/
+├── isotopia/
+├── isotopia.libs/
 ```
 
 #### 2. Using git (latest beta version)
