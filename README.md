@@ -26,7 +26,7 @@ The following are the prerequisites for compiling and using ISOTOPIA:
 #### 1. Download the tar files (frozen version ISOTOPIA-2.2)
 
 ```bash
-curl -LO https://nds.iaea.org/talys/isotopia.tar
+curl -LO https://nds.iaea.org/talys/codes/isotopia.tar
 tar zxf isotopia.tar
 
 curl -LO https://nds.iaea.org/talys/codes/isotopia.libs.tar
