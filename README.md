@@ -16,16 +16,19 @@ A.J. Koning, D. Rochman, J.-Ch. Sublet, N. Dzysiuk, M. Fleming, and S. van der M
 
 The following are the prerequisites for compiling and using ISOTOPIA:
 
-- git (only if the package is downloaded via GitHub)
 - GNU make
 - a recent Fortran compiler, such as GNU Fortran (gfortran)
 - the `isotopia.libs/` cross-section database for calculations and sample cases
+- git, only when ISOTOPIA is downloaded using `git clone`
 
 ### Downloads
 
-#### 1. Download the tar files (frozen version ISOTOPIA-2.2)
+ISOTOPIA and its cross-section library can be downloaded in one of the following ways.
 
-This is available at the the [TALYS page](https://nds.iaea.org/talys/), and can be retrieved by clicking on the download link or
+#### 1. Frozen version ISOTOPIA-2.2 (December 2025)
+
+The frozen ISOTOPIA-2.2 distribution is available from the [TALYS page](https://nds.iaea.org/talys/). It can be retrieved by clicking on the download links or with
+
 ```bash
 curl -LO https://nds.iaea.org/talys/codes/isotopia.tar
 tar zxf isotopia.tar
@@ -42,7 +45,41 @@ parent_directory/
 └── isotopia.libs/
 ```
 
-#### 2. Using git (latest beta version)
+This version is fixed and will not change.
+
+#### 2. Latest beta version without git
+
+Users who do not have git can download snapshots of the current `main` branches directly from GitHub:
+
+```bash
+curl -L \
+  -o isotopia-main.tar.gz \
+  https://github.com/arjankoning1/isotopia/archive/refs/heads/main.tar.gz
+
+tar zxf isotopia-main.tar.gz
+mv isotopia-main isotopia
+
+curl -L \
+  -o isotopia.libs-main.tar.gz \
+  https://github.com/arjankoning1/isotopia.libs/archive/refs/heads/main.tar.gz
+
+tar zxf isotopia.libs-main.tar.gz
+mv isotopia.libs-main isotopia.libs
+```
+
+Keep both directories in the same parent directory:
+
+```text
+parent_directory/
+├── isotopia/
+└── isotopia.libs/
+```
+
+The downloaded snapshots contain the latest versions of the `main` branches at the time of download. To obtain newer versions later, download the snapshots again.
+
+#### 3. Latest beta version using git
+
+Users with git can clone both repositories with
 
 ```bash
 git clone https://github.com/arjankoning1/isotopia.git
@@ -50,6 +87,16 @@ git clone https://github.com/arjankoning1/isotopia.libs.git
 ```
 
 Again, keep both repositories in the same parent directory.
+
+The advantage of this method is that the local installations can subsequently be updated with
+
+```bash
+cd isotopia
+git pull --ff-only
+
+cd ../isotopia.libs
+git pull --ff-only
+```
 
 By default, ISOTOPIA derives `isotopia.libs/` from the parent directory of `ISOTOPIA_DIR`. If the library is stored elsewhere, use the existing `crosspath` input keyword:
 
@@ -61,7 +108,9 @@ A separate `ISOTOPIA_LIBS` environment variable is therefore not required.
 
 ### Installation instructions
 
-#### 1. For the tar file (frozen version ISOTOPIA-2.2)
+#### 1. Frozen version ISOTOPIA-2.2
+
+For the frozen tar distribution:
 
 ```bash
 cd isotopia
@@ -77,10 +126,13 @@ make
 
 The frozen distribution retains its own installation scripts and settings.
 
-#### 2. For the git version (latest beta version)
+#### 2. Latest beta version
+
+The installation procedure is identical whether the latest beta version was obtained as a GitHub tar snapshot or using `git clone`.
+
+From the `isotopia/` directory, run
 
 ```bash
-cd isotopia
 ./install_isotopia.bash
 ```
 
@@ -93,7 +145,13 @@ cd isotopia/source
 make
 ```
 
-For the git version, the default compiler is `gfortran`. When `gfortran` is used and no `FFLAGS` are supplied, the Makefile uses:
+The executable is installed as
+
+```text
+isotopia/bin/isotopia
+```
+
+For the latest beta version, the default compiler is `gfortran`. When `gfortran` is used and no `FFLAGS` are supplied, the Makefile uses:
 
 ```text
 -w -O3 -ffp-contract=off
@@ -104,11 +162,12 @@ For other compilers, no default compiler flags are imposed.
 Compiler and compilation options can be passed through `install_isotopia.bash`, for example:
 
 ```bash
+# GNU Fortran
 ./install_isotopia.bash FC=gfortran FFLAGS="-O3 -ffp-contract=off"
+
+# Intel Fortran
 ./install_isotopia.bash FC=ifx FFLAGS="-O3"
 ```
-
-The executable is installed as `isotopia/bin/isotopia`.
 
 Set:
 
@@ -122,22 +181,22 @@ These lines can be added to `~/.zshrc` or `~/.profile`.
 
 If setting `ISOTOPIA_DIR` is not possible, edit `code_dir` in `source/machine.f90` and rebuild ISOTOPIA.
 
-For the modern git version, `code_build.bash` and `path_change.bash` are no longer required and can be removed after adopting the new installer, Makefile and `machine.f90`.
-
 ## The ISOTOPIA package
 
 The `isotopia/` directory contains:
 
-+ `README.md` is this README file
-+ `LICENSE` is the License file
-+ `install_isotopia.bash` is  the installation script
-+ `source/` contains the Fortran source code of ISOTOPIA and the Makefile
-+ `bin/` contains the executable after successful installation
-+ `files/` contains abundance and decay data files needed for the calculations
-+ `doc/` contains the tutorial in pdf format
-+ `samples/` contains the input and output files of the sample cases, and the *verify* script for the user to run the sample cases
+- `README.md` this README file
+- `LICENSE` the License file
+- `install_isotopia.bash` the installation script
+- `source/` the Fortran source code of ISOTOPIA and the Makefile
+- `bin/` the executable after successful installation
+- `files/` abundance and decay data files needed for the calculations
+- `doc/` the tutorial in PDF format
+- `samples/` the input and output files of the sample cases and the `verify` script used to run the sample cases
 
-The separate sibling `isotopia.libs/` repository contains the cross-section database. In total, about 20 GB of free disk space is required for ISOTOPIA and its data.
+The separate sibling `isotopia.libs/` repository contains the cross-section database.
+
+In total, about 20 GB of free disk space is required for ISOTOPIA and its data.
 
 ## Sample cases
 
@@ -149,14 +208,14 @@ parent_directory/
 └── isotopia.libs/
 ```
 
-Run:
+To run the sample cases:
 
 ```bash
 cd samples
 ./verify
 ```
 
-or from the top-level directory:
+From the top-level ISOTOPIA directory, the same test can be started with:
 
 ```bash
 make -C source check
