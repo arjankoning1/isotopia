@@ -11,7 +11,7 @@ isotopia="$samples_dir/../bin/isotopia"
 
 usage()
 {
-  echo "Usage: ./verify_new [--isotopia /path/to/isotopia]"
+  echo "Usage: ./verify [--isotopia /path/to/isotopia]"
 }
 
 while [[ $# -gt 0 ]]; do
@@ -203,4 +203,4 @@ echo "Cases with differences: $casesdiff"
 echo "Files with differences: $diffs"
 echo "Missing files: $missing"
 echo "Execution errors: $runs"
-[[ "$runs" -eq 0 && "$missing" -eq 0 ]]
+[[ "$runs" -eq 0 && "$missing" -eq 0 && "$diffs" -eq 0 ]]

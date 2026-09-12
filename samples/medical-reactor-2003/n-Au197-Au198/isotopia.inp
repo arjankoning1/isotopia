@@ -1,0 +1,10 @@
+projectile n
+element Au
+mass 197
+fluxtotal 4.e13
+targetmass 0.100
+thickness 0.04
+selfshield n
+Tirrad 24. h
+Tcool 0. h
+radiounit GBq

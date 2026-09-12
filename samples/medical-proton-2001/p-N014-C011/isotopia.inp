@@ -1,0 +1,6 @@
+projectile p
+element N
+mass 14
+Ebeam 25.
+Eback 1.e-6
+radiounit GBq

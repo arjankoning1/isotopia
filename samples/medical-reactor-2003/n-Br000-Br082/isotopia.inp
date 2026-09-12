@@ -1,0 +1,10 @@
+projectile n
+element Br
+mass 0
+fluxtotal 5.e13
+targetmass 0.0623
+thickness 0.05
+selfshield n
+Tirrad 30. h
+Tcool 24. h
+radiounit GBq

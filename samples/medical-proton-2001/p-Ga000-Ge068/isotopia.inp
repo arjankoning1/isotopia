@@ -1,0 +1,6 @@
+projectile p
+element Ga
+mass 0
+Ebeam 60.
+Eback 1.e-6
+radiounit GBq

@@ -1,0 +1,12 @@
+projectile g
+element Mo
+mass 100
+Ebeam 42.
+Ibeam 0.19047619
+fgamma 0.3
+Tirrad 6.5 d
+Tcool 0. h
+rho 10.22
+Area 1.13097
+thickness 2.0
+radiounit GBq

@@ -1,0 +1,6 @@
+projectile p
+element Te
+mass 123
+Ebeam 20.
+Eback 1.e-6
+radiounit GBq

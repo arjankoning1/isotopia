@@ -1,0 +1,4 @@
+# case	product	TECDOC activity [GBq]	comparison point
+n-Br000-Br082	Br082	16.65	after 30 h irradiation and 24 h cooling
+n-Cr000-Cr051	Cr051	30	EOI; report specifies greater than this value
+n-Au197-Au198	Au198	259	EOI; 7 Ci converted using 37 GBq/Ci
