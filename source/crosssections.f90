@@ -135,10 +135,10 @@ subroutine crosssections(iz, ia, is)
       if (flagcross) then
         if (type == 1) then
           reaction='('//ptype0//',non)'
-          csfile = parsym(k0)//'-'//trim(nuclide)//'.non'
+          csfile = parsym(k0)//'-'//trim(nuclide)//'-non'//'.'//trim(libname)
         else
           reaction='('//ptype0//',tot)'
-          csfile = parsym(k0)//'-'//trim(nuclide)//'.tot'
+          csfile = parsym(k0)//'-'//trim(nuclide)//'-tot'//'.'//trim(libname)
         endif
         open (unit = 1, status = 'unknown', file = csfile)
         topline=trim(targetnuclide)//trim(reaction)//' '//trim(quantity)
@@ -228,7 +228,7 @@ subroutine crosssections(iz, ia, is)
 !
     Nenrp = iE
     if ( .not. flagpositive) rpexist(iz, ia, is) = .false.
-    if (iz == Ztarget .and. ia == Atarget .and. is <= 0) then
+    if (iz == Ztarget .and. ia == Atarget .and. is == -1) then
       do i = 1, Nennon
         E = Enon(i)
         if (E < Ein(1)) cycle
@@ -243,7 +243,7 @@ subroutine crosssections(iz, ia, is)
         xsnon(i) = max(xsnon(i) - xsr, 0.)
       enddo
       if (flagcross) then
-        csfile = parsym(k0)//'-'//trim(nuclide)//'-non.xs'
+        csfile = parsym(k0)//'-'//trim(nuclide)//'-non-ninl'//'.'//trim(libname)
         open (unit = 1, status = 'unknown', file = csfile)
         reaction='('//ptype0//',non)'
         topline=trim(targetnuclide)//trim(reaction)//' '//trim(quantity)
