@@ -27,6 +27,7 @@ module A0_isotopia_mod
   integer, parameter :: numA=339         ! number of masses
   integer, parameter :: numen=1000000    ! number of energies
   integer, parameter :: numtime=100      ! number of time points
+  integer, parameter :: numdk=6          ! maximum number of decay modes per nuclide
 !
 !-----------------------------------------------------------------------------------------------------------------------------------
 ! Variables for reading input lines
@@ -143,11 +144,16 @@ module A0_isotopia_mod
 !-----------------------------------------------------------------------------------------------------------------------------------
 !
   integer, dimension(-1:numZ, 0:numA, -1:numisom)    :: rtyp      ! type of beta decay, beta-: 1 , beta+: 2 (from ENDF format)
+  integer, dimension(-1:numZ, 0:numA, -1:numisom)    :: ndk       ! number of decay modes (from ENDF format)
+  integer, dimension(-1:numZ, 0:numA, -1:numisom, numdk) :: dkZ   ! Z of daughter per decay mode (-1: no daughter, e.g. SF)
+  integer, dimension(-1:numZ, 0:numA, -1:numisom, numdk) :: dkA   ! A of daughter per decay mode
+  integer, dimension(-1:numZ, 0:numA, -1:numisom, numdk) :: dkis  ! isomeric state of daughter per decay mode (RFS)
   integer, dimension(-1:numZ, 0:numA, -1:numisom, 5) :: Td        ! half life per time unit
   integer                                            :: Zcomp     ! compound nucleus Z
   integer                                            :: Acomp     ! compound nucleus A
   real(sgl)                                          :: daysec    ! number of seconds in a day
   real(sgl)                                          :: hoursec   ! number of seconds in an hour
+  real(sgl), dimension(-1:numZ, 0:numA, -1:numisom, numdk) :: dkbr ! branching ratio per decay mode
   real(sgl), dimension(-1:numZ, 0:numA, -1:numisom)  :: lambda    ! decay rate per isotope
   real(sgl)                                          :: minutesec ! number of seconds in a minute
   real(sgl), dimension(-1:numZ, 0:numA, -1:numisom)  :: Thalf     ! half life of nuclide in sec.

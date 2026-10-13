@@ -33,7 +33,12 @@ subroutine equations
 !              numtime, &                         ! number of time points
 !              reaction_rate, &                   ! reaction rate per isotope
 !              radiounit, &                       ! unit for radioactivity: Bq, kBq, MBq, Gbq, mCi,
-!              rtyp, &                            ! type of beta decay, beta - : 1 , beta + : 2 (from ENDF format)
+!              ndk, &                             ! number of decay modes (from ENDF format)
+!              dkZ, &                             ! Z of daughter per decay mode (-1: no daughter, e.g. SF)
+!              dkA, &                             ! A of daughter per decay mode
+!              dkis, &                            ! isomeric state of daughter per decay mode (RFS)
+!              dkbr, &                            ! branching ratio per decay mode
+!              rpexist, &                         ! logical for residual production c.s.
 !              Tco, &                             ! cooling time per unit
 !              Tgrid, &                           ! time
 !              Tir, &                             ! irradiation time per unit
@@ -48,14 +53,24 @@ subroutine equations
 ! *** Declaration of local data
 !
   implicit none
+  integer, parameter :: maxfeed=5*5*3*numdk ! maximum number of feeding decay modes per nuclide
+  integer   :: Ap      ! A of parent isotope
   integer   :: ia      ! mass number from abundance table
+  integer   :: ip      ! counter for feeding decay mode
   integer   :: is      ! isotope counter: -1=total, 0=ground state 1=isomer
   integer   :: is_p    ! isotope counter: -1=total, 0=ground state 1=isomer
-  integer   :: isob    ! counter
+  integer   :: is_p1   ! first isomeric state of parent
+  integer   :: is_p2   ! last isomeric state of parent
   integer   :: it      ! counter for tritons
   integer   :: iz      ! charge number of residual nucleus
+  integer   :: k       ! counter for decay mode
   integer   :: Ncool   ! number of cooling time steps
-  integer   :: Zparent ! Z of parent isotope
+  integer   :: Nfeed   ! number of feeding decay modes
+  integer   :: Zp      ! Z of parent isotope
+  integer, dimension(maxfeed) :: Afeed  ! A of parent per feeding decay mode
+  integer, dimension(maxfeed) :: isfeed ! isomeric state of parent per feeding decay mode
+  integer, dimension(maxfeed) :: Zfeed  ! Z of parent per feeding decay mode
+  real(dbl), dimension(maxfeed) :: brfeed ! branching ratio per feeding decay mode
   real(sgl) :: dT      ! time step
   real(sgl) :: N_p     ! number of isotopes for parent
   real(dbl) :: enum_i  ! constant
@@ -77,6 +92,7 @@ subroutine equations
   real(dbl) :: term    ! help variable
   real(dbl) :: term_pi ! help variable
   real(dbl) :: term_Ti ! help variable
+  real(dbl) :: br      ! branching ratio
   real(dbl) :: TT      ! help variable
   real(dbl) :: tau     ! help variable
   real(dbl) :: eps_decay ! help variable
@@ -111,6 +127,14 @@ subroutine equations
 ! ******************** Activity ****************************************
 !
   R_T = dble(reaction_rate(0, 0, -1))
+!
+! The equations are solved in three passes over all nuclides:
+! 1. irradiation: feeding only depends on the direct production rate of the parent, so the order of nuclides is irrelevant
+! 2. cooling: feeding depends on the parent inventory at the end of irradiation, which is complete after pass 1
+! 3. totals, existence flags and time of maximum yield
+!
+! ******************** Pass 1: irradiation *****************************
+!
   do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
     do it=0,numtime
       Nisotot(iz,it)=0.
@@ -118,17 +142,18 @@ subroutine equations
     do ia = Acomp, Acomp - Adepth, -1
       do is = -1, Nisomer(iz, ia)
         Yexist(iz,ia,is)=.false.
-        if (iz /= Zcomp + 1 .and. .not. rpexist(iz, ia, is)) cycle
+        do it=0,numtime
+          Niso(iz,ia,is,it)=0.
+          Nisorel(iz,ia,is,it)=0.
+        enddo
+        call feeding
+        if (iz /= Zcomp + 1 .and. .not. rpexist(iz, ia, is) .and. Nfeed == 0) cycle
         Tmax(iz,ia,is)=0.
         Tmaxactivity(iz,ia,is)=0.
         do it=1,5
           Tp(iz,ia,is,it)=0.
         enddo
         if (iso == 1) Ynatexist(iz,ia,is)=.false.
-        do it=0,numtime
-          Niso(iz,ia,is,it)=0.
-          Nisorel(iz,ia,is,it)=0.
-        enddo
         if (iz == Ztarget .and. ia == Atarget .and. is ==  -1) then
           Niso(iz, ia, is, 0) = dble(N_0)
           Nisotot(iz, 0) = Nisotot(iz, 0) + Niso(iz, ia, is, 0)
@@ -137,98 +162,115 @@ subroutine equations
         lambda_i = dble(lambda(iz, ia, is))
         enum_i = dble(N_0) * R_Ti
         denom_i = lambda_i - R_T
-        do it = 1, numtime
+        do it = 1, Ntime
           TT = dble(Tgrid(it))
 !
 ! Depletion of target
 !
           if (iz == Ztarget .and. ia == Atarget .and. is ==  -1) then
-            if (it <= Ntime) then
-              Niso(iz, ia, is, it) = dble(N_0) * exp( -R_T * TT)
-            else
-              Niso(iz, ia, is, it) = Niso(iz, ia, is, Ntime)
-            endif
+            Niso(iz, ia, is, it) = dble(N_0) * exp( -R_T * TT)
           else
 !
 ! Production and decay of other isotopes
 !
 ! 1. Production directly from target
 !
-            if (it <= Ntime) then
-              exp_T = exp( -R_T * TT)
-              exp_i = exp( -lambda_i * TT)
-              eps_decay = 1.d-12 * max(abs(lambda_i), abs(R_T), 1.d-30)
-              if (abs(denom_i) > eps_decay) then
-                term_Ti = (exp_T - exp_i) / denom_i
-              else
-                term_Ti = TT * exp_i
-              endif
-              Niso(iz, ia, is, it) = enum_i * term_Ti
+            exp_T = exp( -R_T * TT)
+            exp_i = exp( -lambda_i * TT)
+            eps_decay = 1.d-12 * max(abs(lambda_i), abs(R_T), 1.d-30)
+            if (abs(denom_i) > eps_decay) then
+              term_Ti = (exp_T - exp_i) / denom_i
             else
-!
-! Cooling
-!
-              exp_c = exp( -lambda_i * (TT - Tir))
-              Niso(iz, ia, is, it) = Niso(iz, ia, is, Ntime) * exp_c
+              term_Ti = TT * exp_i
             endif
+            Niso(iz, ia, is, it) = enum_i * term_Ti
 !
-! 2. Production from decay of other isotope
+! 2. Production from decay of other isotopes, weighted with the branching ratio of each decay mode
 !
-            if (flagdecay) then
-              do isob = -1, 1, 2
-                Zparent = iz + isob
-                if (Zparent < 0) cycle
-!
-! Account for isomeric decay of parent
-!
-                do is_p = -1, Nisomer(Zparent, ia)
-                  if ((isob ==  -1 .and. rtyp(Zparent, ia, is_p) == 1) .or. (isob == 1 .and. rtyp(Zparent, ia, is_p) == 2)) then
-                    lambda_p = dble(lambda(Zparent, ia, is_p))
-                    denom_ip = lambda_i - lambda_p
-                    if (it <= Ntime) then
-                      R_Tp = dble(reaction_rate(Zparent, ia, is_p))
-                      if (R_Tp > 0. .and. lambda_p > 0.) then
-                        exp_p = exp( -lambda_p * TT)
-                        eps_decay = 1.d-12 * max(abs(lambda_i), abs(lambda_p), 1.d-30)
-                        if (abs(denom_ip) > eps_decay) then
-                          term_pi = (exp_p - exp_i) / denom_ip
-                        else
-                          term_pi = TT * exp_p
-                        endif
-                        enum_p = dble(N_0) * R_Tp
-                        denom_p = lambda_p - R_T
-                        if (abs(denom_p) > eps_decay) then
-                          term = lambda_p * enum_p / denom_p * (term_Ti - term_pi)
-                        else
-                          if (abs(denom_i) > eps_decay) then
-                            term = R_T * enum_p * (TT * exp_T * denom_i - exp_T + exp_i) / (denom_i * denom_i)
-                          else
-                            term = 0.5d0 * R_T * enum_p * TT * TT * exp_T
-                          endif
-                        endif
-                        Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
-                      endif
-                    else
-!
-! Cooling only
-!
-                      N_p = Niso(Zparent, ia, is_p, Ntime)
-                      exp_cp = exp( -lambda_p * (TT - Tir))
-                      exp_ci = exp( -lambda_i * (TT - Tir))
-                      tau = TT - Tir
-                      eps_decay = 1.d-12 * max(abs(lambda_i), abs(lambda_p), 1.d-30)
-                      if (abs(denom_ip) > eps_decay) then
-                        term = N_p * lambda_p / denom_ip * (exp_cp - exp_ci)
-                      else
-                        term = N_p * lambda_p * tau * exp_cp
-                    endif
-                      Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + term
-                    endif
+            do ip = 1, Nfeed
+              Zp = Zfeed(ip)
+              Ap = Afeed(ip)
+              is_p = isfeed(ip)
+              br = brfeed(ip)
+              lambda_p = dble(lambda(Zp, Ap, is_p))
+              denom_ip = lambda_i - lambda_p
+              R_Tp = dble(reaction_rate(Zp, Ap, is_p))
+              if (R_Tp > 0. .and. lambda_p > 0.) then
+                exp_p = exp( -lambda_p * TT)
+                eps_decay = 1.d-12 * max(abs(lambda_i), abs(lambda_p), 1.d-30)
+                if (abs(denom_ip) > eps_decay) then
+                  term_pi = (exp_p - exp_i) / denom_ip
+                else
+                  term_pi = TT * exp_p
+                endif
+                enum_p = dble(N_0) * R_Tp
+                denom_p = lambda_p - R_T
+                if (abs(denom_p) > eps_decay) then
+                  term = lambda_p * enum_p / denom_p * (term_Ti - term_pi)
+                else
+                  if (abs(denom_i) > eps_decay) then
+                    term = R_T * enum_p * (TT * exp_T * denom_i - exp_T + exp_i) / (denom_i * denom_i)
+                  else
+                    term = 0.5d0 * R_T * enum_p * TT * TT * exp_T
                   endif
-                enddo
-              enddo
-            endif
+                endif
+                Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + br * term
+              endif
+            enddo
           endif
+        enddo
+      enddo
+    enddo
+  enddo
+!
+! ******************** Pass 2: cooling *********************************
+!
+  do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
+    do ia = Acomp, Acomp - Adepth, -1
+      do is = -1, Nisomer(iz, ia)
+        call feeding
+        if (iz /= Zcomp + 1 .and. .not. rpexist(iz, ia, is) .and. Nfeed == 0) cycle
+        lambda_i = dble(lambda(iz, ia, is))
+        do it = Ntime + 1, numtime
+          TT = dble(Tgrid(it))
+          if (iz == Ztarget .and. ia == Atarget .and. is ==  -1) then
+            Niso(iz, ia, is, it) = Niso(iz, ia, is, Ntime)
+          else
+            exp_c = exp( -lambda_i * (TT - Tir))
+            Niso(iz, ia, is, it) = Niso(iz, ia, is, Ntime) * exp_c
+            do ip = 1, Nfeed
+              Zp = Zfeed(ip)
+              Ap = Afeed(ip)
+              is_p = isfeed(ip)
+              br = brfeed(ip)
+              lambda_p = dble(lambda(Zp, Ap, is_p))
+              denom_ip = lambda_i - lambda_p
+              N_p = Niso(Zp, Ap, is_p, Ntime)
+              exp_cp = exp( -lambda_p * (TT - Tir))
+              exp_ci = exp( -lambda_i * (TT - Tir))
+              tau = TT - Tir
+              eps_decay = 1.d-12 * max(abs(lambda_i), abs(lambda_p), 1.d-30)
+              if (abs(denom_ip) > eps_decay) then
+                term = N_p * lambda_p / denom_ip * (exp_cp - exp_ci)
+              else
+                term = N_p * lambda_p * tau * exp_cp
+              endif
+              Niso(iz, ia, is, it) = Niso(iz, ia, is, it) + br * term
+            enddo
+          endif
+        enddo
+      enddo
+    enddo
+  enddo
+!
+! ******************** Pass 3: totals and time of maximum yield ********
+!
+  do iz = Zcomp + 1, Zcomp + 1 - Zdepth, -1
+    do ia = Acomp, Acomp - Adepth, -1
+      do is = -1, Nisomer(iz, ia)
+        call feeding
+        if (iz /= Zcomp + 1 .and. .not. rpexist(iz, ia, is) .and. Nfeed == 0) cycle
+        do it = 1, numtime
           if (Niso(iz, ia, is, it) > 0.) then
             Yexist(iz, ia, is) = .true.
             Ynatexist(iz, ia, is) = .true.
@@ -236,6 +278,7 @@ subroutine equations
           Nisotot(iz, it) = Nisotot(iz, it) + Niso(iz, ia, is, it)
         enddo
         if ( .not. Yexist(iz, ia, is)) cycle
+        lambda_i = dble(lambda(iz, ia, is))
         if (lambda_i > 0..and. R_T > 0.) then
           Tmax(iz, ia, is) = log(lambda_i / R_T) / (lambda_i - R_T)
         else
@@ -264,8 +307,48 @@ subroutine equations
           enddo
         endif
       enddo
-    enddo 
+    enddo
   enddo
   return
+contains
+!
+! ******************** Feeding decay modes *****************************
+!
+  subroutine feeding
+!
+! Collect all parent decay modes that end in nuclide (iz, ia, is). Parents lie within Z-2..Z+2 and A..A+4 of the daughter.
+! For a parent with isomeric states, the states 0..Nisomer are used, not the total, to avoid double counting.
+! The total of the daughter (is=-1) is fed by all decay modes, an isomeric state only by modes with that final state (RFS).
+! Internal transition within the same nuclide only feeds a different isomeric state, not the total.
+! The target is only depleted, it is not fed by decay.
+!
+    Nfeed = 0
+    if (.not. flagdecay) return
+    if (iz == Ztarget .and. ia == Atarget .and. is == -1) return
+    do Zp = max(iz - 2, Zcomp + 1 - Zdepth, 0), min(iz + 2, Zcomp + 1)
+      do Ap = ia, min(ia + 4, Acomp)
+        if (Nisomer(Zp, Ap) >= 0) then
+          is_p1 = 0
+          is_p2 = Nisomer(Zp, Ap)
+        else
+          is_p1 = -1
+          is_p2 = -1
+        endif
+        do is_p = is_p1, is_p2
+          if (Zp == iz .and. Ap == ia .and. (is == -1 .or. is_p == is)) cycle
+          do k = 1, ndk(Zp, Ap, is_p)
+            if (dkZ(Zp, Ap, is_p, k) /= iz .or. dkA(Zp, Ap, is_p, k) /= ia) cycle
+            if (is /= -1 .and. dkis(Zp, Ap, is_p, k) /= is) cycle
+            if (dkbr(Zp, Ap, is_p, k) <= 0.) cycle
+            Nfeed = Nfeed + 1
+            Zfeed(Nfeed) = Zp
+            Afeed(Nfeed) = Ap
+            isfeed(Nfeed) = is_p
+            brfeed(Nfeed) = dble(dkbr(Zp, Ap, is_p, k))
+          enddo
+        enddo
+      enddo
+    enddo
+  end subroutine feeding
 end subroutine equations
 ! Copyright A.J. Koning 2026
