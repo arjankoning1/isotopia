@@ -5,8 +5,8 @@
 
  Copyright (C) 2026  A.J. Koning
 
- User: Arjan Koning
- Date: 2026-09-22
+ User: Unknown User
+ Date: 2026-10-13
 
  ########## USER INPUT ##########
 
@@ -23,10 +23,10 @@
 
  Keyword           Value   Variable     Explanation
 
- user      Arjan Koning    user         user for this calculation
+ user      Unknown User    user         user for this calculation
  source    ISOTOPIA        source       source for this calculation
  format    YANDF-0.4       oformat      format for output
- crosspath /Users/koning/isotopia.libs/   crosspath    directory containing cross sections 
+ crosspath /Users/louisbutt/isotopia.libs/   crosspath    directory containing cross sections 
  #
  # Nuclear reaction
  #
@@ -90,14 +90,16 @@
  At 211     2.195560E+10   1.484506E+11   2.289880E+10   8.226184E+14   1.00000   5.722317E-11   2.668989E-05          0 y   0 d   7 h  12 m  50 s           0 y   5 d  12 h  47 m  14 s 
  Po 212     1.460060E+06   9.872051E+06   3.041792E+07   1.292613E+07   0.00000   3.426122E-15   2.325997E+06                                                                            
  Po 212 g   1.261397E+06   8.528807E+06   2.627910E+07   5.423036E-01   0.00000   2.959946E-15   2.325997E+06          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m   0 s 
- Po 212 m   1.986632E+05   1.343242E+06   4.138818E+06   1.292613E+07   0.01191   4.661756E-16   1.536912E-02          0 y   0 d   0 h   0 m  45 s           0 y   0 d   0 h  20 m  43 s 
- Po 211     3.359108E+05   2.271227E+06   6.998142E+06   1.067759E+06   0.00023   7.882356E-16   1.343309E+00                                                                            
- Po 211 g   3.132249E+05   2.117838E+06   6.525518E+06   2.331742E+05   0.00021   7.350016E-16   1.343309E+00          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m  17 s 
- Po 211 m   2.268590E+04   1.533884E+05   4.726228E+05   8.345852E+05   0.00077   5.323387E-17   2.718224E-02          0 y   0 d   0 h   0 m  25 s           0 y   0 d   0 h  12 m   4 s 
- Po 210     3.098211E+03   2.094824E+04   1.294096E+03   5.344374E+10   0.99973   1.455136E-15   5.797144E-08          0 y 138 d   9 h  18 m  20 s           3 y 229 d   0 h   9 m  44 s 
- Bi 208     4.331546E-02   2.928731E-01   1.804817E-02   7.257205E+11   0.97935   1.971011E-14   5.968615E-14     368000 y  36 d   9 h  48 m  48 s        2956 y 237 d  12 h  16 m   0 s 
- Bi 207     1.058317E+01   7.155702E+01   4.409796E+00   1.530248E+10   0.02065   4.156182E-16   6.915980E-10         31 y 277 d   6 h   0 m  32 s         113 y 102 d  23 h  19 m  28 s 
- Pb 208     0.000000E+00   0.000000E+00   0.000000E+00   9.887624E+08   1.00000   2.685411E-17   0.000000E+00       stable                                infinite                       
+ Po 212 m   1.986632E+05   1.343242E+06   4.138818E+06   1.292613E+07   0.00634   4.661756E-16   1.536912E-02          0 y   0 d   0 h   0 m  45 s           0 y   0 d   0 h  20 m  43 s 
+ Po 211     1.277847E+10   8.640031E+10   1.332849E+10   9.513499E+09   0.13124   7.882356E-16   1.343309E+00                                                                            
+ Po 211 g   1.277844E+10   8.640016E+10   1.332802E+10   9.512664E+09   0.13124   7.350016E-16   1.343309E+00          0 y   0 d   0 h   0 m   0 s           0 y   0 d   0 h   0 m  17 s 
+ Po 211 m   2.268590E+04   1.533884E+05   4.726228E+05   8.345852E+05   0.00041   5.323387E-17   2.718224E-02          0 y   0 d   0 h   0 m  25 s           0 y   0 d   0 h  12 m   4 s 
+ Po 210     3.098211E+03   2.094824E+04   1.294096E+03   5.344374E+10   0.73733   1.455136E-15   5.797144E-08          0 y 138 d   9 h  18 m  20 s           3 y 229 d   0 h   9 m  44 s 
+ Bi 208     2.361913E+01   1.596984E+02   9.839820E+00   3.957221E+14   0.41740   1.971011E-14   5.968615E-14     368000 y  36 d   9 h  48 m  48 s        2956 y 237 d  12 h  16 m   0 s 
+ Bi 207     5.853625E+05   3.957870E+06   5.767850E+03   8.463913E+14   0.68141   4.156182E-16   6.915980E-10         31 y 277 d   6 h   0 m  32 s         113 y 102 d  23 h  19 m  28 s 
+ Pb 208     0.000000E+00   0.000000E+00   0.000000E+00   1.271246E+11   0.81344   2.685411E-17   0.000000E+00       stable                                infinite                       
+ Pb 207     0.000000E+00   0.000000E+00   0.000000E+00   2.902199E+10   0.18570   0.000000E+00   0.000000E+00       stable                                infinite                       
+ Pb 206     0.000000E+00   0.000000E+00   0.000000E+00   1.339546E+08   0.00086   0.000000E+00   0.000000E+00       stable                                infinite                       
 
 file: At212.act
 file: At212g.act
@@ -113,5 +115,7 @@ file: Po210.act
 file: Bi208.act
 file: Bi207.act
 file: Pb208.act
+file: Pb207.act
+file: Pb206.act
 
   End of ISOTOPIA calculation for a + Bi209
