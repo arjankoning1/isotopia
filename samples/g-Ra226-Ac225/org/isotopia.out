@@ -6,7 +6,7 @@
  Copyright (C) 2026  A.J. Koning
 
  User: Arjan Koning
- Date: 2026-11-01
+ Date: 2026-11-09
 
  ########## USER INPUT ##########
 
@@ -80,7 +80,7 @@
 
 #  Nuc       Activity     Spec_activity    Prod_rate      #Isotopes Isot_fraction  Reac_constant   Decay_constant            Half-life                      Time of maximum production
 #              [Bq]          [Bq/g]        [Bq/(g.h)]        []            []        [s^-1]         [s^-1]       
- Ac 225     4.905473E+06   1.783808E+07   1.543831E+04   6.114616E+12   1.00000   0.000000E+00   8.022537E-07          0 y  10 d   0 h   0 m   0 s           0 y 167 d  13 h  38 m  50 s 
+ Ac 225     1.397722E+07   5.082624E+07   1.543831E+04   1.742244E+13   1.00000   0.000000E+00   8.022537E-07          0 y  10 d   0 h   0 m   0 s           0 y 167 d  13 h  38 m  50 s 
  Ra 226     1.005972E+10   3.658079E+10   7.620997E+10   7.327826E+20   1.00000   2.958177E-13   1.372811E-11       1599 y 352 d  23 h  53 m  36 s        3123 y 348 d   3 h  50 m  24 s 
  Ra 225     1.437229E+08   5.226289E+08   2.227967E+07   2.651405E+14   0.00000   4.286626E-12   5.420633E-07          0 y  14 d  19 h  12 m   0 s           0 y 239 d  15 h   9 m  40 s 
  Ra 224     3.294405E+08   1.197966E+09   5.471429E+07   1.494744E+14   0.00000   2.592819E-12   2.203994E-06          0 y   3 d  15 h  21 m  36 s           0 y  66 d   7 h  14 m  29 s 
